@@ -12,7 +12,7 @@ PRODUCTION_BUCKET=docs-ruby-driver
 PREFIX=mongoid
 TARGET_DIR=source-${GIT_BRANCH}
 
-SOURCE_FILE_DIR=build/mongoid-master
+SOURCE_FILE_DIR=build/mongoid-6.1
 
 .PHONY: help stage fake-deploy deploy api-docs get-assets migrate
 
