@@ -10,8 +10,8 @@ project:
   title: 'Mongoid Manual'
   branched: true
 version:
-  release: '6.2'
-  branch: 'master'
+  release: '6.2.1'
+  branch: '6.2'
 system:
   runstate:
     serial_sphinx: publish
@@ -26,13 +26,13 @@ assets:
     path: build/docs-tools
     repository: https://github.com/mongodb/docs-tools.git
   - branch: 6.2.0-stable
-    path: build/mongoid-master
+    path: build/mongoid-6.2
     repository: https://github.com/mongodb/mongoid.git
 paths:
   output: 'build'
-  source: 'source-master'
-  includes: 'source-master/includes'
-  images: 'source-master/images'
+  source: 'source-6.2'
+  includes: 'source-6.2/includes'
+  images: 'source-6.2/images'
   tools: 'bin'
   buildsystem: 'build/docs-tools'
   builddata: 'config'
