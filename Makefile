@@ -18,7 +18,7 @@ SOURCE_FILE_DIR=build/mongoid-6.1
 # the current "stable" branch. This is weird and dumb, yes.
 STABLE_BRANCH=`grep 'manual' build/docs-tools/data/${PROJECT}-published-branches.yaml | cut -d ':' -f 2 | grep -Eo '[0-9a-z.]+'`
 
-.PHONY: help stage fake-deploy deploy deploy-search-index api-docs get-assets migrate
+.PHONY: help stage fake-deploy deploy deploy-search-index api-docs get-assets migrate clean
 
 help:
 	@echo 'Targets'
@@ -101,3 +101,6 @@ migrate: get-assets
 
 get-assets:
 	giza generate assets
+
+clean:
+	rm -rf build giza.log source-master
