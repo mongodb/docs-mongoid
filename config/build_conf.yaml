@@ -30,9 +30,9 @@ assets:
     repository: https://github.com/mongodb/mongoid.git
 paths:
   output: 'build'
-  source: 'source-master'
-  includes: 'source-master/includes'
-  images: 'source-master/images'
+  source: 'source-7.0'
+  includes: 'source-7.0/includes'
+  images: 'source-7.0/images'
   tools: 'bin'
   buildsystem: 'build/docs-tools'
   builddata: 'config'
