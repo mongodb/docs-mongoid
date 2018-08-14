@@ -59,7 +59,8 @@ deploy: build/public/${GIT_BRANCH}
 	mut-publish build/public/ ${PRODUCTION_BUCKET} --prefix=${PROJECT} --deploy --verbose  --redirects build/public/.htaccess --dry-run ${ARGS}
 
 	@echo ''
-	read -p "Press any key to perform the previous upload to ${PRODUCTION_BUCKET}"
+	@echo "Press any key to perform the previous upload to ${PRODUCTION_BUCKET}"
+	@read ignore
 	mut-publish build/public/ ${PRODUCTION_BUCKET} --prefix=${PROJECT} --deploy --verbose  --redirects build/public/.htaccess ${ARGS}
 
 	@echo "Hosted at ${PRODUCTION_URL}/${PROJECT}/${GIT_BRANCH}"
