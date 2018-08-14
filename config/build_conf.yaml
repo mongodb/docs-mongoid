@@ -11,7 +11,7 @@ project:
   branched: true
 version:
   release: '7.0'
-  branch: 'master'
+  branch: '7.0'
 system:
   runstate:
     serial_sphinx: publish
@@ -25,8 +25,8 @@ assets:
   - branch: master
     path: build/docs-tools
     repository: https://github.com/mongodb/docs-tools.git
-  - branch: master
-    path: build/mongoid-master
+  - branch: 7.0.0-stable
+    path: build/mongoid-7.0
     repository: https://github.com/mongodb/mongoid.git
 paths:
   output: 'build'
