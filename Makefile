@@ -44,7 +44,7 @@ publish: migrate
 	if [ -d build/public/${GIT_BRANCH}/api ]; then rm -rf build/public/${GIT_BRANCH}/api ; fi;
 	mkdir build/public/${GIT_BRANCH}/api
 
-	yard doc ${SOURCE_FILE_DIR} --exclude ${SOURCE_FILE_DIR}/spec --readme ${SOURCE_FILE_DIR}/README.md -o build/public/${GIT_BRANCH}/api/
+	yard doc ${SOURCE_FILE_DIR} --exclude ${SOURCE_FILE_DIR}/spec --exclude ${SOURCE_FILE_DIR}/perf --readme ${SOURCE_FILE_DIR}/README.md -o build/public/${GIT_BRANCH}/api/
 
 stage:
 	mut-publish build/${GIT_BRANCH}/html ${STAGING_BUCKET} --prefix=${PROJECT} --stage ${ARGS}
@@ -85,7 +85,7 @@ api-docs:
 	if [ -d build/public/${GIT_BRANCH}/api ]; then rm -rf build/public/${GIT_BRANCH}/api ; fi;
 	mkdir build/public/${GIT_BRANCH}/api
 
-	yard doc ${SOURCE_FILE_DIR} --exclude ${SOURCE_FILE_DIR}/spec --readme ${SOURCE_FILE_DIR}/README.md -o build/public/${GIT_BRANCH}/api/
+	yard doc ${SOURCE_FILE_DIR} --exclude ${SOURCE_FILE_DIR}/spec --exclude ${SOURCE_FILE_DIR}/perf --readme ${SOURCE_FILE_DIR}/README.md -o build/public/${GIT_BRANCH}/api/
 
 
 migrate: get-assets
