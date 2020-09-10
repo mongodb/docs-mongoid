@@ -1,6 +1,6 @@
 base:
   links:
-    - { '6.2': 'master' }
+    - { '5.4': 'master' }
   targets:
     - 'html'
     - 'dirhtml'
