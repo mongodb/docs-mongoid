@@ -10,8 +10,8 @@ project:
   title: 'Mongoid Manual'
   branched: true
 version:
-  release: 'upcoming'
-  branch: 'master'
+  release: '7.3'
+  branch: '7.3'
 system:
   runstate:
     serial_sphinx: publish
