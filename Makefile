@@ -16,10 +16,12 @@ SOURCE_FILE_DIR=build/mongoid-${GIT_BRANCH}
 ifeq ($(ENV), 'dotcom_stg')
 	STAGING_URL="https://docs-mongodborg-staging.corp.mongodb.com"
 	STAGING_BUCKET=docs-mongodb-org-dotcomstg
+endif
 
 ifeq ($(ENV), 'dotcom_prd')
 	PRODUCTION_URL="https://mongodb.com/docs"
 	PRODUCTION_BUCKET=docs-mongodb-org-dotcomprd
+endif
 
 # Parse our published-branches configuration file to get the name of
 # the current "stable" branch. This is weird and dumb, yes.
