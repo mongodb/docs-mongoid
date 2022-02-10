@@ -15,9 +15,9 @@ TARGET_DIR=source-${GIT_BRANCH}
 SOURCE_FILE_DIR=build/mongoid-${GIT_BRANCH}
 
 ifeq ($(ENV), 'dotcom')
-	STAGING_URL="https://docs-mongodborg-staging.corp.mongodb.com"
+	STAGING_URL="https://mongodbcom-cdn.website.staging.corp.mongodb.com"
 	STAGING_BUCKET=docs-mongodb-org-dotcomstg
-	PRODUCTION_URL="https://mongodb.com/docs"
+	PRODUCTION_URL="https://mongodb.com"
 	PRODUCTION_BUCKET=docs-mongodb-org-dotcomprd
 	PROJECT=docs-qa/mongoid
 	STGPROJECT=docs/mongoid
