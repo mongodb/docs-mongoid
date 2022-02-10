@@ -9,7 +9,8 @@ STAGING_BUCKET=docs-mongodb-org-stg
 PRODUCTION_BUCKET=docs-mongodb-org-prd
 
 PROJECT=mongoid
-STGPROJECT=mongoid
+PREFIX=mongoid
+STGPREFIX=mongoid
 TARGET_DIR=source-${GIT_BRANCH}
 
 SOURCE_FILE_DIR=build/mongoid-${GIT_BRANCH}
@@ -19,8 +20,8 @@ ifeq ($(ENV), 'dotcom')
 	STAGING_BUCKET=docs-mongodb-org-dotcomstg
 	PRODUCTION_URL="https://mongodb.com"
 	PRODUCTION_BUCKET=docs-mongodb-org-dotcomprd
-	PROJECT=docs-qa/mongoid
-	STGPROJECT=docs/mongoid
+	PREFIX=docs-qa/mongoid
+	STGPREFIX=docs/mongoid
 endif
 
 # Parse our published-branches configuration file to get the name of
@@ -53,17 +54,17 @@ publish: migrate ## Builds this branch's publishable HTML and other artifacts un
 	if [ ${GIT_BRANCH} = master ]; then mut-redirects config/redirects -o build/public/.htaccess; fi
 
 stage: ## Host online for review
-	mut-publish build/${GIT_BRANCH}/html ${STAGING_BUCKET} --prefix=${STGPROJECT} --stage ${ARGS}
-	@echo "Hosted at ${STAGING_URL}/${PROJECT}/${USER}/${GIT_BRANCH}/index.html"
+	mut-publish build/${GIT_BRANCH}/html ${STAGING_BUCKET} --prefix=${STGPREFIX} --stage ${ARGS}
+	@echo "Hosted at ${STAGING_URL}/${STGPREFIX}/${USER}/${GIT_BRANCH}/index.html"
 
 fake-deploy: build/public/${GIT_BRANCH} ## Create a fake deployment in the staging bucket
-	mut-publish build/public ${STAGING_BUCKET} --prefix=${PROJECT} --deploy --verbose  ${ARGS}
-	@echo "Hosted at ${STAGING_URL}/${PROJECT}/${GIT_BRANCH}/index.html"
+	mut-publish build/public ${STAGING_BUCKET} --prefix=${STGPREFIX} --deploy --verbose  ${ARGS}
+	@echo "Hosted at ${STAGING_URL}/${STGPREFIX}/${GIT_BRANCH}/index.html"
 
 deploy: build/public/${GIT_BRANCH} ## Deploy to the production bucket
-	mut-publish build/public/ ${PRODUCTION_BUCKET} --prefix=${PROJECT} --deploy --redirects build/public/.htaccess ${ARGS}
+	mut-publish build/public/ ${PRODUCTION_BUCKET} --prefix=${PREFIX} --deploy --redirects build/public/.htaccess ${ARGS}
 
-	@echo "Hosted at ${PRODUCTION_URL}/${PROJECT}/${GIT_BRANCH}"
+	@echo "Hosted at ${PRODUCTION_URL}/${PREFIX}/${GIT_BRANCH}"
 
 	$(MAKE) deploy-search-index
 
