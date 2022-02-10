@@ -9,18 +9,18 @@ STAGING_BUCKET=docs-mongodb-org-stg
 PRODUCTION_BUCKET=docs-mongodb-org-prd
 
 PROJECT=mongoid
+STGPROJECT=mongoid
 TARGET_DIR=source-${GIT_BRANCH}
 
 SOURCE_FILE_DIR=build/mongoid-${GIT_BRANCH}
 
-ifeq ($(ENV), 'dotcom_stg')
+ifeq ($(ENV), 'dotcom')
 	STAGING_URL="https://docs-mongodborg-staging.corp.mongodb.com"
 	STAGING_BUCKET=docs-mongodb-org-dotcomstg
-endif
-
-ifeq ($(ENV), 'dotcom_prd')
 	PRODUCTION_URL="https://mongodb.com/docs"
 	PRODUCTION_BUCKET=docs-mongodb-org-dotcomprd
+	PROJECT=docs-qa/mongoid
+	STGPROJECT=docs/mongoid
 endif
 
 # Parse our published-branches configuration file to get the name of
@@ -53,7 +53,7 @@ publish: migrate ## Builds this branch's publishable HTML and other artifacts un
 	if [ ${GIT_BRANCH} = master ]; then mut-redirects config/redirects -o build/public/.htaccess; fi
 
 stage: ## Host online for review
-	mut-publish build/${GIT_BRANCH}/html ${STAGING_BUCKET} --prefix=${PROJECT} --stage ${ARGS}
+	mut-publish build/${GIT_BRANCH}/html ${STAGING_BUCKET} --prefix=${STGPROJECT} --stage ${ARGS}
 	@echo "Hosted at ${STAGING_URL}/${PROJECT}/${USER}/${GIT_BRANCH}/index.html"
 
 fake-deploy: build/public/${GIT_BRANCH} ## Create a fake deployment in the staging bucket
