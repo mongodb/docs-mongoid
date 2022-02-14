@@ -10,19 +10,15 @@ PRODUCTION_BUCKET=docs-mongodb-org-prd
 
 PROJECT=mongoid
 PREFIX=mongoid
-STGPREFIX=mongoid
 TARGET_DIR=source-${GIT_BRANCH}
 
 SOURCE_FILE_DIR=build/mongoid-${GIT_BRANCH}
-
-ifeq ($(ENV), 'dotcom')
-	STAGING_URL="https://mongodbcom-cdn.website.staging.corp.mongodb.com"
-	STAGING_BUCKET=docs-mongodb-org-dotcomstg
-	PRODUCTION_URL="https://mongodb.com"
-	PRODUCTION_BUCKET=docs-mongodb-org-dotcomprd
-	PREFIX=docs-qa/mongoid
-	STGPREFIX=docs/mongoid
-endif
+DOTCOM_STAGING_URL="https://mongodbcom-cdn.website.staging.corp.mongodb.com"
+DOTCOM_STAGING_BUCKET=docs-mongodb-org-dotcomstg
+DOTCOM_PRODUCTION_URL="https://mongodb.com"
+DOTCOM_PRODUCTION_BUCKET=docs-mongodb-org-dotcomprd
+DOTCOM_PREFIX=docs-qa/mongoid
+DOTCOM_STGPREFIX=docs/mongoid
 
 # Parse our published-branches configuration file to get the name of
 # the current "stable" branch. This is weird and dumb, yes.
@@ -56,15 +52,29 @@ publish: migrate ## Builds this branch's publishable HTML and other artifacts un
 stage: ## Host online for review
 	mut-publish build/${GIT_BRANCH}/html ${STAGING_BUCKET} --prefix=${STGPREFIX} --stage ${ARGS}
 	@echo "Hosted at ${STAGING_URL}/${STGPREFIX}/${USER}/${GIT_BRANCH}/index.html"
+	mut-publish build/${GIT_BRANCH}/html ${DOTCOM_STAGING_BUCKET} --prefix=${DOTCOM_STGPREFIX} --stage ${ARGS}
+	@echo "Hosted at ${DOTCOM_STAGING_URL}/${DOTCOM_STGPREFIX}/${USER}/${GIT_BRANCH}/index.html"
+
+	
 
 fake-deploy: build/public/${GIT_BRANCH} ## Create a fake deployment in the staging bucket
 	mut-publish build/public ${STAGING_BUCKET} --prefix=${STGPREFIX} --deploy --verbose  ${ARGS}
 	@echo "Hosted at ${STAGING_URL}/${STGPREFIX}/${GIT_BRANCH}/index.html"
+	mut-publish build/public ${DOTCOM_STAGING_BUCKET} --prefix=${DOTCOM_STGPREFIX} --deploy --verbose  ${ARGS}
+	@echo "Hosted at ${DOTCOM_STAGING_URL}/${DOTCOM_STGPREFIX}/${GIT_BRANCH}/index.html"
+
+	
 
 deploy: build/public/${GIT_BRANCH} ## Deploy to the production bucket
 	mut-publish build/public/ ${PRODUCTION_BUCKET} --prefix=${PREFIX} --deploy --redirects build/public/.htaccess ${ARGS}
 
 	@echo "Hosted at ${PRODUCTION_URL}/${PREFIX}/${GIT_BRANCH}"
+
+	mut-publish build/public/ ${DOTCOM_PRODUCTION_BUCKET} --prefix=${DOTCOM_PREFIX} --deploy --redirects build/public/.htaccess ${ARGS}
+
+	@echo "Hosted at ${DOTCOM_PRODUCTION_URL}/${DOTCOM_PREFIX}/${GIT_BRANCH}"
+
+	
 
 	$(MAKE) deploy-search-index
 
