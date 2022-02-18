@@ -5,13 +5,20 @@ USER=$(shell whoami)
 STAGING_URL="https://docs-mongodborg-staging.corp.mongodb.com"
 PRODUCTION_URL="https://docs.mongodb.com"
 
-STAGING_BUCKET=docs-mongodb-org-stg
+STAGING_BUCKET=docs-mongodb-org-prd-staging
 PRODUCTION_BUCKET=docs-mongodb-org-prd
 
 PROJECT=mongoid
+PREFIX=mongoid
 TARGET_DIR=source-${GIT_BRANCH}
 
 SOURCE_FILE_DIR=build/mongoid-${GIT_BRANCH}
+DOTCOM_STAGING_URL="https://mongodbcom-cdn.website.staging.corp.mongodb.com"
+DOTCOM_STAGING_BUCKET=docs-mongodb-org-dotcomstg
+DOTCOM_PRODUCTION_URL="https://mongodb.com"
+DOTCOM_PRODUCTION_BUCKET=docs-mongodb-org-dotcomprd
+DOTCOM_PREFIX=docs-qa/mongoid
+DOTCOM_STGPREFIX=docs-qa/mongoid
 
 # Parse our published-branches configuration file to get the name of
 # the current "stable" branch. This is weird and dumb, yes.
@@ -51,6 +58,7 @@ stage: ## Host online for review
 
 	mut-publish build/${GIT_BRANCH}/html ${DOTCOM_STAGING_BUCKET} --prefix=${DOTCOM_STGPREFIX} --stage ${ARGS}
 	@echo "Hosted at ${DOTCOM_STAGING_URL}/${DOTCOM_STGPREFIX}/${USER}/${GIT_BRANCH}/index.html"
+
 
 
 fake-deploy: build/public/${GIT_BRANCH} ## Create a fake deployment in the staging bucket
