@@ -111,6 +111,7 @@ html_theme_options = {
     'sitename': sconf.theme.sitename,
     'nav_excluded': sconf.theme.nav_excluded,
     'is_private': False,
+    'eol': True,
 }
 
 html_sidebars = sconf.sidebars
