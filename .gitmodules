@@ -1,4 +1,4 @@
 [submodule "mongoid"]
 	path = mongoid
 	url = https://github.com/mongodb/mongoid.git
-	branch = master
+	branch = 8.1-stable
