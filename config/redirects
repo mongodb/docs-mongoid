@@ -5,5 +5,4 @@ define: master https://www.mongodb.com/docs/mongoid/master
 symlink: current -> 8.1
 
 raw: ${prefix}/ -> ${base}/current/
-
 raw: ${prefix}/current/release-notes/mongoid-7.0 -> ${base}/current/
