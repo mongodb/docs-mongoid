@@ -1,8 +1,10 @@
 define: prefix docs/mongoid
 define: base https://www.mongodb.com/docs/mongoid
-define: master https://www.mongodb.com/docs/mongoid/master
+define: versions 8.1 upcoming
 
 symlink: current -> 8.1
 
 raw: ${prefix}/ -> ${base}/current/
+raw: ${prefix}/master -> ${base}/upcoming/
+
 raw: ${prefix}/current/release-notes/mongoid-7.0 -> ${base}/current/
