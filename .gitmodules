@@ -1,4 +1,4 @@
 [submodule "mongoid"]
 	path = mongoid
-	url = https://github.com/mongodb/mongoid.git
-	branch = master
+	url = https://github.com/mongoKart/mongoid.git
+	branch = docsp-38361-fix-empty-pages
