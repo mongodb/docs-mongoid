@@ -36,17 +36,17 @@ specified Mongoid versions.
      - Driver 2.17-2.10
      - Driver 2.9-2.7
 
-   * - 8.0 thru 9.0
+   * - 8.0 through 9.0
      - |checkmark|
      -
      -
 
-   * - 7.2 thru 7.5
+   * - 7.2 through 7.5
      - |checkmark|
      - |checkmark|
      -
 
-   * - 7.0 thru 7.1
+   * - 7.0 through 7.1
      - |checkmark|
      - |checkmark|
      - |checkmark|
@@ -263,7 +263,7 @@ and will be removed in a next version.
      -
      -
 
-   * - 8.0 thru 9.0
+   * - 8.0 through 9.0
      -
      - |checkmark|
      - |checkmark|
@@ -277,7 +277,7 @@ and will be removed in a next version.
      -
      -
 
-   * - 7.4 thru 7.5
+   * - 7.4 through 7.5
      -
      - |checkmark|
      - |checkmark|
@@ -291,7 +291,7 @@ and will be removed in a next version.
      - D
      - D
 
-   * - 7.0 thru 7.3 
+   * - 7.0 through 7.3 
      -
      -
      -
@@ -335,7 +335,7 @@ are supported by Mongoid.
      -
      -
 
-   * - 8.0 thru 8.1
+   * - 8.0 through 8.1
      - |checkmark| [#rails-7.1]_
      - |checkmark|
      - |checkmark|
