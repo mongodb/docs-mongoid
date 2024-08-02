@@ -32,7 +32,7 @@ specified Mongoid versions.
    :class: compatibility-large no-padding
 
    * - Mongoid
-     - Driver 2.19-2.18
+     - Driver 2.18+
      - Driver 2.17-2.10
      - Driver 2.9-2.7
 
@@ -236,6 +236,7 @@ and will be removed in a next version.
    :class: compatibility-large no-padding
 
    * - Mongoid
+     - MongoDB 8.0
      - MongoDB 7.0
      - MongoDB 6.0
      - MongoDB 5.0
@@ -248,7 +249,22 @@ and will be removed in a next version.
      - MongoDB 3.0
      - MongoDB 2.6
 
+   * - 9.0+
+     - |checkmark|
+     - |checkmark|
+     - |checkmark|
+     - |checkmark|
+     - |checkmark|
+     - |checkmark|
+     - |checkmark|
+     - |checkmark|
+     -
+     -
+     -
+     -
+
    * - 8.0 thru 9.0
+     -
      - |checkmark|
      - |checkmark|
      - |checkmark|
@@ -262,6 +278,7 @@ and will be removed in a next version.
      -
 
    * - 7.4 thru 7.5
+     -
      - |checkmark|
      - |checkmark|
      - |checkmark|
@@ -274,7 +291,8 @@ and will be removed in a next version.
      - D
      - D
 
-   * - 7.0 thru 7.3
+   * - 7.0 thru 7.3 
+     -
      -
      -
      - |checkmark|
