@@ -46,7 +46,7 @@ In order to do so, the first step is to install the ``rails`` gem:
 
 .. code-block:: sh
 
-    gem install rails -v '{+rails-7-version+}'
+    gem install rails -v {+rails-7-version+}
 
 
 Create New Application
