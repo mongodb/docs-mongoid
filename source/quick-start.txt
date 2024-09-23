@@ -27,8 +27,8 @@ read and write operations on the data.
 .. tip::
 
    If you prefer to connect to MongoDB by using the {+ruby-driver+} without
-   {+odm+}, see the {+ruby-driver+} :driver:`Quick Start guide
-   </ruby-driver/current/tutorials/quick-start/>`.
+   {+odm+}, see the {+ruby-driver+} :ruby:`Quick Start guide
+   </tutorials/quick-start/>`.
 
 {+odm+} is an Object-Document Mapper (ODM) framework for MongoDB in
 Ruby.

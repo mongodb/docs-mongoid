@@ -1,7 +1,13 @@
 name = "mongoid"
 title = "Mongoid"
 
-intersphinx = ["https://www.mongodb.com/docs/manual/objects.inv"]
+intersphinx = [ "https://www.mongodb.com/docs/manual/objects.inv",
+                "https://www.mongodb.com/docs/atlas/objects.inv"
+              ]
+
+toc_landing_pages = [
+    "/quick-start"
+    ]
 
 [constants]
 rails-6-version = 6.0
