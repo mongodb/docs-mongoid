@@ -6,3 +6,5 @@ intersphinx = ["https://www.mongodb.com/docs/manual/objects.inv"]
 [constants]
 rails-6-version = 6.0
 rails-7-version = 7.1
+odm = "Mongoid"
+ruby-driver = "Ruby driver"

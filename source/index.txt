@@ -1,18 +1,18 @@
-.. _mongoid:
+.. _mongoid-odm:
 
-*******
-Mongoid
-*******
+=======
+{+odm+}
+=======
 
-.. default-domain:: mongodb
-
-Mongoid is the officially supported object-document mapper (ODM) for MongoDB in
-Ruby. To work with Mongoid from the command line using ``rails``-like tooling,
-the `railsmdb <https://github.com/mongodb/mongoid-railsmdb>`_ utility can be used.
+{+odm+} is the officially supported object-document mapper (ODM) for
+MongoDB in Ruby. To work with {+odm+} from the command line using
+``rails``-like tooling, the `railsmdb
+<https://github.com/mongodb/mongoid-railsmdb>`_ utility can be used.
 
 .. toctree::
   :titlesonly:
 
+  /quick-start
   installation-configuration
   tutorials
   schema-configuration
