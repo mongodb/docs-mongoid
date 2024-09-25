@@ -22,7 +22,7 @@ Overview
 
 This guide shows you how to use {+odm+} in a new web application,
 connect to a MongoDB cluster hosted on MongoDB Atlas, and perform
-read and write operations on the data.
+read and write operations on the data in your cluster.
 
 .. tip::
 
@@ -31,7 +31,8 @@ read and write operations on the data.
    </tutorials/quick-start/>`.
 
 {+odm+} is an Object-Document Mapper (ODM) framework for MongoDB in
-Ruby.
+Ruby. By using {+odm+}, you can easily interact with your data and
+create flexible data models.
 
 MongoDB Atlas is a fully managed cloud database service that hosts your
 MongoDB deployments. You can create your own free (no credit card

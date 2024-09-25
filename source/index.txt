@@ -6,8 +6,8 @@
 
 {+odm+} is the officially supported object-document mapper (ODM) for
 MongoDB in Ruby. To work with {+odm+} from the command line using
-``rails``-like tooling, the `railsmdb
-<https://github.com/mongodb/mongoid-railsmdb>`_ utility can be used.
+``rails``-like tooling, you can use the `railsmdb
+<https://github.com/mongodb/mongoid-railsmdb>`_ utility.
 
 .. toctree::
   :titlesonly:
