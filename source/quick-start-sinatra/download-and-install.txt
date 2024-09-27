@@ -14,8 +14,8 @@ Download and Install
 Prerequisites
 -------------
 
-To create the Quick Start application, you need the following software
-installed in your development environment:
+To create the Quick Start application by using Sinatra, you need the
+following software installed in your development environment:
 
 - `Ruby <https://www.ruby-lang.org/en/documentation/installation/>`__
 - `RubyGems package manager <https://rubygems.org/pages/download>`__
@@ -61,28 +61,51 @@ to your web application.
    .. step:: Create a Quick Start application directory
 
       Run the following commands to generate a new directory
-      called ``{+quickstart-app-name+}`` and enter it:
+      called ``{+quickstart-sinatra-app-name+}`` and enter it:
 
       .. code-block:: bash
 
-         mkdir {+quickstart-app-name+}
-         cd {+quickstart-app-name+}
+         mkdir {+quickstart-sinatra-app-name+}
+         cd {+quickstart-sinatra-app-name+}
 
-   .. step:: Create a ``Gemfile`` and add packages
+   .. step:: Create a ``Gemfile`` and add gems
 
       All {+language+} applications must have a ``Gemfile`` that lists
-      the required packages, or gems. Run the following command to
-      create a ``Gemfile`` in your application:
+      the required gems. Run the following command to create a
+      ``Gemfile`` in your application:
 
       .. code-block:: bash
 
          touch Gemfile
 
-      In the TODO Connect to MongoDB section of the Quick Start, you can
-      learn which specific gems to add to the ``Gemfile`` depending on your
-      preferred web framework.
+      Paste the following content into your ``Gemfile`` to add the
+      required gems:
 
-      After completing these steps, you have a new web application with
+      .. code-block:: ruby
+
+         source 'https://rubygems.org'
+         
+         gem 'sinatra'
+         gem 'mongoid'
+         gem 'rackup'
+
+      The ``rackup`` gem provides a web server interface for your
+      application.
+
+   .. step:: Install gems
+
+      Run the following command to install the list of gems into your
+      application:
+
+      .. code-block:: bash
+
+         gem install bundler
+         bundle install
+
+      When the command runs successfully, you should see output in your
+      shell that contains a ``Bundle complete!`` message.
+
+      After completing these steps, you have a new Sinatra web application with
       {+odm+} installed.
 
 .. include:: /includes/quick-start/troubleshoot.rst
