@@ -1,10 +1,8 @@
-.. _compatibility:
+.. _mongoid-compatibility:
 
-*************
+=============
 Compatibility
-*************
-
-.. default-domain:: mongodb
+=============
 
 .. contents:: On this page
    :local:
@@ -13,7 +11,7 @@ Compatibility
    :class: singlecol
 
 Ruby MongoDB Driver Compatibility
-=================================
+---------------------------------
 
 The following compatibility table specifies the versions of `Ruby driver for
 MongoDB <https://mongodb.com/docs/ruby-driver/current/>`_
@@ -53,7 +51,7 @@ specified Mongoid versions.
 
 
 Ruby Compatibility
-==================
+------------------
 
 The following compatibility table specifies the versions of Ruby interpreters
 supported by Mongoid. "D" in a column means support for that Ruby version
@@ -216,7 +214,7 @@ is deprecated.
 
 
 MongoDB Server Compatibility
-============================
+----------------------------
 
 The following compatibility table specifies the recommended
 version(s) of Mongoid for use with a specific version of MongoDB server.
@@ -309,7 +307,7 @@ and will be removed in a next version.
 .. _rails-compatibility:
 
 Rails Compatibility
-===================
+-------------------
 
 The following compatibility table specifies which versions of Ruby on Rails
 are supported by Mongoid.
@@ -428,7 +426,7 @@ are supported by Mongoid.
 .. include:: /includes/unicode-ballot-x.rst
 
 Rails Frameworks Support
-------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 Ruby on Rails is comprised of a number of frameworks, which Mongoid attempts to
 provide compatibility with wherever possible.

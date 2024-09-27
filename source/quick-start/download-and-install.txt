@@ -1,0 +1,95 @@
+.. _mongoid-qs-download-and-install:
+
+====================
+Download and Install
+====================
+
+.. facet::
+   :name: genre
+   :values: tutorial
+
+.. meta::
+   :keywords: ruby framework, odm, code example
+
+Prerequisites
+-------------
+
+To create the Quick Start application, you need the following software
+installed in your development environment:
+
+- `Ruby <https://www.ruby-lang.org/en/documentation/installation/>`__
+- `RubyGems package manager <https://rubygems.org/pages/download>`__
+- A terminal app and shell. For MacOS users, use Terminal or a similar app.
+  For Windows users, use PowerShell.
+
+Download and Install the Mongoid Gem
+------------------------------------
+
+Complete the following steps to install and add the {+odm+} gem
+to your web application.
+
+.. procedure::
+   :style: connected
+
+   .. step:: Install {+odm+}
+
+      Ensure that the version of {+odm+} you install is compatible with the
+      version of {+language+} installed on your operating system. To
+      learn which versions are compatible, see the
+      :ref:`mongoid-compatibility` page.
+
+      Run the following command to install {+odm+}:
+
+      .. code-block:: bash
+
+         gem install mongoid
+
+      In {+language+}, packages are called **gems**.
+
+      When the installation completes, the command outputs the following
+      message:
+
+      .. code-block:: none
+         :copyable: false
+
+         Successfully installed mongoid-{+full-version}
+         Parsing documentation for mongoid-{+full-version}
+         Installing ri documentation for mongoid-{+full-version}
+         Done installing documentation for mongoid after 1 seconds
+         1 gem installed
+
+   .. step:: Create a Quick Start application directory
+
+      Run the following commands to generate a new directory
+      called ``{+quickstart-app-name+}`` and enter it:
+
+      .. code-block:: bash
+
+         mkdir {+quickstart-app-name+}
+         cd {+quickstart-app-name+}
+
+   .. step:: Create a ``Gemfile`` and add packages
+
+      All {+language+} applications must have a ``Gemfile`` that lists
+      the required packages, or gems. Run the following command to
+      create a ``Gemfile`` in your application:
+
+      .. code-block:: bash
+
+         touch Gemfile
+
+      Populate your ``Gemfile`` with the following list of gems:
+
+      .. code-block:: ruby
+
+         source 'https://rubygems.org'
+         
+         gem 'mongoid'
+
+      After completing these steps, you have a new web application with
+      {+odm+} installed.
+      
+.. In the :ref:`` section of the Quick Start, you can learn how
+.. to install the specific gems needed for your preferred web framework.
+
+.. include:: /includes/quick-start/troubleshoot.rst
