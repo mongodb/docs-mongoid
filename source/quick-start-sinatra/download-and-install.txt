@@ -102,8 +102,8 @@ to your web application.
          gem install bundler
          bundle install
 
-      When the command runs successfully, you should see output in your
-      shell that contains a ``Bundle complete!`` message.
+      When the command runs successfully, the output in your
+      shell contains a ``Bundle complete!`` message.
 
       After completing these steps, you have a new Sinatra web application with
       {+odm+} installed.
