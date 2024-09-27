@@ -52,9 +52,9 @@ to your web application.
       .. code-block:: none
          :copyable: false
 
-         Successfully installed mongoid-{+full-version}
-         Parsing documentation for mongoid-{+full-version}
-         Installing ri documentation for mongoid-{+full-version}
+         Successfully installed mongoid-{+full-version+}
+         Parsing documentation for mongoid-{+full-version+}
+         Installing ri documentation for mongoid-{+full-version+}
          Done installing documentation for mongoid after 1 seconds
          1 gem installed
 
@@ -78,18 +78,11 @@ to your web application.
 
          touch Gemfile
 
-      Populate your ``Gemfile`` with the following list of gems:
-
-      .. code-block:: ruby
-
-         source 'https://rubygems.org'
-         
-         gem 'mongoid'
+      In the TODO Connect to MongoDB section of the Quick Start, you can
+      learn which specific gems to add to the ``Gemfile`` depending on your
+      preferred web framework.
 
       After completing these steps, you have a new web application with
       {+odm+} installed.
-      
-.. In the :ref:`` section of the Quick Start, you can learn how
-.. to install the specific gems needed for your preferred web framework.
 
 .. include:: /includes/quick-start/troubleshoot.rst
