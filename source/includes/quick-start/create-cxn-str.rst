@@ -1,7 +1,7 @@
 You can connect to your MongoDB deployment by providing a
 **connection URI**, also called a *connection string*, which
-instructs {+odm+} on how to connect to a MongoDB deployment
-and how to behave while connected.
+tells {+odm+} how to connect to a MongoDB deployment and behave while
+connected.
 
 The connection string includes the hostname or IP address and
 port of your deployment, the authentication mechanism, user credentials
