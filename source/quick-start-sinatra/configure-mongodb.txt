@@ -1,0 +1,54 @@
+.. _mongoid-quick-start-sinatra-connect-to-mongodb:
+
+=================================
+Configure Your MongoDB Connection
+=================================
+
+.. facet::
+   :name: genre
+   :values: tutorial
+
+.. meta::
+   :keywords: test connection, runnable, code example
+
+.. procedure::
+   :style: connected
+
+   .. step:: Specify target database in connection string
+      
+      When connecting to an Atlas cluster, you must specify the name of the
+      database that you want to interact with as the default database in your
+      connection string.
+      
+      We want to access the ``sample_restaurants`` database for this tutorial,
+      which you can add to your connection string **after the hostname**.
+
+      For example, if the connection string for your Atlas cluster is
+      ``"mongodb+srv://user0:pass123@mongo0.example.com/"``, you can
+      specify the target database as shown in the following code:
+
+      .. code-block:: none
+
+         mongodb+srv://user0:pass123@mongo0.example.com/sample_restaurants
+
+   .. step:: Specify connection
+
+      In your project, create the ``config`` directory, then create a
+      file in this directory called ``mongoid.yml``.
+      
+      Paste the following configuration into the file, making sure to
+      replace the ``<connection string>`` placeholder with your connection
+      string that contains the target database:
+
+      .. code-block:: yaml
+         :emphasize-lines: 4
+
+         development:
+           clients:
+             default:
+               uri: <connection string>
+
+After completing these steps, your Sinatra web application is ready to
+connect to MongoDB.
+
+.. include:: /includes/quick-start/troubleshoot.rst

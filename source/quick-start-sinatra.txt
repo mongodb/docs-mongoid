@@ -57,8 +57,8 @@ that connects to a MongoDB deployment.
    /quick-start-sinatra/download-and-install/
    /quick-start-sinatra/create-a-deployment/
    /quick-start-sinatra/create-a-connection-string/
+   /quick-start-sinatra/configure-mongodb/
 
-..    /quick-start-sinatra/configure-mongodb/
 ..    /quick-start-sinatra/view-data/
 ..    /quick-start-sinatra/write-data/
 ..    /quick-start-sinatra/next-steps/
