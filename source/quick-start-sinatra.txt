@@ -1,8 +1,8 @@
-.. _mongoid-quick-start:
+.. _mongoid-quick-start-sinatra:
 
-===========
-Quick Start
-===========
+=====================
+Quick Start (Sinatra)
+=====================
 
 .. facet::
    :name: genre
@@ -20,7 +20,7 @@ Quick Start
 Overview
 --------
 
-This guide shows you how to use {+odm+} in a new web application,
+This guide shows you how to use {+odm+} in a new Sinatra web application,
 connect to a MongoDB cluster hosted on MongoDB Atlas, and perform
 read and write operations on the data in your cluster.
 
@@ -33,6 +33,12 @@ read and write operations on the data in your cluster.
 {+odm+} is an Object-Document Mapper (ODM) framework for MongoDB in
 Ruby. By using {+odm+}, you can easily interact with your data and
 create flexible data models.
+
+Sinatra is a domain-specific language (DSL) for creating web
+applications in {+language+}. Sinatra applications are simple to set up
+and can provide faster request processing than other frameworks.
+
+.. TODO .. tip:: If you prefer to use Rails as your web framework, see the Quick Start (Rails) guide.
 
 MongoDB Atlas is a fully managed cloud database service that hosts your
 MongoDB deployments. You can create your own free (no credit card
@@ -48,11 +54,11 @@ that connects to a MongoDB deployment.
 
 .. toctree::
 
-   /quick-start/download-and-install/
+   /quick-start-sinatra/download-and-install/
 
-..    /quick-start/create-a-deployment/
-..    /quick-start/create-a-connection-string/
-..    /quick-start/configure-mongodb/
-..    /quick-start/view-data/
-..    /quick-start/write-data/
-..    /quick-start/next-steps/
+..    /quick-start-sinatra/create-a-deployment/
+..    /quick-start-sinatra/create-a-connection-string/
+..    /quick-start-sinatra/configure-mongodb/
+..    /quick-start-sinatra/view-data/
+..    /quick-start-sinatra/write-data/
+..    /quick-start-sinatra/next-steps/
