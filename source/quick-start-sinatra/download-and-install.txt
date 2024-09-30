@@ -17,16 +17,18 @@ Prerequisites
 To create the Quick Start application by using Sinatra, you need the
 following software installed in your development environment:
 
-- `Ruby <https://www.ruby-lang.org/en/documentation/installation/>`__
-- `RubyGems package manager <https://rubygems.org/pages/download>`__
+- `Ruby <https://www.ruby-lang.org/en/documentation/installation/>`__.
+- `RubyGems package manager <https://rubygems.org/pages/download>`__.
 - A terminal app and shell. For MacOS users, use Terminal or a similar app.
   For Windows users, use PowerShell.
 
-Download and Install the Mongoid Gem
-------------------------------------
+Download and Install the {+odm+} and Framework Gems
+---------------------------------------------------
 
-Complete the following steps to install and add the {+odm+} gem
-to your web application.
+In {+language+}, packages are called **gems**.
+
+Complete the following steps to install and add the {+odm+} and Sinatra
+gems to your web application.
 
 .. procedure::
    :style: connected
@@ -38,13 +40,11 @@ to your web application.
       learn which versions are compatible, see the
       :ref:`mongoid-compatibility` page.
 
-      Run the following command to install {+odm+}:
+      Run the following command to install the {+odm+} gem:
 
       .. code-block:: bash
 
          gem install mongoid
-
-      In {+language+}, packages are called **gems**.
 
       When the installation completes, the command outputs the following
       message:
@@ -78,7 +78,7 @@ to your web application.
 
          touch Gemfile
 
-      Paste the following content into your ``Gemfile`` to add the
+      Paste the following content into the ``Gemfile`` to add the
       required gems:
 
       .. code-block:: ruby
@@ -94,7 +94,7 @@ to your web application.
 
    .. step:: Install gems
 
-      Run the following command to install the list of gems into your
+      Run the following command to install the specified gems into your
       application:
 
       .. code-block:: bash
@@ -103,7 +103,8 @@ to your web application.
          bundle install
 
       When the command runs successfully, the output in your
-      shell contains a ``Bundle complete!`` message.
+      shell contains a ``Bundle complete!`` message and describes the
+      number of new gems installed.
 
       After completing these steps, you have a new Sinatra web application with
       {+odm+} installed.

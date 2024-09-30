@@ -34,7 +34,7 @@ read and write operations on the data in your cluster.
 Ruby. By using {+odm+}, you can easily interact with your data and
 create flexible data models.
 
-Sinatra is a Domain Specific Language (DSL) for creating web
+Sinatra is a domain-specific language (DSL) for creating web
 applications in {+language+}. Sinatra applications are simple to set up
 and can provide faster request processing than other frameworks.
 
