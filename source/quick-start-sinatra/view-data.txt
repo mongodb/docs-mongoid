@@ -31,7 +31,7 @@ View MongoDB Data
 
       In the ``app.rb`` file, create a model called ``Restaurant``
       to represent data from the sample ``restaurants`` collection in
-      your MongoDB database:
+      the ``sample_restaurants`` database:
 
       .. code-block:: ruby
 
@@ -46,8 +46,8 @@ View MongoDB Data
 
    .. step:: Generate a view
 
-      To display your data in a specified way by using HTML, you can
-      create a **view**.
+      Create a **view** to display your data in a specified way by using
+      HTML and {+language+}.
 
       At the root level of your project, create a directory
       called ``views``. Then, create a file called
@@ -106,8 +106,8 @@ View MongoDB Data
       use the ``to_json()`` method to display your results in JSON
       format.
       
-      Replace the ``list_restaurants`` route with the following code to
-      retrieve results and return them as JSON documents:
+      Replace the ``list_restaurants`` route in the ``app.rb`` file with
+      the following code to return the results as JSON documents:
 
       .. code-block:: ruby
 

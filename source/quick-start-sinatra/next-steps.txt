@@ -23,9 +23,9 @@ the sample data, and render retrieved results.
 
 .. TODO Learn more about {+odm+} features from the following resources:
 
-.. - :ref:`mongoid-fundamentals-connection`: learn how to configure your MongoDB
+.. - :ref:`mongoid-fundamentals-connection`: Learn how to configure your MongoDB
 ..   connection.
 .. 
-.. - :ref:`mongoid-usage-examples`: see code examples of frequently used MongoDB
+.. - :ref:`mongoid-usage-examples`: See code examples of frequently used MongoDB
 ..   operations.
 
