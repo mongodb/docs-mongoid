@@ -9,7 +9,7 @@ Quick Start (Sinatra)
    :values: tutorial
 
 .. meta::
-   :keywords: php framework, odm
+   :keywords: ruby framework, odm
 
 .. contents:: On this page
    :local:

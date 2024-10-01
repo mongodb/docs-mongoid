@@ -109,7 +109,7 @@ View MongoDB Data
       Replace the ``list_restaurants`` route with the following code to
       retrieve results and return them as JSON documents:
 
-      .. code-block:: php
+      .. code-block:: ruby
 
          get '/list_restaurants' do
              restaurants = Restaurant
