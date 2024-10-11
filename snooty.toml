@@ -1,3 +1,4 @@
+eol = true
 name = "mongoid"
 title = "Mongoid"
 
@@ -6,3 +7,12 @@ intersphinx = ["https://www.mongodb.com/docs/manual/objects.inv"]
 [constants]
 rails-6-version = 6.0
 rails-7-version = 7.1
+driver-short = "Mongoid"
+current-url-base = "https://www.mongodb.com/docs/mongoid/current/"
+
+[[banners]]
+targets = ["*"]
+variant = "info"
+value = """\
+    This version of the documentation is archived and no longer supported. View the `current documentation <{+current-url-base+}>`__ to learn how to `upgrade your version of [{+driver-short+}] <{+current-url-base+}/installation>`__.\
+    """
