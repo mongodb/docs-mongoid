@@ -14,5 +14,5 @@ current-url-base = "https://www.mongodb.com/docs/mongoid/current/"
 targets = ["*"]
 variant = "info"
 value = """\
-    This version of the documentation is archived and no longer supported. View the `current documentation <{+current-url-base+}>`__ to learn how to `upgrade your version of [{+driver-short+}] <{+current-url-base+}/installation>`__.\
+    This version of the documentation is archived and no longer supported. View the `current documentation <{+current-url-base+}>`__ to learn how to `upgrade your version of {+driver-short+} <{+current-url-base+}installation>`__.\
     """
