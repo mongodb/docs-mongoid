@@ -73,7 +73,7 @@ gems to your web application.
          First, make sure that your macOS and `Xcode
          <https://developer.apple.com/xcode/>`__ versions are up to
          date. If you receive an error message similar to the following,
-         you might need to update or configure your build tools:
+         you must update or configure your build tools:
       
          .. code-block:: none
             :copyable: false
