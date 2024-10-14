@@ -13,6 +13,7 @@ MongoDB in Ruby. To work with {+odm+} from the command line using
   :titlesonly:
 
   /quick-start-sinatra
+  /quick-start-rails
   installation-configuration
   tutorials
   schema-configuration
