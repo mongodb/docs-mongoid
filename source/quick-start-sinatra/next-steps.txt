@@ -1,0 +1,31 @@
+.. _mongoid-quick-start-sinatra-next-steps:
+
+==========
+Next Steps
+==========
+
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: learn more
+
+Congratulations on completing the Quick Start tutorial for Sinatra!
+
+After you complete these steps, you have a Sinatra web application that
+uses {+odm+} to connect to your MongoDB deployment, run a query on
+the sample data, and render retrieved results.
+
+.. TODO You can download the completed web application project by cloning the
+.. `mongoid-quickstart <>`__
+.. GitHub repository.
+
+.. TODO Learn more about {+odm+} features from the following resources:
+
+.. - :ref:`mongoid-fundamentals-connection`: Learn how to configure your MongoDB
+..   connection.
+.. 
+.. - :ref:`mongoid-usage-examples`: See code examples of frequently used MongoDB
+..   operations.
+
