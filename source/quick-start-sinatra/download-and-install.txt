@@ -17,8 +17,8 @@ Prerequisites
 To create the Quick Start application by using Sinatra, you need the
 following software installed in your development environment:
 
-- `{+language+} <https://www.ruby-lang.org/en/documentation/installation/>`__.
-- `RubyGems package manager <https://rubygems.org/pages/download>`__.
+- `{+language+}. <https://www.ruby-lang.org/en/documentation/installation/>`__
+- `RubyGems package manager. <https://rubygems.org/pages/download>`__
 - A terminal app and shell. For MacOS users, use Terminal or a similar app.
   For Windows users, use PowerShell.
 
