@@ -43,7 +43,7 @@ gems to your web application.
    .. step:: Install Rails
 
       Install the ``rails`` gem, which provides a command-line
-      interface to create an application skeleton and application
+      interface to create a basic application structure and application
       components.
 
       Run the following command to install ``rails``:
@@ -52,10 +52,10 @@ gems to your web application.
          
          gem install rails
 
-   .. step:: Create a Rails skeleton app
+   .. step:: Create a Rails app with default scaffolding
 
       Run the following commands to create a new Rails application
-      directory and enter it:
+      directory with default scaffolding and enter the application:
 
       .. code-block:: bash
 
@@ -63,7 +63,8 @@ gems to your web application.
          cd {+quickstart-rails-app-name+}
 
       The ``--skip-active-record`` flag instructs Rails to not add
-      ``ActiveRecord`` as a dependency, as you will use {+odm+}
+      ``ActiveRecord`` as a dependency. You don't need this
+      dependency because you will use {+odm+}
       instead.
 
       .. tip:: MacOS Installation Issue

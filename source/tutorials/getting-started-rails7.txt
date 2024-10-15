@@ -15,7 +15,7 @@ Getting Started (Rails 7)
 .. note::
 
    This tutorial is for Ruby on Rails 7. If this is not the version
-   you're using choose the appropriate tutorial for your Rails version
+   you're using, choose the appropriate tutorial for your Rails version
    from the navigation menu.
 
 New Application

@@ -10,10 +10,14 @@ Getting Started (Rails 6)
    :depth: 2
    :class: singlecol
 
+In this guide, you can learn how to implement {+odm} in a Ruby on Rails
+6 web application. View the following sections to learn how to integrate
+{+odm+} in new applications or how to add it to existing applications.
+
 .. note::
 
-   This tutorial is for Ruby on Rails 6. If this is not the version you're using choose
-   the appropriate tutorial for your Rails version from the navigation menu.
+   This tutorial is for Ruby on Rails 6. To use Ruby on Rails 7 as your
+   web framework, see the :ref:`mongoid-quick-start-rails` guide.
 
 New Application
 ---------------
@@ -21,18 +25,18 @@ New Application
 This section shows how to create a new Ruby on Rails application using Mongoid
 for data access. The application will be similar to the blog application
 described in the `Ruby on Rails Getting Started
-<https://guides.rubyonrails.org/getting_started.html#creating-the-blog-application>`_
+<https://guides.rubyonrails.org/getting_started.html#creating-the-blog-application>`__
 guide, however using Mongoid instead of ActiveRecord as the database adapter.
 
 The complete source code for this application can be found in the
-`mongoid-demo GitHub repository
-<https://github.com/mongoid/mongoid-demo/tree/master/rails>`_.
+`mongoid-demo GitHub repository.
+<https://github.com/mongoid/mongoid-demo/tree/master/rails>`__
 
 .. note::
 
   This guide assumes basic familiarity with Ruby on Rails.
   To learn more about Ruby on Rails, please refer to its `Getting Started
-  guide <https://guides.rubyonrails.org/getting_started.html>`_ or
+  guide <https://guides.rubyonrails.org/getting_started.html>`__ or
   other Rails guides.
 
 Install ``rails``

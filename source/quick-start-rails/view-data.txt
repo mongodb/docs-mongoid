@@ -31,8 +31,8 @@ View MongoDB Data
    .. step:: Retrieve specific documents
 
       The ``app/controllers/restaurants_controller.rb`` file contains
-      definable methods that specify how your app handles different
-      requests. Replace the ``index()`` method with the following code:
+      methods that specify how your app handles different
+      requests. Replace the ``index()`` method body with the following code:
 
       .. code-block:: ruby
 
@@ -41,7 +41,7 @@ View MongoDB Data
                .where(name: /earth/i)
          end
 
-      This controller method retrieves restaurant documents in which the
+      This controller method retrieves ``Restaurant`` documents in which the
       value of the ``name`` field contains the string ``"earth"``. The
       results are rendered at the ``/restaurants`` route by default.
 
@@ -85,6 +85,7 @@ View MongoDB Data
          :alt: The rendered list of restaurants
 
       Rails provides a default interface that allows you to view, edit,
-      and delete models.
+      and delete models. In the next section, you can learn how to use the
+      interface to interact with MongoDB data.
 
 .. include:: /includes/quick-start/troubleshoot.rst

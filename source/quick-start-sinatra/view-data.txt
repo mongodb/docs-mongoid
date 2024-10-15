@@ -94,7 +94,7 @@ View MongoDB Data
              erb :list_restaurants
          end
 
-      This route retrieves restaurant documents in which the value of
+      This route retrieves ``Restaurant`` documents in which the value of
       the ``name`` field contains the string ``"earth"``. The route
       uses the ``list_restaurants`` view to render the results.
 

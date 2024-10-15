@@ -18,7 +18,7 @@ Configure Your MongoDB Connection
       
       When connecting to an Atlas cluster, you must specify the database that
       you want to interact with as the default database in your connection string.
-      You must add the database name to your connection string **after the hostname**.
+      You must add the database name to your connection string *after the hostname*.
       
       The following example specifies the ``sample_restaurants`` target database
       in a sample connection string:
@@ -27,7 +27,7 @@ Configure Your MongoDB Connection
 
          mongodb+srv://user0:pass123@mongo0.example.com/sample_restaurants
 
-   .. step:: Specify connection
+   .. step:: Specify connection in mongoid.yml
 
       At the root level of your project, create a ``config`` directory.
       Then, create a file in this directory called ``mongoid.yml``.
