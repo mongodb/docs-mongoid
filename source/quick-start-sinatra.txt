@@ -38,14 +38,20 @@ Sinatra is a domain-specific language (DSL) for creating web
 applications in {+language+}. Sinatra applications are simple to set up
 and can provide faster request processing than other frameworks.
 
-.. TODO .. tip:: If you prefer to use Rails as your web framework, see the Quick Start (Rails) guide.
-
 MongoDB Atlas is a fully managed cloud database service that hosts your
 MongoDB deployments. You can create your own free (no credit card
 required) MongoDB Atlas deployment by following the steps in this guide.
 
 Follow the steps in this guide to create a sample {+odm+} web application
 that connects to a MongoDB deployment.
+
+.. tip:: Other Framework Tutorials
+   
+   If you prefer to use Ruby on Rails 6 to build your application, see the
+   :ref:`mongoid-getting-started-rails-6` guide.
+
+   If you prefer to use Ruby on Rails 7 as your web framework, see the
+   :ref:`mongoid-quick-start-rails` guide.
 
 .. TODO .. tip::
 .. 

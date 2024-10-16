@@ -14,8 +14,9 @@ Getting Started (Rails 7)
 
 .. note::
 
-  This tutorial is for Ruby on Rails 7. If this is not the version you're using choose
-  the appropriate tutorial for your Rails version from the navigation menu.
+   This tutorial is for Ruby on Rails 7. If this is not the version
+   you're using, choose the appropriate tutorial for your Rails version
+   from the navigation menu.
 
 New Application
 ===============
@@ -32,10 +33,10 @@ The complete source code for this application can be found in the
 
 .. note::
 
-  This guide assumes basic familiarity with Ruby on Rails.
-  To learn more about Ruby on Rails, please refer to its `Getting Started
-  guide <https://guides.rubyonrails.org/getting_started.html>`_ or
-  other Rails guides.
+   This guide assumes basic familiarity with Ruby on Rails.
+   To learn more about Ruby on Rails, please refer to its `Getting Started
+   guide <https://guides.rubyonrails.org/getting_started.html>`_ or
+   other Rails guides.
 
 
 Install ``rails``
