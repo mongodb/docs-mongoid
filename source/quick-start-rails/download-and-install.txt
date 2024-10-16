@@ -14,7 +14,7 @@ Download and Install
 Prerequisites
 -------------
 
-To create the Quick Start application by using Rails 7, you need the
+To create the Quick Start application by using Ruby on Rails 7, you need the
 following software installed in your development environment:
 
 - `{+language+}. <https://www.ruby-lang.org/en/documentation/installation/>`__

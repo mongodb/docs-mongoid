@@ -35,7 +35,7 @@ cluster.
 Ruby. By using {+odm+}, you can easily interact with your data and
 create flexible data models.
 
-Ruby on Rails, or Rails, is a web application framework for
+Ruby on Rails is a web application framework for
 {+language+}. Rails applications use a model-view-controller (MVC)
 architecture that allows you to easily control how your data is
 modeled and displayed. {+odm+} replaces the default ``ActiveRecord``
