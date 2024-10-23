@@ -55,7 +55,7 @@ with your connection information to start using MongoDB in your
 application.
 
 To adapt an existing Rails application to use only {+odm+} instead of
-ActiveRecord, you must make additional configuration changes, as
+ActiveRecord, you must make other configuration changes, as
 described in the following sections.
 
 Modify Dependencies
@@ -99,7 +99,7 @@ Modify Frameworks
 ~~~~~~~~~~~~~~~~~
 
 Open the ``config/application.rb`` file and examine the contents. If it
-requires all of the components of Rails by including the ``require
+requires all the components of Rails by including the ``require
 'rails/all'`` specification, change this to specify individual
 frameworks.
 
@@ -150,7 +150,7 @@ Review your application's configuration files, such as
 Adjust Models
 ~~~~~~~~~~~~~
 
-If your application already uses models, you need to adjust them to
+If your application already uses models, you must adjust them to
 migrate from using ActiveRecord to {+odm+}.
 
 ActiveRecord models derive from ``ApplicationRecord`` and do not have
@@ -203,8 +203,8 @@ Data Migration
 ~~~~~~~~~~~~~~
 
 If you already have data in a relational database that you want to
-move into MongoDB, you must perform a data migration. You do not need to
-perform a schema migration because MongoDB does not require
+move into MongoDB, you must perform a data migration. You don't have to
+perform schema migration because MongoDB does not require
 a predefined schema to store the data.
 
 Migration tools are often specific to datasets.
