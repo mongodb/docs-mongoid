@@ -1,7 +1,7 @@
 .. _mongoid-quick-start-sinatra:
 
 =====================
-Quick Start (Sinatra)
+Quick Start - Sinatra
 =====================
 
 .. facet::
@@ -23,6 +23,9 @@ Overview
 This guide shows you how to use {+odm+} in a new Sinatra web application,
 connect to a MongoDB cluster hosted on MongoDB Atlas, and perform
 read and write operations on the data in your cluster.
+
+To learn how to migrate an existing application to use {+odm+}, see the
+:ref:`mongoid-add-to-existing` guide.
 
 .. tip::
 
