@@ -19,5 +19,5 @@ Interact with Data
 In this section, you can learn how to use {+odm+} to interact with your
 MongoDB data.
 
-.. - :ref:`mongoid-data-specify-query`: Learn about how to construct
+.. - :ref:`mongoid-data-specify-query`: Learn how to construct
 ..   queries to match specific documents in a MongoDB collection.
