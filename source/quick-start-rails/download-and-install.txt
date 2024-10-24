@@ -63,9 +63,8 @@ gems to your web application.
          cd {+quickstart-rails-app-name+}
 
       The ``--skip-active-record`` flag instructs Rails to not add
-      ``ActiveRecord`` as a dependency. You don't need this
-      dependency because you will use {+odm+}
-      instead.
+      Active Record as a dependency. You don't need this
+      dependency because you will use {+odm+} instead.
 
       .. tip:: MacOS Installation Issue
       
