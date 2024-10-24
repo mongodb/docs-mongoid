@@ -31,8 +31,7 @@ Sinatra Application
 -------------------
 
 To start using {+odm+} in an existing Sinatra application, you can follow
-the same steps described in the
-:ref:`Sinatra Quick Start <mongoid-quick-start-sinatra>` guide.
+the steps described in the :ref:`mongoid-quick-start-sinatra` guide.
 
 The following steps describe how to add {+odm+} to a Sinatra application:
 
@@ -41,7 +40,9 @@ The following steps describe how to add {+odm+} to a Sinatra application:
 #. Create a ``config/mongoid.yml`` configuration file and specify your
    connection target.
 
-#. Create an application file and load your configuration file.
+#. Create an application file and load your configuration file, as shown
+   in the :ref:`mongoid-quick-start-sinatra-view-data` step of the Quick
+   Start guide.
 
 #. Create {+odm+} models.
 
@@ -49,13 +50,13 @@ Rails Application
 -----------------
 
 You can add {+odm+} to an existing Rails application to run alongside
-other ActiveRecord adapters. To use a combination of adapters, you
+other Active Record adapters. To use a combination of adapters, you
 can add the ``mongoid`` dependency and populate the configuration file
 with your connection information to start using MongoDB in your
 application.
 
 To adapt an existing Rails application to use only {+odm+} instead of
-ActiveRecord, you must make other configuration changes, as
+Active Record, you must make other configuration changes, as
 described in the following sections.
 
 Modify Dependencies
@@ -69,7 +70,8 @@ Add the ``mongoid`` gem to your application's ``Gemfile``:
    gem 'mongoid'
 
 To use {+odm+} as the *only* database adapter, remove or comment out any
-RDBMS libraries such as ``sqlite`` or ``pg`` listed in the ``Gemfile``.
+RDBMS libraries listed in the ``Gemfile``,  such as ``sqlite`` or
+``pg``.
 
 Then, install the dependencies by running the following command:
 
@@ -98,17 +100,11 @@ other connection options.
 Modify Frameworks
 ~~~~~~~~~~~~~~~~~
 
-Open the ``config/application.rb`` file and examine the contents. If it
-requires all the components of Rails by including the ``require
-'rails/all'`` specification, change this to specify individual
-frameworks.
-
-To verify the contents of ``rails/all`` for Rails 7, see the
-:github:`rails GitHub repository
-</rails/rails/blob/7-0-stable/railties/lib/rails/all.rb>`.
-
-The following code is a sample ``config/application.rb`` file that
-demonstrates how to specify individual frameworks instead of using ``rails/all``:
+Open the ``config/application.rb`` file and examine the contents. If the
+file uses the ``require "rails/all"`` statement to load all Rails components,
+delete this statement. You must add a separate ``require`` statement
+for each Rails component, as shown the following sample
+``config/application.rb`` file:
 
 .. code-block:: ruby
    :caption: config/application.rb
@@ -133,33 +129,37 @@ demonstrates how to specify individual frameworks instead of using ``rails/all``
 
 .. note::
 
-   Because they rely on ActiveRecord, the `ActionText
+   Because they rely on Active Record, the `ActionText
    <https://guides.rubyonrails.org/action_text_overview.html>`__,
-   `ActiveStorage <https://edgeguides.rubyonrails.org/active_storage_overview.html>`__ and
+   `ActiveStorage <https://edgeguides.rubyonrails.org/active_storage_overview.html>`__, and
    `ActionMailbox
    <https://guides.rubyonrails.org/action_mailbox_basics.html>`__
    adapters cannot be used alongside {+odm+}.
 
-Disable ActiveRecord
-~~~~~~~~~~~~~~~~~~~~
+Disable Active Record Adapters
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Review your application's configuration files, such as
-``config/application.rb``, then remove or comment out any references to
+In ``config/application.rb`` and your application's other configuration
+files, remove or comment out any references to
 ``config.active_record`` and ``config.active_storage``.
 
 Adjust Models
 ~~~~~~~~~~~~~
 
-If your application already uses models, you must adjust them to
-migrate from using ActiveRecord to {+odm+}.
+To migrate from using Active Record to {+odm+}, you must adjust your
+application's existing models.
 
-ActiveRecord models derive from ``ApplicationRecord`` and do not have
-column definitions. {+odm+} models generally have no superclass but must
-include the ``Mongoid::Document`` attribute. {+odm+} models usually
-define fields explicitly. You can also use :ref:`dynamic fields
-<mongoid-dynamic-fields>` instead of explicit field definitions.
+Active Record models derive from the ``ApplicationRecord`` class and do
+not have column definitions, while {+odm+} models generally have no
+superclass but must include the ``Mongoid::Document`` attribute.
 
-For example, a basic ActiveRecord ``Post`` model might resemble the
+When creating {+odm+} models, you can define fields in the following
+ways:
+
+- Define fields explicitly
+- Use :ref:`dynamic fields <mongoid-dynamic-fields>`
+
+For example, a basic Active Record ``Post`` model might resemble the
 following:
 
 .. code-block:: ruby
@@ -183,8 +183,8 @@ A similar {+odm+} ``Post`` model might resemble the following:
      has_many :comments, dependent: :destroy
    end
 
-Or, you can define the ``Post`` model by using dynamic fields, as shown
-in the following code:
+Instead of using predefined fields, you can define the ``Post`` model by using
+dynamic fields, as shown in the following code:
 
 .. code-block:: ruby
    :caption: app/models/post.rb
@@ -196,9 +196,6 @@ in the following code:
      has_many :comments, dependent: :destroy
    end
 
-{+odm+} does not use ActiveRecord migrations, because MongoDB does not
-require a defined schema before you can store data.
-
 Data Migration
 ~~~~~~~~~~~~~~
 
@@ -208,9 +205,9 @@ perform schema migration because MongoDB does not require
 a predefined schema to store the data.
 
 Migration tools are often specific to datasets.
-Even though {+odm+} supports a superset of ActiveRecord associations,
+Even though {+odm+} supports a superset of Active Record associations,
 the way that model references are stored in collections is different between
-{+odm+} and ActiveRecord.
+{+odm+} and Active Record.
 
 Visit the following resources to learn more about migrating from an
 RDBMS to MongoDB:

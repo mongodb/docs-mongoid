@@ -24,7 +24,7 @@ This guide shows you how to use {+odm+} in a new Sinatra web application,
 connect to a MongoDB cluster hosted on MongoDB Atlas, and perform
 read and write operations on the data in your cluster.
 
-To learn how to migrate an existing application to use {+odm+}, see the
+To learn how to integrate {+odm+} into an existing application, see the
 :ref:`mongoid-add-to-existing` guide.
 
 .. tip::
