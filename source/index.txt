@@ -14,6 +14,7 @@ MongoDB in Ruby. To work with {+odm+} from the command line using
  
    /quick-start-rails
    /quick-start-sinatra
+   /interact-data
    installation-configuration
    tutorials
    schema-configuration
