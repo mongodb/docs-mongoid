@@ -4,6 +4,13 @@
 Interact with Data
 ==================
 
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: ruby framework, odm, crud, query
+
 .. TODO
   .. toctree::
      :caption: Interact with Data
