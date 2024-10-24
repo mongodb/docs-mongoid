@@ -1,0 +1,16 @@
+.. _mongoid-interact-data:
+
+==================
+Interact with Data
+==================
+
+.. TODO
+  .. toctree::
+     :caption: Interact with Data
+     /interact-data/specify-query
+
+In this section, you can learn how to use {+odm+} to interact with your
+MongoDB data.
+
+.. - :ref:`mongoid-data-specify-query`: Learn about how to construct
+..   queries to match specific documents in a MongoDB collection.
