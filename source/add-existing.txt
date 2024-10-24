@@ -31,20 +31,20 @@ Sinatra Application
 -------------------
 
 To start using {+odm+} in an existing Sinatra application, you can follow
-the steps described in the :ref:`mongoid-quick-start-sinatra` guide.
-
-The following steps describe how to add {+odm+} to a Sinatra application:
+the following steps:
 
 1. Add the ``mongoid`` dependency to your application's ``Gemfile``.
 
 #. Create a ``config/mongoid.yml`` configuration file and specify your
-   connection target.
+   connection target, as shown in the
+   :ref:`mongoid-quick-start-sinatra-connect-to-mongodb` step of the
+   Quick Start guide.
 
 #. Create an application file and load your configuration file, as shown
    in the :ref:`mongoid-quick-start-sinatra-view-data` step of the Quick
    Start guide.
 
-#. Create {+odm+} models.
+#. Create {+odm+} models to interact with your data.
 
 Rails Application
 -----------------
