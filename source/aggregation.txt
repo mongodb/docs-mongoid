@@ -59,8 +59,7 @@ pipeline operators:
 
 .. list-table::
    :header-rows: 1
-   :widths: 10 90
-   :class: table-bordered
+   :widths: 50 50
     
    * - Operator
      - Method Name
@@ -76,7 +75,7 @@ pipeline operators:
 
 To create an aggregation pipeline by using one of the preceding operators, call
 the corresponding method on an instance of ``Criteria``. Calling the method adds
-the aggregation operation to the ``pipelin`` atrritbure of the ``Criteria``
+the aggregation operation to the ``pipeline`` atrritbure of the ``Criteria``
 instance. To run the aggregation pipeline, pass the ``pipeline`` attribute value
 to the ``Collection#aggregate()`` method. 
 
@@ -124,7 +123,7 @@ Aggregation with the Ruby Driver
 
 You can use the Ruby driver to run aggregation operations that do not have
 corresponding builder methods by using the
-``Collection#aggregate()`` method, and passing in an array of aggregation
+``Collection#aggregate()`` method and passing in an array of aggregation
 operations. Creating the aggregation pipeline by using the Ruby driver returns
 raw ``BSON::Document`` objects rather than ``Mongoid::Document`` model
 instances.
@@ -156,7 +155,7 @@ Consider a collection that contains documents that are modeled as follows:
    end
 
 The following example creates an aggregation pipeline to retrieve all bands that
-have toured since 2010 and have at least one or more awards:
+have toured since 2000 and have at least one award:
 
 .. literalinclude:: /includes/aggregation/ruby-aggregation.rb
    :language: ruby
@@ -164,7 +163,7 @@ have toured since 2010 and have at least one or more awards:
 .. tip::
 
    The preceding example projects only the ``_id`` field of the output
-   documents. It then uses the ``_id`` field to find the documents and return
+   documents. It then uses the projected results to find the documents and return
    them as ``Mongoid::Document`` model instances. This optional step is not
    required to run an aggregation pipeline.
 
