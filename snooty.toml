@@ -1,14 +1,12 @@
 name = "mongoid"
 title = "Mongoid"
 
-intersphinx = [ "https://www.mongodb.com/docs/manual/objects.inv",
-                "https://www.mongodb.com/docs/atlas/objects.inv"
-              ]
+intersphinx = [
+    "https://www.mongodb.com/docs/manual/objects.inv",
+    "https://www.mongodb.com/docs/atlas/objects.inv",
+]
 
-toc_landing_pages = [
-    "/quick-start-rails",
-    "/quick-start-sinatra"
-    ]
+toc_landing_pages = ["/quick-start-rails", "/quick-start-sinatra"]
 
 [constants]
 rails-6-version = 6.0
@@ -22,3 +20,4 @@ quickstart-sinatra-app-name = "my-sinatra-app"
 quickstart-rails-app-name = "my-rails-app"
 feedback-widget-title = "Feedback"
 server-manual = "Server manual"
+api-root = "https://www.mongodb.com/docs/mongoid/master/api/Mongoid"
