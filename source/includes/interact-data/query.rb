@@ -1,6 +1,6 @@
 # start-simple-field-query
 Band.where(name: 'Depeche Mode')
-Band.where(name => 'Depeche Mode')
+Band.where('name' => 'Depeche Mode')
 # end-simple-field-query
 
 # start-query-api-query
@@ -68,53 +68,54 @@ Band.and([Band.where(name: 'Sun Kil Moon'), [{member_count: 2}]])
 
 # start-logical-combination-ops
 # Combines as "and"
-Band.where(name: 'Swans').where(name: 'Feist').selector
+Band.where(name: 'Swans').where(name: 'Feist')
 
 # Combines as "or"
-Band.where(name: 'Swans').or(name: 'Feist').selector
+Band.where(name: 'Swans').or(name: 'Feist')
 # end-logical-combination-ops
 
 # start-logical-combination-ops-2
 # "or" applies to the first condition, and the second is combined
 # as "and"
-Band.or(name: 'Sun').where(label: 'Trust').selector
+Band.or(name: 'Sun').where(label: 'Trust')
 
-# Same as previous example - where and and are aliases
-Band.or(name: 'Sun').and(label: 'Trust').selector
+# Same as previous example - "where" and "and" are aliases
+Band.or(name: 'Sun').and(label: 'Trust')
 
 # Same operator can be stacked any number of times
-Band.or(name: 'Sun').or(label: 'Trust').selector
+Band.or(name: 'Sun').or(label: 'Trust')
 
 # The last label condition is added to the top level as "and"
-Band.where(name: 'Sun').or(label: 'Trust').where(label: 'Feist').selector
-# => {"$or"=>[{"name"=>"Sun"}, {"label"=>"Trust"}], "label"=>"Foo"}
+Band.where(name: 'Sun').or(label: 'Trust').where(label: 'Feist')
+# Interpreted query:
+# {"$or"=>[{"name"=>"Sun"}, {"label"=>"Trust"}], "label"=>"Feist"}
 # end-logical-combination-ops-2
 
 # start-not-logical
 # "not" negates "where"
-Band.not.where(name: 'Best').selector
+Band.not.where(name: 'Best')
 
 # The second "where" is added as "$and"
-Band.not.where(name: 'Best').where(label: /Records/).selector
+Band.not.where(name: 'Best').where(label: /Records/)
 
 # "not" negates its argument
-Band.not(name: 'Best').selector
+Band.not(name: 'Best')
 # end-not-logical
 
 # start-not-logical-note
 # String negation - uses "$ne"
-Band.not.where(name: 'Best').selector
+Band.not.where(name: 'Best')
  
 # Regex negation - uses "$not"
-Band.not.where(name: /Best/).selector
+Band.not.where(name: /Best/)
 # end-not-logical-note
 
 # start-not-behavior
 # Simple condition
-Band.not(name: /Best/).selector
+Band.not(name: /Best/)
 
 # Complex conditions
-Band.where(name: /Best/).not(name: 'Astral Projection').selector
+Band.where(name: /Best/).not(name: 'Astral Projection')
 
 # Symbol operator syntax
 Band.not(:name.ne => 'Astral Projection')
