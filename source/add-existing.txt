@@ -30,7 +30,7 @@ application that uses {+odm+}, see one of the following guides:
 Sinatra Application
 -------------------
 
-To start using {+odm+} in an existing Sinatra application, you can follow
+To start using {+odm+} in an existing Sinatra application, perform
 the following steps:
 
 1. Add the ``mongoid`` dependency to your application's ``Gemfile``.
@@ -103,7 +103,7 @@ Modify Frameworks
 Open the ``config/application.rb`` file and examine the contents. If the
 file uses the ``require "rails/all"`` statement to load all Rails components,
 delete this statement. You must add a separate ``require`` statement
-for each Rails component, as shown the following sample
+for each Rails component, as shown in the following sample
 ``config/application.rb`` file:
 
 .. code-block:: ruby
@@ -206,8 +206,8 @@ a predefined schema to store the data.
 
 Migration tools are often specific to datasets.
 Even though {+odm+} supports a superset of Active Record associations,
-the way that model references are stored in collections is different between
-{+odm+} and Active Record.
+model references are stored differently in collections when using
+{+odm+} compared to Active Record.
 
 Visit the following resources to learn more about migrating from an
 RDBMS to MongoDB:
