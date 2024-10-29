@@ -246,7 +246,7 @@ querying on an embedded field:
 
 .. note::
 
-   Queries always return top-level model instances, even if all of the
+   Queries always return top-level model instances, even if all the
    conditions reference embedded document fields.
 
 .. _mongoid-query-logical-operations:
@@ -440,7 +440,7 @@ The set of methods may be expanded in future releases of {+odm+}. To ensure
 future compatibility, invoke a strategy method only when the next method call
 is an operator that supports merge strategies.
 
-Merge strategies are currently applied only when conditions are
+Merge strategies are applied only when conditions are
 added through the designated methods. In the following example, the
 merge strategy is not applied because the second condition is added as
 ``where()``, not by using ``in()``:
