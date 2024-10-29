@@ -1,0 +1,476 @@
+.. _mongoid-data-specify-query:
+
+=======
+Queries
+=======
+
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: ruby framework, odm, crud, filter
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+Overview
+--------
+
+In this guide, you can learn how to specify a **query** by using {+odm+}.
+
+You can refine the set of documents that a query returns by creating a
+**query filter**. A query filter is an expression that specifies the search
+criteria MongoDB uses to match documents in a read or write operation.
+When creating a query filter, you can prompt the driver to search for
+documents with an exact match to your query, or you can compose query
+filters to express more complex matching criteria.
+
+{+odm+} provides a query DSL similar to the one used in Active Record.
+
+Sample Data
+~~~~~~~~~~~
+
+The examples in this guide use the ``Band`` model, which represents a
+band or musical group. The definition of the ``Band`` model might be
+different for each section to demonstrate different query
+functionalities. Some sections might also use the ``Manager`` model,
+which represents a person who manages a given band.
+
+``Show`` model, which
+represents a live performance by a certain band or musical group.
+
+Queries in {+odm+}
+------------------
+
+{+odm+} query methods return ``Mongoid::Criteria`` objects, which are
+chainable and lazily evaluated wrappers for the MongoDB Query API.
+The queries are executed when you iterate through the results. The
+following example demonstrates the return type for a simple query:
+
+.. code-block:: ruby
+
+  # Creates a simple query
+  Band.where(name: "Deftones")
+  
+  # Returns a Criteria object
+  # => #<Mongoid::Criteria
+  #   selector: {"name"=>"Deftones"}
+  #   options:  {}
+  #   class:    Band
+  #   embedded: false>
+
+  # Evaluate the query by converting to JSON
+  Band.where(name: "Deftones").to_json
+  
+  # Returns matching documents
+  # => [{"_id":"...","name":"Deftones"}]
+
+You can use methods such as ``first()`` and ``last()`` to return
+individual documents. You can also iterate a ``Criteria`` object by using
+methods such as ``each()`` or ``map()`` to retrieve documents from the
+server. You can use ``to_json()`` to convert a ``Criteria`` object to
+JSON.
+
+.. tip::
+
+   If you call more query methods on an existing ``Criteria`` object,
+   {+odm+} merges the filter criteria.
+
+Condition Syntax
+----------------
+
+This section describes the syntax patterns that you can use to create
+filter criteria. You can specify queries in {+odm+} by using any of the
+following syntax patterns:
+
+- Field syntax
+- Query API syntax
+- Symbol operator syntax
+
+.. note:: Query Syntax Behavior
+    
+   These syntaxes support querying embedded documents by using dot notation.
+   The syntaxes also respect :ref:`field aliases <mongoid-query-field-alias>`
+   and field types, if the field being queried is defined in the model class.
+
+The examples in this section use the following model definition:
+
+.. code-block:: ruby
+
+   class Band
+     include Mongoid::Document
+ 
+     field :name, type: String
+     field :founded, type: Integer
+     field :m, as: :member_count, type: Integer
+ 
+     embeds_one :manager
+   end
+ 
+   class Manager
+     include Mongoid::Document
+ 
+     embedded_in :band
+ 
+     field :name, type: String
+   end
+
+Field Syntax
+~~~~~~~~~~~~
+
+The field querying syntax uses the basic {+language+} hashes. The keys
+can be symbols or strings and correspond to field names in MongoDB
+documents.
+
+The following code shows two equivalent queries that use field querying
+syntax to retrieve documents in which the ``name`` field value is
+``'Depeche Mode'``:
+
+.. literalinclude:: /includes/interact-data/query.rb
+   :start-after: start-simple-field-query
+   :end-before: end-simple-field-query
+   :language: ruby
+   :dedent:
+
+Query API Syntax
+~~~~~~~~~~~~~~~~
+
+You can specify a Query API operator on any field by using the hash
+syntax, as shown by the following equivalent queries:
+
+.. literalinclude:: /includes/interact-data/query.rb
+   :start-after: start-query-api-query
+   :end-before: end-query-api-query
+   :language: ruby
+   :dedent:
+
+Symbol Operator Syntax
+~~~~~~~~~~~~~~~~~~~~~~
+
+You can specify Query API operators as methods on symbols for the
+respective field name, as shown in the following code:
+
+.. literalinclude:: /includes/interact-data/query.rb
+   :start-after: start-symbol-query
+   :end-before: end-symbol-query
+   :language: ruby
+   :dedent:
+
+Fields
+------
+
+This section describes how to perform queries on fields with different
+types of values.
+
+Defined Fields
+~~~~~~~~~~~~~~
+
+.. TODO add link to Fields page
+
+To query on a field, the field does not need to be in the
+the model class definition. However, if a field is defined in
+the model class, {+odm+} coerces query values to match the defined field
+types when constructing the query.
+
+The following code specifies a string value when querying on the
+``founded`` field. Because the ``founded`` field is defined in the model
+class to have ``Integer`` values, {+odm+} coerces the string ``'2020'``
+to ``2020`` when performing the query:
+
+.. literalinclude:: /includes/interact-data/query.rb
+   :start-after: start-defined-field-query
+   :end-before: end-defined-field-query
+   :language: ruby
+   :dedent:
+
+Raw Values
+~~~~~~~~~~
+
+To bypass {+odm+}'s query type coercion behavior and query
+directly for the raw-typed value in the database, wrap the query value in
+the ``Mongoid::RawValue`` class, as shown in the following code:
+
+.. literalinclude:: /includes/interact-data/query.rb
+   :start-after: start-raw-field-query
+   :end-before: end-raw-field-query
+   :language: ruby
+   :dedent:
+
+This behavior can be useful when working with legacy data.
+
+.. _mongoid-query-field-alias:
+
+Field Aliases
+~~~~~~~~~~~~~
+
+.. TODO update links
+
+Queries follow the :ref:`storage field names <storage-field-names>`
+and :ref:`field aliases <field-aliases>` that you might have set in your
+model class definition.
+
+The ``id`` and ``_id`` fields are aliases, so you can use either field
+name in queries:
+
+.. literalinclude:: /includes/interact-data/query.rb
+   :start-after: start-id-field-query
+   :end-before: end-id-field-query
+   :language: ruby
+   :dedent:
+
+Embedded Documents
+~~~~~~~~~~~~~~~~~~
+
+To query on values of fields of embedded documents, you can use dot
+notation. The following code retrieves documents in which the ``name``
+field of the embedded ``Manager`` document is ``'Smith'``:
+
+.. literalinclude:: /includes/interact-data/query.rb
+   :start-after: start-embedded-query
+   :end-before: end-embedded-query
+   :language: ruby
+   :dedent:
+
+The following code demonstrates how to use a symbol operator when
+querying on an embedded field:
+
+.. literalinclude:: /includes/interact-data/query.rb
+   :start-after: start-embedded-ne-query
+   :end-before: end-embedded-ne-query
+   :language: ruby
+   :dedent:
+
+.. note::
+
+   Queries always return top-level model instances, even if all of the
+   conditions reference embedded document fields.
+
+.. _mongoid-query-logical-operations:
+
+Logical Operations
+------------------
+
+{+odm+} supports ``and()``, ``or()``, ``nor()``, and ``not()`` logical
+operations on ``Criteria`` objects. These methods take one or more hashes
+of conditions or another ``Criteria`` object as their arguments. The
+``not`` operation has an argument-free version.
+
+The following code demonstrates how to use the logical operations in
+queries:
+
+.. literalinclude:: /includes/interact-data/query.rb
+   :start-after: start-logical-ops
+   :end-before: end-logical-ops
+   :language: ruby
+   :dedent:
+
+.. note:: Array Parameters
+
+   To ensure backwards compatibility with earlier {+odm+} versions, the
+   logical operation methods accept arrays of parameters, which are
+   flattened to obtain the criteria.
+   
+   Passing arrays to logical operations is deprecated and may be removed
+   in a future version.
+
+The following queries produce the same conditions:
+
+.. literalinclude:: /includes/interact-data/query.rb
+   :start-after: start-logical-and-ops
+   :end-before: end-logical-and-ops
+   :language: ruby
+   :dedent:
+
+Operator Combinations
+~~~~~~~~~~~~~~~~~~~~~
+
+The logical operators have the the same semantics as those from Active
+Record. 
+
+When conditions are specified on the same field multiple times, all
+conditions are added to the criteria, as shown by the queries in the
+following code:
+
+.. literalinclude:: /includes/interact-data/query.rb
+   :start-after: start-logical-combination-ops
+   :end-before: end-logical-combination-ops
+   :language: ruby
+   :dedent:
+
+The ``any_of()``, ``none_of()``, ``nor()``, and ``not()`` operations
+behave similarly.
+
+When you use ``and()``, ``or()``, and ``nor()`` logical operators, they
+operate on the criteria built up to that point:
+
+.. literalinclude:: /includes/interact-data/query.rb
+   :start-after: start-logical-combination-ops-2
+   :end-before: end-logical-combination-ops-2
+   :language: ruby
+   :dedent:
+
+not() Behavior
+~~~~~~~~~~~~~~
+
+You can use the ``not()`` method without arguments, in which case it
+negates the next condition that is specified. The ``not()`` method can
+be called with one or more hash conditions or ``Criteria`` objects,
+which are all negated and added to the criteria.
+
+The following examples demonstrate the behavior of ``not()``:
+
+.. literalinclude:: /includes/interact-data/query.rb
+   :start-after: start-not-logical
+   :end-before: end-not-logical
+   :language: ruby
+   :dedent:
+
+.. note::
+   
+   You cannot use the ``$not`` operator in MongoDB with a string argument.
+   Mongoid uses the ``$ne`` operator to achieve negation:
+
+   .. literalinclude:: /includes/interact-data/query.rb
+      :start-after: start-not-logical-note
+      :end-before: end-not-logical-note
+      :language: ruby
+      :dedent:
+
+Similarly to ``and()``, the ``not()`` operation negates individual
+conditions for simple field criteria. For complex conditions and when a
+field already has a condition defined on it, {+odm+} emulates ``$not``
+by using an ``{'$and' => [{'$nor' => ...}]}`` construct, since MongoDB
+only supports the ``$not`` operator on a per-field basis rather than
+globally:
+
+.. literalinclude:: /includes/interact-data/query.rb
+   :start-after: start-not-behavior
+   :end-before: end-not-behavior
+   :language: ruby
+   :dedent:
+
+If you are using ``not()`` with arrays or regular expressions, view the
+limitations of ``$not`` in the :manual:`{+server-manual+}
+</reference/operator/query/not/>`.
+
+Incremental Query Construction
+------------------------------
+
+By default, when you add conditions to a query, {+odm+} considers each
+condition complete and independent from any other conditions
+present in the query. For example, calling ``in()`` twice adds two separate
+``$in`` conditions:
+
+.. literalinclude:: /includes/interact-data/query.rb
+   :start-after: start-incremental-1
+   :end-before: end-incremental-1
+   :language: ruby
+   :dedent:
+
+Some operator methods support building the condition incrementally. In this
+case, when adding a condition which uses one of the supported operators,
+if there already is a condition on the same field using the
+same operator, the operator expressions are combined according to the
+specified *merge strategy*, which is described in the following section.
+
+.. _mongoid-merge-strategies:
+
+Merge Strategies
+~~~~~~~~~~~~~~~~
+
+{+odm+} provides the following merge strategies:
+
+- **Override**: The new operator instance replaces any existing
+  conditions on the same field by using the same operator.
+- **Intersect**: If there already is a condition using the same operator
+  on the same field, the values of the existing condition are
+  intersected with the values of the new condition and the result is
+  stored as the operator value.
+- **Union**: If there already is a condition using the same operator on
+  the same field, the values of the new condition are added to the
+  values of the existing condition and the result is stored as the
+  operator value.
+
+The following code demonstrates hwo the merge strategies produce
+criteria, by using ``in()`` as the example operator:
+
+.. literalinclude:: /includes/interact-data/query.rb
+   :start-after: start-in-merge
+   :end-before: end-in-merge
+   :language: ruby
+   :dedent:
+
+The strategy is requested by calling ``override()``, ``intersect()`` or ``union()``
+on a ``Criteria`` instance. The requested strategy applies to the next
+condition method called on the query. If the next condition method called does
+not support merge strategies, the strategy is reset, as shown in the following
+example:
+
+.. literalinclude:: /includes/interact-data/query.rb
+   :start-after: start-merge-reset
+   :end-before: end-merge-reset
+   :language: ruby
+   :dedent:
+
+Since ``ne()`` does not support merge strategies, the ``union`` strategy
+is ignored and reset, then when ``in()`` is invoked the second time,
+there is no active strategy.
+
+.. warning::
+
+   Merge strategies assume that the previous conditions have been added
+   to the top level of the query. However, this is not always the case,
+   as conditions may be nested under an ``$and`` clause. Using merge
+   strategies with complex criteria generate incorrect queries.
+
+Supported Operator Methods
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following operator methods support merge strategies:
+
+- ``all()``
+- ``in()``
+- ``nin()``
+
+The set of methods may be expanded in future releases of {+odm+}. To ensure
+future compatibility, invoke a strategy method only when the next method call
+is an operator that supports merge strategies.
+
+Merge strategies are currently applied only when conditions are
+added through the designated methods. In the following example, the
+merge strategy is not applied because the second condition is added as
+``where()``, not by using ``in()``:
+
+.. literalinclude:: /includes/interact-data/query.rb
+   :start-after: start-merge-where
+   :end-before: end-merge-where
+   :language: ruby
+   :dedent:
+
+Operator Value Expansion
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Operator methods that support merge strategies take ``Array`` as their
+value type. {+odm+} expands ``Array``-compatible types, such as a
+``Range``, when they are used with these operator methods.
+
+The following example demonstrates how you can pass a ``Range`` object
+as the query value in when calling ``in()``:
+
+.. literalinclude:: /includes/interact-data/query.rb
+   :start-after: start-range-query
+   :end-before: end-range-query
+   :language: ruby
+   :dedent:
+
+{+odm+} wraps non-``Array`` values in arrays,
+as the shown in the following example:
+
+.. code-block:: ruby
+
+   Band.in(year: 1950)
+   # Interpreted query: {"year"=>{"$in"=>[1950]}}
