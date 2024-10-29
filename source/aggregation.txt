@@ -14,7 +14,7 @@ Transform Your Data with Aggregation
 .. contents:: On this page
    :local:
    :backlinks: none
-   :depth: 1
+   :depth: 2
    :class: singlecol
 
 Overview
@@ -29,10 +29,17 @@ API, is modeled on the concept of data processing pipelines. Documents enter a
 pipeline that contains one or more stages, and this pipeline transforms the
 documents into an aggregated result. 
 
-An aggregation operation is similar to a car factory. A car factory has an assembly line, which contains assembly stations with specialized tools to do specific jobs, like drills and welders. Raw parts enter the factory, and then the assembly line transforms and assembles them into a finished product.
+Aggregation operations function similarly to car factories with assembly
+lines. The assembly lines have stations with specialized tools to
+perform specific tasks. For example, when building a car, the assembly
+line begins with the frame. Then, as the car frame moves through the
+assembly line, each station assembles a separate part. The result is a
+transformed final product, the finished car.
 
-The **aggregation pipeline** is the assembly line, **aggregation stages** are the
-assembly stations, and **operator expressions** are the specialized tools.
+The assembly line represents the *aggregation pipeline*, the individual
+stations represent the *aggregation stages*, the specialized tools
+represent the *expression operators*, and the finished product
+represents the *aggregated result*.
 
 Aggregation Versus Find Operations
 ----------------------------------
@@ -82,7 +89,8 @@ to the ``Collection#aggregate()`` method.
 Example
 ~~~~~~~
 
-Consider a collection that contains documents that are modeled as follows:
+Consider a database that contains a collection with documents that are modeled by
+the following classes:
 
 .. code-block:: ruby
 
@@ -103,16 +111,20 @@ Consider a collection that contains documents that are modeled as follows:
      field :name, type: String
    end
 
+In this example, the ``Tour`` model represents the name of a tour and the states
+it travels through, and the ``Participant`` model represents the name of a
+person participating in the tour.
+
 The following example creates an aggregation pipeline that outputs the states a
 participant has visited by using the following
 aggregation operations:
 
-- ``$match``, which find documents in which the ``participants.name`` field
+- ``match()``, which find documents in which the ``participants.name`` field
   value is ``"Serenity"``
-- ``$unwind``, which deconstructs the ``states`` array field and outputs a
+- ``unwind()``, which deconstructs the ``states`` array field and outputs a
   document for each element in the array
-- ``$group``, which groups the documents by the value of their ``states`` field
-- ``$project``, which prompts the pipeline to return only the ``_id`` and
+- ``group()``, which groups the documents by the value of their ``states`` field
+- ``project()``, which prompts the pipeline to return only the ``_id`` and
   ``states`` fields
 
 .. literalinclude:: /includes/aggregation/builder-dsl.rb
@@ -121,17 +133,18 @@ aggregation operations:
 Aggregation with the Ruby Driver
 --------------------------------
 
-You can use the Ruby driver to run aggregation operations that do not have
+You can use the {+ruby-driver+} to run aggregation operations that do not have
 corresponding builder methods by using the
 ``Collection#aggregate()`` method and passing in an array of aggregation
-operations. Creating the aggregation pipeline by using the Ruby driver returns
+operations. Using the {+ruby-driver+} to perform the aggregation returns
 raw ``BSON::Document`` objects rather than ``Mongoid::Document`` model
 instances.
 
 Example
 ~~~~~~~
 
-Consider a collection that contains documents that are modeled as follows:
+Consider a database that contains a collection with documents that are modeled
+by the following classes:
 
 .. code-block:: ruby
     
@@ -155,7 +168,7 @@ Consider a collection that contains documents that are modeled as follows:
    end
 
 The following example creates an aggregation pipeline to retrieve all bands that
-have toured since 2000 and have at least one award:
+have toured since ``2000`` and have at least ``1`` award:
 
 .. literalinclude:: /includes/aggregation/ruby-aggregation.rb
    :language: ruby
