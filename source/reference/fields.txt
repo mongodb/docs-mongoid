@@ -1251,8 +1251,7 @@ Then, use it your model class:
 Note that the handler function will be invoked whenever the option is used
 in the field definition, even if the option's value is false or nil.
 
-
-.. _dynamic-fields:
+.. _mongoid-dynamic-fields:
 
 Dynamic Fields
 ==============

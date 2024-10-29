@@ -707,7 +707,7 @@ each declared field:
   # => "Artem"
 
 To use this mechanism, each field must be explicitly declared, or the
-model class must enable :ref:`dynamic fields <dynamic-fields>`.
+model class must enable :ref:`dynamic fields <mongoid-dynamic-fields>`.
 
 
 Custom Getters & Setters
