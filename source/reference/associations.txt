@@ -338,7 +338,7 @@ Querying Referenced Associations
 In most cases, efficient queries across referenced associations (and in general
 involving data or conditions or multiple collections) are performed using
 the aggregation pipeline. Mongoid helpers for constructing aggregation pipeline
-queries are described in the :ref:`aggregation pipeline <aggregation-pipeline>`
+queries are described in the :ref:`aggregation pipeline <mongoid-aggregation>`
 section.
 
 For simple queries, the use of aggregation pipeline may be avoided and
