@@ -422,7 +422,7 @@ example:
    :dedent:
 
 Because ``ne()`` does not support merge strategies, the ``union`` strategy
-is ignored and reset, then when ``in()`` is invoked the second time,
+is ignored and reset. Then, when ``in()`` is invoked the second time,
 there is no active strategy.
 
 .. warning::
