@@ -41,21 +41,35 @@ stations represent the *aggregation stages*, the specialized tools
 represent the *expression operators*, and the finished product
 represents the *aggregated result*.
 
-Aggregation Versus Find Operations
-----------------------------------
+Compare Aggregation and Find Operations
+---------------------------------------
 
-You can use find operations to perform the following actions:
+The following table lists the different tasks you can perform with find
+operations, compared to what you can achieve with aggregation
+operations. The aggregation framework provides expanded functionality
+that allows you to transform and manipulate your data.
 
-- Select which documents to return
-- Select which fields to return
-- Sort the results
+.. list-table::
+   :header-rows: 1
+   :widths: 50 50
 
-You can use aggregation operations to perform the following actions:
+   * - Find Operations
+     - Aggregation Operations
 
-- Run find operations
-- Rename fields
-- Summarize data
-- Group values
+   * - | Select *certain* documents to return
+       | Select *which* fields to return
+       | Sort the results
+       | Limit the results
+       | Count the results
+     - | Select *certain* documents to return
+       | Select *which* fields to return
+       | Sort the results
+       | Limit the results
+       | Count the results
+       | Rename fields
+       | Compute new fields
+       | Summarize data
+       | Connect and merge data sets
 
 {+odm+} Builders
 ----------------
@@ -127,8 +141,14 @@ aggregation operations:
 - ``project()``, which prompts the pipeline to return only the ``_id`` and
   ``states`` fields
 
-.. literalinclude:: /includes/aggregation/builder-dsl.rb
-   :language: ruby
+.. io-code-block::
+   
+   .. input:: /includes/aggregation/builder-dsl.rb
+      :language: ruby
+
+   .. output::
+
+      [{"states":["OR","WA","CA"]}]
 
 Aggregation with the Ruby Driver
 --------------------------------
@@ -170,8 +190,18 @@ by the following classes:
 The following example creates an aggregation pipeline to retrieve all bands that
 have toured since ``2000`` and have at least ``1`` award:
 
-.. literalinclude:: /includes/aggregation/ruby-aggregation.rb
-   :language: ruby
+.. io-code-block::
+   
+   .. input:: /includes/aggregation/ruby-aggregation.rb
+      :language: ruby
+
+   .. output::
+
+      [
+       {"_id": "...", "name": "Deftones" },
+       {"_id": "...", "name": "Tool"},
+       ...
+      ]
 
 .. tip::
 
