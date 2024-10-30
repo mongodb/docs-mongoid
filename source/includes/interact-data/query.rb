@@ -22,6 +22,7 @@ Band.where(founded: Mongoid::RawValue('2020'))
 
 # start-id-field-query
 Band.where(id: '5ebdeddfe1b83265a376a760')
+Band.where(_id: '5ebdeddfe1b83265a376a760')
 # end-id-field-query
 
 # start-embedded-query
@@ -53,7 +54,7 @@ Band.and(name: 'Sun Kil Moon').and(member_count: 2)
 # Multiple conditions in the same "and" call
 Band.and({name: 'Sun Kil Moon'}, {member_count: 2})
 
-# Multiple conditions in an array - Deprecates
+# Multiple conditions in an array - Deprecated
 Band.and([{name: 'Sun Kil Moon'}, {member_count: 2}])
 
 # Condition in "where" and a scope

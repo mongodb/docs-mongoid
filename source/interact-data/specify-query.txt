@@ -9,7 +9,7 @@ Specify a Query
    :values: reference
 
 .. meta::
-   :keywords: ruby framework, odm, crud, filter
+   :keywords: ruby framework, odm, crud, filter, code example
 
 .. contents:: On this page
    :local:
@@ -29,7 +29,8 @@ When creating a query filter, you can prompt the driver to search for
 documents with an exact match to your query, or you can compose query
 filters to express more complex matching criteria.
 
-{+odm+} provides a query DSL similar to the one used in Active Record.
+{+odm+} provides a query domain-specific language (DSL) similar to the
+one used in Active Record.
 
 Sample Data
 ~~~~~~~~~~~
@@ -38,9 +39,7 @@ The examples in this guide use the ``Band`` model, which represents a
 band or musical group. The definition of the ``Band`` model might be
 different for each section to demonstrate different query
 functionalities. Some sections might also use the ``Manager`` model,
-which represents a person who manages a given band.
-
-``Show`` model, which
+which represents a person who manages a given band, or a ``Show`` model, which
 represents a live performance by a certain band or musical group.
 
 Queries in {+odm+}
@@ -75,13 +74,13 @@ methods such as ``each()`` or ``map()`` to retrieve documents from the
 server. You can use ``to_json()`` to convert a ``Criteria`` object to
 JSON.
 
-.. tip::
+.. tip:: Chaining methods
 
-   If you call more query methods on an existing ``Criteria`` object,
+   If you chain other query methods on an existing ``Criteria`` object,
    {+odm+} merges the filter criteria.
 
-Condition Syntax
-----------------
+Create a Query Filter 
+---------------------
 
 This section describes the syntax patterns that you can use to create
 filter criteria. You can specify queries in {+odm+} by using any of the
@@ -91,7 +90,7 @@ following syntax patterns:
 - Query API syntax
 - Symbol operator syntax
 
-.. note:: Query Syntax Behavior
+.. note:: Syntax Behaviors
     
    These syntaxes support querying embedded documents by using dot notation.
    The syntaxes also respect :ref:`field aliases <mongoid-query-field-alias>`
@@ -160,8 +159,8 @@ respective field name, as shown in the following code:
    :language: ruby
    :dedent:
 
-Fields
-------
+Query on Different Field Types
+------------------------------
 
 This section describes how to perform queries on fields with different
 types of values.
@@ -199,8 +198,6 @@ the ``Mongoid::RawValue`` class, as shown in the following code:
    :end-before: end-raw-field-query
    :language: ruby
    :dedent:
-
-This behavior can be useful when working with legacy data.
 
 .. _mongoid-query-field-alias:
 
@@ -254,10 +251,17 @@ querying on an embedded field:
 Logical Operations
 ------------------
 
-{+odm+} supports ``and()``, ``or()``, ``nor()``, and ``not()`` logical
-operations on ``Criteria`` objects. These methods take one or more hashes
-of conditions or another ``Criteria`` object as their arguments. The
-``not`` operation has an argument-free version.
+{+odm+} supports the following logical operations on ``Criteria``
+objects:
+
+- ``and()``
+- ``or()``
+- ``nor()``
+- ``not()``
+
+These methods take one or more hashes of conditions or another
+``Criteria`` object as their arguments. The ``not()`` operation has an
+argument-free version.
 
 The following code demonstrates how to use the logical operations in
 queries:
@@ -274,7 +278,7 @@ queries:
    logical operation methods accept arrays of parameters, which are
    flattened to obtain the criteria.
    
-   Passing arrays to logical operations is deprecated and may be removed
+   Passing arrays to logical operations is deprecated and might be removed
    in a future version.
 
 The following queries produce the same conditions:
@@ -343,8 +347,8 @@ The following examples demonstrate the behavior of ``not()``:
 Similarly to ``and()``, the ``not()`` operation negates individual
 conditions for simple field criteria. For complex conditions and when a
 field already has a condition defined on it, {+odm+} emulates ``$not``
-by using an ``{'$and' => [{'$nor' => ...}]}`` construct, since MongoDB
-only supports the ``$not`` operator on a per-field basis rather than
+by using an ``{'$and' => [{'$nor' => ...}]}`` construct, because MongoDB
+supports the ``$not`` operator only on a per-field basis rather than
 globally:
 
 .. literalinclude:: /includes/interact-data/query.rb
@@ -371,11 +375,12 @@ present in the query. For example, calling ``in()`` twice adds two separate
    :language: ruby
    :dedent:
 
-Some operator methods support building the condition incrementally. In this
-case, when adding a condition which uses one of the supported operators,
-if there already is a condition on the same field using the
-same operator, the operator expressions are combined according to the
-specified *merge strategy*, which is described in the following section.
+Some operator methods support building the condition incrementally. When
+you add a condition which uses one of the supported operators, {+odm+}
+sees if there already is a condition on the same field using the
+same operator. If so, the operator expressions are combined according to the
+specified *merge strategy*. The following section describes the available merge
+strategies.
 
 .. _mongoid-merge-strategies:
 
@@ -395,8 +400,8 @@ Merge Strategies
   values of the existing condition and the result is stored as the
   operator value.
 
-The following code demonstrates hwo the merge strategies produce
-criteria, by using ``in()`` as the example operator:
+The following code demonstrates how the merge strategies produce
+criteria by using ``in()`` as the example operator:
 
 .. literalinclude:: /includes/interact-data/query.rb
    :start-after: start-in-merge
@@ -416,7 +421,7 @@ example:
    :language: ruby
    :dedent:
 
-Since ``ne()`` does not support merge strategies, the ``union`` strategy
+Because ``ne()`` does not support merge strategies, the ``union`` strategy
 is ignored and reset, then when ``in()`` is invoked the second time,
 there is no active strategy.
 
@@ -424,8 +429,8 @@ there is no active strategy.
 
    Merge strategies assume that the previous conditions have been added
    to the top level of the query. However, this is not always the case,
-   as conditions may be nested under an ``$and`` clause. Using merge
-   strategies with complex criteria generate incorrect queries.
+   as conditions might be nested under an ``$and`` clause. Using merge
+   strategies with complex criteria can generate incorrect queries.
 
 Supported Operator Methods
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -436,7 +441,7 @@ The following operator methods support merge strategies:
 - ``in()``
 - ``nin()``
 
-The set of methods may be expanded in future releases of {+odm+}. To ensure
+The set of methods might be expanded in future releases of {+odm+}. To ensure
 future compatibility, invoke a strategy method only when the next method call
 is an operator that supports merge strategies.
 
@@ -459,7 +464,7 @@ value type. {+odm+} expands ``Array``-compatible types, such as a
 ``Range``, when they are used with these operator methods.
 
 The following example demonstrates how you can pass a ``Range`` object
-as the query value in when calling ``in()``:
+as the query value when using the ``in()`` method:
 
 .. literalinclude:: /includes/interact-data/query.rb
    :start-after: start-range-query
