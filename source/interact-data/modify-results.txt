@@ -100,7 +100,7 @@ loads all fields of the referenced associations.
 
 .. note::
 
-   If you are connected to a deployment running MongoDB 4.4 or higher,
+   If you are connected to a deployment running MongoDB 4.4 or later,
    you cannot specify an association and its fields in a projection in
    the same query.
 
@@ -246,7 +246,7 @@ is applied after documents are skipped.
 
 .. tip::
     
-   When performing pagination, you should use ``skip()`` on :ref:`sorted results <mongoid-data-sort>` to ensure consistent results.
+   When performing pagination, use ``skip()`` on :ref:`sorted results <mongoid-data-sort>` to ensure consistent results.
 
 The following code skips the first ``3`` documents when returning results:
 
