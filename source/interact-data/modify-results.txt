@@ -9,7 +9,7 @@ Modify Query Results
    :values: reference
 
 .. meta::
-   :keywords: ruby framework, odm, crud, print results
+   :keywords: ruby framework, odm, crud, print results, code example
 
 .. contents:: On this page
    :local:
@@ -36,7 +36,9 @@ Sample Data
 The examples in this guide use the ``Band`` model, which represents a
 band or musical group. The definition of the ``Band`` model might be
 different for each section to demonstrate different query
-functionalities.
+functionalities. Some sections might also use the ``Manager`` model,
+which represents a person who manages a given band, or a ``Tour`` model, which
+represents live performances by a certain band or musical group.
 
 .. _mongoid-data-projection:
 
