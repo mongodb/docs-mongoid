@@ -173,12 +173,15 @@ each field.
 You can specify the sort direction in the following ways:
 
 - Integers ``1`` (ascending) and ``-1`` (descending)
+
   - Example: ``Band.order(name: 1, year: -1)``
 
 - Symbols ``:asc`` and ``:desc``
+
   - Example: ``Band.order(name: :asc)``
 
 - Strings ``"asc"`` and ``"desc"``
+
   - Example: ``Band.order_by(name: "asc", year: "desc")``
 
 The ``order()`` method also accepts the following sort specifications:
@@ -186,15 +189,19 @@ The ``order()`` method also accepts the following sort specifications:
 - Array of two-element arrays:
 
   - Strings
+
     - Example: ``Band.order([['name', 'asc'], ['year', 'desc']])``
 
   - Symbols
+
     - Example: ``Band.order([[:name, :asc]])``
 
 - ``asc`` and ``desc`` methods on symbols
+
   - Example: ``Band.order(:name.asc, :year.desc)``
 
 - SQL syntax
+
   - Example: ``Band.order('name desc')``
 
 You can also use the ``asc()`` and ``desc()`` methods instead of using
