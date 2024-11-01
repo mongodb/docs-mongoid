@@ -117,6 +117,7 @@ retrieve documents in which the ``active`` field value is ``true``:
    :end-before: end-default-scope-1
    :language: ruby
    :dedent:
+   :emphasize-lines: 7
 
 Then, any queries on the ``Band`` model pre-filter for documents in which the
 ``active`` value is ``true``.
@@ -139,6 +140,7 @@ as boolean values or integers.
       :end-before: end-default-scope-2
       :language: ruby
       :dedent:
+      :emphasize-lines: 5, 7
 
 We do not recommend using dot notation to reference nested fields in default
 scopes. This can direct {+odm+} to initialize unexpected fields in new
