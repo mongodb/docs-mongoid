@@ -11,6 +11,11 @@ Specify a Query
 .. meta::
    :keywords: ruby framework, odm, crud, filter, code example
 
+.. toctree::
+   :caption: Queries
+   
+   /interact-data/scoping
+
 .. contents:: On this page
    :local:
    :backlinks: none
