@@ -8,7 +8,8 @@ intersphinx = [ "https://www.mongodb.com/docs/manual/objects.inv",
 toc_landing_pages = [
     "/quick-start-rails",
     "/quick-start-sinatra",
-    "/interact-data"
+    "/interact-data",
+    "/interact-data/specify-query"
     ]
 
 [constants]
