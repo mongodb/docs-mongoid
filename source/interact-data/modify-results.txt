@@ -21,7 +21,7 @@ Overview
 --------
 
 In this guide, you can learn how to customize the way that {+odm+}
-returns results to you from queries. MongoDB allows you to perform the
+returns results from queries. MongoDB allows you to perform the
 following actions to modify the way that results appear:
 
 - :ref:`mongoid-data-projection`
@@ -36,17 +36,17 @@ Sample Data
 The examples in this guide use the ``Band`` model, which represents a
 band or musical group. The definition of the ``Band`` model might be
 different for each section to demonstrate different query
-functionalities. Some sections might also use the ``Manager`` model,
-which represents a person who manages a given band, or a ``Tour`` model, which
-represents live performances by a certain band or musical group.
+functionalities. Some sections also use the ``Manager`` model,
+which represents a person who manages a given band, or the ``Tour``
+model, which represents live performances by a given band.
 
 .. _mongoid-data-projection:
 
 Return Specified Fields
 -----------------------
 
-In MongoDB, the process of specifying fields to include or exclude from
-results is called *projection*. {+odm+} provides the following operators
+In MongoDB, *projection* is the process of specifying fields to include
+or exclude from results. {+odm+} provides the following operators
 to project fields:
 
 - ``only()``: Specifies fields to include
@@ -98,7 +98,9 @@ Then, you can access the embedded fields from the returned documents:
 
 You can pass fields of referenced associations to the ``only()`` method,
 but the projection is ignored when loading the embedded objects. {+odm+}
-loads all fields of the referenced associations.
+loads all fields of the referenced associations. For example, when you
+access the embedded ``Tour`` object as shown in the preceding code,
+{+odm+} returns the complete object, not just the ``year`` field.
 
 .. note::
 
@@ -106,10 +108,10 @@ loads all fields of the referenced associations.
    you cannot specify an association and its fields in a projection in
    the same query.
 
-If a document has ``has_one`` or ``has_and_belongs_to_many``
-associations, you must include the fields with foreign keys in the list
-of attributes loaded when using ``only()`` for those associations to be
-loaded.
+If a document contains ``has_one`` or ``has_and_belongs_to_many``
+associations, and you want {+odm+} to load those associations when
+you call the ``only()`` method, you must include the fields with foreign
+keys in the list of attributes.
 
 In the following example, the ``Band`` and ``Manager`` models have a
 ``has_and_belongs_to_many`` association:
@@ -163,14 +165,17 @@ objects:
 Sort Results
 ------------
 
-You can sort the order that {+odm+} returns documents by using the
+You can specify the order in which {+odm+} returns documents by using the
 ``order()`` and ``order_by()`` methods.
 
 These methods accept a hash that indicates which fields to order the
 documents by, and whether to use an ascending or descending order for
 each field.
 
-You can specify the sort direction in the following ways:
+You can specify the sort direction by using integers, symbols, or
+strings. We recommend using the same sorting syntax throughout your
+application for consistency. The following list provides each syntax and
+shows how to sort on the ``name`` and ``year`` fields:
 
 - Integers ``1`` (ascending) and ``-1`` (descending)
 
@@ -178,7 +183,7 @@ You can specify the sort direction in the following ways:
 
 - Symbols ``:asc`` and ``:desc``
 
-  - Example: ``Band.order(name: :asc)``
+  - Example: ``Band.order(name: :asc, year: :desc)``
 
 - Strings ``"asc"`` and ``"desc"``
 
@@ -194,7 +199,7 @@ The ``order()`` method also accepts the following sort specifications:
 
   - Symbols
 
-    - Example: ``Band.order([[:name, :asc]])``
+    - Example: ``Band.order([[:name, :asc], [:year, :desc]])``
 
 - ``asc`` and ``desc`` methods on symbols
 
@@ -202,26 +207,28 @@ The ``order()`` method also accepts the following sort specifications:
 
 - SQL syntax
 
-  - Example: ``Band.order('name desc')``
+  - Example: ``Band.order('name asc', 'year desc')``
 
-You can also use the ``asc()`` and ``desc()`` methods instead of using
-``order()``:
+.. tip::
 
-.. code-block:: ruby
+   Instead of using ``order()`` or ``order_by()``, you can also use the
+   ``asc()`` and ``desc()`` methods to specify sort orders: 
 
-   Band.asc('name').desc('year')
+   .. code-block:: ruby
+   
+      Band.asc('name').desc('year')
 
-If you chain sort specifications, the first call defines the most
-significant criteria and the newest call defines the least significant
-one.
+When you chain sort specifications, the first call defines the first
+sorting order and the newest call defines the last sorting order after
+the previous sorts have been applied.
 
 .. TODO update link in the following note for scope
 
 .. note:: Sorting in Scopes
 
    If you define a scope on your model that includes a sort specification,
-   the scope sort takes precedence over the sort specified in a query, as the
-   default scope is evaluated first.
+   the scope sort takes precedence over the sort specified in a query,
+   because the default scope is evaluated first.
 
 .. _mongoid-data-skip-limit:
 
@@ -229,14 +236,14 @@ Paginate Results
 ----------------
 
 {+odm+} provides the ``limit()``, ``skip()``, and ``batch_size()``
-pagination operators that you can use on ``Criteria`` objects. The
+pagination methods that you can use on ``Criteria`` objects. The
 following sections describe how to use these operators.
 
 Limit Number of Results
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-You can limit the number of results that {+odm+} returns by using the
-``limit()`` method.
+You can use the ``limit()`` method to limit the number of results that
+{+odm+} returns.
 
 The following code retrieves a maximum of ``5`` documents:
 
@@ -250,12 +257,21 @@ Skip Results
 ~~~~~~~~~~~~
 
 You can skip a specified number of results by using the ``skip()``
-method, or its alias ``offset()``. If you chain a ``limit()`` call, it
-is applied after documents are skipped. 
+method, or its alias ``offset()``.
+
+If you chain a ``limit()`` call to ``skip()``, the limit is applied
+after documents are skipped, as demonstrated in the following example:
+
+.. literalinclude:: /includes/interact-data/modify-results.rb
+   :start-after: start-skip-limit
+   :end-before: end-skip-limit
+   :language: ruby
+   :dedent:
 
 .. tip::
     
-   When performing pagination, use ``skip()`` on :ref:`sorted results <mongoid-data-sort>` to ensure consistent results.
+   When performing pagination, use ``skip()`` on :ref:`sorted results <mongoid-data-sort>`
+   to ensure consistent results.
 
 The following code skips the first ``3`` documents when returning results:
 

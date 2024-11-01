@@ -22,6 +22,12 @@ Band.where(members: 4).without(:year)
 Band.limit(5)
 # end-limit
 
+# start-skip-limit
+Band.skip(2).limit(5)
+# Skips the first two results and returns
+# the following five results
+# end-skip-limit
+
 # start-skip
 Band.skip(3)
 
