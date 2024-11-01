@@ -31,9 +31,9 @@ if you are applying the same criteria to most queries.
 Named Scopes
 ------------
 
-Named scopes are criteria defined at class load that are
-referenced by a provided name. Similar to normal criteria, they are
-lazily loaded and chainable.
+Named scopes are criteria defined at class load that are referenced by a
+provided name. Similar to filter criteria, they are lazily loaded and
+chainable.
 
 This example defines a ``Band`` model that includes the following named
 scopes:
@@ -140,8 +140,8 @@ as boolean values or integers.
       :language: ruby
       :dedent:
 
-You *should not* use dot notation to reference nested fields in default
-scopes. This can lead to {+odm+} initializing unexpected fields in new
+We do not recommend using dot notation to reference nested fields in default
+scopes. This can direct {+odm+} to initialize unexpected fields in new
 models.
 
 For example, if you define a default scope that references the
@@ -158,7 +158,7 @@ Associations
 If you define a default scope on a model that is part of an
 association, you must reload the association to have scoping reapplied.
 This is necessary for when you change a value of a document in the
-association that would affect its visibility when the scope is applied.
+association that affects its visibility when the scope is applied.
 
 This example uses the following models:
 
@@ -255,4 +255,4 @@ the following example:
 Additional Information
 ----------------------
 
-.. TODO add additional info
+.. TODO add info links
