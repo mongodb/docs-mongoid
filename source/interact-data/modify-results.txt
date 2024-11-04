@@ -222,13 +222,12 @@ When you chain sort specifications, the first call defines the first
 sorting order and the newest call defines the last sorting order after
 the previous sorts have been applied.
 
-.. TODO update link in the following note for scope
-
 .. note:: Sorting in Scopes
 
-   If you define a scope on your model that includes a sort specification,
-   the scope sort takes precedence over the sort specified in a query,
-   because the default scope is evaluated first.
+   If you define a :ref:`default scope <mongoid-data-scoping>` on your
+   model that includes a sort specification, the scope sort takes precedence
+   over the sort specified in a query, because the default scope is
+   evaluated first.
 
 .. _mongoid-data-skip-limit:
 
