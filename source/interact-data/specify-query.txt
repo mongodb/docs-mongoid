@@ -575,7 +575,7 @@ with the specified ``_id`` field value:
 
 The ``find()`` method accepts multiple arguments, or an array of arguments.
 {+odm+} interprets each argument or array element as an
-``_id`` value, and returns documents with all of the specified ``_id``
+``_id`` value, and returns documents with all the specified ``_id``
 values in an array, as shown in the following example:
 
 .. literalinclude:: /includes/interact-data/query.rb
@@ -656,13 +656,13 @@ result from the list of returned documents based on its position.
 
 - ``first()``: Returns the first matching document. You can get the
   first ``n`` documents by passing an integer-valued parameter. This method
-  automatically uses a sort on the ``_id`` field. **See lines 1-8 in the
-  following code for usage examples**
+  automatically uses a sort on the ``_id`` field. *See lines 1-8 in the
+  following code for examples*
 
 - ``last()``: Returns the last matching document. You can get the
   last ``n`` documents by passing an integer-valued parameter. This method
-  automatically uses a sort on the ``_id`` field. **See lines  in the
-  following code for usage examples**
+  automatically uses a sort on the ``_id`` field. *See line 11 in the
+  following code an example*
 
 - ``first_or_create()``: Returns the first matching document. If no
   document matches, creates and returns a newly persisted one.
@@ -670,28 +670,29 @@ result from the list of returned documents based on its position.
 - ``first_or_initialize()``: Returns the first matching document. If no
   document matches, returns a new one.
 
-- ``second()``: Returns the second matching document. This method
-  automatically uses a sort on the ``_id`` field.
+- ``second()``: Returns the second matching document. Automatically uses
+  a sort on the ``_id`` field.
 
-- ``second()``: Returns the second matching document. This method
-  automatically uses a sort on the ``_id`` field.
+- ``second()``: Returns the second matching document. Automatically uses
+  a sort on the ``_id`` field.
 
-- ``third()``: Returns the third matching document. This method
-  automatically uses a sort on the ``_id`` field.
+- ``third()``: Returns the third matching document. Automatically uses
+  a sort on the ``_id`` field.
 
-- ``fourth()``: Returns the fourth matching document. This method
-  automatically uses a sort on the ``_id`` field.
+- ``fourth()``: Returns the fourth matching document. Automatically uses
+  a sort on the ``_id`` field.
 
-- ``fifth()``: Returns the fifth matching document. This method
-  automatically uses a sort on the ``_id`` field.
+- ``fifth()``: Returns the fifth matching document. Automatically uses
+  a sort on the ``_id`` field.
 
 - ``second_to_last()``: Returns the second to last matching document.
-  This method automatically uses a sort on the ``_id`` field.
+  Automatically usesa sort on the ``_id`` field. *See line 14 in the
+  following code an example*
 
 - ``third_to_last()``: Returns the third to last matching document.
-  This method automatically uses a sort on the ``_id`` field.
+  Automatically uses a sort on the ``_id`` field.
 
-The following code demonstrates how to use some of the methods described
+The following code demonstrates how to use some methods described
 in the preceding list:
 
 .. literalinclude:: /includes/interact-data/query.rb
@@ -700,3 +701,15 @@ in the preceding list:
    :language: ruby
    :dedent:
    :linenos:
+
+.. tip:: Error Generation
+
+   Each method described in this section has a ``-!`` suffixed counterpart
+   that returns an error if {+odm+} doesn't match any documents. For
+   example, to implement error handling in your application when your
+   query returns no results, use the ``first!()`` method instead of
+   ``first()``.
+
+List Field Values
+~~~~~~~~~~~~~~~~~
+
