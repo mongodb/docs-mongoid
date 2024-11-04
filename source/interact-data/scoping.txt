@@ -51,8 +51,10 @@ scopes:
    :dedent:
    :emphasize-lines: 7-8
 
-Then, you can query by using the named scopes, as shown in the following
-code:
+Then, you can query by using the named scopes. The following query uses
+the named scopes to match documents in which value of the ``country``
+field is ``"Japan"`` and value of the ``genre`` field includes
+``"rock"``:
 
 .. literalinclude:: /includes/interact-data/scoping.rb
    :start-after: start-query-named-scope
@@ -66,7 +68,7 @@ Advanced Scoping
 You can define ``Proc`` objects and blocks in named scopes so that they
 accept parameters and extend functionality.
 
-This example defines a ``Band`` model that includes ``based_in`` scope,
+This example defines a ``Band`` model that includes the ``based_in`` scope,
 which matches documents in which the ``country`` field value
 is the specified value passed as a parameter:
 
@@ -109,8 +111,11 @@ criteria to most queries. By defining a default scope, you specify these
 criteria as the default for any queries that use the model. Default
 scopes return ``Criteria`` objects.
 
-The following code defines a default scope on the ``Band`` model to only
-retrieve documents in which the ``active`` field value is ``true``:
+To create a default scope, you must define the ``default_scope()`` method
+on your model class.
+
+The following code defines the ``default_scope()`` method on the ``Band``
+model to only retrieve documents in which the ``active`` field value is ``true``:
 
 .. literalinclude:: /includes/interact-data/scoping.rb
    :start-after: start-default-scope-1
@@ -243,8 +248,8 @@ scope as the default scope at runtime, as shown in the following code:
 Class Methods
 -------------
 
-{+odm+} treats class methods on models that return ``Criteria`` objects
-as scopes. You can chain these class methods when querying, as shown in
+{+odm+} treats class methods that return ``Criteria`` objects
+as scopes. You can query by using these class methods, as shown in
 the following example:
 
 .. literalinclude:: /includes/interact-data/scoping.rb

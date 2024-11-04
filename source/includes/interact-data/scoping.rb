@@ -48,7 +48,7 @@ class Band
     field :name, type: String
     field :active, type: Boolean
 
-    default_scope ->{ where(active: true) }
+    default_scope -> { where(active: true) }
 end
 # end-default-scope-1
 
@@ -102,8 +102,12 @@ band = Band.new(name: "Ghost Mountain")
 label.bands.push(band)
 label.bands # Displays the Band because "active" is "true"
 band.update_attribute(:active, false) # Updates "active" to "false"
-label.bands # Still displays the Band
-label.reload.bands # Won't display the Band after reloading
+
+# Displays the "Ghost Mountain" band
+label.bands # => {"_id":"...","name":"Ghost Mountain",...}
+
+# Won't display "Ghost Mountain" band after reloading
+label.reload.bands # => nil
 # end-scope-association-steps
 
 # start-scope-query-behavior
