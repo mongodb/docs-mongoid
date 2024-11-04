@@ -150,13 +150,12 @@ aggregation operations:
 
       [{"states":["OR","WA","CA"]}]
 
-Aggregation with the Ruby Driver
---------------------------------
+Aggregation without Builders
+----------------------------
 
-You can use the {+ruby-driver+} to run aggregation operations that do not have
-corresponding builder methods by using the
-``Collection#aggregate()`` method and passing in an array of aggregation
-operations. Using the {+ruby-driver+} to perform the aggregation returns
+You can use the ``Collection#aggregate()`` method to run aggregation operations that do not have
+corresponding builder methods by passing in an array of aggregation
+operations. Using this method to perform the aggregation returns
 raw ``BSON::Document`` objects rather than ``Mongoid::Document`` model
 instances.
 
