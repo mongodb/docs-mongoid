@@ -627,7 +627,13 @@ using the ``count()`` method:
    Band.count
 
    # Counts documents that match criteria
-   Band.where(name: 'Joywave').count
+   Band.where(country: 'England').count
+
+.. tip:: length() and size() Methods
+
+   You can also use the ``length()`` or ``size()`` method to count documents.
+   These methods cache subsequent calls to the database, which might
+   produce performance improvements.
 
 You can get an approximate number of documents in the collection from
 the collection metadata by using the ``estimated_count()`` method:
@@ -636,9 +642,61 @@ the collection metadata by using the ``estimated_count()`` method:
 
    Band.estimated_count
 
-.. note::
+The ``estimated_count()`` method does not accept query conditions,
+including conditions set by a :ref:`scope <mongoid-data-scoping>` on
+the model. If you are calling this method on a model that has a
+default scope, you must first call the ``unscoped()`` method to
+disable the scope.
 
-   The ``estimated_count()`` method does not accept query conditions,
-   including conditions set by a :ref:`scope <>` on the model.
+Ordinal Methods
+~~~~~~~~~~~~~~~
 
+The methods described in the following list allow you to select a specific
+result from the list of returned documents based on its position.
 
+- ``first()``: Returns the first matching document. You can get the
+  first ``n`` documents by passing an integer-valued parameter. This method
+  automatically uses a sort on the ``_id`` field. **See lines 1-8 in the
+  following code for usage examples**
+
+- ``last()``: Returns the last matching document. You can get the
+  last ``n`` documents by passing an integer-valued parameter. This method
+  automatically uses a sort on the ``_id`` field. **See lines  in the
+  following code for usage examples**
+
+- ``first_or_create()``: Returns the first matching document. If no
+  document matches, creates and returns a newly persisted one.
+
+- ``first_or_initialize()``: Returns the first matching document. If no
+  document matches, returns a new one.
+
+- ``second()``: Returns the second matching document. This method
+  automatically uses a sort on the ``_id`` field.
+
+- ``second()``: Returns the second matching document. This method
+  automatically uses a sort on the ``_id`` field.
+
+- ``third()``: Returns the third matching document. This method
+  automatically uses a sort on the ``_id`` field.
+
+- ``fourth()``: Returns the fourth matching document. This method
+  automatically uses a sort on the ``_id`` field.
+
+- ``fifth()``: Returns the fifth matching document. This method
+  automatically uses a sort on the ``_id`` field.
+
+- ``second_to_last()``: Returns the second to last matching document.
+  This method automatically uses a sort on the ``_id`` field.
+
+- ``third_to_last()``: Returns the third to last matching document.
+  This method automatically uses a sort on the ``_id`` field.
+
+The following code demonstrates how to use some of the methods described
+in the preceding list:
+
+.. literalinclude:: /includes/interact-data/query.rb
+   :start-after: start-ordinal-examples
+   :end-before: end-ordinal-examples
+   :language: ruby
+   :dedent:
+   :linenos:

@@ -230,3 +230,20 @@ root.child_tags.elem_match(child_tags: {name: 'sub_sub_tag_1'})
 Band.find('5f0e41d92c97a64a26aabd10', '5f0e41b02c97a64a26aabd0e')
 Band.find(['5f0e41d92c97a64a26aabd10', '5f0e41b02c97a64a26aabd0e'])
 # end-id-query-multiple
+
+# start-ordinal-examples
+# Returns the first document in the collection
+Band.first
+
+# Returns the first matching document
+Band.where(founded: {'$gt' => 1980}).first
+
+# Returns the first two matching documents
+Band.first(2)
+
+# Returns the last matching document
+Band.where(founded: {'$gt' => 1980}).last
+
+# Returns the second to last document
+Band.second_to_last
+# end-ordinal-examples
