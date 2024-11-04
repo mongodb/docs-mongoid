@@ -479,3 +479,161 @@ as the shown in the following example:
 
    Band.in(year: 1950)
    # Interpreted query: {"year"=>{"$in"=>[1950]}}
+
+Element Match
+-------------
+
+You can use the ``elem_match()`` method to match documents that contain
+an array field with at least one element that matches all the specified
+query criteria.
+
+The following example creates a sample document that contains an array
+field, then uses the  ``elem_match()`` method to match documents in
+which the ``tour`` array field contains an entry in which the value of
+the ``city`` field is ``'London'``:
+
+.. literalinclude:: /includes/interact-data/query.rb
+   :start-after: start-elem-match-1
+   :end-before: end-elem-match-1
+   :language: ruby
+   :dedent:
+
+Associations
+~~~~~~~~~~~~
+
+You can use the ``elem_match()`` method to match embedded associations.
+
+This example uses the following models that define an embedded
+association between ``Band`` and ``Tour``:
+
+.. literalinclude:: /includes/interact-data/query.rb
+   :start-after: start-elemmatch-embedded-class
+   :end-before: end-elemmatch-embedded-class
+   :language: ruby
+   :dedent:
+
+The following code creates a ``Band`` object and embedded ``Tour``
+objects, then uses the ``elem_match()`` method to query on the ``city``
+field:
+
+.. literalinclude:: /includes/interact-data/query.rb
+   :start-after: start-elemmatch-embedded-operations
+   :end-before: end-elemmatch-embedded-operations
+   :language: ruby
+   :dedent:
+
+.. note::
+
+   You cannot use ``elem_match()`` on non-embedded associations because
+   MongoDB does not perform a join on the collections.
+   If you perform this query, the conditions are added to the collection
+   that is the source of the non-embedded association rather than the
+   collection of the association.
+
+You can use ``elem_match()`` to query recursively embedded associations,
+as shown in the following example:
+
+.. literalinclude:: /includes/interact-data/query.rb
+   :start-after: start-elemmatch-recursive
+   :end-before: end-elemmatch-recursive
+   :language: ruby
+   :dedent:
+
+Querying by _id Value
+---------------------
+
+{+odm+} provides the ``find()`` method that allows you to query
+documents by their ``_id`` values.
+
+The following example uses the ``find()`` method to match a document
+with the specified ``_id`` field value:
+
+.. code-block:: ruby
+
+   Band.find('6725342d4cb3e161059f91d7')
+
+.. note:: Type Conversion
+
+   The ``find()`` method performs the type conversion of the argument that
+   you pass to the type declared for the ``_id`` field in the model. By
+   default, the ``_id`` field is defined as a ``BSON::ObjectId`` type.
+
+   The preceding example is equivalent to the following code, which
+   passes an ``BSON::ObjectId`` instance as the argument to ``find()``:
+
+   .. code-block:: ruby
+      
+      Band.find(BSON::ObjectId.from_string('5f0e41d92c97a64a26aabd10'))
+
+   If you use the {+ruby-driver+} to query on the ``_id`` field,
+   ``find()`` does not internally perform the type conversion.
+
+The ``find()`` method accepts multiple arguments, or an array of arguments.
+{+odm+} interprets each argument or array element as an
+``_id`` value, and returns documents with all of the specified ``_id``
+values in an array, as shown in the following example:
+
+.. literalinclude:: /includes/interact-data/query.rb
+   :start-after: start-id-query-multiple
+   :end-before: end-id-query-multiple
+   :language: ruby
+   :dedent:
+
+The ``find()`` method exhibits the following behavior:
+
+- If you provide the same ``_id`` value more than once, {+odm+}
+  returns only one document, if one exists.
+
+- {+odm+} does not return documents in an ordered way. Documents might
+  be returned in different order from the order of the provided ``_id``
+  values.
+
+- If any of the ``_id`` values are not found in the database, the result
+  depends on the value of the ``raise_not_found_error`` configuration
+  option.
+  
+  If you set the option to ``true``, ``find()`` raises a
+  ``Mongoid::Errors::DocumentNotFound`` error if any of the ``_id``
+  values are not found.
+  
+  If you set the option to ``false`` and query for a single ``_id``
+  value, ``find()`` returns ``nil`` if {+odm+} does not match any
+  document. If you pass multiple ``_id`` values and
+  some or all are not matched, the return value is an array of any documents
+  that match, or an empty array if no documents match.
+
+Additional Query Methods
+------------------------
+
+This section describes more query methods that you can use in {+odm+}.
+
+Count Documents
+~~~~~~~~~~~~~~~
+
+You can use the ``count()`` and ``estimated_count()`` methods to count
+the number of documents in a collection.
+
+You can count the number of documents that match filter criteria by
+using the ``count()`` method:
+
+.. code-block:: ruby
+
+   # Counts all documents in collection
+   Band.count
+
+   # Counts documents that match criteria
+   Band.where(name: 'Joywave').count
+
+You can get an approximate number of documents in the collection from
+the collection metadata by using the ``estimated_count()`` method:
+
+.. code-block:: ruby
+
+   Band.estimated_count
+
+.. note::
+
+   The ``estimated_count()`` method does not accept query conditions,
+   including conditions set by a :ref:`scope <>` on the model.
+
+
