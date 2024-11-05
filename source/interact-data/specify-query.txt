@@ -632,8 +632,6 @@ and returns a newly persisted one.
 The following code demonstrates how to use the ``find_or_create_by()``
 method:
 
-The following code demonstrates how to use the ``find_by()`` method:
-
 .. literalinclude:: /includes/interact-data/query.rb
    :start-after: start-query-find-or-create
    :end-before: end-query-find-or-create
@@ -906,4 +904,4 @@ To learn how to modify how {+odm+} returns results to you, see
 :ref:`mongoid-data-modify-results`.
 
 To learn more about defining scopes on your models, see
-:ref:`source/interact-data/scoping.txt`.
+:ref:`mongoid-data-scoping`.
