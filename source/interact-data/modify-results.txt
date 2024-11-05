@@ -252,6 +252,11 @@ The following code retrieves a maximum of ``5`` documents:
    :language: ruby
    :dedent:
 
+.. note::
+
+   Alternatively, you can use the ``take()`` method to retrieve a
+   specified number of documents from the database.
+
 Skip Results
 ~~~~~~~~~~~~
 

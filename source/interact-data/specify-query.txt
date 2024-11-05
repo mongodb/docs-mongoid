@@ -43,9 +43,8 @@ Sample Data
 The examples in this guide use the ``Band`` model, which represents a
 band or musical group. The definition of the ``Band`` model might be
 different for each section to demonstrate different query
-functionalities. Some sections might also use the ``Manager`` model,
-which represents a person who manages a given band, or a ``Show`` model, which
-represents a live performance by a certain band or musical group.
+functionalities. Some sections might also use other supplementary models
+to demonstrate query functionality.
 
 Queries in {+odm+}
 ------------------
@@ -607,6 +606,128 @@ The ``find()`` method exhibits the following behavior:
   some or all are not matched, the return value is an array of any documents
   that match, or an empty array if no documents match.
 
+find() Variations
+-----------------
+
+This section describes methods that are similar to the ``find()`` method
+described in the preceding section.
+
+You can use the ``find_by()`` method to retrieve documents based on the
+provided criteria. If no documents are found, it raises an error or
+returns ``nil`` depending on how you set the ``raise_not_found_error``
+configuration option.
+
+The following code demonstrates how to use the ``find_by()`` method:
+
+.. literalinclude:: /includes/interact-data/query.rb
+   :start-after: start-query-findby
+   :end-before: end-query-findby
+   :language: ruby
+   :dedent:
+
+You can use the ``find_or_create_by()`` method to retrieve documents
+based on the provided criteria. If no documents are found, it creates
+and returns a newly persisted one.
+
+The following code demonstrates how to use the ``find_or_create_by()``
+method:
+
+The following code demonstrates how to use the ``find_by()`` method:
+
+.. literalinclude:: /includes/interact-data/query.rb
+   :start-after: start-query-find-or-create
+   :end-before: end-query-find-or-create
+   :language: ruby
+   :dedent:
+
+You can use the ``find_or_initialize_by()`` method to to retrieve documents
+based on the provided criteria. If no documents are found, it returns a
+new one, without persisting it. The syntax for
+``find_or_initialize_by()`` is the same as in the preceding example.
+
+Regular Expressions
+-------------------
+
+{+odm+} allows you to query documents by using regular expressions in
+your filter criteria.
+
+The following code creates a sample ``Band`` model:
+
+.. code-block:: ruby
+
+   Band.create!(name: 'Tame Impala', description: "Tame\nImpala is an American band")
+   
+You can perform queries by using {+language+} regular expressions, as
+shown in the following code:
+
+.. code-block:: ruby
+   
+   # Matches documents in which the "name" field includes the string "impala"
+   Band.where(name: /impala/i)
+   # => Returns sample document
+
+You can also perform queries by using PCRE syntax and
+``BSON::Regexp::Raw`` objects:
+
+.. literalinclude:: /includes/interact-data/query.rb
+   :start-after: start-regex
+   :end-before: end-regex
+   :language: ruby
+   :dedent:
+
+Field Type Query Conversions
+----------------------------
+
+When you specify a query on a field defined in a model, {+odm+} converts
+the query value based on how the field is defined, and if it has a
+specified type.
+
+Consider the following ``Album`` model definition that
+contains a ``Date``-valued field, a ``Time``-valued field and an
+implicit ``Object``-valued field. The model also intentionally *does not define*
+a field named ``last_reviewed``:
+
+.. literalinclude:: /includes/interact-data/query.rb
+   :start-after: start-field-conversion-model
+   :end-before: end-field-conversion-model
+   :language: ruby
+   :dedent:
+
+You can query on the ``release_date`` and ``last_commented`` fields
+by using ``Date`` and ``Time`` values, as shown in the following code:
+
+.. literalinclude:: /includes/interact-data/query.rb
+   :start-after: start-date-queries-1
+   :end-before: end-date-queries-1
+   :language: ruby
+   :dedent:
+
+However, if you query by using only ``Date`` values on fields defined
+as other types, the generated queries display the default conversion
+behavior, as shown in the following example:
+
+.. literalinclude:: /includes/interact-data/query.rb
+   :start-after: start-date-queries-2
+   :end-before: end-date-queries-2
+   :language: ruby
+   :dedent:
+
+In the preceding example, the following conversions apply:
+
+.. TODO add link to time zone configuration
+
+- When using a ``Date`` value to query the ``Time``-valued
+  ``last_commented`` field, {+odm+} interprets the date to be in local
+  time and applies the :ref:`configured time zone <>`.
+
+- When querying on the ``last_purchased`` field that has no explicit
+  type, the date is used unmodified in the constructed query.
+  
+- When querying on the undefined ``last_reviewed`` field, {+odm+}
+  interprets the ``Date`` to be in UTC and converts to a time, matching
+  the behavior of querying a ``Date``-valued field such as
+  ``release_date``.
+
 Additional Query Methods
 ------------------------
 
@@ -657,12 +778,12 @@ result from the list of returned documents based on its position.
 - ``first()``: Returns the first matching document. You can get the
   first ``n`` documents by passing an integer-valued parameter. This method
   automatically uses a sort on the ``_id`` field. *See lines 1-8 in the
-  following code for examples*
+  following code for examples.*
 
 - ``last()``: Returns the last matching document. You can get the
   last ``n`` documents by passing an integer-valued parameter. This method
   automatically uses a sort on the ``_id`` field. *See line 11 in the
-  following code an example*
+  following code for an example.*
 
 - ``first_or_create()``: Returns the first matching document. If no
   document matches, creates and returns a newly persisted one.
@@ -687,7 +808,7 @@ result from the list of returned documents based on its position.
 
 - ``second_to_last()``: Returns the second to last matching document.
   Automatically usesa sort on the ``_id`` field. *See line 14 in the
-  following code an example*
+  following code for an example.*
 
 - ``third_to_last()``: Returns the third to last matching document.
   Automatically uses a sort on the ``_id`` field.
@@ -710,6 +831,79 @@ in the preceding list:
    query returns no results, use the ``first!()`` method instead of
    ``first()``.
 
-List Field Values
-~~~~~~~~~~~~~~~~~
+Survey Field Values
+~~~~~~~~~~~~~~~~~~~
 
+To inspect the values of specified fields of documents in a
+collection, you can use the following methods:
+
+- ``distinct()``: Gets a list of distinct values for a single field.
+  *See lines 1-7 in the following code for examples.*
+
+- ``pick()``: Gets the values from one document for the provided fields.
+  Returns ``nil`` for unset fields and for non-existent fields.
+  *See line 10 in the following code for an example.*
+
+- ``pluck()``: Gets all values for the provided field. Returns ``nil``
+  for unset fields and for non-existent fields.
+  *See line 13 in the following code for an example.*
+
+- ``tally()``: Gets a mapping of values to counts for the specified
+  field. *See line 16 in the following code for an example.*
+
+The preceding methods accept field names referenced by using dot
+notation, which allows you to reference fields in embedded associations.
+They also respect :ref:`field aliases <mongoid-field-aliases>`, including
+those defined in embedded documents.
+
+The following code demonstrates how to use these methods:
+
+.. literalinclude:: /includes/interact-data/query.rb
+   :start-after: start-field-val-examples
+   :end-before: end-field-val-examples
+   :language: ruby
+   :dedent:
+   :linenos:
+
+Miscellaneous
+~~~~~~~~~~~~~
+
+The following list describes {+odm+} methods that do not fit into another
+category:
+
+- ``each()``: Iterates over all matching documents.
+  
+.. code-block:: ruby
+   
+   # Print each matching document "name" to console
+   Band.where(:members.gt => 1).each do |band|
+     p band.name
+   end
+
+- ``exists?()``: Determines if any matching documents exist, returning
+  ``true`` if at least one matching document is found.
+
+.. code-block:: ruby
+   
+   # Checks existence of any document
+   Band.exists?
+
+   # Checks existence based on query
+   Band.where(name: "Le Tigre").exists?
+   Band.exists?(name: "Le Tigre")
+
+   # Checks existence based on "_id" value
+   Band.exists?('6320d96a3282a48cfce9e72c')
+
+   # Always returns false
+   Band.exists?(false)
+   Band.exists?(nil)
+
+Additional Information
+----------------------
+
+To learn how to modify how {+odm+} returns results to you, see
+:ref:`mongoid-data-modify-results`.
+
+To learn more about defining scopes on your models, see
+:ref:`source/interact-data/scoping.txt`.
