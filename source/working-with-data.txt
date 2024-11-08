@@ -12,7 +12,7 @@ Working With Data
   reference/crud
   reference/queries
   reference/text-search
-  reference/aggregation
+  /aggregation
   reference/map-reduce
   reference/persistence-configuration
   reference/nested-attributes
@@ -28,7 +28,7 @@ See the following sections to learn more about working with data in Mongoid:
 - :ref:`CRUD Operations <crud>`
 - :ref:`Queries <queries>`
 - :ref:`Text Search <text-search>`
-- :ref:`Aggregation Pipeline <aggregation-pipeline>`
+- :ref:`mongoid-aggregation`
 - :ref:`Map/Reduce <map-reduce>`
 - :ref:`Persistence Configuration <persistence>`
 - :ref:`Nested Attributes <nested-attributes>`
