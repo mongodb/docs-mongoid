@@ -11,13 +11,17 @@ Interact with Data
 .. meta::
    :keywords: ruby framework, odm, crud, query
 
-.. TODO
-  .. toctree::
-     :caption: Interact with Data
-     /interact-data/specify-query
+.. toctree::
+   :caption: Interact with Data
+   
+   /interact-data/specify-query
+   /interact-data/modify-results
 
 In this section, you can learn how to use {+odm+} to interact with your
 MongoDB data.
 
-.. - :ref:`mongoid-data-specify-query`: Learn how to construct
-..   queries to match specific documents in a MongoDB collection.
+- :ref:`mongoid-data-specify-query`: Learn how to construct
+  queries to match specific documents in a MongoDB collection.
+
+- :ref:`mongoid-data-modify-results`: Learn how to modify the way that
+  {+odm+} returns results from queries.

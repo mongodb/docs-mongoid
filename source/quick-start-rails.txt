@@ -1,7 +1,7 @@
 .. _mongoid-quick-start-rails:
 
 ===========================
-Quick Start (Ruby on Rails)
+Quick Start - Ruby on Rails
 ===========================
 
 .. facet::
@@ -25,6 +25,9 @@ web application, connect to a MongoDB cluster hosted on MongoDB
 Atlas, and perform read and write operations on the data in your
 cluster.
 
+To learn how to integrate {+odm+} into an existing application, see the
+:ref:`mongoid-add-to-existing` guide.
+
 .. tip::
 
    If you prefer to connect to MongoDB by using the {+ruby-driver+} without
@@ -38,7 +41,7 @@ create flexible data models.
 Ruby on Rails is a web application framework for
 {+language+}. Rails applications use a model-view-controller (MVC)
 architecture that allows you to easily control how your data is
-modeled and displayed. {+odm+} replaces the default ``ActiveRecord``
+modeled and displayed. {+odm+} replaces the default Active Record
 adapter for data modeling in Rails.
 
 To learn more about Ruby on Rails, see the `Getting Started

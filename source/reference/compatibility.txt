@@ -481,7 +481,7 @@ Mongoid is used as a drop-in replacement.
    ``ActionCable``, however any existing adapter (such as `Redis <https://guides.rubyonrails.org/action_cable_overview.html#redis-adapter>`_)
    can be used successfully in conjunction with Mongoid models
 
-.. [#rails-activerecord-dependency] Depends directly on ``ActiveRecord``
+.. [#rails-activerecord-dependency] Depends directly on ActiveRecord
 
 .. [#rails-activemodel-dependency] ``Mongoid::Document`` includes ``ActiveModel::Model``
    and leverages ``ActiveModel::Validations`` for validations

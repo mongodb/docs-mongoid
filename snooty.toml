@@ -6,7 +6,12 @@ intersphinx = [
     "https://www.mongodb.com/docs/atlas/objects.inv",
 ]
 
-toc_landing_pages = ["/quick-start-rails", "/quick-start-sinatra"]
+toc_landing_pages = [
+    "/quick-start-rails",
+    "/quick-start-sinatra",
+    "/interact-data",
+    "/interact-data/specify-query"
+    ]
 
 [constants]
 rails-6-version = 6.0
@@ -21,3 +26,4 @@ quickstart-rails-app-name = "my-rails-app"
 feedback-widget-title = "Feedback"
 server-manual = "Server manual"
 api-root = "https://www.mongodb.com/docs/mongoid/master/api/Mongoid"
+api = "https://www.mongodb.com/docs/mongoid/master/api"
