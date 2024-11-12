@@ -277,7 +277,7 @@ creating a session, then performs data operations:
 Additional Information
 ----------------------
 
-To learn more about transactions, see :manual:`/core/transactions/` in
+To learn more about transactions, see :manual:`Transactions </core/transactions/>` in
 the {+server-manual+}.
 
 .. TODO To learn more about performing CRUD operations, see the :ref:`` guide.
