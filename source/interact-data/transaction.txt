@@ -122,7 +122,7 @@ Ending Transactions
 ~~~~~~~~~~~~~~~~~~~
 
 Any exception raised inside the transaction method block ends the
-transaction and rolls back changes. In most cases, {+odm+} displays the
+transaction and rolls back changes. Usually, {+odm+} displays the
 exception, except for the ``Mongoid::Errors::Rollback`` exception. Implement
 this exception in your application to explicitly end the transaction
 without passing on an exception.
@@ -134,7 +134,7 @@ This transaction API introduces the ``after_commit`` and
 ``after_rollback`` callbacks.
 
 {+odm+} triggers the ``after_commit`` callback for an object that was
-created, saved, or destroyed in the following cases:
+created, saved, or deleted in the following cases:
 
 - After the transaction is committed if the object was modified inside
   the transaction.
@@ -149,7 +149,7 @@ persisted, but the ``after_commit`` callback was not triggered, for
 example, if {+odm+} raised an exception in the ``after_save`` callback.
 
 The ``after_rollback`` callback is triggered for an object that was
-created, saved, or destroyed inside a transaction if the transaction was
+created, saved, or deleted inside a transaction if the transaction was
 ended. {+odm+} never triggers ``after_rollback`` outside of a transaction.
 
 .. _mongoid-txn-low-level:
