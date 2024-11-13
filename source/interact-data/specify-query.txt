@@ -43,7 +43,7 @@ Sample Data
 The examples in this guide use the ``Band`` model, which represents a
 band or musical group. The definition of the ``Band`` model might be
 different for each section to demonstrate different query
-functionalities. Some sections might also use other supplementary models
+functionalities. Some sections might use other models
 to demonstrate query functionality.
 
 Queries in {+odm+}
@@ -492,9 +492,9 @@ an array field with at least one element that matches all the specified
 query criteria.
 
 The following example creates a sample document that contains an array
-field, then uses the  ``elem_match()`` method to match documents in
-which the ``tour`` array field contains an entry in which the value of
-the ``city`` field is ``'London'``:
+field. Then, it uses the  ``elem_match()`` method to match documents in
+which the ``tour`` array field contains an entry in which the ``city``
+value is ``'London'``:
 
 .. literalinclude:: /includes/interact-data/query.rb
    :start-after: start-elem-match-1
@@ -529,7 +529,7 @@ field:
 .. note::
 
    You cannot use ``elem_match()`` on non-embedded associations because
-   MongoDB does not perform a join on the collections.
+   MongoDB does not perform a join operation on the collections.
    If you perform this query, the conditions are added to the collection
    that is the source of the non-embedded association rather than the
    collection of the association.
@@ -546,7 +546,7 @@ as shown in the following example:
 Querying by _id Value
 ---------------------
 
-{+odm+} provides the ``find()`` method that allows you to query
+{+odm+} provides the ``find()`` method, which allows you to query
 documents by their ``_id`` values.
 
 The following example uses the ``find()`` method to match a document
@@ -558,8 +558,8 @@ with the specified ``_id`` field value:
 
 .. note:: Type Conversion
 
-   The ``find()`` method performs the type conversion of the argument that
-   you pass to the type declared for the ``_id`` field in the model. By
+   The ``find()`` method converts the ID that you pass to the 
+   data type declared for the ``_id`` field in the model. By
    default, the ``_id`` field is defined as a ``BSON::ObjectId`` type.
 
    The preceding example is equivalent to the following code, which
@@ -596,13 +596,13 @@ The ``find()`` method exhibits the following behavior:
   depends on the value of the ``raise_not_found_error`` configuration
   option.
   
-  If you set the option to ``true``, ``find()`` raises a
-  ``Mongoid::Errors::DocumentNotFound`` error if any of the ``_id``
-  values are not found.
+  If you set the ``raise_not_found_error`` option to ``true``,
+  ``find()`` raises a ``Mongoid::Errors::DocumentNotFound`` error if any
+  of the ``_id`` values are not found.
   
-  If you set the option to ``false`` and query for a single ``_id``
-  value, ``find()`` returns ``nil`` if {+odm+} does not match any
-  document. If you pass multiple ``_id`` values and
+  If you set the ``raise_not_found_error`` option to ``false`` and query
+  for a single ``_id`` value, ``find()`` returns ``nil`` if {+odm+} does
+  not match a document. If you pass multiple ``_id`` values and
   some or all are not matched, the return value is an array of any documents
   that match, or an empty array if no documents match.
 
@@ -627,7 +627,7 @@ The following code demonstrates how to use the ``find_by()`` method:
 
 You can use the ``find_or_create_by()`` method to retrieve documents
 based on the provided criteria. If no documents are found, it creates
-and returns a newly persisted one.
+and returns an instance that is saved to MongoDB.
 
 The following code demonstrates how to use the ``find_or_create_by()``
 method:
@@ -638,10 +638,11 @@ method:
    :language: ruby
    :dedent:
 
-You can use the ``find_or_initialize_by()`` method to to retrieve documents
+You can use the ``find_or_initialize_by()`` method to retrieve documents
 based on the provided criteria. If no documents are found, it returns a
-new one, without persisting it. The syntax for
-``find_or_initialize_by()`` is the same as in the preceding example.
+new one, without persisting it to MongoDB. The syntax for
+``find_or_initialize_by()`` is the same for the ``find_or_create_by()``
+method.
 
 Regular Expressions
 -------------------
@@ -664,8 +665,8 @@ shown in the following code:
    Band.where(name: /impala/i)
    # => Returns sample document
 
-You can also perform queries by using PCRE syntax and
-``BSON::Regexp::Raw`` objects:
+You can also perform queries by using Perl Compatible Regular Expression
+(PCRE) syntax and ``BSON::Regexp::Raw`` objects:
 
 .. literalinclude:: /includes/interact-data/query.rb
    :start-after: start-regex
@@ -676,12 +677,12 @@ You can also perform queries by using PCRE syntax and
 Field Type Query Conversions
 ----------------------------
 
-When you specify a query on a field defined in a model, {+odm+} converts
-the query value based on how the field is defined, and if it has a
-specified type.
+When you specify a query on a field defined in a model, if the field has
+a *specified data type*, {+odm+} converts the query value based on how the
+field is defined.
 
 Consider the following ``Album`` model definition that
-contains a ``Date``-valued field, a ``Time``-valued field and an
+contains a ``Date``-valued field, a ``Time``-valued field, and an
 implicit ``Object``-valued field. The model also intentionally *does not define*
 a field named ``last_reviewed``:
 
@@ -718,7 +719,7 @@ In the preceding example, the following conversions apply:
   ``last_commented`` field, {+odm+} interprets the date to be in local
   time and applies the :ref:`configured time zone <>`.
 
-- When querying on the ``last_purchased`` field that has no explicit
+- When querying on the ``last_purchased`` field, which has no explicit
   type, the date is used unmodified in the constructed query.
   
 - When querying on the undefined ``last_reviewed`` field, {+odm+}
@@ -792,9 +793,6 @@ result from the list of returned documents based on its position.
 - ``second()``: Returns the second matching document. Automatically uses
   a sort on the ``_id`` field.
 
-- ``second()``: Returns the second matching document. Automatically uses
-  a sort on the ``_id`` field.
-
 - ``third()``: Returns the third matching document. Automatically uses
   a sort on the ``_id`` field.
 
@@ -804,11 +802,11 @@ result from the list of returned documents based on its position.
 - ``fifth()``: Returns the fifth matching document. Automatically uses
   a sort on the ``_id`` field.
 
-- ``second_to_last()``: Returns the second to last matching document.
-  Automatically usesa sort on the ``_id`` field. *See line 14 in the
+- ``second_to_last()``: Returns the second-to-last matching document.
+  Automatically uses a sort on the ``_id`` field. *See line 14 in the
   following code for an example.*
 
-- ``third_to_last()``: Returns the third to last matching document.
+- ``third_to_last()``: Returns the third-to-last matching document.
   Automatically uses a sort on the ``_id`` field.
 
 The following code demonstrates how to use some methods described
@@ -823,11 +821,11 @@ in the preceding list:
 
 .. tip:: Error Generation
 
-   Each method described in this section has a ``-!`` suffixed counterpart
-   that returns an error if {+odm+} doesn't match any documents. For
-   example, to implement error handling in your application when your
-   query returns no results, use the ``first!()`` method instead of
-   ``first()``.
+   Each method described in this section has a variation that is
+   suffixed with ``!`` that returns an error if {+odm+} doesn't match
+   any documents. For example, to implement error handling in your
+   application when your query returns no results, use the ``first!()``
+   method instead of ``first()``.
 
 Survey Field Values
 ~~~~~~~~~~~~~~~~~~~
@@ -900,7 +898,7 @@ category:
 Additional Information
 ----------------------
 
-To learn how to modify how {+odm+} returns results to you, see
+To learn how to modify the way that {+odm+} returns results to you, see
 :ref:`mongoid-data-modify-results`.
 
 To learn more about defining scopes on your models, see
