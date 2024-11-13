@@ -14,8 +14,8 @@ Interact with Data
 .. toctree::
    :caption: Interact with Data
    
-   /interact-data/specify-query
-   /interact-data/modify-results
+   Specify a Query </interact-data/specify-query>
+   Modify Query Results </interact-data/modify-results>
 
 In this section, you can learn how to use {+odm+} to interact with your
 MongoDB data.
