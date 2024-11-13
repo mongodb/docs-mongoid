@@ -18,6 +18,7 @@ end
 # start-txn-operations
 # Starts a transaction from the model class
 Book.transaction do
+    # Saves new Book and Film instances to MongoDB
     Book.create(title: 'Covert Joy', author: 'Clarice Lispector')
     Film.create(title: 'Nostalgia', year: 1983)
 end
@@ -25,12 +26,14 @@ end
 # Starts a transaction from an instance of Book
 book = Book.create(title: 'Sula', author: 'Toni Morrison')
 book.transaction do
+  # Saves a new field value to the Book instance
   book.length = 192
   book.save!
 end
 
 # Starts a transaction from the Mongoid instance
 Mongoid.transaction do
+  # Deletes the Book instance in MongoDB
   book.destroy
 end
 # end-txn-operations
