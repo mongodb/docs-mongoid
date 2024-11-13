@@ -1,0 +1,21 @@
+.. _mongoid-data-modeling:
+
+===============
+Model Your Data
+===============
+
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: ruby framework, odm, model, class, query
+
+.. .. toctree::
+..    :caption: Data Modeling
+..    
+..    Documents </data-modeling/documents>
+
+In this section, you can learn how to model data in {+odm+}.
+
+.. - :ref:``: Learn how to ...
