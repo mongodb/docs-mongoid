@@ -1,0 +1,54 @@
+.. _mongoid-modeling-inheritance:
+
+===========
+Inheritance
+===========
+
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: ruby framework, odm, relationship, code example
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+Overview
+--------
+
+In this guide, you can learn how to implement **inheritance** into your
+{+odm+} models. Inheritance allows you to apply the characteristics of
+one class to another class.
+
+{+odm+} supports inheritance in top level and embedded documents.
+When a child model class inherits from a parent class, {+odm+} copies
+the parent class's fields, associations, validations, and scopes to
+the child class.
+
+Assign Inheritance
+------------------
+
+When creating a child model class, use the ``<`` character to implement
+inheritance from a specified parent class. The following model classes
+demonstrate how to create parent and child classes between the
+``Person``, ``Employee``, and ``Manager`` models:
+
+.. literalinclude:: /includes/data-modeling/inheritance.rb
+   :start-after: start-simple-inheritance
+   :end-before: end-simple-inheritance
+   :language: ruby
+   :emphasize-lines: 7, 14
+   :dedent:
+
+When you perform data operations by using the preceding models, any
+instances of ``Person``, ``Employee``, or ``Manager`` are all saved in the
+``people`` collection. {+odm+} adds the ``_type`` discriminator field to
+each document to ensure that documents are returned as the expected
+types when you retrieve them.
+
+You can also embed 
+
