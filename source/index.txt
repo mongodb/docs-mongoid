@@ -12,10 +12,11 @@ MongoDB in Ruby. To work with {+odm+} from the command line using
 .. toctree::
    :titlesonly:
  
-   /quick-start-rails
-   /quick-start-sinatra
-   /add-existing
-   /interact-data
+   Quick Start - Ruby on Rails </quick-start-rails>
+   Quick Start - Sinatra </quick-start-sinatra>
+   Add {+odm+} to an Existing Application </add-existing>
+   Interact with Data </interact-data>
+   Model Your Data </data-modeling>
    installation-configuration
    tutorials
    schema-configuration
