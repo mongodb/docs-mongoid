@@ -72,8 +72,8 @@ following tasks:
 
 #. Performs the specified data changes.
 
-#. Commits the transaction if no errors occur or ends the transaction if
-   there is an error.
+#. Commits the transaction to the database if no errors occur, or ends
+   the transaction if there is an error.
 
 #. Closes the session.
 
@@ -81,8 +81,8 @@ If your transaction is committed, {+odm+} calls any ``after_commit``
 callbacks for all objects modified inside the transaction. If there is
 an error and the transaction is rolled back, {+odm+} calls any
 ``after_rollback`` callbacks for all objects modified inside the
-transaction. To learn more about this behavior, see the
-:ref:`mongoid-txn-callbacks` section of this guide.
+transaction. To learn more about these callbacks and their behavior, see
+the :ref:`mongoid-txn-callbacks` section of this guide.
 
 Example
 ~~~~~~~
@@ -133,10 +133,10 @@ Ending Transactions
 Any exception raised inside the transaction method block ends the
 transaction and rolls back data changes. {+odm+} displays all
 exceptions except for the ``Mongoid::Errors::Rollback`` exception. You
-must raise this exception in your application to explicitly end the
-transaction without returning the exception to you. You might implement
-this transaction exception to end a transaction when a certain condition
-is not met without raising an exception message.
+can raise this exception in your application to explicitly end the
+transaction without returning the exception to you. For example, you
+might implement this transaction exception to end a transaction when a
+certain condition is not met, but without raising an exception message.
 
 .. _mongoid-txn-callbacks:
 
@@ -164,9 +164,9 @@ might occur, for example, if {+odm+} raised an exception in the
 to trigger ``after_commit``.
 
 The ``after_rollback`` callback is triggered for an object that was
-created, saved, or deleted inside a transaction if the transaction was
-ended. {+odm+} never triggers ``after_rollback`` outside of a
-transaction.
+created, saved, or deleted inside a transaction, if the transaction was
+unsuccessful and changes were rolled back. {+odm+} never triggers
+``after_rollback`` outside of a transaction.
 
 .. TODO link to callbacks guide.
 
@@ -287,8 +287,8 @@ You can use the ``with_session()`` method on a model class and pass it session
 options to perform a block of operations in the context of a session.
 
 The following code enables the ``causal_consistency`` option to
-guarantee the order of operations when creating a session, then
-performs data operations:
+guarantee the order of operations when creating a session on the
+``Book`` model, then performs data operations:
 
 .. literalinclude:: /includes/interact-data/transaction.rb
    :start-after: start-model-session
@@ -301,13 +301,13 @@ To learn more about the available session options, see the
 <{+ruby-api+}/Session.html#initialize-instance_method>`__ in the
 {+ruby-driver+} API documentation.
 
-Alternatively, you can use the ``with_session()`` on an instance of a
+Alternatively, you can use the ``with_session()`` method on an instance of a
 model and pass it session options to perform a block of operations in
 the context of a session.
 
 The following code enables the ``causal_consistency`` option to
-guarantee the order of operations when creating a session, then
-performs data operations:
+guarantee the order of operations when creating a session on an instance
+of ``Book``, then performs data operations:
 
 .. literalinclude:: /includes/interact-data/transaction.rb
    :start-after: start-instance-session
