@@ -9,7 +9,7 @@ Inheritance
    :values: reference
 
 .. meta::
-   :keywords: ruby framework, odm, relationship, code example
+   :keywords: ruby framework, odm, relationship, code example, polymorphic
 
 .. contents:: On this page
    :local:
