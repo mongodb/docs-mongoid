@@ -717,8 +717,7 @@ and criteria while performing the conversion for you.
   criteria = Band.where(name: "Placebo")
   criteria.selector # { "n" => "Placebo" }
 
-
-.. _field-aliases:
+.. _mongoid-field-aliases:
 
 Field Aliases
 -------------
