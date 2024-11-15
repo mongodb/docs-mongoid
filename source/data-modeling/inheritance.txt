@@ -59,7 +59,7 @@ Similar to the behavior of top-level model classes, {+odm+} sets the
 model class used to create them.
 
 The following example adds an embedded association to the ``Person``
-model and create parent and child models for the embedded ``Info``
+model and creates parent and child models for the embedded ``Info``
 class:
 
 .. literalinclude:: /includes/data-modeling/inheritance.rb
@@ -270,7 +270,7 @@ The following model definitions demonstrate how to use the
 in a different collection than the ``people`` collection:
 
 .. code-block:: ruby
-   :emphasize-lines: 6, 10
+   :emphasize-lines: 7, 11
 
    class Person
      include Mongoid::Document
