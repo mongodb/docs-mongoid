@@ -270,7 +270,7 @@ The following model definitions demonstrate how to use the
 in a different collection than the ``people`` collection:
 
 .. code-block:: ruby
-   :emphasize-lines: 7, 11
+   :emphasize-lines: 7, 12
 
    class Person
      include Mongoid::Document
