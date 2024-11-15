@@ -558,9 +558,10 @@ with the specified ``_id`` field value:
 
 .. note:: Type Conversion
 
-   The ``find()`` method converts the ID that you pass to the 
-   data type declared for the ``_id`` field in the model. By
-   default, the ``_id`` field is defined as a ``BSON::ObjectId`` type.
+   When you pass an ID value to the ``find()`` method, the method
+   converts it to the data type declared for the ``_id`` field in the
+   model. By default, the ``_id`` field is defined as a
+   ``BSON::ObjectId`` type.
 
    The preceding example is equivalent to the following code, which
    passes an ``BSON::ObjectId`` instance as the argument to ``find()``:
@@ -640,8 +641,8 @@ method:
 
 You can use the ``find_or_initialize_by()`` method to retrieve documents
 based on the provided criteria. If no documents are found, it returns a
-new one, without persisting it to MongoDB. The syntax for
-``find_or_initialize_by()`` is the same for the ``find_or_create_by()``
+new one, without persisting it to MongoDB. Use the same syntax for
+``find_or_initialize_by()`` as you do for the ``find_or_create_by()``
 method.
 
 Regular Expressions
@@ -785,7 +786,7 @@ result from the list of returned documents based on its position.
   following code for an example.*
 
 - ``first_or_create()``: Returns the first matching document. If no
-  document matches, creates and returns a newly persisted one.
+  document matches, creates and returns a newly saved one.
 
 - ``first_or_initialize()``: Returns the first matching document. If no
   document matches, returns a new one.
