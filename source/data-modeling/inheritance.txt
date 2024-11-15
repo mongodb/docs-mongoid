@@ -290,7 +290,7 @@ in a different collection than the ``people`` collection:
    
    {+odm+} still adds the discriminator field to stored documents.
 
-If you set an alternate target collection on some of the child classes
+If you set an alternate target collection on some child classes
 and not others, instances of the classes without specified collections
 are stored in the collection associated with the parent class.
 
