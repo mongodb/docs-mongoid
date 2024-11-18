@@ -185,13 +185,16 @@ end the transaction. You can use the ``commit_transaction()`` and
 ``abort_transaction()`` methods on the session instance to manage the
 transaction lifecycle.
 
-This example demonstrates how to use the low-level transaction API
-to perform the following actions:
+Example
+~~~~~~~
 
-- Create a session
-- Start a transaction
-- Perform data operations
-- Commit the transaction, or end it if there are errors
+This example uses the low-level transaction API to perform the following
+actions:
+
+1. Creates a session
+#. Starts a transaction
+#. Performs data operations
+#. Commits the transaction, or ends it if there are errors
 
 .. literalinclude:: /includes/interact-data/transaction.rb
    :start-after: start-lower-lvl-api
@@ -204,6 +207,9 @@ to perform the following actions:
    If a session ends and includes an open transaction, the transaction is
    automatically ended.
 
+Transaction Retry
+~~~~~~~~~~~~~~~~~
+
 You can retry the transaction commit if it fails initially. The
 following example demonstrates how to retry the transaction when {+odm+}
 raises the ``UNKNOWN_TRANSACTION_COMMIT_RESULT_LABEL`` exception:
@@ -213,6 +219,9 @@ raises the ``UNKNOWN_TRANSACTION_COMMIT_RESULT_LABEL`` exception:
    :end-before: end-commit-retry
    :language: ruby
    :dedent:
+
+Options
+~~~~~~~
 
 You can specify a read concern, write concern or read
 preference when starting a transaction by passing options to the
