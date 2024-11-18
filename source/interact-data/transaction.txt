@@ -42,21 +42,21 @@ encounter unexpected errors.
 In {+odm+}, you can perform transactions by using either of the
 following APIs:
 
-- :ref:`mongoid-txn-convenient`: {+odm+} manages the life cycle of the
+- :ref:`mongoid-txn-high-level`: {+odm+} manages the life cycle of the
   transaction. You can use this API in {+odm+} v9.0 and later.
 
-- :ref:`mongoid-txn-core`: You must manage the life cycle of the
+- :ref:`mongoid-txn-low-level`: You must manage the life cycle of the
   transaction. You can use this API in {+odm+} v6.4 and later.
 
 The :ref:`mongoid-txn-session` section describes how to make changes to
 your data from within a session without performing a transaction.
 
-.. _mongoid-txn-convenient:
+.. _mongoid-txn-high-level:
 
-Convenient Transaction API
+High-Level Transaction API
 --------------------------
 
-You can use the Convenient Transaction API to internally manage the
+You can use the High-Level Transaction API to internally manage the
 lifecycle of your transaction. This API either commits your transaction
 or ends it and incorporates error handling logic.
 
@@ -170,21 +170,47 @@ unsuccessful and changes were rolled back. {+odm+} never triggers
 
 .. TODO link to callbacks guide.
 
-.. _mongoid-txn-core:
+.. _mongoid-txn-low-level:
 
-Core Transaction API
---------------------
+Low-Level Transaction API
+-------------------------
 
-When using the Core API, you must create a session before
+When using the low-level API, you must create a session before
 starting a transaction. You can create a session by calling the
 ``with_session()`` method on a model class or an instance of a model.
 
 Then, you can start a transaction by calling the ``start_transaction()``
-method on a session, as shown in the following code:
+method on a session. When using this API, you must manually commit or
+end the transaction. You can use the ``commit_transaction()`` and
+``abort_transaction()`` methods on the session instance to manage the
+transaction lifecycle.
+
+This example demonstrates how to use the low-level transaction API
+to perform the following actions:
+
+- Create a session
+- Start a transaction
+- Perform data operations
+- Commit the transaction, or end it if there are errors
 
 .. literalinclude:: /includes/interact-data/transaction.rb
    :start-after: start-lower-lvl-api
    :end-before: end-lower-lvl-api
+   :language: ruby
+   :dedent:
+
+.. note::
+
+   If a session ends and includes an open transaction, the transaction is
+   automatically ended.
+
+You can retry the transaction commit if it fails initially. The
+following example demonstrates how to retry the transaction when {+odm+}
+raises the ``UNKNOWN_TRANSACTION_COMMIT_RESULT_LABEL`` exception:
+
+.. literalinclude:: /includes/interact-data/transaction.rb
+   :start-after: start-commit-retry
+   :end-before: end-commit-retry
    :language: ruby
    :dedent:
 
@@ -204,31 +230,6 @@ To learn more about the available transaction options, see
 :ruby-api:`start_transaction()
 </Session.html#start_transaction-instance_method>` in the
 {+ruby-driver+} API documentation.
-
-When using this API, you must manually commit or end the transaction.
-You can use the ``commit_transaction()`` and ``abort_transaction()``
-methods on the session instance to manage the transaction lifecycle:
-
-.. literalinclude:: /includes/interact-data/transaction.rb
-   :start-after: start-commit-abort
-   :end-before: end-commit-abort
-   :language: ruby
-   :dedent:
-
-.. note::
-
-   If a session ends and includes an open transaction, the transaction is
-   automatically ended.
-
-You can retry the transaction commit if it fails initially. The
-following example demonstrates how to retry the transaction when {+odm+}
-raises the ``UNKNOWN_TRANSACTION_COMMIT_RESULT_LABEL`` exception:
-
-.. literalinclude:: /includes/interact-data/transaction.rb
-   :start-after: start-commit-retry
-   :end-before: end-commit-retry
-   :language: ruby
-   :dedent:
 
 Client Behavior
 ~~~~~~~~~~~~~~~

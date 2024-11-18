@@ -63,27 +63,24 @@ end
 # start-lower-lvl-api
 # Starts a session from the model class
 Book.with_session do |session|
-  # Starts the transaction in the session
-  session.start_transaction
+  session.start_transaction 
+  # Creates a Book
+  Book.create(title: 'Siddhartha', author: 'Hermann Hesse')
+
+  # Commits the transaction
+  session.commit_transaction
+rescue StandardError
+  # Ends the transaction if there is an error
+  session.abort_transaction
 end
 
 book = Book.new
-# Starts a session from an instance of Book
+# Starts a session from an *instance* of Book
 book.with_session do |session|
   # Starts the transaction in the session
   session.start_transaction
 end
 # end-lower-lvl-api
-
-# start-commit-abort
-Book.with_session do |session|
-  session.commit_transaction
-end
-
-Book.with_session do |session|
-  session.abort_transaction
-end
-# end-commit-abort
 
 # start-commit-retry
 begin
