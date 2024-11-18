@@ -1,0 +1,59 @@
+.. _mongoid-modeling-documents:
+
+=========
+Documents
+=========
+
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: ruby framework, odm, code example, bson
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+Overview
+--------
+
+In this guide, you can learn about the ``Mongoid::Document`` module in
+{+odm+}. The ``Document`` module is a representation of a MongoDB
+document. To learn more about the terminology, structure, and limitations of
+MongoDB documents, see :manual:`Documents </core/document/>` in the
+{+server-manual+}.
+
+You must include the ``Mongoid::Document`` module in any class that you
+want to persist to MongoDB. By including the ``Document`` module in your
+model class, you can use its methods on instances of your model class.
+
+The following code demonstrates how to include the ``Document`` module
+in a sample ``Person`` model class:
+
+.. code-block:: ruby
+   :emphasize-lines: 2
+
+   class Person
+       include Mongoid::Document
+   
+       field :name, type: String
+   end
+
+You can find more information about the ``Document`` module in the `API
+documentation <{+api-root+}/Document.html>`__.
+
+MongoDB Representation
+----------------------
+
+The representation of a ``Document`` in MongoDB is a BSON object that is
+similar to a {+language+} hash or JSON object. You can store instances
+of your models directly in a collection in the database, or you can
+embed them in other classes that use the ``Document`` module.
+
+To learn more about how to model your data by using {+odm+} models,
+see the :ref:`mongoid-data-modeling` guides.
+
+.. TODO Add link to field types guide.

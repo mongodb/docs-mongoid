@@ -11,11 +11,12 @@ Model Your Data
 .. meta::
    :keywords: ruby framework, odm, model, class, query
 
-.. .. toctree::
-..    :caption: Data Modeling
-..    
-..    Documents </data-modeling/documents>
+.. toctree::
+   :caption: Data Modeling
+   
+   Documents </data-modeling/documents>
 
 In this section, you can learn how to model data in {+odm+}.
 
-.. - :ref:``: Learn how to ...
+- :ref:`mongoid-modeling-documents`: Learn about the ``Document`` object
+  type.
