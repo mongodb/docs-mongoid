@@ -63,6 +63,7 @@ in the preceding section:
 The document appears in MongoDB as follows:
 
 .. code-block:: json
+   :copyable: false
 
    {
      "_id": {
