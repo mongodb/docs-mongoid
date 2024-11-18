@@ -73,13 +73,6 @@ rescue StandardError
   # Ends the transaction if there is an error
   session.abort_transaction
 end
-
-book = Book.new
-# Starts a session from an *instance* of Book
-book.with_session do |session|
-  # Starts the transaction in the session
-  session.start_transaction
-end
 # end-lower-lvl-api
 
 # start-commit-retry
