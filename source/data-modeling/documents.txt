@@ -53,6 +53,39 @@ similar to a {+language+} hash or JSON object. You can store instances
 of your models directly in a collection in the database, or you can
 embed them in other classes that use the ``Document`` module.
 
+The following code creates an instance of the ``Person`` model defined
+in the preceding section:
+
+.. code-block:: ruby
+
+   Person.create(name: 'Meena Kumar')
+
+The document appears in MongoDB as follows:
+
+.. code-block:: json
+
+   {
+     "_id": {
+       "$oid": "673b6dce61700598c24a72b0"
+     },
+     "name": "Meena Kumar"
+   }
+
+.. note:: _id Field
+
+   When you persist an instance of a model to the database, MongoDB
+   automatically adds an ``_id`` field that has a unique value even if you
+   do not explicitly define this field in your model.
+   
+   To learn more about this field, see the :manual:`ObjectId reference
+   </reference/bson-types/#objectid>` in the {+server-manual+}.
+
+Additional Information
+----------------------
+
+To learn how to access and change your MongoDB data, see the
+:ref:`mongoid-interact-data` guides.
+
 To learn more about how to model your data by using {+odm+} models,
 see the :ref:`mongoid-data-modeling` guides.
 
