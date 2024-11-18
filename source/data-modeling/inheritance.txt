@@ -24,7 +24,7 @@ In this guide, you can learn how to implement **inheritance** into your
 {+odm+} models. Inheritance allows you to apply the characteristics of
 one "parent" class to one or more "child" classes.
 
-{+odm+} supports inheritance in top level and embedded documents.
+{+odm+} supports inheritance in top-level and embedded documents.
 When a child model class inherits from a parent class, {+odm+} copies
 the parent class's fields, associations, validations, and scopes to
 the child class.
@@ -44,11 +44,10 @@ demonstrate how to create parent and child classes between the
    :emphasize-lines: 7, 14
    :dedent:
 
-When you perform data operations by using the preceding models,
-instances of ``Person``, ``Employee``, or ``Manager`` are all saved in the
-``people`` collection. {+odm+} sets the ``_type`` discriminator field to
-the model class name in documents to ensure that documents are returned
-as the expected types when you retrieve them.
+{+odm+} saves instances of ``Person``, ``Employee``, and ``Manager`` in
+the ``people`` collection. {+odm+} sets the ``_type`` discriminator
+field to the model class name in documents to ensure that documents are
+returned as the expected types when you perform read operations.
 
 Embedded Documents
 ~~~~~~~~~~~~~~~~~~
@@ -73,7 +72,7 @@ Query Behavior
 ~~~~~~~~~~~~~~
 
 When you query on a child model class, the query returns only documents
-in which the value of the ``_type`` field match the queried class or
+in which the value of the ``_type`` field matches the queried class or
 further child classes. For example, if you query on the ``Employee``
 class, the query returns documents from the ``people`` collection in
 which the ``_type`` value is either ``"Employee"`` or ``"Manager"``. All
@@ -190,11 +189,13 @@ name.
 
    Because the discriminator value customization is declared in child classes,
    you must load the child classes retrieved by a query *before* sending
-   that query. In the preceding example, the ``Employee`` class definition
-   must be loaded before you query on ``Person`` if the returned documents could
-   potentially be instances of ``Employee``. Autoloading isn't able to resolve
-   the discriminator value ``"Worker"`` to return the document as an
-   instance of ``Employee``.
+   that query.
+   
+   In the preceding example, the ``Employee`` class definition must be
+   loaded before you query on ``Person`` if the returned documents include
+   instances of ``Employee``. Autoloading cannot resolve the
+   discriminator value ``"Worker"`` to return documents as instances of
+   ``Employee``.
 
 Embedded Associations
 ---------------------
