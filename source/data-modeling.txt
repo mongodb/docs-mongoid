@@ -11,11 +11,12 @@ Model Your Data
 .. meta::
    :keywords: ruby framework, odm, model, class, query
 
-.. .. toctree::
-..    :caption: Data Modeling
-..    
-..    Documents </data-modeling/documents>
+.. toctree::
+   :caption: Data Modeling
+   
+   Inheritance </data-modeling/inheritance>
 
 In this section, you can learn how to model data in {+odm+}.
 
-.. - :ref:``: Learn how to ...
+- :ref:`mongoid-modeling-inheritance`: Learn how to implement
+  inheritance in your model classes.
