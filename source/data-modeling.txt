@@ -11,11 +11,15 @@ Model Your Data
 .. meta::
    :keywords: ruby framework, odm, model, class, query
 
-.. .. toctree::
-..    :caption: Data Modeling
-..    
-..    Documents </data-modeling/documents>
+.. toctree::
+   :caption: Data Modeling
+   
+   Field Types </data-modeling/field-types>
+   Field Behaviors </data-modeling/field-behaviors>
 
 In this section, you can learn how to model data in {+odm+}.
 
-.. - :ref:``: Learn how to ...
+- :ref:`mongoid-field-types`: Learn about the field types that you can use in
+  {+odm+} to define the schema for your MongoDB documents. 
+- :ref:`mongoid-field-behaviors`: Learn how to customize the behaviors of fields
+  in {+odm+} to meet your application requirements.
