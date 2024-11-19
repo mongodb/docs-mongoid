@@ -26,9 +26,9 @@ product = Product.new(properties: {color: "white", size: "large"})
 
 # start-stringified-symbol
 class Post
-    include Mongoid::Document
+  include Mongoid::Document
   
-    field :status, type: StringifiedSymbol
+  field :status, type: StringifiedSymbol
 end
   
 # Save status as a symbol
@@ -46,31 +46,32 @@ post.status
 
 # start-hash
 class Person
-    include Mongoid::Document
-    field :first_name
-    field :url, type: Hash
+  include Mongoid::Document
+  field :first_name
+  field :url, type: Hash
   
-    def set_vals
-      self.first_name = 'Daniel'
-      self.url = {'home_page' => 'http://www.homepage.com'}
-      save
+  def set_vals
+    self.first_name = 'Daniel'
+    self.url = {'home_page' => 'http://www.homepage.com'}
+    save
+  end
 end
 # end-hash
 
 # start-time
 class Voter
-    include Mongoid::Document
+  include Mongoid::Document
   
-    field :registered_at, type: Time
+  field :registered_at, type: Time
 end
   
-  Voter.new(registered_at: Date.today)
+Voter.new(registered_at: Date.today)
 # end-time
 
 # start-datetime
 class Ticket
-    include Mongoid::Document
-    field :opened_at, type: DateTime
+  include Mongoid::Document
+  field :opened_at, type: DateTime
 end
 # end-datetime
 
@@ -128,9 +129,9 @@ end
 
 # start-regexp
 class Token
-    include Mongoid::Document
+  include Mongoid::Document
   
-    field :pattern, type: Regexp
+  field :pattern, type: Regexp
 end
   
 token = Token.create!(pattern: /hello.world/m)

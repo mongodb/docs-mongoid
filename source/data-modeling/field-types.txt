@@ -23,11 +23,11 @@ Overview
 In this guide, you can learn about the field types that you can use in
 {+odm+} to define the schema for your MongoDB documents. 
 
-MongoDB uses :manual:`BSON types <reference/bson-types/>` to represent the type of
+MongoDB uses :manual:`BSON types </reference/bson-types/>` to represent the type of
 data stored in document fields. To use that data in a {+odm+} application,
-{+odm+} must convert the BSON types to Ruby types at runtime. For example,
+{+odm+} must convert the BSON types to {+language+} types at runtime. For example,
 when retrieving a document from the database, {+odm+} translates a BSON field
-with the type ``double`` to use the Ruby ``Float`` type. It then translates that
+with the type ``double`` to use the {+language+} ``Float`` type. It then translates that
 field back to a BSON ``double`` when saving the document to the database.
 
 .. note::
@@ -103,7 +103,7 @@ the type of data stored in that field. The following example saves data into the
    :end-before: # end-untyped
 
 Because {+odm+} doesn't perform any type conversions on untyped fields when
-reading from the database, values that require special handling might now work
+reading from the database, values that require special handling might not work
 correctly in an untyped field. The following BSON data types should not be
 stored in untyped fields:
 
@@ -115,7 +115,7 @@ StringifiedSymbol
 ~~~~~~~~~~~~~~~~~
 
 Use the ``StringifiedSymbol`` field type to store values that should be exposed
-as symbols to Ruby applications. ``StringifiedSymbol`` allows you to use symbols
+as symbols to {+language+} applications. ``StringifiedSymbol`` allows you to use symbols
 while ensuring interoperability with other drivers. This type stores all data on
 the database as strings, and converts the strings to symbols when read by the
 application. Values that cannot be directly converted to symbols, such as
@@ -152,6 +152,7 @@ You can store values as ``Time`` instances by using the ``Time`` field value.
 ``Time`` fields are stored in the time zone configured for your application. To
 learn more about configuring time zones, see the :ref:`Time Zones <time-zones>`
 guide. 
+
 .. TODO: Update Time Zones guide ref if it's changed during standardization
 
 The following example creates a ``Voter`` class and specifies the
@@ -166,7 +167,7 @@ The following example creates a ``Voter`` class and specifies the
 
    Storing a ``Date`` or ``DateTime`` value in a field specified as ``Time``
    converts the value to ``Time`` when assigned. If you store a string in a
-   ``Time`` field, {+odm+} parses the string by using the ``Time.pars`` method.
+   ``Time`` field, {+odm+} parses the string by using the ``Time.parse`` method.
 
 Date
 ~~~~
@@ -201,7 +202,7 @@ DateTime
 ~~~~~~~~
 
 When you assign a value to, or query on a ``DateTime`` field, {+odm+} converts
-the value to a UTC ``Time`` value before sending it to the MongoDB server.
+the value to a UTC ``Time`` value before sending it to the {+mdb-server+}.
 {+odm+} saves the value with the time zone embedded in the ``DateTime`` object. When
 you retrieve the value, {+odm+} converts the UTC time to the time zone
 configured for your application.
@@ -350,7 +351,7 @@ Consider the following limitations when setting the
    rather than untyped.
 
 Specify Fields with Strings or Symbols
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------------
 
 You can use strings or symbols to specify certain field types in {+odm+}, instead of
 using their class names. The following example specifies the ``state`` field by
@@ -449,7 +450,7 @@ The following field types can be specified as a string or a symbol:
      - ``"Time"``
 
 Custom Field Types
-~~~~~~~~~~~~~~~~~~
+------------------
 
 You can create custom field types and define how {+odm+} serializes and
 deserializes them. To create a custom field type, define a class that
@@ -484,7 +485,7 @@ The ``evolve`` method converts the custom ``Point`` type into a queryable
 method when it calls a method that queries the database.
 
 Phantom Custom Field Types
-``````````````````````````
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can create a custom field type that saves a different value to the database
 than the value assigned in the application. This can be useful to have
@@ -500,7 +501,7 @@ color in the application, but stores the color as an integer in the database:
    :end-before: # end-phantom-field-type
 
 Dynamic Fields
-~~~~~~~~~~~~~~
+--------------
 
 You can instruct {+odm+} to create fields dynamically by setting the
 ``Mongoid::Attributes::Dynamic`` module in your model. This allows {+odm+} to
@@ -531,7 +532,7 @@ If you don't initially set the value by using one of the preceding options,
 invoking the attribute returns a ``NoMethodError``.
 
 Reserved Characters
-~~~~~~~~~~~~~~~~~~~
+-------------------
 
 Both {+odm+} and the MongoDB Query API use the ``.`` character to separate field
 names in nested documents, and use the ``$`` character at the beginning of a
