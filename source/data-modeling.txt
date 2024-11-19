@@ -14,9 +14,9 @@ Model Your Data
 .. toctree::
    :caption: Data Modeling
    
-   Inheritance </data-modeling/inheritance>
+   Field Behaviors </data-modeling/field-behaviors>
 
 In this section, you can learn how to model data in {+odm+}.
 
-- :ref:`mongoid-modeling-inheritance`: Learn how to implement
-  inheritance in your model classes.
+- :ref:`mongoid-field-behaviors`: Learn how to customize the behaviors of fields
+  in {+odm+} to meet your application requirements.
