@@ -28,7 +28,7 @@ Specify Default Values
 You can configure fields to have default values by using the ``default`` option.
 Default field values can be either fixed or ``Proc`` values.
 
-The following example specifies a fixed default value for the ``fulfill_by``
+The following example specifies a fixed default value for the ``state``
 field:
 
 .. literalinclude:: /includes/data-modeling/field-behaviors.rb
@@ -87,8 +87,8 @@ Specify Storage Names
 ---------------------
 
 You can specify a separate field name to store in the database, while still
-referring to the field by its original name in your application. This can be
-useful to save storage space, because MongoDB stores all field information along
+referring to the field by its original name in your application. This can save
+storage space, because MongoDB stores all field information along
 with every document.
 
 You can set an alternate storage name by using the ``as:`` keyword. The
@@ -152,7 +152,7 @@ Custom ID Field
 
 By default, {+odm+} defines the ``_id`` field on documents to contain a
 ``BSON::ObjectId`` value that {+odm+} generates automatically. You can customize
-the type or the specify the default value of the ``_id`` field by specifying it in your
+the type or specify the default value of the ``_id`` field by specifying it in your
 model.
 
 The following example creates a ``Band`` class with a custom ``_id`` field:
@@ -163,10 +163,10 @@ The following example creates a ``Band`` class with a custom ``_id`` field:
    :end-before: # end-custom-id
 
 You can omit the default value for the ``_id`` field. If you don't specify a
-default value for the field, {+odm+} persists the value without an ``_id``
-value. If the document is a top-level document, the MongoDB server automatically
-assigns an ``_id`` value to the document. However, if the document is an
-embedded document, the server does not assign an ``_id`` value. 
+default value for the field, {+odm+} persists the document without an ``_id``
+value. For top-level documents, the MongoDB server automatically
+assigns an ``_id`` value. However, for embedded documents, the server does not
+assign an ``_id`` value.
 
 When you don't specify a value for the ``_id`` field, {+odm+} does not retrieve
 the automatically assigned value from the server. Because of this, you cannot
