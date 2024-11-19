@@ -202,7 +202,7 @@ DateTime
 ~~~~~~~~
 
 When you assign a value to, or query on a ``DateTime`` field, {+odm+} converts
-the value to a UTC ``Time`` value before sending it to the {+mdb-server+}.
+the value to a UTC ``Time`` value before sending it to the MongoDB server.
 {+odm+} saves the value with the time zone embedded in the ``DateTime`` object. When
 you retrieve the value, {+odm+} converts the UTC time to the time zone
 configured for your application.
