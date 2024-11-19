@@ -43,7 +43,7 @@ You can define the field type for fields in a model class by using the ``field``
 and ``type`` macros. The following example defines the fields of a ``Person``
 class:
 
-.. literalinclude:: /includes/field-types/field-types.rb
+.. literalinclude:: /includes/data-modeling/field-types.rb
    :language: ruby
    :start-after: # start-define-fields
    :end-before: # end-define-fields
@@ -88,7 +88,7 @@ different types of data, or if the type of the field's value is not known.
 
 The following example defines a ``Person`` class with an untyped field:
 
-.. literalinclude:: /includes/field-types/field-types.rb
+.. literalinclude:: /includes/data-modeling/field-types.rb
    :language: ruby
    :start-after: # start-define-untyped
    :end-before: # end-define-untyped
@@ -97,7 +97,7 @@ The type of the ``preferences`` field is ``Object`` and will vary depending on
 the type of data stored in that field. The following example saves data into the
 ``preferences`` field in two different ways:
 
-.. literalinclude:: /includes/field-types/field-types.rb
+.. literalinclude:: /includes/data-modeling/field-types.rb
    :language: ruby
    :start-after: # start-untyped
    :end-before: # end-untyped
@@ -124,7 +124,7 @@ integers and arrays, are converted into strings and then into symbols.
 The following example stores a ``status`` field as a ``StringifiedSymbol`` and
 demonstrates how the field is stored and returned:
 
-.. literalinclude:: /includes/field-types/field-types.rb
+.. literalinclude:: /includes/data-modeling/field-types.rb
    :language: ruby
    :start-after: # start-stringified-symbol
    :end-before: # end-stringified-symbol
@@ -140,7 +140,7 @@ store properly in the database.
 The following example creates a ``Person`` class and specifies the ``url`` field
 as a ``Hash``. 
 
-.. literalinclude:: /includes/field-types/field-types.rb
+.. literalinclude:: /includes/data-modeling/field-types.rb
    :language: ruby
    :start-after: # start-hash
    :end-before: # end-hash
@@ -157,7 +157,7 @@ guide.
 The following example creates a ``Voter`` class and specifies the
 ``registered_at`` property as a ``Time`` field:
 
-.. literalinclude:: /includes/field-types/field-types.rb
+.. literalinclude:: /includes/data-modeling/field-types.rb
    :language: ruby
    :start-after: # start-time
    :end-before: # end-time
@@ -209,7 +209,7 @@ configured for your application.
 The following example creates a ``Ticket`` class and specifies the ``opened_at``
 field as a ``DateTime`` field:
 
-.. literalinclude:: /includes/field-types/field-types.rb
+.. literalinclude:: /includes/data-modeling/field-types.rb
    :language: ruby
    :start-after: # start-datetime
    :end-before: # end-datetime
@@ -218,7 +218,7 @@ If you save an integer or float value to a ``DateTime`` field, the value is trea
 a Unix timestamp in UTC. The following example saves an integer value to the
 ``opened_at`` field:
 
-.. literalinclude:: /includes/field-types/field-types.rb
+.. literalinclude:: /includes/data-modeling/field-types.rb
    :language: ruby
    :start-after: # start-datetime-int
    :end-before: # end-datetime-int
@@ -227,7 +227,7 @@ If you save a string value to a ``DateTime`` field, {+odm+} saves the ticket
 with the time zone specified. If a time zone is not specified, {+odm+} saves the
 value by using the default {+odm+} timezone:
 
-.. literalinclude:: /includes/field-types/field-types.rb
+.. literalinclude:: /includes/data-modeling/field-types.rb
    :language: ruby
    :start-after: # start-datetime-string
    :end-before: # end-datetime-string
@@ -249,7 +249,7 @@ fields:
 
 The following example creates a ``Person`` class with timestamp fields:
 
-.. literalinclude:: /includes/field-types/field-types.rb
+.. literalinclude:: /includes/data-modeling/field-types.rb
    :language: ruby
    :start-after: # start-timestamps
    :end-before: # end-timestamps
@@ -259,7 +259,7 @@ by including only the ``Created`` or ``Updated`` modules. The following example
 creates a ``Person`` class with only the ``created_at`` field, and a ``Post``
 class with only the ``updated_at`` field:
 
-.. literalinclude:: /includes/field-types/field-types.rb
+.. literalinclude:: /includes/data-modeling/field-types.rb
    :language: ruby
    :start-after: # start-timestamps-specific
    :end-before: # end-timestamps-specific
@@ -267,7 +267,7 @@ class with only the ``updated_at`` field:
 You can shorten the timestamp field names to ``c_at`` and ``u_at`` by setting
 the ``::Short`` option when including the module:
 
-.. literalinclude:: /includes/field-types/field-types.rb
+.. literalinclude:: /includes/data-modeling/field-types.rb
    :language: ruby
    :start-after: # start-timestamps-short
    :end-before: # end-timestamps-short
@@ -276,7 +276,7 @@ You can disable creating the timestamp field for specific operations by calling
 the ``timeless`` method on the method call. The following example disables the
 timestamps for the ``save`` operation:
 
-.. literalinclude:: /includes/field-types/field-types.rb
+.. literalinclude:: /includes/data-modeling/field-types.rb
    :language: ruby
    :start-after: # start-timestamps-disable
    :end-before: # end-timestamps-disable
@@ -301,7 +301,7 @@ the data back to a Ruby regular expression.
 The following example creates a ``Token`` class and specifies the ``pattern``
 field as a ``Regexp``:
 
-.. literalinclude:: /includes/field-types/field-types.rb
+.. literalinclude:: /includes/data-modeling/field-types.rb
    :language: ruby
    :start-after: # start-regexp
    :end-before: # end-regexp
@@ -465,7 +465,7 @@ implements the following methods:
 The following example creates a custom field type called ``Point`` and
 implements the preceding methods:
 
-.. literalinclude:: /includes/field-types/field-types.rb
+.. literalinclude:: /includes/data-modeling/field-types.rb
    :language: ruby
    :start-after: # start-custom-field-type
    :end-before: # end-custom-field-type
@@ -494,7 +494,7 @@ database.
 The following example creates a ``ColorMapping`` type that uses the name of the
 color in the application, but stores the color as an integer in the database:
 
-.. literalinclude:: /includes/field-types/field-types.rb
+.. literalinclude:: /includes/data-modeling/field-types.rb
    :language: ruby
    :start-after: # start-phantom-field-type
    :end-before: # end-phantom-field-type
@@ -509,7 +509,7 @@ database.
 
 The following example creates a ``Person`` class with dynamic fields:
 
-.. literalinclude:: /includes/field-types/field-types.rb
+.. literalinclude:: /includes/data-modeling/field-types.rb
    :language: ruby
    :start-after: # start-dynamic-field
    :end-before: # end-dynamic-field
@@ -543,7 +543,7 @@ fields by calling the ``send`` method. The following example creates a ``User``
 class with fields that contain reserved characters. It then accesses the fields
 with the ``send`` method:
 
-.. literalinclude:: /includes/field-types/field-types.rb
+.. literalinclude:: /includes/data-modeling/field-types.rb
    :language: ruby
    :start-after: # start-reserved-characters
    :end-before: # end-reserved-characters
