@@ -17,13 +17,16 @@ Customize Field Behaviors
    :depth: 1
    :class: singlecol
 
+Overview
+--------
+
 In this guide, you can learn how to customize the behavior of fields in {+odm+} models.
 
 Specify Default Values
 ----------------------
 
 You can configure fields to have default values by using the ``default`` option.
-Default field values can be either fixed or processed (``Proc``) values.
+Default field values can be either fixed or ``Proc`` values.
 
 The following example specifies a fixed default value for the ``fulfill_by``
 field:
@@ -44,8 +47,8 @@ field:
 .. note::
    
    The driver evaluates default values that are not ``Proc`` instances when the
-   class loads. The driver evaluates ``Proc`` default values when the document is
-   instantiated. The following default field values do not produce equivalent outcomes:
+   class *loads*. The driver evaluates ``Proc`` values when the document is
+   *instantiated*. The following default field values do not produce equivalent outcomes:
 
    .. code-block:: ruby
 
@@ -198,7 +201,7 @@ of a ``Person`` class:
 Read-Only Attributes
 --------------------
 
-You can specify a field to read-only by specifying the ``attr_readonly`` option.
+You can specify a field to be read-only by specifying the ``attr_readonly`` option.
 This allows you to create documents with the attributes, but not update them.
 
 The following example creates a ``Band`` class and specifies the ``name`` field
