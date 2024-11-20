@@ -13,7 +13,7 @@ Working With Data
   Queries <reference/queries>
   Text Search <reference/text-search>
   Aggregation Pipeline <reference/aggregation>
-  Map/Reduce <reference/map-reduce>
+  MapReduce <reference/map-reduce>
   Persistence Configuration <reference/persistence-configuration>
   Nested Attributes <reference/nested-attributes>
   Callbacks <reference/callbacks>
