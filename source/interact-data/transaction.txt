@@ -152,7 +152,7 @@ created, saved, or deleted in the following cases:
 - After the transaction is committed if the object was modified inside
   the transaction.
 
-- After the object is persisted if the object was modified before
+- After the object is persisted if the object was modified outside
   the transaction block.
 
 The ``after_commit`` callback is triggered only after all
