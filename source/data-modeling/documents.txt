@@ -21,8 +21,9 @@ Overview
 --------
 
 In this guide, you can learn about the ``Mongoid::Document`` module in
-{+odm+}. The ``Document`` module is a representation of a MongoDB
-document. To learn more about the terminology, structure, and limitations of
+{+odm+}. The ``Document`` module is a {+language+} implementation of a
+MongoDB document, which stores data in field-and-value pairs. To learn
+more about the terminology, structure, and limitations of
 MongoDB documents, see :manual:`Documents </core/document/>` in the
 {+server-manual+}.
 
@@ -45,13 +46,14 @@ in a sample ``Person`` model class:
 You can find more information about the ``Document`` module in the `API
 documentation <{+api-root+}/Document.html>`__.
 
-MongoDB Representation
-----------------------
+Work with Documents
+-------------------
 
-The representation of a ``Document`` in MongoDB is a BSON object that is
-similar to a {+language+} hash or JSON object. You can store instances
-of your models directly in a collection in the database, or you can
-embed them in other classes that use the ``Document`` module.
+You can store instances of your models directly in a collection, or you
+can embed them in other classes that use the ``Document`` module.
+When you save a ``Document`` instance to MongoDB, it is converted
+to a BSON object that is similar to a {+language+} hash or JSON
+object.
 
 The following code creates an instance of the ``Person`` model defined
 in the preceding section:
