@@ -14,9 +14,13 @@ Model Your Data
 .. toctree::
    :caption: Data Modeling
    
+   Documents </data-modeling/documents>
    Inheritance </data-modeling/inheritance>
 
 In this section, you can learn how to model data in {+odm+}.
 
+- :ref:`mongoid-modeling-documents`: Learn about the ``Document``
+  module.
+   
 - :ref:`mongoid-modeling-inheritance`: Learn how to implement
   inheritance in your model classes.
