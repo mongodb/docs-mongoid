@@ -16,6 +16,7 @@ Interact with Data
    
    Specify a Query </interact-data/specify-query>
    Modify Query Results </interact-data/modify-results>
+   Transactions and Sessions </interact-data/transaction>
 
 In this section, you can learn how to use {+odm+} to interact with your
 MongoDB data.
@@ -25,3 +26,6 @@ MongoDB data.
 
 - :ref:`mongoid-data-modify-results`: Learn how to modify the way that
   {+odm+} returns results from queries.
+
+- :ref:`mongoid-data-txn`: Learn how to perform multi-document
+  transactions to make atomic data changes.
