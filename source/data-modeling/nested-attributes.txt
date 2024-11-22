@@ -53,7 +53,7 @@ class and includes the ``accepts_nested_attributes_for`` macro:
 
 When you enable nested attributes behavior on an association, {+odm+}
 adds a special method to the base model. You can use this method to
-update the attributes by using this added functionality.
+update the attributes.
 
 The method name is the association name suffixed with ``_attributes``. For
 example, the setter method to update the ``producers`` association is
@@ -110,17 +110,17 @@ on an existing ``Band`` instance:
    :language: ruby
    :dedent:
 
-This action appends the new document to the existing set, without changing
+This action appends the new document to the existing set without changing
 any existing nested documents.
 
 Updating Nested Documents
 -------------------------
 
 You can update existing nested documents by using the nested attributes
-feature. To update a nested document, pass the ``_id`` value for the
-document to direct {+odm+} to use attributes to update it. The following
-example uses the ``_id`` value of an ``albums`` entry to update the
-``year`` field:
+feature. To instruct {+odm+} to update a nested document by using
+attributes, pass the document's ``_id`` value to the ``update()``
+method. The following example uses the ``_id`` value of an ``albums``
+entry to update the ``year`` field:
 
 .. literalinclude:: /includes/data-modeling/nested_attr.rb
    :start-after: start-update-id
@@ -128,7 +128,7 @@ example uses the ``_id`` value of an ``albums`` entry to update the
    :language: ruby
    :dedent:
 
-.. note:: No Matching Document
+.. important:: No Matching Document
 
    If {+odm+} does not match a document that has the specified ``_id``
    value, it raises a ``Mongoid::Errors::DocumentNotFound`` exception.
@@ -160,7 +160,7 @@ The following code uses the ``_destroy`` attribute to delete the first
    :emphasize-lines: 6
    :dedent:
 
-.. note:: No Matching Document
+.. important:: No Matching Document
 
    If {+odm+} does not match a document that has the specified ``_id``
    value, it raises a ``Mongoid::Errors::DocumentNotFound`` exception.
@@ -184,7 +184,8 @@ instance:
 Additional Information
 ----------------------
 
-To learn more about querying, see :ref:`mongoid-data-specify-query`.
+To learn more about querying, see the :ref:`mongoid-data-specify-query`
+guide.
 
 .. TODO link to CRUD guide
 
