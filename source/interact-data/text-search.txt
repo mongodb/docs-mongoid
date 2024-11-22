@@ -72,8 +72,8 @@ Create the Text Index
 
 Next, you must create the text index in your collection. You can
 create the index by using an interface such as the :atlas:`Atlas UI
-</atlas-ui/indexes>` or :compass:`Compass </indexes>`. If you are
-developing your application by using Rails, you can run the following
+</atlas-ui/indexes>` or :compass:`Compass </indexes>`. If you are using
+the Rails framework to develop your application, you can run the following
 Rake task to create the index based on your model specification:
 
 .. code-block:: bash
@@ -136,8 +136,9 @@ the term ``'herb'``:
    Although the search term was ``'herb'``, the method also matches
    descriptions containing ``'herbs'`` because a MongoDB text index uses *suffix
    stemming* to match similar words. To learn more about how
-   MongoDB matches terms, see :manual:`Index Entries
-   </core/index-text/#index-entries>`.
+   MongoDB matches terms, see :manual:`Text Index Properties
+   </core/indexes/index-types/index-text/text-index-properties/>` in the
+   {+server-manual}.
 
 Search by a Phrase
 ~~~~~~~~~~~~~~~~~~
@@ -148,8 +149,8 @@ phrase, {+odm+} runs a :ref:`term search <mongoid-term-search>`.
 
 .. tip::
 
-   Escaped quotes are a backslash character followed by a double quote
-   character.
+   Escaped quotes are a backslash character (``\``) followed by a double
+   quote character (``"``).
 
 The following example runs a text search for ``description`` values that
 contain the phrase ``"serves 2"``:
