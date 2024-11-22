@@ -174,13 +174,13 @@ contain the phrase ``"serves 2"``:
 Search with Excluded Terms
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-For each term or phrase you want to exclude from your text search,
+For each term or phrase to exclude from your text search,
 specify the term or phrase prefixed with a minus sign (``-``) as a string in
 your query filter.
 
 .. important::
 
-   You must search for at least one term if you want to exclude
+   You must search for at least one term to exclude
    terms from your search. If you don't search for any terms, {+odm+}
    doesn't return any documents.
 
