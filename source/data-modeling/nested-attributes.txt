@@ -52,10 +52,10 @@ class and includes the ``accepts_nested_attributes_for`` macro:
    association.
 
 When you enable nested attributes behavior on an association, {+odm+}
-adds an additional method to the base model. You can use this method to
+adds a special method to the base model. You can use this method to
 update the attributes by using this added functionality.
 
-The method is the association name suffixed with ``_attributes``. For
+The method name is the association name suffixed with ``_attributes``. For
 example, the setter method to update the ``producers`` association is
 ``producer_attributes``.
 
@@ -172,7 +172,8 @@ You can perform multiple data operations on nested documents by using
 the nested attributes feature.
 
 The following code creates a nested document, updates an existing
-document, and destroys a document in the same ``Band`` instance:
+document, and deletes a document in the ``albums`` array of a ``Band``
+instance:
 
 .. literalinclude:: /includes/data-modeling/nested_attr.rb
    :start-after: start-multiple-ops
