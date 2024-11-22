@@ -98,10 +98,18 @@ Search by a Term
 To search for a term, specify the term as a string in your query filter.
 To search for multiple terms, separate each term with spaces in the string.
 
-.. note::
+.. note:: Searching for Multiple Terms
 
    When searching for multiple terms, {+odm+} returns
    documents with at least one of the terms in text indexed fields.
+
+   Suppose you search by using the string ``'cake coffee cream'``. The
+   following list describes values that match this text query:
+
+   - ``'Has strong coffee notes.'``
+   - ``'Good for creamy coffee fans.'``
+   - ``'A rich but light cake.'``
+   - ``'A creamy coffee cake with cranberries.'``
 
 The following example runs a text search for ``description`` values that contain
 the term ``'herb'``:
@@ -109,10 +117,11 @@ the term ``'herb'``:
 .. io-code-block::
    :copyable: true
 
-   .. input::
-      :language: ruby
-
-      Dish.where('$text' => {'$search' => 'herb'})
+   .. input:: /includes/interact-data/text-search.rb
+      :start-after: start-term
+      :end-before: end-term
+      :language: rust
+      :dedent:
 
    .. output::
       :language: none
@@ -148,10 +157,11 @@ contain the phrase ``"serves 2"``:
 .. io-code-block::
    :copyable: true
 
-   .. input::
-      :language: ruby
-
-      Dish.where('$text' => {'$search' => "\"serves 2\""})
+   .. input:: /includes/interact-data/text-search.rb
+      :start-after: start-phrase
+      :end-before: end-phrase
+      :language: rust
+      :dedent:
 
    .. output::
       :language: none
@@ -180,10 +190,11 @@ contain the term ``'vegan'``, but do not contain the term ``'tofu'``:
 .. io-code-block::
    :copyable: true
 
-   .. input::
-      :language: ruby
-
-      Dish.where('$text' => {'$search' => 'vegan -tofu'})
+   .. input:: /includes/interact-data/text-search.rb
+      :start-after: start-exclude
+      :end-before: end-exclude
+      :language: rust
+      :dedent:
 
    .. output::
       :language: none
@@ -195,6 +206,7 @@ contain the term ``'vegan'``, but do not contain the term ``'tofu'``:
 Additional Information
 ----------------------
 
-To learn more about querying, see :ref:`mongoid-data-specify-query`.
+To learn more about constructing query filters, see
+:ref:`mongoid-data-specify-query`.
 
 .. TODO link to CRUD guide
