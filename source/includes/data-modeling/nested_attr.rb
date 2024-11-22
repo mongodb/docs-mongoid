@@ -10,7 +10,6 @@ end
 #start-use-method
 # Retrieves a Band instance
 band = Band.where(name: 'Tennis').first
-
 # Updates the "producer" association
 band.producer_attributes = { name: 'Alaina Moore' }
 #end-use-method
@@ -20,8 +19,7 @@ band = Band.create(
   name: 'Tennis',
   albums_attributes: [
      { name: 'Swimmer', year: 2020 },
-     { name: 'Young & Old', year: 2013 },
-  ]
+     { name: 'Young & Old', year: 2013 }]
 )
 # end-create-attr
 
