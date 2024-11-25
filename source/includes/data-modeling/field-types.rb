@@ -8,11 +8,11 @@ end
 # end-define-fields
 
 # start-define-untyped
-class Person
+class Product
   include Mongoid::Document
 
   field :name, type: String
-  field :preferences
+  field :properties
 end
 # end-define-untyped
 
@@ -49,13 +49,9 @@ class Person
   include Mongoid::Document
   field :first_name
   field :url, type: Hash
-  
-  def set_vals
-    self.first_name = 'Daniel'
-    self.url = {'home_page' => 'http://www.homepage.com'}
-    save
-  end
 end
+
+person = Person.new(url: {'home_page' => 'http://www.homepage.com'})
 # end-hash
 
 # start-time
@@ -71,31 +67,31 @@ Voter.new(registered_at: Date.today)
 # start-datetime
 class Ticket
   include Mongoid::Document
-  field :opened_at, type: DateTime
+  field :purchased_at, type: DateTime
 end
 # end-datetime
 
 # start-datetime-int
-ticket.opened_at = 1544803974
-ticket.opened_at
+ticket.purchased_at = 1544803974
+ticket.purchased_at
 # Outputs: Fri, 14 Dec 2018 16:12:54 +0000
 # end-datetime-int
 
 # start-datetime-string
-ticket.opened_at = 'Mar 4, 2018 10:00:00 +01:00'
-ticket.opened_at
+ticket.purchased_at = 'Mar 4, 2018 10:00:00 +01:00'
+ticket.purchased_at
 # Outputs: Sun, 04 Mar 2018 09:00:00 +0000
 # end-datetime-string
 
 # start-timestamps
-class Person
+class Post
   include Mongoid::Document
   include Mongoid::Timestamps
 end
 # end-timestamps
 
 # start-timestamps-specific
-class Person
+class Post
   include Mongoid::Document
   include Mongoid::Timestamps::Created
 end
@@ -107,7 +103,7 @@ end
 # end-timestamps-specific
 
 # start-timestamps-disable
-person.timeless.save
+post.timeless.save
 # end-timestamps-disable
 
 # start-timestamps-short
@@ -225,7 +221,7 @@ profile = Profile.new(color: 'white')
 profile.color
 # Outputs: "white"
 
-# Writes 0 to the database
+# Sets "color" field to 0 in
 profile.save!
 # end-phantom-field-type
 
