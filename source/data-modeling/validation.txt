@@ -9,7 +9,7 @@ Document Validation
    :values: reference
 
 .. meta::
-   :keywords: ruby framework, odm, relationship, code example, polymorphic
+   :keywords: ruby framework, odm, schema, code example
 
 .. contents:: On this page
    :local:
