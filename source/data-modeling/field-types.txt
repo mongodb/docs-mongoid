@@ -113,24 +113,6 @@ in untyped fields:
 - ``DateTime``: Returns as ``Time`` in untyped fields
 - ``Range``: Returns as ``Hash`` in untyped fields
 
-StringifiedSymbol
-~~~~~~~~~~~~~~~~~
-
-Use the ``StringifiedSymbol`` field type to store values that should be exposed
-as symbols to {+language+} applications. ``StringifiedSymbol`` allows you to use symbols
-while ensuring interoperability with other drivers. This type stores all data on
-the database as strings, and converts the strings to symbols when read by the
-application. Values that cannot be directly converted to symbols, such as
-integers and arrays, are converted into strings and then into symbols.
-
-The following example stores a ``status`` field as a ``StringifiedSymbol`` and
-demonstrates how the field is stored and returned:
-
-.. literalinclude:: /includes/data-modeling/field-types.rb
-   :language: ruby
-   :start-after: # start-stringified-symbol
-   :end-before: # end-stringified-symbol
-
 Hash
 ~~~~
 
@@ -169,7 +151,11 @@ The following example creates a ``Voter`` class and specifies that the value of 
 
    Storing a ``Date`` or ``DateTime`` value in a field specified as ``Time``
    converts the value to ``Time`` when assigned. If you store a string in a
-   ``Time`` field, {+odm+} parses the string by using the ``Time.parse()`` method.
+   ``Time`` field, {+odm+} parses the string by using the ``Time.parse()``
+   method.
+
+.. TODO: Add this to the note:
+.. To learn more about how {+odm+} converts queries, see :ref:`<Field Type Query Conversions section>`
 
 Date
 ~~~~
@@ -199,6 +185,9 @@ to ``Date`` before assigning them to the field.
    parses the value by using the ``Time.parse()`` method, then discards the time
    portion. ``Time.parse()`` considers values without time zones to be in local
    time.
+
+.. TODO: Add this to the note:
+.. To learn more about how {+odm+} converts queries, see :ref:`<Field Type Query Conversions section>`
 
 DateTime
 ~~~~~~~~
@@ -281,7 +270,7 @@ the ``::Short`` option when including the module:
    :end-before: # end-timestamps-short
 
 You can disable creating the timestamp field for specific operations by calling
-the ``timeless`` method on the method call. The following example disables the
+the ``timeless()`` method on the method call. The following example disables the
 timestamps for the ``save`` operation:
 
 .. literalinclude:: /includes/data-modeling/field-types.rb
@@ -303,7 +292,7 @@ end of a string, while PCRE uses ``^`` and ``$``.
 When you declare a field as a ``Regexp``, {+odm+} converts {+language+} regular
 expressions to BSON regular expressions when storing the result into your
 database. The database returns the field as a ``Bson::Regexp::Raw`` instance.
-You can use the ``compile`` method on ``BSON::Regexp::Raw`` instances to convert
+You can use the ``compile()`` method on ``BSON::Regexp::Raw`` instances to convert
 the data back to a {+language+} regular expression.
 
 The following example creates a ``Token`` class and specifies the ``pattern``
@@ -319,6 +308,8 @@ field as a ``Regexp``:
    Converting a BSON regular expression to a {+language+} regular expression might
    produce a different regular expression than the original. This difference is
    due to the differences between the Onigmo and PCRE syntaxes.
+
+.. TODO: To learn more about regular expressions in {+odm+}, see :ref:`mongoid-regular-expressions`.
 
 BigDecimal
 ~~~~~~~~~~
@@ -356,6 +347,24 @@ Consider the following limitations when setting the
 
    You can avoid this issue by specifying the field as a ``BigDecimal`` type,
    rather than untyped.
+
+StringifiedSymbol
+~~~~~~~~~~~~~~~~~
+
+Use the ``StringifiedSymbol`` field type to store values that should be exposed
+as symbols to {+language+} applications. ``StringifiedSymbol`` allows you to use symbols
+while ensuring interoperability with other drivers. This type stores all data on
+the database as strings, and converts the strings to symbols when read by the
+application. Values that cannot be directly converted to symbols, such as
+integers and arrays, are converted into strings and then into symbols.
+
+The following example stores a ``status`` field as a ``StringifiedSymbol`` and
+demonstrates how the field is stored and returned:
+
+.. literalinclude:: /includes/data-modeling/field-types.rb
+   :language: ruby
+   :start-after: # start-stringified-symbol
+   :end-before: # end-stringified-symbol
 
 Specify Field Types as Strings or Symbols
 -----------------------------------------
@@ -478,16 +487,16 @@ implements the preceding methods:
    :start-after: # start-custom-field-type
    :end-before: # end-custom-field-type
 
-In the preceding example, the ``mongoize`` *instance method* accepts an instance
+In the preceding example, the ``mongoize()`` *instance method* accepts an instance
 of your custom type object and converts it to an ``Array`` to store in the
-database. The ``mongoize`` *class method* accepts objects of all types and
+database. The ``mongoize()`` *class method* accepts objects of all types and
 converts them to similar types that can be stored in the database. {+odm+} uses
-the ``mongoize`` class method when it calls the getter and setter methods.
+the ``mongoize()`` class method when it calls the getter and setter methods.
 
-The ``demongoize`` method converts the stored ``Array`` value into the custom
+The ``demongoize()`` method converts the stored ``Array`` value into the custom
 ``Point`` type. The {+odm+} uses this method when it calls the getter.
 
-The ``evolve`` method converts the custom ``Point`` type into a queryable
+The ``evolve()`` method converts the custom ``Point`` type into a queryable
 ``Array`` type, and converts all other types to ``object``. {+odm+} uses this
 method when it calls a method that queries the database.
 
@@ -549,16 +558,16 @@ string to indicate a query operator. Because of this, you should avoid using the
 characters in your field names. 
 
 If your application requires the use of these characters, you can access the
-fields by calling the ``send`` method. The following example creates a ``User``
+fields by calling the ``send()`` method. The following example creates a ``User``
 class with fields that contain reserved characters. It then accesses the fields
-by using the ``send`` method:
+by using the ``send()`` method:
 
 .. literalinclude:: /includes/data-modeling/field-types.rb
    :language: ruby
    :start-after: # start-reserved-characters
    :end-before: # end-reserved-characters
 
-You can also access these fields by calling the ``read_attribute`` method.
+You can also access these fields by calling the ``read_attribute()`` method.
 
 .. important::
 
