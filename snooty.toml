@@ -10,7 +10,8 @@ toc_landing_pages = [
     "/quick-start-rails",
     "/quick-start-sinatra",
     "/interact-data",
-    "/interact-data/specify-query"
+    "/interact-data/specify-query",
+    "/data-modeling"
     ]
 
 [constants]
@@ -27,3 +28,4 @@ feedback-widget-title = "Feedback"
 server-manual = "Server manual"
 api-root = "https://www.mongodb.com/docs/mongoid/master/api/Mongoid"
 api = "https://www.mongodb.com/docs/mongoid/master/api"
+ruby-api = "https://www.mongodb.com/docs/ruby-driver/current/api/Mongo"
