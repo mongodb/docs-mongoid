@@ -13,15 +13,19 @@ Model Your Data
 
 .. toctree::
    :caption: Data Modeling
-   
-   Documents </data-modeling/documents>
-   Inheritance </data-modeling/inheritance>
-   Nested Attributes </data-modeling/nested-attributes>
 
 In this section, you can learn how to model data in {+odm+}.
 
+   Documents </data-modeling/documents>
+   Field Behaviors </data-modeling/field-behaviors>
+   Inheritance </data-modeling/inheritance>
+   Nested Attributes </data-modeling/nested-attributes>
+
 - :ref:`mongoid-modeling-documents`: Learn about the ``Document``
   module.
+  
+- :ref:`mongoid-field-behaviors`: Learn how to customize the behaviors of fields
+  in {+odm+} to meet your application requirements.
    
 - :ref:`mongoid-modeling-inheritance`: Learn how to implement
   inheritance in your model classes.
