@@ -1,8 +1,8 @@
 .. _indexes:
 
-****************
-Index Management
-****************
+=================
+Work With Indexes
+=================
 
 .. default-domain:: mongodb
 
@@ -12,267 +12,188 @@ Index Management
    :depth: 2
    :class: singlecol
 
-Specifying Indexes
-==================
+Overview
+--------
+
+In this guide, you can learn how to use **indexes** with {+odm+}. Indexes can
+improve the efficiency of queries by limiting the number of documents MongoDB
+needs to scan. If your application is repeatedly running queries
+on certain fields, you can create an index on those fields to improve query
+performance.
+
+The following sections in this guide describe how to declare and create different
+types of indexes using {+odm+}. The examples use the ``Restaurant`` model, which 
+maps to the ``restaurants`` collection in the ``sample_restaurants`` database. 
+To learn how to connect to this database
+and collection using {+odm+}, see the :ref:`mongoid-quick-start-rails` or 
+:ref:`mongoid-quick-start-sinatra` guides.
+
+Declare and Create an Index
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+When using {+odm+}, you can declare your index using the ``index`` macro and 
+then create it using the ``create_index`` macro.
+
+The following code example shows how to declare and create an ascending index 
+named ``cuisine_index`` on the ``cuisine`` field in the ``Restaurant`` class:
 
-You can define indexes on documents using the index macro. Provide the key for
-the index along with a direction. Additional options can be supplied in the
-second options hash parameter:
+.. literalinclude:: /includes/reference/indexes.rb
+  :language: ruby
+  :emphasize-lines: 8, 11
+  :start-after: start create index
+  :end-before: end create index
+
+The ``index`` macro defines the index you want to create and the ``create_index``
+macro creates the index in the ``restaurants`` collection. When defining an 
+index, the field you want to index on goes in the first hash object, and the
+index options go in the second hash object.
 
-.. code-block:: ruby
+Aliases and Declaring Indexes
++++++++++++++++++++++++++++++
 
-    class Person
-      include Mongoid::Document
-      field :ssn
+You can use aliased field names in index definitions. For example, the following
+example creates a field on the ``b`` field, which is an alias of the ``borough``
+field:
 
-      index({ ssn: 1 }, { unique: true, name: "ssn_index" })
-    end
+.. literalinclude:: /includes/reference/indexes.rb
+  :language: ruby
+  :start-after: start create alias index
+  :end-before: end create alias index
 
-You can define indexes on embedded document fields as well:
+Create an Index on Embedded Document Fields
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. code-block:: ruby
+You can define an index on embedded document fields. The following code example
+shows how to declare an ascending index on the ``street`` field in the
+``Restaurant`` class where ``street`` is a field embedded within the ``address``
+field.
 
-    class Person
-      include Mongoid::Document
-      embeds_many :addresses
-      index "addresses.street" => 1
-    end
+.. literalinclude:: /includes/reference/indexes.rb
+  :language: ruby
+  :start-after: start create embedded index
+  :end-before: end create embedded index
 
-You can index on multiple fields and provide direction:
+Create a Compound Index
+~~~~~~~~~~~~~~~~~~~~~~~
 
-.. code-block:: ruby
+You can define a compound index on multiple fields. The following code example
+shows how to declare a compound index that is ascending on the ``address.street``
+field and descending on the ``name`` field.
 
-    class Person
-      include Mongoid::Document
-      field :first_name
-      field :last_name
+.. literalinclude:: /includes/reference/indexes.rb
+  :language: ruby
+  :start-after: start create compound index
+  :end-before: end create compound index
 
-      index({ first_name: 1, last_name: 1 }, { unique: true })
-    end
+Create a Geospatial Index
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Indexes can be sparse:
+You can define a 2dsphere index on fields that contain GeoJSON objects or
+coordinate pairs.
+The following example defines a 2dsphere index on a field that contains GeoJSON
+objects:
 
-.. code-block:: ruby
+.. literalinclude:: /includes/reference/indexes.rb
+  :language: ruby
+  :start-after: start create 2dsphere index
+  :end-before: end create 2dsphere index
 
-    class Person
-      include Mongoid::Document
-      field :ssn
+For more information on 2dsphere indexes, see the :manual:`2dsphere <core/indexes/index-types/geospatial/2dsphere/>`
+guide in the {+mdb-server+} manual.
 
-      index({ ssn: -1 }, { sparse: true })
-    end
+For more information on the GeoJSON type, see the :manual:`GeoJSON Objects <reference/geojson/>`
+guide in the {+mdb-server+} manual.
 
-For geospatial indexes, make sure the field being indexed is of type Array:
+Create a Sparse Index
+~~~~~~~~~~~~~~~~~~~~~
 
-.. code-block:: ruby
+You can define a sparse index on fields that are not present in all documents. 
+The following code example defines a sparse index on the ``borough`` field:
 
-    class Person
-      include Mongoid::Document
-      field :location, type: Array
+.. literalinclude:: /includes/reference/indexes.rb
+  :language: ruby
+  :start-after: start create sparse index
+  :end-before: end create sparse index
 
-      index({ location: "2d" }, { min: -200, max: 200 })
-    end
+For more information on sparse indexes, see the :manual:`Sparse Indexes <core/index-sparse/>`
+guide in the {+mdb-server+} manual.
 
-Indexes can be scoped to a specific database:
+Create Multiple Indexes
+~~~~~~~~~~~~~~~~~~~~~~~
 
-.. code-block:: ruby
+You can define multiple indexes within your model and create them using a single
+``create_indexes`` call. The following example shows how to create multiple
+indexes at the same time:
 
-    class Person
-      include Mongoid::Document
-      field :ssn
-      index({ ssn: 1 }, { database: "users", unique: true, background: true })
-    end
+.. literalinclude:: /includes/reference/indexes.rb
+  :language: ruby
+  :start-after: start create multiple indexes
+  :end-before: end create multiple indexes
 
-You may use aliased field names in index definitions. Field aliases
-will also be resolved on the following options: ``partial_filter_expression``,
-``weights``, ``wildcard_projection``.
+.. TODO checkout what databases does
 
-.. code-block:: ruby
+List Indexes
+~~~~~~~~~~~~
 
-    class Person
-      include Mongoid::Document
-      field :a, as: :age
-      index({ age: 1 }, { partial_filter_expression: { age: { '$gte' => 20 } })
-    end
+You can list all indexes in your collection. The following example prints all 
+indexes in the ``Restaurant`` model:
 
-.. note::
+.. literalinclude:: /includes/reference/indexes.rb
+  :language: ruby
+  :start-after: start list index
+  :end-before: end list index
 
-  The expansion of field name aliases in index options such as
-  ``partial_filter_expression`` is performed according to the behavior of MongoDB
-  server 6.0. Future server versions may change how they interpret these options,
-  and Mongoid's functionality may not support such changes.
+.. TODO test if there's a way to drop single index
 
-Mongoid can define indexes on "foreign key" fields for associations.
-This only works on the association macro that the foreign key is stored on:
+Drop Indexes
+~~~~~~~~~~~~
 
-.. code-block:: ruby
+You can drop all indexes in your collection. The following example drops all
+indexes in the ``Restaurant`` model:
 
-    class Comment
-      include Mongoid::Document
-      belongs_to :post, index: true
-      has_and_belongs_to_many :preferences, index: true
-    end
+.. literalinclude:: /includes/reference/indexes.rb
+  :language: ruby
+  :start-after: start drop indexes
+  :end-before: end drop indexes
 
-*Deprecated:* In MongoDB 4.0 and earlier, users could control whether to build indexes
-in the foreground (blocking) or background (non-blocking, but less efficient) using the
-``background`` option.
+.. TODO: Is there a way to only drop 1
 
-.. code-block:: ruby
+Atlas Search Indexes
+~~~~~~~~~~~~~~~~~~~~
 
-    class Person
-      include Mongoid::Document
-      field :ssn
-      index({ ssn: 1 }, { unique: true, background: true })
-    end
+You can declare and manage Atlas Search indexes using {+odm+}.
 
-The default value of ``background`` is controlled by Mongoid's
-``background_indexing`` :ref:`configuration option <configuration-options>`.
+To declare a search index, use the ``search_index`` macro within your model. The
+following code example shows how to declare and create an Atlas Search index:
 
-The ``background`` option has `no effect as of MongoDB 4.2
-<https://www.mongodb.com/docs/manual/core/index-creation/#comparison-to-foreground-and-background-builds>`_.
+.. literalinclude:: /includes/reference/indexes.rb
+  :language: ruby
+  :start-after: start create atlas search index
+  :end-before: end create atlas search index
 
+Remove an Atlas Search Index
+++++++++++++++++++++++++++++
 
-Specifying Search Indexes on MongoDB Atlas
-==========================================
+To remove an Atlas Search index, use the ``remove_search_indexes`` macro. The
+following code example shows how to remove an Atlas Search index from the 
+``restaurants`` collection:
 
-If your application is connected to MongoDB Atlas, you can declare and manage
-search indexes on your models. (This feature is only available on MongoDB
-Atlas.)
+.. literalinclude:: /includes/reference/indexes.rb
+  :language: ruby
+  :start-after: start remove atlas search index
+  :end-before: end remove atlas search index
 
-To declare a search index, use the ``search_index`` macro in your model:
+List Atlas Search Indexes
++++++++++++++++++++++++++
 
-.. code-block:: ruby
+You can list all Atlas Search indexes in your collection by using the 
+``search_indexes`` macro:
 
-    class Message
-      include Mongoid::Document
+.. literalinclude:: /includes/reference/indexes.rb
 
-      search_index { ... }
-      search_index :named_index, { ... }
-    end
+API Documentation
+-----------------
 
-Search indexes may be given an explicit name; this is necessary if you have
-more than one search index on a model.
-
-
-Index Management Rake Tasks
-===========================
-
-When you want to create the indexes in the database, use the provided
-``db:mongoid:create_indexes`` Rake task:
-
-.. code-block:: bash
-
-    $ rake db:mongoid:create_indexes
-
-Mongoid also provides a Rake task to delete all secondary indexes.
-
-.. code-block:: bash
-
-    $ rake db:mongoid:remove_indexes
-
-Note: the output of these Rake tasks goes to the default logger configured
-by Rails. This is usually a file like ``log/development.log`` and not standard
-output.
-
-These create/remove indexes commands also works for just one model by running
-in Rails console:
-
-.. code-block:: ruby
-
-    # Create indexes for Model
-    Model.create_indexes
-
-    # Remove indexes for Model
-    Model.remove_indexes
-
-Managing Search Indexes on MongoDB Atlas
-----------------------------------------
-
-If you have defined search indexes on your model, there are rake tasks available
-for creating and removing those search indexes:
-
-.. code-block:: bash
-
-    $ rake db:mongoid:create_search_indexes
-    $ rake db:mongoid:remove_search_indexes
-
-By default, creating search indexes will wait for the indexes to be created,
-which can take quite some time. If you want to simply let the database create
-the indexes in the background, you can set the ``WAIT_FOR_SEARCH_INDEXES``
-environment variable to 0, like this:
-
-.. code-block:: bash
-
-    $ rake WAIT_FOR_SEARCH_INDEXES=0 db:mongoid:create_search_indexes
-
-Note that the task for removing search indexes will remove all search indexes
-from all models, and should be used with caution.
-
-You can also add and remove search indexes for a single model by invoking the
-following in a Rails console:
-
-.. code-block:: ruby
-
-    # Create all defined search indexes on the model; this will return
-    # immediately and the indexes will be created in the background.
-    Model.create_search_indexes
-
-    # Remove all search indexes from the model
-    Model.remove_search_indexes
-
-    # Enumerate all search indexes on the model
-    Model.search_indexes.each { |index| ... }
-
-
-Telling Mongoid Where to Look For Models
-----------------------------------------
-
-For non-Rails applications, Mongoid's rake tasks will look for models in
-``./app/models`` and ``./lib/models``. For Rails, Mongoid will look in
-``./app/models`` (or wherever you've configured Rails to look for models). If
-your models are in another location, you will need to tell Mongoid where to
-look for them with ``Mongoid.model_paths=``. You can do this by setting it
-in your application's Rakefile:
-
-.. code-block:: ruby
-
-    # Rakefile
-
-    # keep the defaults, but add more paths to look for models
-    Mongoid.model_paths += [ "./src/models", "./lib/documents" ]
-
-    # or, override the defaults entirely
-    Mongoid.model_paths = [ "./src/models", "./lib/documents" ]
-
-Make sure that these paths are in your application's load path, as well. For
-example:
-
-.. code-block:: ruby
-
-    # Rakefile
-
-    $LOAD_PATHS.concat [ "./src/models", "./lib/documents" ]
-
-
-Using Rake Tasks With Non-Rails Applications
---------------------------------------------
-
-Mongoid's Rake tasks are automatically loaded in Rails applications using
-Mongoid. When using Mongoid with a non-Rails application, these tasks must
-be loaded manually:
-
-.. code-block:: ruby
-
-    # Rakefile
-
-    require 'mongoid'
-    load 'mongoid/tasks/database.rake'
-
-If your application uses Bundler, you can require ``bundler/setup`` instead of
-explicitly requiring ``mongoid``:
-
-.. code-block:: ruby
-
-    # Rakefile
-
-    require 'bundler/setup'
-    load 'mongoid/tasks/database.rake'
+To learn more about using indexes in {+odm+}, see the 
+`Mongoid::Indexable::ClassMethods <{+api-root+}/Indexable/ClassMethods.html>`__
+guide.
