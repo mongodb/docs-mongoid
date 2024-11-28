@@ -23,6 +23,12 @@ end
 # end create alias index
 
 # start create embedded index
+class Address
+    include Mongoid::Document
+
+    field :street, type: String
+end
+
 class Restaurant
     include Mongoid::Document
 
@@ -38,7 +44,7 @@ class Restaurant
     field :name, type: String
     embeds_many :addresses
 
-    index({"addresses.street": 1, name: -1}, { name: "compound_index"})
+    index({borough: 1, name: -1}, { name: "compound_index"})
 end
 # end create compound index
 
@@ -46,7 +52,7 @@ end
 class Restaurant
     include Mongoid::Document
 
-    field :location, type: Point
+    field :location, type: Array
 
     index({location: "2dsphere"}, { name: "location_index"})
 end
@@ -63,10 +69,6 @@ class Restaurant
     index({ borough: 1}, { sparse: true })
 end
 # end create sparse index
-
-# start list index
-Restaurant.indexes.each { |index| puts index }
-# end list index
 
 # start create multiple indexes
 class Restaurant
@@ -95,7 +97,18 @@ class Restaurant
     field :cuisine, type: String
     field :borough, type: String
 
-    search_index({ name: 1})
+    search_index :my_search_index, 
+        mappings: { 
+            fields: { 
+                name: { 
+                    type: "string" 
+                },
+                cuisine: {
+                    type: "string"
+                }
+            }, 
+            dynamic: true 
+        }
 end
 
 Restaurant.create_search_indexes
