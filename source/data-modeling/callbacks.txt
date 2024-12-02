@@ -121,6 +121,7 @@ in the following code:
    :start-after: start-doc-set-syntax
    :end-before: end-doc-set-syntax
    :language: ruby
+   :emphasize-lines: 8-12
    :dedent:
 
 Association Callbacks
@@ -153,7 +154,7 @@ instances:
    :start-after: start-association-callback
    :end-before: end-association-callback
    :language: ruby
-   :emphasize-lines: 8-13
+   :emphasize-lines: 9-14
    :dedent:
 
 Additional Information
@@ -170,5 +171,3 @@ To learn about how {+odm+} manages callbacks in transactions, see the
 
 To learn how to access and change your MongoDB data, see the
 :ref:`mongoid-interact-data` guides.
-
-.. TODO Add link to field types guide.
