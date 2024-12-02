@@ -1,4 +1,4 @@
-.. _mongoid-modeling-nested-attr:
+.. _mongoid-data-nested-attr:
 
 =================
 Nested Attributes
