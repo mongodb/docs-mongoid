@@ -1,0 +1,33 @@
+.. _mongoid-modeling-callbacks:
+
+=========
+Callbacks
+=========
+
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: ruby framework, odm, code example, life cycle
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+Overview
+--------
+
+In this guide, you can learn how to implement **callbacks** in your
+{+odm+} models to customize the life cycle of your model instances.
+
+Callbacks are methods that {+odm+} triggers at specified moments of
+an object's life cycle. They allow you to initiate specified actions
+before or after changes to an object's state.
+
+{+odm+} implements many of the callbacks from Active Record. To learn
+more, see `Callbacks
+<{+active-record-docs+}/active_record_callbacks.html>`__ in the
+Active Record documentation.
