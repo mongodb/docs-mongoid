@@ -32,7 +32,7 @@ Declare and Create an Index
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 When using {+odm+}, you can declare your index using the ``index`` macro and 
-then create it using the ``create_index`` macro.
+then create it using the ``create_indexes`` macro.
 
 The following code example shows how to declare and create an ascending index 
 named ``cuisine_index`` on the ``cuisine`` field in the ``Restaurant`` class:
@@ -43,13 +43,13 @@ named ``cuisine_index`` on the ``cuisine`` field in the ``Restaurant`` class:
   :start-after: start create index
   :end-before: end create index
 
-The ``index`` macro defines the index you want to create and the ``create_index``
+The ``index`` macro defines the index you want to create and the ``create_indexes``
 macro creates the index in the ``restaurants`` collection. 
 
 When defining an index, the first hash object contains the field you want to
 index and its direction. ``1`` represents an ascending index, ``-1`` represents a
 descending index. The second hash object contains index options. To learn more
-about index options, see the :ref:`mongoid_indexes_api_documentation` section.
+about index options, see the :ref:`mongoid-indexes-api-documentation` section.
 
 Aliases and Declaring Indexes
 +++++++++++++++++++++++++++++
@@ -156,7 +156,8 @@ Atlas Search Indexes
 
 You can declare and manage Atlas Search indexes using {+odm+}.
 
-To declare a search index, use the ``search_index`` macro within your model. The
+To declare a search index, use the ``search_index`` macro within your model. To
+create the declared search indexes, use the ``create_search_indexes`` macro. The
 following code example shows how to declare and create an Atlas Search index 
 named ``my_search_index``.
 The index is on the ``name`` and ``cuisine`` fields and is dynamic.
