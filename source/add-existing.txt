@@ -130,10 +130,10 @@ for each Rails component, as shown in the following sample
 .. note::
 
    Because they rely on Active Record, the `ActionText
-   <https://guides.rubyonrails.org/action_text_overview.html>`__,
+   <{+active-record-docs+}/action_text_overview.html>`__,
    `ActiveStorage <https://edgeguides.rubyonrails.org/active_storage_overview.html>`__, and
    `ActionMailbox
-   <https://guides.rubyonrails.org/action_mailbox_basics.html>`__
+   <{+active-record-docs+}/action_mailbox_basics.html>`__
    adapters cannot be used alongside {+odm+}.
 
 Disable Active Record Adapters
