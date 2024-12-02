@@ -56,6 +56,7 @@ class User
   include Mongoid::Document
 
   field :username, type: String
+  # Registers the callback in the association statement
   embeds_many :saved_articles, before_add: :send_message
 
   protected

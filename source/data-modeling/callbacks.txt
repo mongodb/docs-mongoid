@@ -154,7 +154,7 @@ instances:
    :start-after: start-association-callback
    :end-before: end-association-callback
    :language: ruby
-   :emphasize-lines: 9-14
+   :emphasize-lines: 6, 10-15
    :dedent:
 
 Additional Information
