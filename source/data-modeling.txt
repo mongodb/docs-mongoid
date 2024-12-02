@@ -13,12 +13,14 @@ Model Your Data
 
 .. toctree::
    :caption: Data Modeling
-
+   
    Documents </data-modeling/documents>
    Field Behaviors </data-modeling/field-behaviors>
    Inheritance </data-modeling/inheritance>
+   Document Validation </data-modeling/validation>
    Callbacks </data-modeling/callbacks>
-   Nested Attributes </data-modeling/nested-attributes>
+
+In this section, you can learn how to model data in {+odm+}.
 
 In this section, you can learn how to model data in {+odm+}.
 
@@ -31,8 +33,8 @@ In this section, you can learn how to model data in {+odm+}.
 - :ref:`mongoid-modeling-inheritance`: Learn how to implement
   inheritance in your model classes.
 
+- :ref:`mongoid-modeling-validation`: Learn how to create document
+  validation rules for your model classes.
+
 - :ref:`mongoid-modeling-callbacks`: Learn how to implement callbacks to
   customize the life cycle of your models.
-
-- :ref:`mongoid-modeling-nested-attr`: Learn how to modify documents and
-  their associations in a single operation.

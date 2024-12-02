@@ -31,3 +31,4 @@ before or after changes to an object's state.
 more, see `Callbacks
 <{+active-record-docs+}/active_record_callbacks.html>`__ in the
 Active Record documentation.
+
