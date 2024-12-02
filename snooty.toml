@@ -10,12 +10,14 @@ toc_landing_pages = [
     "/quick-start-rails",
     "/quick-start-sinatra",
     "/interact-data",
-    "/interact-data/specify-query"
+    "/interact-data/specify-query",
+    "/data-modeling"
     ]
 
 [constants]
 rails-6-version = 6.0
 rails-7-version = 7.1
+rails-8-version-docs = "v8.0"
 odm = "Mongoid"
 version = "9.0"
 full-version = "{+version+}.2"
@@ -27,3 +29,4 @@ feedback-widget-title = "Feedback"
 server-manual = "Server manual"
 api-root = "https://www.mongodb.com/docs/mongoid/master/api/Mongoid"
 api = "https://www.mongodb.com/docs/mongoid/master/api"
+ruby-api = "https://www.mongodb.com/docs/ruby-driver/current/api/Mongo"

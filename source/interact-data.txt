@@ -16,6 +16,9 @@ Interact with Data
    
    Specify a Query </interact-data/specify-query>
    Modify Query Results </interact-data/modify-results>
+   Search Text </interact-data/text-search>
+   Transactions and Sessions </interact-data/transaction>
+   Nested Attributes </interact-data/nested-attributes>
 
 In this section, you can learn how to use {+odm+} to interact with your
 MongoDB data.
@@ -25,3 +28,12 @@ MongoDB data.
 
 - :ref:`mongoid-data-modify-results`: Learn how to modify the way that
   {+odm+} returns results from queries.
+
+- :ref:`mongoid-data-text-search`: Learn how to perform efficient
+  searches on text fields.
+
+- :ref:`mongoid-data-txn`: Learn how to perform multi-document
+  transactions to make atomic data changes.
+
+- :ref:`mongoid-data-nested-attr`: Learn how to modify documents and
+  their associations in a single operation.
