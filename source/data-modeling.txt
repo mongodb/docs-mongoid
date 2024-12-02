@@ -22,8 +22,6 @@ Model Your Data
 
 In this section, you can learn how to model data in {+odm+}.
 
-In this section, you can learn how to model data in {+odm+}.
-
 - :ref:`mongoid-modeling-documents`: Learn about the ``Document``
   module.
   
