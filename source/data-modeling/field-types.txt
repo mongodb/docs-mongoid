@@ -320,7 +320,7 @@ value you set for the ``Mongoid.map_big_decimal_to_decimal128`` configuration pr
 
 - If set to ``true``, {+odm+} stores ``BigDecimal`` values as BSON ``Decimal128``
   values.
-- If set to ``false`` (default), {+odm+} stores ``BigDecimal`` values as a string.
+- If set to ``false`` (default), {+odm+} stores ``BigDecimal`` values as strings.
 
 Consider the following limitations when setting the
 ``Mongoid.map_big_decimal_to_decimal128`` option to ``true``:
@@ -329,7 +329,7 @@ Consider the following limitations when setting the
   ``Decimal128`` has a maximum value of approximately ``10^6145`` and a minimum
   of approximately ``-10^6145``, with a maximum of 34 bits of precision. If you
   are storing values that are outside of these limits, we recommend storing them
-  as a string instead.
+  as strings instead.
 - ``Decimal128`` accepts signed ``NaN`` values, but ``BigDecimal`` does not.
   Retrieving signed ``NaN`` ``Decimal128`` values from the database as
   ``BigDecimal`` returns the value unsigned.
@@ -346,7 +346,7 @@ Consider the following limitations when setting the
    database. To find the value, you must first convert the query value to a string.
 
    You can avoid this issue by specifying the field as a ``BigDecimal`` type,
-   rather than untyped.
+   instead of as untyped.
 
 StringifiedSymbol
 ~~~~~~~~~~~~~~~~~
@@ -358,7 +358,7 @@ the database as strings, and converts the strings to symbols when read by the
 application. Values that cannot be directly converted to symbols, such as
 integers and arrays, are converted into strings and then into symbols.
 
-The following example stores a ``status`` field as a ``StringifiedSymbol`` and
+The following example defines the ``status`` field as a ``StringifiedSymbol`` and
 demonstrates how the field is stored and returned:
 
 .. literalinclude:: /includes/data-modeling/field-types.rb
@@ -370,7 +370,7 @@ Specify Field Types as Strings or Symbols
 -----------------------------------------
 
 You can use strings or symbols to specify certain field types in {+odm+}, instead of
-using their class names. The following example specifies the ``state`` field by
+using their class names. The following example specifies the ``order_num`` field by
 using the class name, a string, and a symbol:
 
 .. code-block:: ruby
@@ -472,11 +472,11 @@ You can create custom field types and define how {+odm+} serializes and
 deserializes them. To create a custom field type, define a class that
 implements the following methods:
 
-- ``mongoize``, which takes an instance of your custom type and converts it to
+- ``mongoize()``: Takes an instance of your custom type and converts it to
   an object that MongoDB can store.
-- ``demongoize``, which takes an object from MongoDB and converts it to an
+- ``demongoize()``: Takes an object from MongoDB and converts it to an
   instance of your custom type.
-- ``evolve``, which takes an instance of your custom type and converts it to a
+- ``evolve()``: Takes an instance of your custom type and converts it to a
   criteria that MongoDB can use to query the database.
 
 The following example creates a custom field type called ``Point`` and

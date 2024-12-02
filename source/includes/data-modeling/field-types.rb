@@ -107,17 +107,17 @@ post.timeless.save
 # end-timestamps-disable
 
 # start-timestamps-short
-class Band
+class Post
   include Mongoid::Document
   include Mongoid::Timestamps::Short # For c_at and u_at.
 end
 
-class Band
+class Post
   include Mongoid::Document
   include Mongoid::Timestamps::Created::Short # For c_at only.
 end
 
-class Band
+class Post
   include Mongoid::Document
   include Mongoid::Timestamps::Updated::Short # For u_at only.
 end
@@ -221,7 +221,7 @@ profile = Profile.new(color: 'white')
 profile.color
 # Outputs: "white"
 
-# Sets "color" field to 0 in
+# Sets "color" field to 0 in MongoDB
 profile.save!
 # end-phantom-field-type
 
