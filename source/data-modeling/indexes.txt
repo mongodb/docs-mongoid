@@ -1,4 +1,4 @@
-.. _indexes:
+.. _mongoid-work-with-indexes:
 
 =================
 Work With Indexes
