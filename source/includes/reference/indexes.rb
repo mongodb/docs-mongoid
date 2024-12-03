@@ -42,7 +42,7 @@ class Restaurant
     include Mongoid::Document
 
     field :name, type: String
-    embeds_many :addresses
+    field :borough, type: String
 
     index({borough: 1, name: -1}, { name: "compound_index"})
 end
