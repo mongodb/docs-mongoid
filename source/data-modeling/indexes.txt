@@ -1,8 +1,8 @@
-.. _mongoid-work-with-indexes:
+.. _mongoid-optimize-queries-with-indexes:
 
-=================
-Work With Indexes
-=================
+=============================
+Optimize Queries With Indexes
+=============================
 
 .. default-domain:: mongodb
 

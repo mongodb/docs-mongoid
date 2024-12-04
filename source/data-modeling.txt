@@ -18,7 +18,7 @@ Model Your Data
    Field Behaviors </data-modeling/field-behaviors>
    Inheritance </data-modeling/inheritance>
    Document Validation </data-modeling/validation>
-   Work With Indexes </data-modeling/indexes>
+   Optimize Queries With Indexes </data-modeling/indexes>
 
 In this section, you can learn how to model data in {+odm+}.
 
@@ -34,5 +34,5 @@ In this section, you can learn how to model data in {+odm+}.
 - :ref:`mongoid-modeling-validation`: Learn how to create document
   validation rules for your model classes.
 
-- :ref:`mongoid-work-with-indexes`: Learn how to create and manage indexes for
-  your model classes.
+- :ref:`mongoid-optimize-queries-with-indexes`: Learn how to create and manage 
+  indexes for your model classes.
