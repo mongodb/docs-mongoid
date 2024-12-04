@@ -62,7 +62,7 @@ Aliases and Declaring Indexes
 +++++++++++++++++++++++++++++
 
 You can use aliased field names in index definitions. For example, the following
-code creates a field on the ``b`` field, which is an alias of the ``borough``
+code creates an index on the ``b`` field, which is an alias of the ``borough``
 field:
 
 .. literalinclude:: /includes/data-modeling/indexes.rb

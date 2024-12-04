@@ -18,7 +18,7 @@ Model Your Data
    Field Behaviors </data-modeling/field-behaviors>
    Inheritance </data-modeling/inheritance>
    Document Validation </data-modeling/validation>
-   Indexes </data-modeling/indexes>
+   Work With Indexes </data-modeling/indexes>
 
 In this section, you can learn how to model data in {+odm+}.
 
