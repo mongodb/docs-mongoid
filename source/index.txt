@@ -17,6 +17,7 @@ MongoDB in Ruby. To work with {+odm+} from the command line using
    Add {+odm+} to an Existing Application </add-existing>
    Interact with Data </interact-data>
    Model Your Data </data-modeling>
+   Configuration <mongoid-configuration>
    installation-configuration
    tutorials
    schema-configuration
