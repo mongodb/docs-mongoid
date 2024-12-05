@@ -19,7 +19,7 @@ Sharding Configuration
 Overview
 --------
 
-Sharding is a method for distributing data across multiple machines. MongoDB
+Sharding is a way to distribute your data across multiple machines. MongoDB
 uses sharding to support deployments with large data sets and high
 throughput operations. In this guide, you can learn how to configure sharding in
 your {+odm+} application.
@@ -61,16 +61,15 @@ Standard Syntax
 ~~~~~~~~~~~~~~~
 
 The standard syntax follows the format
-of the MongoDB shell's :manual:`shardCollection()
-</reference/method/sh.shardCollection>` method, and allows you to specify keys
-in the following formats:
+of the ``mongosh`` :manual:`shardCollection()
+</reference/method/sh.shardCollection>` method, and allows you to specify the
+following types of shard keys:
 
 - Ranged keys
 - Hashed keys
 - Compound keys
 
-You can also specify collection and sharding options by using the standard
-syntax.
+The standard syntax also allows you to specify collection and sharding options.
 
 The following example creates a shard key on the ``ssn`` field in each of the
 preceding formats:
@@ -156,4 +155,7 @@ errors, check the output of {+odm+} logger configured for your application.
 API Documentation
 -----------------
 
-- `shard_key <{+api-root+}/Shardable/ClassMethods.html#shard_key-instance_method>`__
+To learn more about any of the ``shard_key`` macro discussed in this
+guide, see the `shard_key
+<{+api-root+}/Shardable/ClassMethods.html#shard_key-instance_method>`__ API
+documentation.
