@@ -1,0 +1,22 @@
+.. _mongoid-configuration:
+
+=============
+Configuration
+=============
+
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: ruby framework, odm, setup, config
+
+.. toctree::
+   :caption: Configuration
+
+   Sharding </configuration/sharding>
+
+In this section, you can learn how to configure different options with {+odm+}.
+
+- :ref:`Sharding Configuration <mongoid-sharding-configuration>`: Learn how to configure
+  sharding in your {+odm+} application.
