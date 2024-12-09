@@ -53,7 +53,7 @@ The following example creates a ``Person`` class with a shard key on the
    {+odm+}, see the :ref:`Index Management <mongoid-indexes>` guide.
 
 If a model declares a shard key, {+odm+} expects the sharded collection to
-use that declared key for sharding. When {+odm+} reloads models, it provides
+use the declared key for sharding. When {+odm+} reloads models, it provides
 the shard key along with the ``_id`` field to the ``find`` command to improve query
 performance. If the collection is not sharded with the specified shard key,
 queries might not return the expected results.
@@ -62,7 +62,7 @@ Syntax
 ~~~~~~
 
 You can declare shard keys by using either the full MongoDB
-syntax, or by using a shorthand syntax.
+syntax or by using a shorthand syntax.
 
 The full syntax follows the format
 of the ``mongosh`` :manual:`shardCollection()
