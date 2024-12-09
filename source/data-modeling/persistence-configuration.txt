@@ -249,4 +249,4 @@ mentioned in this guide:
 - `Mongoid.override_client <{+api-root+}/Config.html#override_client-instance_method>`__
 - `Mongoid.override_database <{+api-root+}/Config.html#override_database-instance_method>`__
 - `Model.mongo_client <{+api-root+}/Clients/Options/ClassMethods.html#mongo_client-instance_method>`__
-- `Model.collection <{+api-root+}/Clients/Options/ClassMethods.html#collection-instance_method>
+- `Model.collection <{+api-root+}/Clients/Options/ClassMethods.html#collection-instance_method>`__
