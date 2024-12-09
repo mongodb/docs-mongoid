@@ -75,6 +75,8 @@ Band.with(collection: "artists") do |band_class|
     band_class.delete_all
 end
 
+band = Band.new(name: "Japanese Breakfast")
+
 # Perform operations on tertiary cluster
 band.with(client: :tertiary) do |band_object|
     band_object.save!
@@ -89,13 +91,13 @@ band.with(collection: "artists") do |band_object|
     band_object.save!
 end
   
-# This operation incorrectly updates the collection "bands" which does not have
-# the Scuba band.
-band.update_attribute(likes: 1000)
+# This operation incorrectly updates the collection 
+# "bands" which does not have the Scuba band.
+band.update_attribute(:likes, 1000)
   
 # This will correctly update the Scuba band document.
 band.with(collection: "artists") do |band_object|
-    band_object.update_attribute(likes: 1000)
+    band_object.update_attribute(:likes, 1000)
 end
 # end consistency example
 

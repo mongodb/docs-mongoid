@@ -9,7 +9,7 @@ Persistence Configuration
 .. contents:: On this page
    :local:
    :backlinks: none
-   :depth: 2
+   :depth: 3
    :class: singlecol
 
 .. TODO: add meta, facets
@@ -19,7 +19,7 @@ Overview
 
 In this guide, you can learn about how {+odm+} persists data in your database
 and collections. **Persistence configuration** in {+odm+} refers to the client,
-database, and collection that the documents for a model class are stored in, as
+database, and collection that documents for a model class are stored in, as
 well as any options that may be defined such as write preferences. This guide 
 provides methods and examples that can be used to access and update 
 the persistence configuration of a model class.
@@ -54,14 +54,13 @@ the following code will define the correct pluralization for the model named
   :start-after: start set pluralization
   :end-before: end set pluralization
 
+After this inflection is created, the ``Alumnus`` model class documents will be
+stored in the ``alumni`` collection.
+
 .. note:: Document BSON Structure
 
   When a document is stored in a database, the Ruby object gets serialized
   into BSON and has the following structure:
-
-
-  When a document is stored in the database the ruby object will get serialized into BSON
-  and have a structure like so:
 
   .. literalinclude:: /includes/data-modeling/persistence-configuration.rb
     :language: ruby
@@ -157,7 +156,7 @@ ensure consistency between contexts.
   :start-after: start consistency example
   :end-before: end consistency example
 
-.. important:: ``with`` Block Scope
+.. important:: Using Block Scope
    
    As of {+odm+} 6.0, the ``with`` method must always be called with a block.
    This is because a new client is created in the background with the
@@ -166,7 +165,7 @@ ensure consistency between contexts.
    its resources can be freed.
 
 ``with`` can also apply directly to read and write operations. The following 
-example reads and counts data from the secondary node in a cluster:
+example reads and counts data from the secondary node in an application:
 
 .. literalinclude:: /includes/data-modeling/persistence-configuration.rb
   :language: ruby
@@ -217,9 +216,7 @@ described earlier.
 
 The following code example accesses the client used by the ``Band`` model class.
 It then uses the ``with()`` method on the client to write to the ``music``
-database.
-
-.. TODO: Better understand this example
+database, setting the ``w`` write option to ``0`` to not require write acknowledgement.
 
 .. literalinclude:: /includes/data-modeling/persistence-configuration.rb
   :language: ruby
@@ -235,10 +232,21 @@ the ``with()`` method on a collection to set write preferences.
 
 .. literalinclude:: /includes/data-modeling/persistence-configuration.rb
   :language: ruby
-  :start-after: start client with example
-  :end-before: end client with example 
+  :start-after: start collection with example
+  :end-before: end collection with example 
 
 API Documentation
 -----------------
 
-.. TODO: Add an API documentation section
+Check out the following API documentation for more information on the methods
+mentioned in this guide:
+
+- `#client_name <{+api-root+}/PersistenceContext.html#client_name-instance_method>`__
+- `#database_name <{+api-root+}/Clients/Options/ClassMethods.html#database_name-instance_method>`__
+- `#collection_name <{+api-root+}/Clients/Options/ClassMethods.html#collection_name-instance_method>`__
+- `#store_in <{+api-root+}/Clients/StorageOptions/ClassMethods.html#store_in-instance_method>`__
+- `Model.with() <{+api-root+}/Clients/Options.html#with-instance_method>`__
+- `Mongoid.override_client <{+api-root+}/Config.html#override_client-instance_method>`__
+- `Mongoid.override_database <{+api-root+}/Config.html#override_database-instance_method>`__
+- `Model.mongo_client <{+api-root+}/Clients/Options/ClassMethods.html#mongo_client-instance_method>`__
+- `Model.collection <{+api-root+}/Clients/Options/ClassMethods.html#collection-instance_method>
