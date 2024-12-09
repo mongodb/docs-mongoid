@@ -1,8 +1,8 @@
-.. _persistence:
+.. _mongoid-persistence:
 
-*************************
+=========================
 Persistence Configuration
-*************************
+=========================
 
 .. default-domain:: mongodb
 
@@ -12,257 +12,233 @@ Persistence Configuration
    :depth: 2
    :class: singlecol
 
+.. TODO: add meta, facets
 
-Document Storage
-================
+Overview
+--------
 
-Mongoid by default stores documents in a collection that is the pluralized form of the class name.
-For the following ``Person`` class, the collection the document would get stored in would be named ``people``.
+In this guide, you can learn about how {+odm+} persists data in your database
+and collections. **Persistence configuration** in {+odm+} refers to the client,
+database, and collection that the documents for a model class are stored in, as
+well as any options that may be defined such as write preferences. This guide 
+provides methods and examples that can be used to access and update 
+the persistence configuration of a model class.
 
-.. code-block:: ruby
+Default Collection Name
+-----------------------
 
-   class Person
-     include Mongoid::Document
-   end
+By default, {+odm+} stores documents in a collection whose name is the pluralized
+form of its representative class name. In the following example, for the 
+``Restaurant`` class, the corresponding collection is named ``restaurants``. For
+the ``Person`` class, the corresponding collection is named ``people``.
 
-Model class names cannot end with "s", because it will be considered as the pluralized form of
-the word. For example "Status" would be considered as the plural form of "Statu",
-which will cause a few known problems.
+.. literalinclude:: /includes/data-modeling/persistence-configuration.rb
+  :language: ruby
+  :start-after: start default modeling
+  :end-before: end default modeling
 
-This is a limitation of the ``ActiveSupport::Inflector#classify`` which Mongoid uses to convert
-from filenames and collection names to class names. You can overcome this by specifying a custom
-inflection rule for your model class. For example, the following code will take care of the model
-named ``Status``.
+This pluralization functionality relies on functions in the 
+`ActiveSupport::Inflector <https://api.rubyonrails.org/classes/ActiveSupport/Inflector.html>`__ 
+class. However, sometimes the default rules of pluralization don't always work. For 
+example, if your model class is named ``Alumnus``, the default collection will
+also be named ``alumnus``, even if the grammatically correct collection name is
+``alumni``. Or, perhaps you want your model to be named in a language other than
+English.
 
-.. code-block:: ruby
+You can specify custom inflection rules for your model class. For example,
+the following code will define the correct pluralization for the model named
+``Alumnus``:
 
-   ActiveSupport::Inflector.inflections do |inflect|
-     inflect.singular("status", "status")
-   end
+.. literalinclude:: /includes/data-modeling/persistence-configuration.rb
+  :language: ruby
+  :start-after: start set pluralization
+  :end-before: end set pluralization
 
-The collection for the model's documents can be changed at the class level if you would like
-them persisted elsewhere. You can also change the database and client the model gets persisted
-in from the defaults.
+.. note:: Document BSON Structure
 
-.. code-block:: ruby
+  When a document is stored in a database, the Ruby object gets serialized
+  into BSON and has the following structure:
 
-   class Person
-     include Mongoid::Document
-     store_in collection: "citizens", database: "other", client: "analytics"
-   end
 
-The ``store_in`` macro can also take lambdas - a common case for this is multi-tenant applications.
+  When a document is stored in the database the ruby object will get serialized into BSON
+  and have a structure like so:
 
-.. code-block:: ruby
-
-   class Band
-     include Mongoid::Document
-     store_in database: ->{ Thread.current[:database] }
-   end
-
-When a document is stored in the database the ruby object will get serialized into BSON
-and have a structure like so:
-
-.. code-block:: ruby
-
-   {
-     "_id" : ObjectId("4d3ed089fb60ab534684b7e9"),
-     "title" : "Sir",
-     "name" : {
-       "_id" : ObjectId("4d3ed089fb60ab534684b7ff"),
-       "first_name" : "Durran"
-     },
-     "addresses" : [
-       {
-         "_id" : ObjectId("4d3ed089fb60ab534684b7e0"),
-         "city" : "Berlin",
-         "country" : "Deutschland"
-       }
-     ]
-   }
-
+  .. literalinclude:: /includes/data-modeling/persistence-configuration.rb
+    :language: ruby
+    :start-after: start BSON model
+    :end-before: end BSON model
 
 Persistence Context Attributes
-==============================
+------------------------------
 
-Mongoid provides ``client_name``, ``database_name`` and ``collection_name``
-methods on model classes to determine the client, database and collection names
-used for persistence:
+{+odm+} provides ``client_name``, ``database_name``, and ``collection_name``
+methods on model classes. These methods return the client,
+database, and collection names used when the model is being persisted. The
+following example shows the client, database, and collection name that the 
+``Band`` class documents are being persisted to.
 
-.. code-block:: ruby
+.. literalinclude:: /includes/data-modeling/persistence-configuration.rb
+  :language: ruby
+  :start-after: start persistence context attributes
+  :end-before: end persistence context attributes
 
-  Band.client_name
-  # => :default
-  
-  Band.database_name
-  # => "mongoid"
-  
-  Band.collection_name
-  # => :bands
+Customize Your Persistence Configuration
+----------------------------------------
 
+There may be cases where you want to persist documents to different sources, or
+with different options, from the default. For example, perhaps you want to store
+your model's documents in a collection with a different name than the pluralized
+form of the model class name. {+odm+} provides both per-model and runtime 
+support for customizing your persistence configuration.
 
-Custom
-======
+Setting Model-Level Persistence Options
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-There may be cases where you want to persist documents to different sources from their
-defaults, or with different options from the default. Mongoid provides run-time support
-for this as well as support on a per-model basis.
+You can use the ``store_in`` macro to change the collection, database, or client
+that a model's documents will be persisted in. The following example shows how
+to use the ``store_in`` macro to store documents from the ``Person`` class in
+a collection called ``citizens`` in the ``other`` database within a cluster
+named ``analytics``.
 
+.. literalinclude:: /includes/data-modeling/persistence-configuration.rb
+  :language: ruby
+  :start-after: start store_in example
+  :end-before: end store_in example
 
-Model-Level Persistence Options
--------------------------------
+The ``store_in`` macro can also take lambdas. A common case for this is 
+multi-tenant applications, which is when multiple users share common access
+to an application. The following example stores documents in a database determined
+by the current thread.
 
-On a per-model basis, you can tell it to store in a custom collection name, a different
-database, or a different client. The following example would store the Band class by
-default into a collection named "artists" in the database named "music", with the client "analytics".
+.. literalinclude:: /includes/data-modeling/persistence-configuration.rb
+  :language: ruby
+  :start-after: start store_in lambda example
+  :end-before: end store_in lambda example
 
-Note that the value supplied to the ``client`` option must be configured under ``clients``
-in your mongoid.yml.
+.. _mongoid-set-runtime-persistence-options:
 
-.. code-block:: ruby
+Setting Runtime Persistence Options
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  class Band
-    include Mongoid::Document
-    store_in collection: "artists", database: "music", client: "analytics"
-  end
+You can use the ``with()`` method on a model class or instance to change
+a model's persistence configuration for a group of operations during runtime.
 
-If no ``store_in`` macro would have been provided, Mongoid would store the model in a
-collection named "bands" in the default database in the default client.
+By default, the ``Band`` class will store documents in a collection called
+``bands``. By using the ``with()`` method, you can temporarily perform operations 
+on the ``Band`` model class's documents using a different client, database, or 
+collection.
 
+The following example shows how to perform operations on the ``Band`` model class
+within a different client, database, and collection.
 
-Runtime Persistence Options
----------------------------
+.. literalinclude:: /includes/data-modeling/persistence-configuration.rb
+  :language: ruby
+  :start-after: start with() example
+  :end-before: end with() example
 
-It is possible to change the client, database and collection, as well as
-any of the MongoDB client options, used for persistence for a group of
-operations by using the ``with`` method on a model class or instance:
-
-.. code-block:: ruby
-
-  Band.with(database: "music-non-stop") do |klass|
-    klass.create(...)
-    
-    band = Band.first
-    
-    Band.create(...)
-  end
-  
-  Band.with(collection: "artists") do |klass|
-    klass.delete_all
-    
-    Band.delete_all
-  end
-  
-  band.with(client: :tertiary) do |band_object|
-    band_object.save!
-    
-    band.save!
-  end
-
-The ``with`` method creates a temporary persistence context and a MongoDB
-client to be used for operations in the context. For the duration of the block,
-the persistence context on the model class or instance that ``with`` was
-called on is changed to the temporary persistence context. For convenience,
-the model class or instance that ``with`` was called on is yielded to the
-block.
+The persistence context for the model class or instance that ``with`` is called
+on is changed to the temporary persistence context defined by the arguments
+passed to the ``with()`` method within the block. The model class or instance 
+that ``with`` was called on is yielded to the block.
 
 The temporary persistence context applies to both queries and writes.
 
-Care should be taken when performing persistence operations across different
-persistence contexts. For example, if a document is saved in a temporary
-persistence context, it may not exist in the default persistence context,
-failing subsequent updates:
+Ensuring Consistency in Contexts
+++++++++++++++++++++++++++++++++
 
-.. code-block:: ruby
+If a document is saved in a temporary persistence context, it may not exist
+in the default persistence context. For example, if you insert a ``Band`` model
+document into the ``artists`` collection, the same document will not be inserted
+into the ``bands`` collection. The following example shows how to correctly 
+ensure consistency between contexts.
 
-  band = Band.new(name: "Scuba")
-  band.with(collection: "artists") do |band_object|
-    band_object.save!
-  end
-  
-  # This will not save - updates the collection "bands" which does not have
-  # the Scuba band
-  band.update_attribute(likes: 1000)
-  
-  # This will update the document.
-  band.with(collection: "artists") do |band_object|
-    band_object.update_attribute(likes: 1000)
-  end
+.. literalinclude:: /includes/data-modeling/persistence-configuration.rb
+  :language: ruby
+  :start-after: start consistency example
+  :end-before: end consistency example
 
-As of Mongoid 6.0, the ``with`` method must always be called with a block,
-and the temporary persistence context exists only for the duration of the block.
-This is because a new client is created under the covers with the options
-passed to ``with``. To ensure that this client is closed and its associated
-resources are freed, the scope when this client could be used must be
-well-defined.
+.. important:: ``with`` Block Scope
+   
+   As of {+odm+} 6.0, the ``with`` method must always be called with a block.
+   This is because a new client is created in the background with the
+   corresponding options that are passed to ``with``. The scope when this new
+   client is used must be well-defined so the client can be closed and
+   its resources can be freed.
 
+``with`` can also apply directly to read and write operations. The following 
+example reads and counts data from the secondary node in a cluster:
 
-Global Override
-```````````````
+.. literalinclude:: /includes/data-modeling/persistence-configuration.rb
+  :language: ruby
+  :start-after: start read configuration
+  :end-before: end read configuration
 
-If you want to switch the persistence context for all operations at runtime, but don't want
-to be using with all over your code, Mongoid provides the ability to do this as the client
-and database level globally. The methods for this are ``Mongoid.override_client`` and
-``Mongoid.override_database``. A useful case for this are internationalized applications
-that store information for different locales in different databases or clients, but the
-schema in each remains the same.
+Setting Persistence Contexts Globally
++++++++++++++++++++++++++++++++++++++
 
-.. code-block:: ruby
+{+odm+} provides the ability to globally define the persistence configuration at
+the database and client level. This is helpful if you want to switch the 
+persistence context for all operations at runtime but don't want to use ``with`` 
+multiple times throughout your code.
 
-  class BandsController < ApplicationController
-    before_action :switch_database
-    after_action :reset_database
+To globally define the persistence context in your program, use the
+``{+odm+}.override_client`` and ``{+odm+}.override_database`` methods. For 
+example, if your application stores information for different locales in 
+different databases, but the overall schema remains the same, you
+can use the ``{+odm+}.override_database`` function:
 
-    private
+.. literalinclude:: /includes/data-modeling/persistence-configuration.rb
+  :language: ruby
+  :start-after: start global configuration example
+  :end-before: end global configuration example
 
-    def switch_database
-      I18n.locale = params[:locale] || I18n.default_locale
-      Mongoid.override_database("my_db_name_#{I18n.locale}")
-    end
-
-    def reset_database
-      Mongoid.override_database(nil)
-    end
-  end
-
-In the above example, all persistence operations would be stored in the alternative
-database for all remaining operations on this thread. This is why the after request
-set the override back to nil - it ensures subsequent requests with no local params
-use the default option.
-
-Persistence context applies to both read and write operations. For example,
-secondary reads can be performed as follows:
-
-.. code-block:: ruby
-
-  Band.with(read: {mode: :secondary}) do
-    Band.count
-  end
-
+In this example, all remaining operations on this thread will be performed on 
+an alternative database determined by the locale. Because the ``after_action`` 
+macro sets the override option to ``nil``, subsequent requests with no
+changes in persistence configuration will use the default configuration.
 
 Client and Collection Access
 ----------------------------
 
-If you want to drop down to the driver level to perform operations, you can grab
-the Mongo client or collection from the model or document instance:
+You can access the client or collection of a model or document instance using
+the ``mongo_client`` and ``collection`` class functions:
 
-.. code-block:: ruby
+.. literalinclude:: /includes/data-modeling/persistence-configuration.rb
+  :language: ruby
+  :start-after: start access client collection
+  :end-before: end access client collection
 
-  Band.mongo_client
-  band.mongo_client
-  Band.collection
-  band.collection
+When using these methods, you can also set runtime persistence options using
+``with``, as described in the :ref:`mongoid-set-runtime-persistence-options`
+described earlier.
 
-From here you also have the same runtime persistence options using the client's ``#with``:
+``mongo_client.with``
+~~~~~~~~~~~~~~~~~~~~~
 
-.. code-block:: ruby
+The following code example accesses the client used by the ``Band`` model class.
+It then uses the ``with()`` method on the client to write to the ``music``
+database.
 
-  client = Band.mongo_client.with(write: { w: 0 }, database: "musik")
-  client[:artists].find(...)
+.. TODO: Better understand this example
 
-You can also override the :read or :write options on the collection using the collections ``#with``:
+.. literalinclude:: /includes/data-modeling/persistence-configuration.rb
+  :language: ruby
+  :start-after: start client with example
+  :end-before: end client with example
 
-.. code-block:: ruby
+``collection.with``
+~~~~~~~~~~~~~~~~~~~
 
-  collection_w_0 = Band.collection.with(write: { w: 0 })
-  collection_w_0[:artists].find(...)
+You can override the ``:read`` or ``:write`` options on a collection using the
+``with()`` method on a collection. The following example shows how to use
+the ``with()`` method on a collection to set write preferences.
+
+.. literalinclude:: /includes/data-modeling/persistence-configuration.rb
+  :language: ruby
+  :start-after: start client with example
+  :end-before: end client with example 
+
+API Documentation
+-----------------
+
+.. TODO: Add an API documentation section
