@@ -4,13 +4,18 @@
 Persistence Configuration
 =========================
 
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: code example, customize, config
+
 .. contents:: On this page
    :local:
    :backlinks: none
    :depth: 3
    :class: singlecol
-
-.. TODO: add meta, facets
 
 Overview
 --------
@@ -151,10 +156,10 @@ You can use the ``with()`` method on a model class or instance to change
 a model's persistence configuration for a group of operations during runtime.
 
 The persistence context for the model class or instance that you call ``with()``
-on changes to the temporary persistence context that you define by the arguments
-passed to the ``with()`` method within a block. When you call ``with()`` on a 
-model class or instance, the class or instance is yielded to the block. The 
-temporary persistence context applies to both queries and writes.
+on changes to the defined temporary persistence context within a block. 
+When you call ``with()`` on a model class or instance, the class or instance is 
+yielded to the block. The temporary persistence context applies to both queries 
+and writes.
 
 By default, {+odm+} stores documents for the ``Band`` class in a collection called
 ``bands``. The following code example uses the ``with()`` method to temporarily
