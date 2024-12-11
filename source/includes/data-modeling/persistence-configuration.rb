@@ -47,14 +47,11 @@ end
 # end store_in lambda example
 
 # start persistence context attributes
-Band.client_name
-# => :default
+puts Band.client_name
 
-Band.database_name
-# => "my_bands"
+puts Band.database_name
 
-Band.collection_name
-# => :bands
+puts Band.collection_name
 # end persistence context attributes
 
 # start with() example
@@ -62,6 +59,7 @@ class Band
     include Mongoid::Document
 
     field :name, type: String
+    field :likes, type: Integer
 end
 
 # Creates document in 'bands' collection in 'music-non-stop' database within
@@ -92,7 +90,7 @@ band.with(collection: "artists") do |band_object|
 end
   
 # This operation incorrectly updates the collection 
-# "bands" which does not have the Scuba band.
+# "bands" which does not have the Scuba band document.
 band.update_attribute(:likes, 1000)
   
 # This will correctly update the Scuba band document.

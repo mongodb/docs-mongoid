@@ -33,8 +33,8 @@ In this section, you can learn how to model data in {+odm+}.
 - :ref:`mongoid-field-behaviors`: Learn how to customize the behaviors of fields
   in {+odm+} to meet your application requirements.
 
-- :ref:`mongoid-persistence`: Learn how to view and customize your document
-  storage using {+odm+}.
+- :ref:`mongoid-persistence`: Learn how to use {+odm+} to view and customize 
+  your document storage.
    
 - :ref:`mongoid-modeling-inheritance`: Learn how to implement
   inheritance in your model classes.
