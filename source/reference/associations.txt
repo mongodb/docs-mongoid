@@ -1211,6 +1211,44 @@ that a bundle may contain other bundles or products:
     has_many :items, polymorphic: true
   end
 
+Starting in version 9.0.2, Mongoid allows you to store an arbitrary string in the
+`*_type` attribute. This feature allows the class resolution to be handled at 
+runtime. 
+
+For example: 
+
+.. code-block:: ruby
+
+   class Item
+     include Mongoid::Document
+     belongs_to :unitable, polymorphic: true, type_field_method:
+   :resolve_unitable_type
+     field :unitable_type, type: String
+
+     def resolve_unitable_type(value)
+       case value
+       when "warehouse"
+        Unit
+       when "store"
+        Store
+       else
+         nil
+       end
+     end
+   end  
+
+   unit = Unit.create(name: "Warehouse")
+   item = Item.create(unitable_id: unit.id, unitable_type: "warehouse")
+
+   store = Store.create(name: "Downtown")
+   store_item = Item.create(unitable_id: store.id, unitable_type: "store")
+
+   # Results in
+   # { "_id": ObjectId("..."), "unitable_id": ObjectId("..."), "unitable_type": "warehouse" }
+   # { "_id": ObjectId("..."), "unitable_id": ObjectId("..."), "unitable_type": "store" }
+
+
+
 ``has_and_belongs_to_many`` associations do not support polymorphism.
 
 
