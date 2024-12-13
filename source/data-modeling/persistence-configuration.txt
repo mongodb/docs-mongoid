@@ -23,9 +23,9 @@ Overview
 In this guide, you can learn about how {+odm+} persists data in your database
 and collections. **Persistence configuration** refers to the settings that
 control how {+odm+} stores data in MongoDB. This includes the client,
-database, and collection where documents for a model class are stored in, as
+database, and collection where documents for a model class are stored, as
 well as other configuration options such as read and write preferences. This guide 
-provides methods and examples that can be used to access and update 
+provides methods and examples that you can use to access and update 
 the persistence configuration of a model class.
 
 .. note::
@@ -46,31 +46,22 @@ the ``Person`` class, the corresponding collection is named ``people``.
    :start-after: start default modeling
    :end-before: end default modeling
 
-This pluralization functionality relies on functions in the 
-`ActiveSupport::Inflector <https://api.rubyonrails.org/classes/ActiveSupport/Inflector.html>`__ 
-class. However, sometimes the default rules of pluralization don't always work. For 
-example, if your model class is named ``Alumnus``, the default collection is
-named ``alumnus``, even if the grammatically correct collection name is
-``alumni``. Or, perhaps you want your model to be named in a language other than
-English.
+However, the default rules of pluralization don't always work. For 
+example, suppose your model is named ``Rey``. The plural form of this word in
+Spanish is "reyes", but the default collection name is "reys."
 
-To specify custom inflection rules for your model class, use methods from 
-the ``ActiveSupport::Inflector::Inflections`` class. You can pass the singular and
-plural forms of your class name to the ``plural()`` method to create a new
-pluralization rule. The following example specifies ``"alumni"`` as the plural
-of ``"alumnus"``:
+You can create a new pluralization rule for your model class by calling the
+`ActiveSupport::Inflector::Inflections.plural() <https://api.rubyonrails.org/classes/ActiveSupport/Inflector/Inflections.html#method-i-plural>`__ 
+instance method, passing the singular and plural forms of your class name.
+The following example specifies ``"reyes"`` as the plural of ``"rey"``:
 
 .. literalinclude:: /includes/data-modeling/persistence-configuration.rb
    :language: ruby
    :start-after: start set pluralization
    :end-before: end set pluralization
 
-The preceding code creates a new inflection in the current instance of the
-``ActiveSupport::Inflector`` class. As a result, {+odm+} stores
-``Alumnus`` model class documents in the ``alumni`` collection.
-
-To learn more about inflection methods, see the documentation for
-`Active Support Inflections <https://api.rubyonrails.org/classes/ActiveSupport/Inflector/Inflections.html>`__.
+As a result, {+odm+} stores ``Rey`` model class documents in the ``reyes`` 
+collection.
 
 .. note:: BSON Document Structure
 
@@ -121,19 +112,21 @@ persistence configuration. The following sections describe these options.
 Model-Level Persistence Options
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Perhaps you want to store your model's documents in a collection with a 
+Suppose you want to store your model's documents in a collection with a 
 different name than the pluralized form of the model class name.
-
 You can use the ``store_in`` macro to change the collection, database, or client
 where {+odm+} stores a model's documents. The following example shows how
 to use the ``store_in`` macro to store documents from the ``Person`` class in
 a collection called ``citizens`` in the ``other`` database within a client
-named ``analytics``.
+named ``analytics``:
 
 .. literalinclude:: /includes/data-modeling/persistence-configuration.rb
    :language: ruby
    :start-after: start store_in example
    :end-before: end store_in example
+
+
+.. TODO: Lambdas 
 
 The ``store_in`` macro can also accept a lambda. For example, you might want to 
 use this pattern in a multi-tenant application,
@@ -155,11 +148,20 @@ Runtime Persistence Options
 You can use the ``with()`` method on a model class or instance to change
 a model's persistence configuration for a group of operations during runtime.
 
-The persistence context for the model class or instance that you call ``with()``
-on changes to the defined temporary persistence context within a block. 
-When you call ``with()`` on a model class or instance, the class or instance is 
-yielded to the block. The temporary persistence context applies to both queries 
-and writes.
+Call the ``with()`` method on a model class or instance and pass options 
+that define a persistence context.
+
+The ``with()`` method accepts the following arguments:
+
+.. TODO: Fill this out
+
+- ``options_or_context``: 
+
+- ``options``: 
+
+Then, use a block to define the operations 
+that you want to execute in the specified context. The context that you define
+only exists for the duration of the block.
 
 By default, {+odm+} stores documents for the ``Band`` class in a collection called
 ``bands``. The following code example uses the ``with()`` method to temporarily
@@ -176,53 +178,48 @@ use a different client, database, and collection to perform operations on the
    In the preceding example, you must define the ``tertiary`` cluster under
    ``clients`` in your ``mongoid.yml`` file.
 
-Ensuring Consistency in Contexts
-++++++++++++++++++++++++++++++++
-
-If you save a document in a temporary persistence context, it does not exist
-in the default persistence context if you do not save it there as well. 
-For example, if you insert a ``Band`` model document into the ``artists`` 
-collection, the same document will not be inserted into the ``bands`` collection.
-Ensure that you perform operations on the same persistence context for data
-consistency. The following example uses ``with()`` to insert a document into
-a custom collection and to update that document in the correct collection.
-
-.. literalinclude:: /includes/data-modeling/persistence-configuration.rb
-   :language: ruby
-   :start-after: start consistency example
-   :end-before: end consistency example
-
 .. important:: Block Scope
-   
+
    You must call the ``with()`` method with a block.
    This is because {+odm+} uses the options you pass to the method to create
    a new client in the background. A block defines the scope of this client
    so it can be closed and its resources freed.
 
-You can also perform read and write operations in the context of a ``with()``
-method. The following example uses the ``with()`` method to call ``Band.count``
-on the secondary node of a replica set:
+You can also pass the ``with()`` method configuration options for read or write 
+operations. The configurations apply only to the specified type of operation, 
+regardless of operations inside the block.
+
+The following example uses the ``with()`` method to specify the use of the 
+secondary node for all read operations within the block. Write operations in 
+the block still run on the default context.
 
 .. literalinclude:: /includes/data-modeling/persistence-configuration.rb
    :language: ruby
    :start-after: start read configuration
    :end-before: end read configuration
 
+.. note:: Ensuring Consistency in Contexts
+
+   When you apply an operation to one context, it does not get applied to
+   different contexts. For example, if you insert a ``Band`` model document into 
+   the ``artists`` collection, the same document will not be inserted into the 
+   ``bands`` collection.
+
 Global Persistence Contexts
 +++++++++++++++++++++++++++
 
-In previous examples in this section, you can only change persistence context in
-the scope of a block. {+odm+} can globally define the persistence
-configuration to perform all operations on a particular database or client. 
+In previous examples in this section, you changed persistence context only in
+the scope of a block. You can use {+odm+} to globally define a custom persistence
+context that all operations in your program use.
 This lets you change the persistence context for all operations at runtime
 without repreatedly calling the ``with()`` method.
 
 You can use the following methods to globally define the persistence context
 in your program:
 
-- ``{+odm+}.override_client``: Perform all operations on the specified client.
+- ``{+odm+}.override_client``: {+odm+} performs all operations on the specified client.
 
-- ``{+odm+}.override_database``: Perform all operations on the specified
+- ``{+odm+}.override_database``: {+odm+} performs all operations on the specified
   database.
 
 In the following code example, the application stores information for different
@@ -263,21 +260,21 @@ It then uses the ``with()`` method on the client to write to the ``music``
 database, setting the ``w`` write option to ``0`` to not require write acknowledgement.
 
 .. literalinclude:: /includes/data-modeling/persistence-configuration.rb
-  :language: ruby
-  :start-after: start client with example
-  :end-before: end client with example
+   :language: ruby
+   :start-after: start client with example
+   :end-before: end client with example
 
 ``collection.with``
 ~~~~~~~~~~~~~~~~~~~
 
-You can override the ``:read`` or ``:write`` options on a collection by using the
+You can override the ``:read`` and ``:write`` options on a collection by using the
 ``with()`` method. The following example shows how to use
-the ``with()`` method to set the ``w`` write option to ``0``.
+the ``with()`` method to set the ``w`` write option to ``0``:
 
 .. literalinclude:: /includes/data-modeling/persistence-configuration.rb
-  :language: ruby
-  :start-after: start collection with example
-  :end-before: end collection with example 
+   :language: ruby
+   :start-after: start collection with example
+   :end-before: end collection with example 
 
 API Documentation
 -----------------

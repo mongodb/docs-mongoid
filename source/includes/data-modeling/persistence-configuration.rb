@@ -10,7 +10,7 @@ end
 
 # start set pluralization
 ActiveSupport::Inflector.inflections do |inflect|
-    inflect.plural("alumnus", "alumni")
+    inflect.plural("rey", "reyes")
 end
 # end set pluralization
 
@@ -102,6 +102,10 @@ end
 # start read configuration
 Band.with(read: {mode: :secondary}) do
     Band.count
+
+    # Write operation runs in default 
+    # persistence context
+    Band.create(name: "Metallica")
 end
 # end read configuration
 
