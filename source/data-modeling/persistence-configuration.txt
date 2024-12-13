@@ -125,15 +125,17 @@ named ``analytics``:
    :start-after: start store_in example
    :end-before: end store_in example
 
+The ``store_in`` macro can also accept a lambda function. This is useful if you
+want to define a persistence context with values that cannot be defined by
+using a constant string. 
 
-.. TODO: Lambdas 
+You might want to use this pattern in a multi-tenant application,
+where multiple users share common access to an application. By using
+a lambda, you can define a persistence context based on the current thread so
+that users cannot access each others' data.
 
-The ``store_in`` macro can also accept a lambda. For example, you might want to 
-use this pattern in a multi-tenant application,
-where multiple users share common access to an application. You can use a lambda
-to perform operations on different databases based on the current thread so that
-users cannot access each others' data. The following example stores documents in
-a database determined by the current thread:
+The following example stores documents in a database determined by the 
+current thread:
 
 .. literalinclude:: /includes/data-modeling/persistence-configuration.rb
    :language: ruby
@@ -153,15 +155,14 @@ that define a persistence context.
 
 The ``with()`` method accepts the following arguments:
 
-.. TODO: Fill this out
+- ``options_or_context``: A customizable set of options or a 
+  ``Mongoid::PersistenceContext`` object.
 
-- ``options_or_context``: 
+- ``options``: A customizable set of options.
 
-- ``options``: 
-
-Then, use a block to define the operations 
-that you want to execute in the specified context. The context that you define
-only exists for the duration of the block.
+Then, use a block to define the operations that you want to execute in the 
+specified context. The context that you define only exists for the duration of 
+the block.
 
 By default, {+odm+} stores documents for the ``Band`` class in a collection called
 ``bands``. The following code example uses the ``with()`` method to temporarily
@@ -287,6 +288,7 @@ API documentation:
 - `#collection_name <{+api-root+}/Clients/Options/ClassMethods.html#collection_name-instance_method>`__
 - `#store_in <{+api-root+}/Clients/StorageOptions/ClassMethods.html#store_in-instance_method>`__
 - `Model.with() <{+api-root+}/Clients/Options.html#with-instance_method>`__
+- `Mongoid::PersistenceContext <{+api-root+}/PersistenceContext.html>`__
 - `Mongoid.override_client <{+api-root+}/Config.html#override_client-instance_method>`__
 - `Mongoid.override_database <{+api-root+}/Config.html#override_database-instance_method>`__
 - `Model.mongo_client <{+api-root+}/Clients/Options/ClassMethods.html#mongo_client-instance_method>`__
