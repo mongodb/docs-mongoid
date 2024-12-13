@@ -53,7 +53,7 @@ Spanish is "reyes", but the default collection name is "reys."
 You can create a new pluralization rule for your model class by calling the
 `ActiveSupport::Inflector::Inflections.plural() <https://api.rubyonrails.org/classes/ActiveSupport/Inflector/Inflections.html#method-i-plural>`__ 
 instance method, passing the singular and plural forms of your class name.
-The following example specifies ``"reyes"`` as the plural of ``"rey"``:
+The following example specifies "reyes" as the plural of "rey":
 
 .. literalinclude:: /includes/data-modeling/persistence-configuration.rb
    :language: ruby
@@ -150,9 +150,8 @@ You can use the ``with()`` method on a model class or instance to change
 a model's persistence configuration for a group of operations during runtime.
 
 Call the ``with()`` method on a model class or instance and pass options 
-that define a persistence context.
-
-The ``with()`` method accepts the following arguments:
+that define a persistence context. The ``with()`` method accepts the following 
+arguments:
 
 - ``options_or_context``: A customizable set of options or a 
   ``Mongoid::PersistenceContext`` object.
@@ -212,7 +211,7 @@ In previous examples in this section, you changed persistence context only in
 the scope of a block. You can use {+odm+} to globally define a custom persistence
 context that all operations in your program use.
 This lets you change the persistence context for all operations at runtime
-without repreatedly calling the ``with()`` method.
+without repeatedly calling the ``with()`` method.
 
 You can use the following methods to globally define the persistence context
 in your program:

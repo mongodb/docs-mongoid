@@ -83,22 +83,6 @@ band.with(client: :tertiary) do |band_object|
 end
 # end with() example
 
-# start consistency example
-band = Band.new(name: "Scuba")
-band.with(collection: "artists") do |band_object|
-    band_object.save!
-end
-  
-# This operation incorrectly updates the collection 
-# "bands" which does not have the Scuba band document.
-band.update_attribute(:likes, 1000)
-  
-# This will correctly update the Scuba band document.
-band.with(collection: "artists") do |band_object|
-    band_object.update_attribute(:likes, 1000)
-end
-# end consistency example
-
 # start read configuration
 Band.with(read: {mode: :secondary}) do
     Band.count
