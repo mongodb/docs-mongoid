@@ -160,7 +160,7 @@ The ``with()`` method accepts the following arguments:
 - ``options``: A customizable set of options.
 
 Then, use a block to define the operations that you want to execute in the 
-specified context. The context that you define only exists for the duration of 
+specified context. The context that you define only exists within
 the block.
 
 By default, {+odm+} stores documents for the ``Band`` class in a collection called
