@@ -1211,43 +1211,60 @@ that a bundle may contain other bundles or products:
     has_many :items, polymorphic: true
   end
 
-Starting in version 9.0.2, Mongoid allows you to store an arbitrary string in the
-`*_type` attribute. This feature allows the class resolution to be handled at 
-runtime. 
-
-For example: 
+Starting in version 9.0.2, Mongoid adds support to custom polymorphic types via
+a global registry. You can now specify alternative keys to represent different
+classes, thus decoupling the code from the data. For example:
 
 .. code-block:: ruby
 
-   class Item
-     include Mongoid::Document
-     belongs_to :unitable, polymorphic: true, type_field_method:
-   :resolve_unitable_type
-     field :unitable_type, type: String
+  class Department
+    include Mongoid::Document
+    identify_as 'dept'
+    has_many :managers, as: :unit
+  end
 
-     def resolve_unitable_type(value)
-       case value
-       when "warehouse"
-        Unit
-       when "store"
-        Store
-       else
-         nil
-       end
-     end
-   end  
+The ``identify_as 'dept'`` directive says that this class should be identified by
+the string "dept" in the database. You can specify multiple aliases, too (e.g. 
+``entify_as 'dept', 'div', 'agency'``), in which case the first key is the "default",
+and the others are only used for looking up records. This lets you refactor your 
+code without breaking the associations in your data. 
 
-   unit = Unit.create(name: "Warehouse")
-   item = Item.create(unitable_id: unit.id, unitable_type: "warehouse")
+Note that these aliases are global; the keys you specify must be unique across your
+entire code base. However, it is possible to register alternative resolvers, which
+must be used for different subsets of your models. In this case, the keys must
+only be unique for each resolver. For example:
 
-   store = Store.create(name: "Downtown")
-   store_item = Item.create(unitable_id: store.id, unitable_type: "store")
+.. code-block:: ruby
 
-   # Results in
-   # { "_id": ObjectId("..."), "unitable_id": ObjectId("..."), "unitable_type": "warehouse" }
-   # { "_id": ObjectId("..."), "unitable_id": ObjectId("..."), "unitable_type": "store" }
+  Mongoid::ModelResolver.register_resolver Mongoid::ModelResolver.new, :eng
+  Mongoid::ModelResolver.register_resolver Mongoid::ModelResolver.new, :purch
 
+  module Engineering
+    class Department
+      include Mongoid::Document
+      identify_as 'dept', resolver: :eng
+    end
 
+    class Manager
+      include Mongoid::Document
+      belongs_to :unit, polymorphic: :eng
+    end
+  end
+
+  module Purchasing
+    class Department
+      include Mongoid::Document
+      identify_as 'dept', resolver: :purch
+    end
+
+    class Manager
+      include Mongoid::Document
+      belongs_to :unit, polymorphic: :purch
+    end
+  end
+
+Both ``Engineering::Department`` and ``Purchasing::Department`` are aliased as 
+``"dept"``, but use their own resolver, so there is no conflict.
 
 ``has_and_belongs_to_many`` associations do not support polymorphism.
 
