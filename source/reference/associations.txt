@@ -1211,7 +1211,7 @@ that a bundle may contain other bundles or products:
     has_many :items, polymorphic: true
   end
 
-Starting in version 9.0.2, Mongoid adds support to custom polymorphic types through
+Starting in version 9.0.2, Mongoid adds support for custom polymorphic types through
 a global registry. You can specify alternative keys to represent different
 classes, thus decoupling the code from the data. The following example specifies
 the string ``"dept"`` as an alternate key for the ``Department`` class:
@@ -1224,14 +1224,14 @@ the string ``"dept"`` as an alternate key for the ``Department`` class:
     has_many :managers, as: :unit
   end
 
-The ``identify_as 'dept'`` directive instructs Mongoid to store this class in the
-database as the string ``"dept"``. You can also specify multiple aliases. For 
-example, you can specify the option as: ``identify_as 'dept', 'div', 'agency'``,
-in which case the first key is the "default", and the others are used only for 
-looking up records. This lets you refactor your code without breaking the associations
-in your data. 
+In the preceding example, the ``identify_as 'dept'`` directive instructs Mongoid
+to store this class in the database as the string ``"dept"``. You can also specify
+multiple aliases. For example, you can specify the option as: 
+``identify_as 'dept', 'div', 'agency'``, in which case the first key is the "default",
+and the others are used only for looking up records. This lets you refactor your 
+code without breaking the associations in your data. 
 
-These aliases are global. The keys you specify must be unique across your
+Polymorphic type aliases are global. The keys you specify must be unique across your
 entire code base. However, it is possible to register alternative resolvers, which
 must be used for different subsets of your models. In this case, the keys must
 only be unique for each resolver. The following example shows how to register
