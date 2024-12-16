@@ -1233,7 +1233,7 @@ code without breaking the associations in your data.
 
 Polymorphic type aliases are global. The keys you specify must be unique across your
 entire code base. However, it is possible to register alternative resolvers, which
-must be used for different subsets of your models. In this case, the keys must
+may be used for different subsets of your models. In this case, the keys must
 only be unique for each resolver. The following example shows how to register
 alternate resolvers: 
 
