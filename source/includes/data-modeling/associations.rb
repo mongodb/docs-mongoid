@@ -52,7 +52,7 @@ end
 
 # start-has-many-any
 band = Band.first
-band.members.any? { |member| member.instrument == 'piano' }
+band.members.any?
 # end-has-many-any
 
 # start-has-many-any-filter
@@ -92,7 +92,7 @@ end
 # end-belongs-to
 
 # start-belongs-to-optional
-class Studio
+class Members
   include Mongoid::Document
 
   belongs_to :band, optional: true
@@ -273,12 +273,6 @@ tours = band.tours.where(year: {'$gte' => 2000})
 # end-embedded-matching
 
 # start-embedded-omit-id
-class Band
-  include Mongoid::Document
-  
-  embeds_many :albums
-end
-
 class Album
   include Mongoid::Document
   field :name, type: String

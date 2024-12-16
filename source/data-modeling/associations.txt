@@ -81,8 +81,8 @@ example creates a ``Band`` class with a ``has_many`` relationship to a
 
 .. literalinclude:: /includes/data-modeling/associations.rb
    :language: ruby
-    :start-after: # start-has-many
-    :end-before: # end-has-many
+   :start-after: # start-has-many
+   :end-before: # end-has-many
 
 When you declare a ``has_many`` association, the child class must also use the
 ``belongs_to`` association that references the parent class. The following
@@ -105,7 +105,7 @@ class is present in your parent class:
    :end-before: # end-has-many-validation
    :emphasize-lines: 6
 
-You can use the ``any?`` method on an association to determine if the
+You can use the ``any?`` method on a ``has_many`` association to determine if the
 association contains any documents. Calling the ``any?`` method allows you to
 determine this without retrieving the entire set of documents from the database. 
 
@@ -445,8 +445,8 @@ Omit _id Fields
 
 By default, {+odm+} adds an ``_id`` field to embedded documents. You can omit
 this field from embedded documents by explicitly specifying the ``_id`` field in
-your model and omitting the default value. The following example prompts {+odm+}
-to not automatically add an ``_id`` field to the ``Albums`` class:
+your model and omitting the default value. The following example instructs {+odm+}
+not to add an ``_id`` field to the ``Albums`` class:
 
 .. literalinclude:: /includes/data-modeling/associations.rb
    :language: ruby
@@ -454,8 +454,8 @@ to not automatically add an ``_id`` field to the ``Albums`` class:
    :end-before: # end-embedded-omit-id
    :emphasize-lines: 4
 
-In the preceding ``Albums`` class, the ``_id`` field is not automatically added,
-and without a default value, no {+odm+} does not store the value in the database
+In the preceding ``Albums`` class, the ``_id`` field is not automatically added.
+Without a default value, {+odm+} does not store the value in the database
 unless it is provided.
 
 Delete Embedded Associations
