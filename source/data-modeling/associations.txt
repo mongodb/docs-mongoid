@@ -45,7 +45,7 @@ You can use the ``has_one`` macro to declare that a class model contains a child
 that is stored in a separate collection. The following example creates a
 ``Band`` class with a ``has_one`` relationship to a ``Studio`` class:
 
-.. literalinclude:: /includes/data-relationships/associations.rb
+.. literalinclude:: /includes/data-modeling/associations.rb
    :language: ruby
    :start-after: # start-has-one
    :end-before: # end-has-one
@@ -54,7 +54,7 @@ When you declare a ``has_one`` association, the child class must also use the
 ``belongs_to`` association that references the parent class. The following
 example shows the ``Studio`` class referenced in the preceding ``Band`` class:
 
-.. literalinclude:: /includes/data-relationships/associations.rb
+.. literalinclude:: /includes/data-modeling/associations.rb
    :language: ruby
    :start-after: # start-has-one-child
    :end-before: # end-has-one-child
@@ -65,7 +65,7 @@ To learn more about the ``belongs_to`` macro, see the :ref:`Belongs To
 You can use :ref:`validations <mongoid-validation>` to ensure that the child
 class is present in your parent class:
 
-.. literalinclude:: /includes/data-relationships/associations.rb
+.. literalinclude:: /includes/data-modeling/associations.rb
    :language: ruby
    :start-after: # start-has-one-validation
    :end-before: # end-has-one-validation
@@ -79,7 +79,7 @@ multiple child documents that are stored in a separate collection. The following
 example creates a ``Band`` class with a ``has_many`` relationship to a
 ``Members`` class:
 
-.. literalinclude:: /includes/data-relationships/associations.rb
+.. literalinclude:: /includes/data-modeling/associations.rb
    :language: ruby
     :start-after: # start-has-many
     :end-before: # end-has-many
@@ -88,7 +88,7 @@ When you declare a ``has_many`` association, the child class must also use the
 ``belongs_to`` association that references the parent class. The following
 example shows the ``Member`` class referenced in the preceding ``Band`` class:
 
-.. literalinclude:: /includes/data-relationships/associations.rb
+.. literalinclude:: /includes/data-modeling/associations.rb
    :language: ruby
    :start-after: # start-has-many-child
    :end-before: # end-has-many-child
@@ -99,7 +99,7 @@ To learn more about the ``belongs_to`` macro, see the :ref:`Belongs To
 You can use :ref:`validations <mongoid-validation>` to ensure that the child
 class is present in your parent class:
 
-.. literalinclude:: /includes/data-relationships/associations.rb
+.. literalinclude:: /includes/data-modeling/associations.rb
    :language: ruby
    :start-after: # start-has-many-validation
    :end-before: # end-has-many-validation
@@ -112,7 +112,7 @@ determine this without retrieving the entire set of documents from the database.
 The following example uses the ``any?`` method to determine if documents in the
 ``Band`` class contain any ``Members`` documents:
 
-.. literalinclude:: /includes/data-relationships/associations.rb
+.. literalinclude:: /includes/data-modeling/associations.rb
    :language: ruby
    :start-after: # start-has-many-any
    :end-before: # end-has-many-any
@@ -120,7 +120,7 @@ The following example uses the ``any?`` method to determine if documents in the
 You can also use the ``any?`` method with a filter to find documents that match
 a specified criteria, as shown in the following example:
 
-.. literalinclude:: /includes/data-relationships/associations.rb
+.. literalinclude:: /includes/data-modeling/associations.rb
    :language: ruby
    :start-after: # start-has-many-any-filter
    :end-before: # end-has-many-any-filter
@@ -128,7 +128,7 @@ a specified criteria, as shown in the following example:
 You can supply a class name to the ``any?`` method to filter the results by the
 name of the class. This is useful for polymorphic associations:
 
-.. literalinclude:: /includes/data-relationships/associations.rb
+.. literalinclude:: /includes/data-modeling/associations.rb
    :language: ruby
    :start-after: # start-has-many-any-class
    :end-before: # end-has-many-any-class
@@ -148,7 +148,7 @@ arguments.
 The following example uses the ``exists?`` method to determine if there are any persisted
 ``Members`` documents in the ``Band`` class:
 
-.. literalinclude:: /includes/data-relationships/associations.rb
+.. literalinclude:: /includes/data-modeling/associations.rb
    :language: ruby
    :start-after: # start-has-many-exists
    :end-before: # end-has-many-exists
@@ -163,7 +163,7 @@ class. By default, the ``_id`` field of the parent class is stored in the child
 class. The following example creates a ``Members`` class with a ``belongs_to``
 association to a ``Band`` class:
 
-.. literalinclude:: /includes/data-relationships/associations.rb
+.. literalinclude:: /includes/data-modeling/associations.rb
    :language: ruby
    :start-after: # start-belongs-to
    :end-before: # end-belongs-to
@@ -172,7 +172,7 @@ You can allow {+odm+} to persist documents to the database without storing the
 ``_id`` of the associated parent class by setting the ``optional`` option to
 ``true``, as shown in the following example:
 
-.. literalinclude:: /includes/data-relationships/associations.rb
+.. literalinclude:: /includes/data-modeling/associations.rb
    :language: ruby
    :start-after: # start-belongs-to-optional
    :end-before: # end-belongs-to-optional
@@ -191,7 +191,7 @@ class is not accessible from the parent. In the following example, the ``Band``
 class cannot access the ``Members`` class, but the ``Members`` class can access the
 ``Band`` class:
 
-.. literalinclude:: /includes/data-relationships/associations.rb
+.. literalinclude:: /includes/data-modeling/associations.rb
    :language: ruby
    :start-after: # start-belongs-to-one-way
    :end-before: # end-belongs-to-one-way
@@ -200,7 +200,7 @@ For clarity, you can optionally set the ``inverse_of`` option to ``nil`` to
 indicate that the parent class does not contain a ``has_one`` or ``has_many``
 association to the child class, as shown in the following example:
 
-.. literalinclude:: /includes/data-relationships/associations.rb
+.. literalinclude:: /includes/data-modeling/associations.rb
    :language: ruby
    :start-after: # start-belongs-to-inverse
    :end-before: # end-belongs-to-inverse
@@ -216,7 +216,7 @@ class. The following example creates a ``Band`` class with a
 reference multiple ``Members`` documents, and a ``Members`` document can
 reference multipls ``Band`` documents.
 
-.. literalinclude:: /includes/data-relationships/associations.rb
+.. literalinclude:: /includes/data-modeling/associations.rb
    :language: ruby
    :start-after: # start-has-and-belongs-to-many
    :end-before: # end-has-and-belongs-to-many
@@ -227,7 +227,7 @@ store a list of the associated document's ID values. You can set the
 only one of the model instances. The following example prompts {+odm+} to store
 the associated document's ID values in only the ``Band`` class:
 
-.. literalinclude:: /includes/data-relationships/associations.rb
+.. literalinclude:: /includes/data-modeling/associations.rb
    :language: ruby
    :start-after: # start-has-and-belongs-to-many-inverse
    :end-before: # end-has-and-belongs-to-many-inverse
@@ -254,7 +254,7 @@ associated to the one you are querying.
 
 For example, consider the following ``Band`` and ``Tour`` classes:
 
-.. literalinclude:: /includes/data-relationships/associations.rb
+.. literalinclude:: /includes/data-modeling/associations.rb
    :language: ruby
    :start-after: # start-query-models
    :end-before: # end-query-models
@@ -264,7 +264,7 @@ The following example queries the ``Tour`` class for documents that have a
 documents. It then queries the ``Band`` class for documents that have those
 ``band_id`` values.
 
-.. literalinclude:: /includes/data-relationships/associations.rb
+.. literalinclude:: /includes/data-modeling/associations.rb
    :language: ruby
    :start-after: # start-association-query
    :end-before: # end-association-query
@@ -292,7 +292,7 @@ class type, use the ``embeds_one`` macro in the parent class and the ``embedded_
 macro in the embedded class. The following example creates a ``Band`` class with
 an embedded ``Label`` class:
 
-.. literalinclude:: /includes/data-relationships/associations.rb
+.. literalinclude:: /includes/data-modeling/associations.rb
    :language: ruby
    :start-after: # start-embed-one
    :end-before: # end-embed-one
@@ -302,7 +302,7 @@ parent document as a field with the same name as the embedded class. The
 preceding ``Label`` documents are stored in the ``Band`` document as shown in
 the following example:
 
-.. literalinclude:: /includes/data-relationships/associations.rb
+.. literalinclude:: /includes/data-modeling/associations.rb
    :language: ruby
    :start-after: # start-embed-one-stored
    :end-before: # end-embed-one-stored
@@ -310,7 +310,7 @@ the following example:
 You can store the embedded document with a different name by using the
 ``store_as`` option, as shown in the following example:
 
-.. literalinclude:: /includes/data-relationships/associations.rb
+.. literalinclude:: /includes/data-modeling/associations.rb
    :language: ruby
    :start-after: # start-embed-store-as
    :end-before: # end-embed-store-as
@@ -323,7 +323,7 @@ different class type, use the ``embeds_many`` macro in the parent class and the
 ``embedded_in`` macro in the embedded class. The following example creates a
 ``Band`` class with multiple embedded ``Album`` type documents:
 
-.. literalinclude:: /includes/data-relationships/associations.rb
+.. literalinclude:: /includes/data-modeling/associations.rb
    :language: ruby
    :start-after: # start-embed-many
    :end-before: # end-embed-many
@@ -333,7 +333,7 @@ parent document as an array field with the same name as the embedded class. The
 preceding ``Album`` documents are stored in the ``Band`` document as shown in
 the following example:
 
-.. literalinclude:: /includes/data-relationships/associations.rb
+.. literalinclude:: /includes/data-modeling/associations.rb
    :language: ruby
    :start-after: # start-embed-many-stored
    :end-before: # end-embed-many-stored
@@ -341,7 +341,7 @@ the following example:
 You can store the embedded document with a different name by using the
 ``store_as`` option, as shown in the following example:
 
-.. literalinclude:: /includes/data-relationships/associations.rb
+.. literalinclude:: /includes/data-modeling/associations.rb
    :language: ruby
    :start-after: # start-embed-many-store-as
    :end-before: # end-embed-many-store-as
@@ -356,7 +356,7 @@ a ``parent_*`` method and a ``child_*`` method, where ``*`` represents the name
 of the class. The following example creates a ``Band`` class that recursively
 embeds multiple other ``Band`` documents to represent multiple band names:
 
-.. literalinclude:: /includes/data-relationships/associations.rb
+.. literalinclude:: /includes/data-modeling/associations.rb
    :language: ruby
    :start-after: # start-recursive-embed
    :end-before: # end-recursive-embed
@@ -364,7 +364,7 @@ embeds multiple other ``Band`` documents to represent multiple band names:
 You can access the parent and child documents through the ``parent_band`` and
 ``child_band`` methods, as shown in the following example:
 
-.. literalinclude:: /includes/data-relationships/associations.rb
+.. literalinclude:: /includes/data-modeling/associations.rb
    :language: ruby
    :start-after: # start-recursive-embed-access
    :end-before: # end-recursive-embed-access
@@ -379,7 +379,7 @@ The following example uses dot notation to query ``Tour`` type documents that
 are embedded in a ``Band`` class. The query returns documents that have a
 ``tours.year`` value of ``2000`` or greater:
 
-.. literalinclude:: /includes/data-relationships/associations.rb
+.. literalinclude:: /includes/data-modeling/associations.rb
    :language: ruby
    :start-after: # start-embedded-query
    :end-before: # end-embedded-query
@@ -388,7 +388,7 @@ You can use the ``pluck()`` projection method to retrieve embedded documents
 without retrieving their associated parent documents, as shown in the following
 example:
 
-.. literalinclude:: /includes/data-relationships/associations.rb
+.. literalinclude:: /includes/data-modeling/associations.rb
    :language: ruby
    :start-after: # start-embedded-query-pluck
    :end-before: # end-embedded-query-pluck
@@ -412,7 +412,7 @@ The following query operators are supported with embedded matching:
 The following example queries the embedded ``tours`` field of a loaded ``Band``
 document by using the ``$gte`` comparison operator:
 
-.. literalinclude:: /includes/data-relationships/associations.rb
+.. literalinclude:: /includes/data-modeling/associations.rb
    :language: ruby
    :start-after: # start-embedded-matching
    :end-before: # end-embedded-matching
@@ -448,7 +448,7 @@ this field from embedded documents by explicitly specifying the ``_id`` field in
 your model and omitting the default value. The following example prompts {+odm+}
 to not automatically add an ``_id`` field to the ``Albums`` class:
 
-.. literalinclude:: /includes/data-relationships/associations.rb
+.. literalinclude:: /includes/data-modeling/associations.rb
    :language: ruby
    :start-after: # start-embedded-omit-id
    :end-before: # end-embedded-omit-id
@@ -474,7 +474,7 @@ association from the parent document. The ``clear()`` method does not run any
 ``destroy`` callbacks. The following example uses the ``clear()``
 method to remove all embedded associations from the ``Band`` class.
 
-.. literalinclude:: /includes/data-relationships/associations.rb
+.. literalinclude:: /includes/data-modeling/associations.rb
    :language: ruby
    :start-after: # start-embedded-clear
    :end-before: # end-embedded-clear
@@ -487,7 +487,7 @@ The ``delete_all()`` method does not run any ``destroy`` callbacks.
 The following example uses the ``delete_all()`` method to remove all embedded
 ``Album`` documents from the ``Band`` class:
 
-.. literalinclude:: /includes/data-relationships/associations.rb
+.. literalinclude:: /includes/data-modeling/associations.rb
    :language: ruby
    :start-after: # start-embedded-delete-all
    :end-before: # end-embedded-delete-all
@@ -498,7 +498,7 @@ embedded association. It also runs any ``destroy`` callbacks that are defined on
 the associated documents. The following example uses the ``destroy_all()``
 method to remove all embedded ``Album`` documents from the ``Band`` class:
 
-.. literalinclude:: /includes/data-relationships/associations.rb
+.. literalinclude:: /includes/data-modeling/associations.rb
    :language: ruby
    :start-after: # start-embedded-destroy-all
    :end-before: # end-embedded-destroy-all
