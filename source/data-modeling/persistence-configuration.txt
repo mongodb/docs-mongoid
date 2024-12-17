@@ -52,7 +52,7 @@ Spanish is "reyes", but the default collection name is "reys."
 
 You can create a new pluralization rule for your model class by calling the
 `ActiveSupport::Inflector::Inflections.plural() <https://api.rubyonrails.org/classes/ActiveSupport/Inflector/Inflections.html#method-i-plural>`__ 
-instance method, passing the singular and plural forms of your class name.
+instance method and passing the singular and plural forms of your class name.
 The following example specifies "reyes" as the plural of "rey":
 
 .. literalinclude:: /includes/data-modeling/persistence-configuration.rb
@@ -159,8 +159,8 @@ arguments:
 - ``options``: A customizable set of options.
 
 Then, use a block to define the operations that you want to execute in the 
-specified context. The context that you define only exists within
-the block.
+specified context. The context that you define only exists while the code
+in the block runs.
 
 By default, {+odm+} stores documents for the ``Band`` class in a collection called
 ``bands``. The following code example uses the ``with()`` method to temporarily
@@ -185,8 +185,7 @@ use a different client, database, and collection to perform operations on the
    so it can be closed and its resources freed.
 
 You can also pass the ``with()`` method configuration options for read or write 
-operations. The configurations apply only to the specified type of operation, 
-regardless of operations inside the block.
+operations. The configurations apply only to the specified type of operation.
 
 The following example uses the ``with()`` method to specify the use of the 
 secondary node for all read operations within the block. Write operations in 
@@ -199,8 +198,9 @@ the block still run on the default context.
 
 .. note:: Ensuring Consistency in Contexts
 
-   When you apply an operation to one context, it does not get applied to
-   different contexts. For example, if you insert a ``Band`` model document into 
+   When you perform an operation in one context, {+odm+} doesn't automatically
+   perform the same operation in different contexts.
+   For example, if you insert a ``Band`` model document into 
    the ``artists`` collection, the same document will not be inserted into the 
    ``bands`` collection.
 
