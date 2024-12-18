@@ -87,9 +87,9 @@ end
 Band.with(read: {mode: :secondary}) do
   Band.count
 
-  # Write operation runs in new
-  # persistence context, but is not
-  # affected by the read preference.
+  # This write operation runs in the 
+  # new persistence context, but is 
+  # not affected by the read preference.
   Band.create(name: "Metallica")
 end
 # end read configuration

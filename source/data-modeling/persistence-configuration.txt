@@ -48,7 +48,7 @@ the ``Person`` class, the corresponding collection is named ``people``.
 
 However, the default rules of pluralization don't always work. For 
 example, suppose your model is named ``Rey``. The plural form of this word in
-Spanish is "reyes", but the default collection name is "reys."
+Spanish is "reyes," but the default collection name is "reys."
 
 You can create a new pluralization rule for your model class by calling the
 `ActiveSupport::Inflector::Inflections.plural() <https://api.rubyonrails.org/classes/ActiveSupport/Inflector/Inflections.html#method-i-plural>`__ 
@@ -130,7 +130,7 @@ want to define a persistence context with values that cannot use a constant stri
 
 You might want to use this pattern in a multi-tenant application,
 where multiple users share common access to an application. By using
-a lambda, you can define a persistence context based on information local
+a lambda, you can define a persistence context based on information that is local
 to the current thread so that users cannot access each others' data.
 
 The following example stores documents in a database determined by a
