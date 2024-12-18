@@ -54,12 +54,12 @@ puts Band.database_name
 puts Band.collection_name
 # end persistence context attributes
 
-# start with() example
+# start with example
 class Band
-    include Mongoid::Document
+  include Mongoid::Document
 
-    field :name, type: String
-    field :likes, type: Integer
+  field :name, type: String
+  field :likes, type: Integer
 end
 
 # Creates document in 'bands' collection in 'music-non-stop' database within
@@ -81,14 +81,15 @@ band.with(client: :tertiary) do |band_object|
     
     band.save!
 end
-# end with() example
+# end with example
 
 # start read configuration
 Band.with(read: {mode: :secondary}) do
     Band.count
 
-    # Write operation runs in default 
-    # persistence context
+    # Write operation runs in new
+    # persistence context, but is not
+    # affected by the read preference.
     Band.create(name: "Metallica")
 end
 # end read configuration
@@ -120,11 +121,13 @@ band.collection
 # end access client collection
 
 # start client with example
-client = Band.mongo_client.with(write: { w: 0 }, database: "music")
-client[:artists].find(...)
+Band.mongo_client.with(write: { w: 0 }, database: "music") do |client|
+    client[:artists].find(...)
+end
 # end client with example
 
 # start collection with example
-collection_w_0 = Band.collection.with(write: { w: 0 })
-collection_w_0[:artists].find(...)
+Band.collection.with(write: { w: 0 }) do |collection|
+    collection[:artists].find(...)
+end
 # end collection with example

@@ -130,11 +130,11 @@ want to define a persistence context with values that cannot use a constant stri
 
 You might want to use this pattern in a multi-tenant application,
 where multiple users share common access to an application. By using
-a lambda, you can define a persistence context based on the current thread so
-that users cannot access each others' data.
+a lambda, you can define a persistence context based on information local
+to the current thread so that users cannot access each others' data.
 
-The following example stores documents in a database determined by the 
-current thread:
+The following example stores documents in a database determined by a
+thread-local variable:
 
 .. literalinclude:: /includes/data-modeling/persistence-configuration.rb
    :language: ruby
@@ -146,31 +146,32 @@ current thread:
 Runtime Persistence Options
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can use the ``with()`` method on a model class or instance to change
+You can use the ``with`` method on a model class or instance to change
 a model's persistence configuration for a group of operations during runtime.
 
-Call the ``with()`` method on a model class or instance and pass options 
-that define a persistence context. The ``with()`` method accepts the following 
-arguments:
+Call the ``with`` method on a model class or instance and pass options 
+that define a persistence context. You can call the ``with`` method in two ways:
 
-- ``options_or_context``: A customizable set of options or a 
-  ``Mongoid::PersistenceContext`` object.
+- ``with(context, options)``: ``context`` is an instance of 
+  ``Mongoid::PersistenceContext`` and ``options`` is a Hash that represents a
+  customizable set of options.
 
-- ``options``: A customizable set of options.
+- ``with(options)``: ``options`` is a Hash that represents a
+  customizable set of options.
 
 Then, use a block to define the operations that you want to execute in the 
 specified context. The context that you define only exists while the code
 in the block runs.
 
 By default, {+odm+} stores documents for the ``Band`` class in a collection called
-``bands``. The following code example uses the ``with()`` method to temporarily
+``bands``. The following code example uses the ``with`` method to temporarily
 use a different client, database, and collection to perform operations on the 
 ``Band`` class's documents:
 
 .. literalinclude:: /includes/data-modeling/persistence-configuration.rb
    :language: ruby
-   :start-after: start with() example
-   :end-before: end with() example
+   :start-after: start with example
+   :end-before: end with example
 
 .. note:: Define Clients
 
@@ -179,17 +180,16 @@ use a different client, database, and collection to perform operations on the
 
 .. important:: Block Scope
 
-   You must call the ``with()`` method with a block.
+   You must call the ``with`` method with a block.
    This is because {+odm+} uses the options you pass to the method to create
    a new client in the background. A block defines the scope of this client
    so it can be closed and its resources freed.
 
-You can also pass the ``with()`` method configuration options for read or write 
+You can also pass the ``with`` method configuration options for read or write 
 operations. The configurations apply only to the specified type of operation.
 
-The following example uses the ``with()`` method to specify the use of the 
-secondary node for all read operations within the block. Write operations in 
-the block still run on the default context.
+The following example uses the ``with`` method to specify the use of the 
+secondary node for all read operations within the block.
 
 .. literalinclude:: /includes/data-modeling/persistence-configuration.rb
    :language: ruby
@@ -211,7 +211,7 @@ In previous examples in this section, you changed persistence context only in
 the scope of a block. You can use {+odm+} to globally define a custom persistence
 context that all operations in your program use.
 This lets you change the persistence context for all operations at runtime
-without repeatedly calling the ``with()`` method.
+without repeatedly calling the ``with`` method.
 
 You can use the following methods to globally define the persistence context
 in your program:
@@ -223,7 +223,7 @@ in your program:
 
 In the following code example, the application stores information for different
 locales in different databases. The code shows how to use the 
-``{+odm+}.override_database()`` method to globally set the persistence
+``{+odm+}.override_database`` method to globally set the persistence
 context based on the locale:
 
 .. literalinclude:: /includes/data-modeling/persistence-configuration.rb
@@ -240,7 +240,7 @@ Client and Collection Access
 ----------------------------
 
 You can access the client or collection of a model or document instance by using
-the ``mongo_client()`` and ``collection()`` class methods:
+the ``mongo_client`` and ``collection`` class methods:
 
 .. literalinclude:: /includes/data-modeling/persistence-configuration.rb
    :language: ruby
@@ -248,14 +248,14 @@ the ``mongo_client()`` and ``collection()`` class methods:
    :end-before: end access client collection
 
 When using these methods, you can also set runtime persistence options by calling
-the ``with()`` method, similar to examples in the :ref:`mongoid-set-runtime-persistence-options`
+the ``with`` method, similar to examples in the :ref:`mongoid-set-runtime-persistence-options`
 section.
 
 ``mongo_client.with``
 ~~~~~~~~~~~~~~~~~~~~~
 
 The following code example accesses the client used by the ``Band`` model class.
-It then uses the ``with()`` method on the client to write to the ``music``
+It then uses the ``with`` method on the client to write to the ``music``
 database, setting the ``w`` write option to ``0`` to not require write acknowledgement.
 
 .. literalinclude:: /includes/data-modeling/persistence-configuration.rb
@@ -267,8 +267,8 @@ database, setting the ``w`` write option to ``0`` to not require write acknowled
 ~~~~~~~~~~~~~~~~~~~
 
 You can override the ``:read`` and ``:write`` options on a collection by using the
-``with()`` method. The following example shows how to use
-the ``with()`` method to set the ``w`` write option to ``0``:
+``with`` method. The following example shows how to use
+the ``with`` method to set the ``w`` write option to ``0``:
 
 .. literalinclude:: /includes/data-modeling/persistence-configuration.rb
    :language: ruby
@@ -285,7 +285,7 @@ API documentation:
 - `#database_name <{+api-root+}/Clients/Options/ClassMethods.html#database_name-instance_method>`__
 - `#collection_name <{+api-root+}/Clients/Options/ClassMethods.html#collection_name-instance_method>`__
 - `#store_in <{+api-root+}/Clients/StorageOptions/ClassMethods.html#store_in-instance_method>`__
-- `Model.with() <{+api-root+}/Clients/Options.html#with-instance_method>`__
+- `Model.with <{+api-root+}/Clients/Options.html#with-instance_method>`__
 - `Mongoid::PersistenceContext <{+api-root+}/PersistenceContext.html>`__
 - `Mongoid.override_client <{+api-root+}/Config.html#override_client-instance_method>`__
 - `Mongoid.override_database <{+api-root+}/Config.html#override_database-instance_method>`__
