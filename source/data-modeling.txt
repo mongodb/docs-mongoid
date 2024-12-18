@@ -20,6 +20,7 @@ Model Your Data
    Inheritance </data-modeling/inheritance>
    Document Validation </data-modeling/validation>
    Data Associations </data-modeling/associations>
+   Optimize Queries With Indexes </data-modeling/indexes>
 
 In this section, you can learn how to model data in {+odm+}.
 
@@ -40,3 +41,6 @@ In this section, you can learn how to model data in {+odm+}.
 
 - :ref:`mongoid-associations`: Learn how to create and manage data
   associations in your model classes.
+
+- :ref:`mongoid-optimize-queries-with-indexes`: Learn how to create and manage 
+  indexes for your model classes.

@@ -1,0 +1,23 @@
+.. _mongoid_associations:
+
+============
+Associations
+============
+
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: ruby framework, odm, code example
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+Overview
+--------
+
+Associations in {+odm+} allow you to create relationships between models. 
