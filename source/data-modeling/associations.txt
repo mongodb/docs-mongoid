@@ -234,10 +234,10 @@ reference multiple ``Band`` documents.
    :end-before: # end-has-and-belongs-to-many
 
 When you declare a ``has_and_belongs_to_many`` association, both model instances
-store a list of the associated document's ID values. You can set the
-``inverse_of`` option to ``nil`` to store the associated document's ID values in
+store a list of the associated document's ``_id`` values. You can set the
+``inverse_of`` option to ``nil`` to store the associated document's ``_id`` values in
 only one of the model instances. The following example prompts {+odm+} to store
-the associated document's ID values in only the ``Band`` class:
+the associated document's ``_id`` values in only the ``Band`` class:
 
 .. literalinclude:: /includes/data-modeling/associations.rb
    :language: ruby

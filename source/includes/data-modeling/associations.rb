@@ -256,6 +256,7 @@ child_two = root.child_band.build(name: "Xero")
 
 # Access parent band
 child_one.parent_band
+# Outputs: root
 # end-recursive-embed-access
 
 # start-embedded-query
