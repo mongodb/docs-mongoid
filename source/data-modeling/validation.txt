@@ -29,7 +29,7 @@ of document fields in your collections.
 {+odm+} includes ``ActiveModel::Validations`` from Active Record to
 provide validation functionality, including an associated and uniqueness
 validator. To learn more, see the `Active Record Validations
-<https://guides.rubyonrails.org/active_record_validations.html>`__
+<{+active-record-docs+}/active_record_validations.html>`__
 Rails guide and `ActiveModel::Validations
 <https://api.rubyonrails.org/classes/ActiveModel/Validations.html>`__
 Rails API documentation.
@@ -284,14 +284,14 @@ Custom Validation Rules
 You can use the ``validates_each`` and ``validates_with`` helpers to
 create custom validators. To learn more about these helpers and view
 examples, see the `validates_each
-<https://guides.rubyonrails.org/active_record_validations.html#validates-each>`__
+<{+active-record-docs+}/active_record_validations.html#validates-each>`__
 and `validates_with
-<https://guides.rubyonrails.org/active_record_validations.html#validates-with>`__
+<{+active-record-docs+}/active_record_validations.html#validates-with>`__
 references in the Active Record documentation.
 
 To learn more about custom validators, see `Performing Custom
 Validations
-<https://guides.rubyonrails.org/active_record_validations.html#performing-custom-validations>`__
+<{+active-record-docs+}/active_record_validations.html#performing-custom-validations>`__
 in the Active Record documentation.
 
 Behavior

@@ -20,6 +20,7 @@ Model Your Data
    Persistence Configuration </data-modeling/persistence-configuration>
    Inheritance </data-modeling/inheritance>
    Document Validation </data-modeling/validation>
+   Callbacks </data-modeling/callbacks>
    Data Associations </data-modeling/associations>
    Optimize Queries With Indexes </data-modeling/indexes>
 
@@ -42,6 +43,9 @@ In this section, you can learn how to model data in {+odm+}.
 
 - :ref:`mongoid-modeling-validation`: Learn how to create document
   validation rules for your model classes.
+
+- :ref:`mongoid-modeling-callbacks`: Learn how to implement callbacks to
+  customize the life cycle of your models.
 
 - :ref:`mongoid-associations`: Learn how to create and manage data
   associations in your model classes.
