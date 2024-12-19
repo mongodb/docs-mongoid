@@ -64,7 +64,8 @@ To learn more about any of the preceding callback types, see the
 <https://api.rubyonrails.org/{+rails-8-version-docs+}/classes/ActiveRecord/Callbacks.html>`__
 reference in the Rails API documentation.
 
-You can implement a callback both top-level and embedded documents. 
+You can implement callbacks in both top-level and embedded document
+models.
 
 .. note:: Callback Invocation Behavior
 
@@ -77,7 +78,8 @@ You can implement a callback both top-level and embedded documents.
 Take precautions and ensure testability when implementing callbacks for
 domain logic, because these designs can lead to unexpected errors when
 callbacks in the chain halt execution. We recommend using callbacks for
-cross-cutting concerns, such as queueing up background jobs.
+cross-cutting concerns outside of your program's core functionality,
+such as queueing up background jobs.
 
 Document Callbacks
 ------------------
@@ -90,7 +92,7 @@ classes or modules.
 This example demonstrates how to register callbacks on the ``Contact``
 model class in the following ways:
 
-- Includes the ``before_save`` class method which triggers the
+- Includes the ``before_save`` class method, which triggers the
   ``process_phone`` method before a ``Contact`` instance is saved to
   MongoDB. The ``process_phone`` method is defined separately in the class.
 
@@ -113,9 +115,11 @@ callback actions:
    :language: ruby
    :dedent:
 
-Because callback functionality comes from Active Support, you can use
-the ``set_callback`` class method syntax to register callbacks, as shown
-in the following code:
+Because callback functionality comes from Active Support, you can
+alternatively use the ``set_callback`` class method syntax to register
+callbacks. The following code demonstrates how to use this syntax to
+create a callback that stores original values of the ``name`` field in
+the ``aliases`` array:
 
 .. literalinclude:: /includes/data-modeling/callbacks.rb
    :start-after: start-doc-set-syntax
@@ -148,7 +152,8 @@ specified callback.
 
 The following code demonstrates how to register an association callback
 on a ``User`` model class that embeds multiple ``SavedArticle``
-instances:
+instances to limit the number of embedded documents for a single
+instance:
 
 .. literalinclude:: /includes/data-modeling/callbacks.rb
    :start-after: start-association-callback
@@ -164,7 +169,7 @@ To learn how to prevent {+odm+} from running callbacks, see the
 following references in the Active Record documentation:
 
 - `Skipping Callbacks <{+active-record-docs+}/active_record_callbacks.html#skipping-callbacks>`__
-- `Suppressing Callbacks <{+active-record-docs+}/active_record_callbacks.html#suppressing-callbacks>`__
+- `Suppressing Saving <{+active-record-docs+}/active_record_callbacks.html#suppressing-saving>`__
 
 To learn about how {+odm+} manages callbacks in transactions, see the
 :ref:`mongoid-data-txn` guide.
