@@ -1,3 +1,4 @@
+.. _mongoid-text-search:
 .. _text-search:
 
 ***********
