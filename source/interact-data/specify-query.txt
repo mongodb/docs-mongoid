@@ -16,6 +16,8 @@ Specify a Query
    
    /interact-data/scoping
    /interact-data/query-persistence
+   /interact-data/query-cache
+   /interact-data/query-async
 
 .. contents:: On this page
    :local:
@@ -905,3 +907,11 @@ To learn how to modify the way that {+odm+} returns results to you, see
 
 To learn more about defining scopes on your models, see
 :ref:`mongoid-data-scoping`.
+
+To learn about methods that you can chain to your queries to persist
+data, see :ref:`mongoid-query-persistence`.
+
+To learn about the query cache feature, see :ref:`mongoid-query-cache`.
+
+To learn about performing asychronous queries, see
+:ref:`mongoid-query-async`.
