@@ -38,7 +38,7 @@ a ``Criteria`` instance, as shown in the following code:
 
 The preceding code schedules the queries for asynchronous execution.
 You can then access the results of the queries in your view as you
-normally would for synchronous queries.
+normally do for synchronous queries.
 
 Even if a query is scheduled for asynchronous execution, it might be
 executed synchronously on the caller's thread. The following list
