@@ -1,0 +1,566 @@
+.. _crud:
+
+===============
+CRUD Operations
+===============
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+.. TODO: add meta and facets
+
+Overview
+--------
+
+CRUD operations create, read, update, and delete documents. In this guide, you 
+can learn how to use {+odm+} to perform CRUD operations.
+
+Create Operations
+~~~~~~~~~~~~~~~~~
+
+Create operations add new documents to a collection. If the collection doesn't
+currently exist, the operation creates a new collection. The following section
+describes the methods you can use to create new documents.
+
+``Model.create!``
++++++++++++++++++
+
+Use ``Model.create!`` to insert a new document or multiple new documents into
+the database. If a server or validation error occurs, ``Model.create!`` raises
+an exception.
+
+To call ``Model.create!``, pass a hash of attributes to create a document with
+the specified attributes. If you want to create and insert multiple documents, 
+you can pass an array of hashes.
+
+The following code shows three ways to call ``Model.create!``. The first example
+creates one ``Person`` document, and the second example creates two ``Person``
+documents. The third example passes a ``do..end`` block to ``create!``. {+odm+}
+invokes this block with the documents passed to ``create!`` as arguments. ``Model.create!``
+attempts to save the document at the end of the block.
+
+.. literalinclude:: /includes/interact-data/crud.rb
+   :language: ruby
+   :start-after: start create! example
+   :end-before: end create! example
+
+``Model.create``
+++++++++++++++++
+
+Use ``Model.create`` to insert a new document or multiple new documents into a 
+database. ``Model.create`` is similar to ``Model.create!`` but
+does not raise an exception on validation errors. Like ``Model.create!``, 
+``Model.create`` still raises exceptions on server errors, such as when
+inserting a document with an ``_id`` that already exists in the collection. 
+
+If ``Model.create`` encounters any validation errors, the document is not inserted
+but is returned with other documents that were inserted. You can use the
+``persisted?``, ``new_record?`` or ``errors`` methods to check which of the
+returned documents were inserted into the database.
+
+The following code shows how to use ``Model.create``. The first example shows
+how to insert a ``Person`` document like in the preceding ``Model.create!``
+example. The second example attempts to insert two ``Post`` documents, one of which
+fails validation. The example then uses the ``persisted?`` method to check which
+of the documents was not inserted into the collection.
+
+.. literalinclude:: /includes/interact-data/crud.rb
+   :language: ruby
+   :start-after: start create example
+   :end-before: end create example
+
+For more information on the ``persisted`` and ``new_record`` methods, see
+the :ref:`mongoid-persistence-attr` section.
+
+``Model#save!``
++++++++++++++++
+
+Use ``Model#save!`` to atomically save changed attributes to the collection or
+to insert a new document. ``Model#save!`` raises an exception if there are any
+server or validation errors. You can use ``Model.new`` to create a new document
+instance. Then, use ``Model#save!`` to insert the document into the database.
+
+The following example shows how to use ``Model#save!`` to insert a new ``Person``
+document and to update the ``first_name`` attribute of an existing document.
+
+.. literalinclude:: /includes/interact-data/crud.rb
+   :language: ruby
+   :start-after: start save! example
+   :end-before: end save! example
+
+``Model#save``
+++++++++++++++
+
+``Model#save`` is similar to ``Model#save!``, except ``Model#save`` does not
+raise an exception if there are any validation errors. ``Model#save`` still raises
+an exception if there are any server errors. The method returns ``true`` if
+all changed attributes were saved, and ``false`` if there were any validation
+errors.
+
+You can pass the following options to ``Model#save``:
+
+- ``validate: false``: bypass validations when saving the new document or updated
+  attributes.
+
+- ``touch: false``: ignore updates to the ``updated_at`` field when updating
+  attributes. This option has no effect when inserting a new document.
+
+The following code uses ``Model#save`` to insert a new document. It then updates
+that document while using the ``validate: false`` option.
+
+.. literalinclude:: /includes/interact-data/crud.rb
+   :language: ruby
+   :start-after: start save example
+   :end-before: end save example
+
+Read Operations
+~~~~~~~~~~~~~~~
+
+Read operations retrieve documents from a collection.
+
+``Model#attributes``
+++++++++++++++++++++
+
+You can use ``Model#attributes`` to get the attributes of a model instance.
+``Model#attributes`` returns the attributes as a hash. This hash also contains 
+the attributes of all embedded documents.
+
+The following example shows how to use ``Model#attributes`` to get the attributes
+of an existing model instance:
+
+.. io-code-block::
+
+   .. input:: /includes/interact-data/crud.rb
+      :language: ruby
+      :start-after: start attributes example
+      :end-before: end attributes example
+    
+   .. output::
+      :language: json
+      
+      { "_id" => BSON::ObjectId('633467d03282a43784c2d56e'), 
+        "first_name" => "James", 
+        "last_name" => "Nan" 
+      }
+
+.. TODO: getting/setting attributes here?
+
+Update Operations
+~~~~~~~~~~~~~~~~~
+
+Update operations modify existing documents in a collection.
+
+Attempting to update a deleted document results in a ``FrozenError`` exception.
+
+``Model#update_attributes!``
+++++++++++++++++++++++++++++
+
+You can use ``Model#update_attributes!`` to update the attributes of an
+existing model instance. This method raises an exception if it encounters
+a validation or server error.
+
+The following example shows how to use ``Model#update_attributes!`` to update
+the ``first_name`` and ``last_name`` attributes of an existing document:
+
+.. literalinclude:: /includes/interact-data/crud.rb
+   :language: ruby
+   :start-after: start update attributes! example
+   :end-before: end update attributes! example
+
+``Model#update_attributes``
++++++++++++++++++++++++++++
+
+``Model#update_attributes`` is similar to ``Model#update_attributes!`` except it
+does not raise an exception on validation errors. The method will return ``true``
+if it passes validation and the document is updated, and ``false`` otherwise.
+
+The following example shows how to use ``Model#update_attributes``:
+
+.. literalinclude:: /includes/interact-data/crud.rb
+   :language: ruby
+   :start-after: start update attributes example
+   :end-before: end update attributes example
+
+``Model#update_attribute``
+++++++++++++++++++++++++++
+
+You can use ``Model#update_attribute`` to bypass validations and update a single 
+attribute of a model instance.
+
+The following example shows how to use ``Model#update_attribute`` to update
+a document's ``first_name`` attribute:
+
+.. literalinclude:: /includes/interact-data/crud.rb
+   :language: ruby
+   :start-after: start update attribute example
+   :end-before: end update attribute example
+
+``Model#upsert``
+++++++++++++++++
+
+You can use ``Model#upsert`` to update, insert, or replace a document.
+
+``Model#upsert`` accepts a ``replace`` option. If this option is set to ``true``
+and the document that calls ``Model#upsert`` exists in the database, the new document
+replaces the one in the database. Any fields in the database
+that the new document does not specify are removed.
+
+If the ``replace`` option is set to ``false`` and the document exists in the 
+database, it is updated. It persists any fields in the database that the new 
+document does not specify. If the document does not exist in the
+database, it is inserted. The ``replace`` option is set to ``false`` by default.
+
+The following example shows how to use ``Model#upsert`` to first insert a new document
+then replace it:
+
+.. literalinclude:: /includes/interact-data/crud.rb
+   :language: ruby
+   :start-after: start upsert example
+   :end-before: end upsert example
+
+.. TODO understand this example
+
+``Model#touch``
++++++++++++++++
+
+You can use ``Model#touch`` to update a document's ``updated_at`` timestamp with
+the current time. ``Model#touch`` cascades the update to all the document's 
+``belongs_to`` associations. You can also pass another time field as an option
+to update this field.
+
+The following example uses ``Model#touch`` to update the 
+``updated_at`` and ``audited_at`` timestamps:
+
+.. literalinclude:: /includes/interact-data/crud.rb
+   :language: ruby
+   :start-after: start touch example
+   :end-before: end touch example
+
+.. TODO: are both timestamps updated in one call?
+
+Delete Operations
+~~~~~~~~~~~~~~~~~
+
+Delete operations remove documents from a collection.
+
+``Model#delete``
+++++++++++++++++
+
+You can use ``Model#delete`` to delete a document from the database. When you
+use ``Model#delete``, {+odm+} does not run callbacks. If the document is not
+saved to the database, ``Model#delete`` attempts to delete any document with the same ``_id``.
+
+The following example shows how to delete a document using ``Model#delete``, as
+well as what happens when you delete a document that is not saved to the database.
+
+.. literalinclude:: /includes/interact-data/crud.rb
+   :language: ruby
+   :start-after: start delete example
+   :end-before: end delete example
+
+In the preceding example, {+odm+} raises a ``Mongoid::Errors::DocumentNotFound``
+error because the ``person`` document was deleted when ``unsaved_person.delete``
+was called since the two documents had the same value for ``_id``.
+
+``Model#destroy``
++++++++++++++++++
+
+``Model#destroy`` is similar to ``Model#delete`` except {+odm+} runs callbacks
+when it calls ``Model#destroy``. If the document is not found in the database,
+``Model#destroy`` also attempts to delete any document with the same ``_id``.
+
+The following example shows how to use ``Model#destroy``:
+
+.. literalinclude:: /includes/interact-data/crud.rb
+   :language: ruby
+   :start-after: start destroy example
+   :end-before: end destroy example
+
+``Model.delete_all``
+++++++++++++++++++++
+
+``Model.delete_all`` deletes all documents from the collection that ``Model`` 
+represents. ``Model.delete_all`` does not run callbacks.
+
+The following example shows how to use ``Model.delete_all``:
+
+.. literalinclude:: /includes/interact-data/crud.rb
+   :language: ruby
+   :start-after: start delete all example
+   :end-before: end delete all example
+
+``Model.destroy_all``
++++++++++++++++++++++
+
+``Model.destroy_all`` deletes all documents from the collection that ``Model`` 
+represents. ``Model.destroy_all`` runs callbacks. This can be an expensive operation
+because all documents are loaded into memory.
+
+The following example shows how to use ``Model.destroy_all``:
+
+.. literalinclude:: /includes/interact-data/crud.rb
+   :language: ruby
+   :start-after: start destroy all example
+   :end-before: end destroy all example
+
+.. _mongoid-persistence-attr:
+
+Persistence Attributes
+~~~~~~~~~~~~~~~~~~~~~~
+
+{+odm+} provides the following attributes to check if a document is
+persisted to the database.
+
+``Model#new_record?``
++++++++++++++++++++++
+
+``Model#new_record?`` returns ``true`` if the model instance has not been 
+saved to the database yet, and ``false`` otherwise. It is the opposite of
+``Model#persisted?``.
+
+The following example shows how to use ``Model#new_record?``:
+
+.. io-code-block::
+
+   .. input:: /includes/interact-data/crud.rb
+      :language: ruby
+      :start-after: start new record example
+      :end-before: end new record example
+
+   .. output::
+      :visible: false
+
+      true
+
+      false
+
+``Model#persisted?``
+++++++++++++++++++++
+
+``Model#persisted?`` returns ``true`` if the model instance is persisted to the
+database, and ``false`` otherwise. ``Model#persisted?`` is the opposite of
+``Model#new_record?``.
+
+The following example shows how to use ``Model#persisted?``:
+
+.. io-code-block::
+
+   .. input:: /includes/interact-data/crud.rb
+      :language: ruby
+      :start-after: start persisted example
+      :end-before: end persisted example
+
+   .. output::
+      :visible: false
+
+      false
+
+      true
+
+Atomic Update Operators
+~~~~~~~~~~~~~~~~~~~~~~~
+
+{+odm+} provides support for the following update operators. You can call these
+operators as methods on {+odm+} documents. These methods perform operations 
+atomically. They skip validations and callbacks.
+
+{+odm+} supports the following operators:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 60
+
+   * - Operator
+     - Example
+
+   * - ``Model#add_to_set``
+     -
+        .. code-block:: ruby
+
+          person.add_to_set(aliases: "Bond")
+
+   * - ``Model#bit``
+     -
+        .. code-block:: ruby
+
+          person.bit(age: { and: 10, or: 12 })
+
+   * - ``Model#inc``
+     -
+        .. code-block:: ruby
+
+          person.inc(age: 1)
+
+   * - ``Model#pop``
+     -
+        .. code-block:: ruby
+
+          person.pop(aliases: 1)
+
+   * - ``Model#pull``
+     -
+        .. code-block:: ruby
+
+          person.pull(aliases: "Bond")
+
+   * - ``Model#pull_all``
+     -
+        .. code-block:: ruby
+
+          person.pull_all(aliases: [ "Bond", "James" ])
+
+   * - ``Model#push``
+     -
+        .. code-block:: ruby
+
+          person.push(aliases: ["007","008"])
+
+   * - ``Model#rename``
+     -
+        .. code-block:: ruby
+
+          person.rename(bday: :dob)
+
+   * - ``Model#set``
+
+       Updates an attribute on the model instance and, if the instance
+       is already persisted, performs an atomic ``$set`` on the field, bypassing
+       validations.
+
+       ``set`` can also deeply set values on Hash fields.
+
+       ``set`` can also deeply set values on ``embeds_one`` associations.
+       If a model instance's ``embeds_one`` association document is ``nil``, one
+       is created prior to the update.
+
+       ``set`` should not be used with ``has_one`` associations.
+
+     -
+        .. code-block:: ruby
+
+          person = Person.create!(name: "Ricky Bobby")
+          person.set(name: "Tyler Durden") # updates name in the database
+
+    	  person = Person.new
+          person.set(name: "Tyler Durden") # does not write to database
+    	  person.name # => "Tyler Durden"
+    	  person.persisted? # => true
+
+    	  class Post
+    	    include Mongoid::Document
+
+    	    field :metadata, type: Hash
+    	  end
+
+          post = Post.create!
+          post.set('metadata.published_at' => Time.now)
+          post.metadata['published_at'] # => Time instance
+
+          post.set('metadata.approved.today' => true)
+          post.metadata['approved'] # => {'today' => true}
+
+          class Flight
+            include Mongoid::Document
+
+            embeds_one :plan
+          end
+
+          class Plan
+            include Mongoid::Document
+
+            embedded_in :flight
+
+            field :route, type: String
+          end
+
+          flight = Flight.create!
+          flight.plan # => nil
+          flight.set('plan.route', 'test route')
+          flight.plan # => Plan instance
+          flight.plan.route # => "test route"
+
+   * - ``Model#unset``
+     -
+        .. code-block:: ruby
+
+          person.unset(:name)
+
+To learn more about update operators, see the :manual:`Update Operators <reference/operator/update>` 
+guide in the MongoDB {+server-manual+}.
+
+Group Atomic Operations
++++++++++++++++++++++++
+
+To group atomic operations together, you can use the ``#atomically`` method 
+on a document. All operations that you give to an ``#atomically`` block are sent to the
+database in a single atomic command.
+
+.. TODO is this still true?
+
+.. note::
+   Atomic operations apply to one document at a time. Therefore, nested
+   ``#atomically`` blocks cannot make changes to multiple documents in one
+   atomic operation. To make changes to multiple documents in one atomic
+   operation, use a multi-document transaction. To learn more about transactions,
+   see :ref:`transactions`.
+
+To use the ``#atomically`` method, call it on a document and pass a block to it.
+The following example shows how to use ``#atomically`` to atomically perform an 
+``$inc`` and ``$set`` operation:
+
+.. literalinclude:: /includes/interact-data/crud.rb
+   :language: ruby
+   :start-after: start atomically example
+   :end-before: end atomically example
+
+You can nest ``#atomically`` blocks. By default, {+odm+} performs atomic writes
+defined by each block when the block ends. The following example shows how to nest
+``#atomically`` blocks:
+
+.. literalinclude:: /includes/interact-data/crud.rb
+   :language: ruby
+   :start-after: start default block atomic example
+   :end-before: end default block atomic example
+
+In the preceding example, the ``$inc`` and ``$set`` operations are executed at
+the end of the inner ``#atomically`` block.
+
+Join Contexts
+`````````````
+.. TODO: test if it's join_contexts or context
+
+The ``#atomically`` method accepts a ``join_contexts: true`` option to specify that
+operations execute at the end of the outermost ``#atomically`` block. When you
+enable this option, only the outermost block, or the first block where ``join_contexts``
+is ``false``, writes changes to the cluster. The following example sets
+the ``join_contexts`` option to ``true``:
+
+.. literalinclude:: /includes/interact-data/crud.rb
+   :language: ruby
+   :start-after: start join_contexts atomic
+   :end-before: end join_contexts atomic
+
+In the preceding example, the ``$inc`` and ``$set`` operations will be executed at the 
+end of the outermost ``#atomically`` block. However, since an exception is raised
+before the block ends and these operations can execute, the changes are not
+persisted.
+
+You can also enable context joining globally, so that operations execute in the
+outermost ``#atomically`` block by default. To do this, set the ``join_contexts``
+configuration option to ``true`` in your ``mongoid.yml`` file. To learn more about
+{+odm+} configuration options, see :ref:`configuration-options`.
+
+When you globally set ``join_contexts`` to ``true``, you can use the ``join_context: false``
+option on an ``#atomically`` block to execute operations at the end of the block.
+
+
+
+
+
+
+
+
+
