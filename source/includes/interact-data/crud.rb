@@ -60,6 +60,26 @@ person.save
 puts person.attributes
 # end attributes example
 
+# start reload example
+band = Band.create!(name: 'foo')
+# => #<Band _id: 6206d06de1b8324561f179c9, name: "foo">
+
+band.name = 'bar'
+# => #<Band _id: 6206d06de1b8324561f179c9, name: "bar">
+
+band.reload
+# => #<Band _id: 6206d06de1b8324561f179c9, name: "foo">
+# end reload example
+
+# start reload unsaved example
+existing = Band.create!(name: 'Photek')
+
+band = Band.new(id: existing.id)
+band.reload
+
+puts band.name
+# end reload unsaved example
+
 # start update attributes! example
 person.update_attributes!(
   first_name: "Maximilian",

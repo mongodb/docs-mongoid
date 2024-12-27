@@ -146,6 +146,63 @@ of an existing model instance:
         "last_name" => "Nan" 
       }
 
+``Model#reload``
+++++++++++++++++
+
+You can use ``Model#reload`` to get the most recent version of a document from
+the database. When you reload a document, its embedded associations are also
+reloaded in the same query. However, {+odm+} does not reload referenced associations.
+Instead, it clears these values so that they are loaded from the database during
+the next access. 
+
+When you call ``Model#reload`` on a document, any unsaved changes to the document
+are lost. The following code shows how to call ``Model#reload`` on a document:
+
+.. literalinclude:: /includes/interact-data/crud.rb
+   :language: ruby
+   :start-after: start reload example
+   :end-before: end reload example
+
+The preceding example updates the ``name`` field on the ``band`` document,
+but does not save it. When you call ``band.reload``, the result is stored in
+``band``. However, because the change to ``name`` was not persisted to the
+database, ``name`` is rewritten to contain the most recent value in the database.
+
+.. note:: Document Not Found Errors
+
+   When {+odm+} cannot find a document in the database, by default it raises a
+   ``Mongoid::Errors::DocumentNotFound`` error. However, you can set the
+   ``raise_not_found_error`` configuration option to ``false`` in your ``mongoid.yml`` 
+   file. When ``raise_not_found_error`` is set to ``false`` and the database does
+   not contain a matching document, {+odm+} replaces the document with a newly-created
+   document and sets its attributes to default values. Generally, it also changes
+   the value of the ``_id`` field. For this reason, we recommend not using
+   ``#reload`` when ``raise_not_found_error`` is set to ``false``.
+
+Reload Unsaved Documents
+````````````````````````
+
+When you call ``#reload`` on a document that is not persisted, the method performs
+a ``find`` query using the document's ``_id`` value. 
+
+The following example uses ``#reload`` on a document that has not been saved and
+prints out its ``name``.
+``#reload`` performs a ``find`` operation using the document's ``_id`` value.
+
+.. io-code-block::
+   :copyable: true
+   
+   .. input:: /includes/interact-data/crud.rb
+      :language: ruby
+      :start-after: start reload unsaved example
+      :end-before: end reload unsaved example
+
+   .. output::
+      :visible: false
+      
+      Photek
+
+
 .. TODO: getting/setting attributes here?
 
 Update Operations
@@ -555,7 +612,6 @@ configuration option to ``true`` in your ``mongoid.yml`` file. To learn more abo
 
 When you globally set ``join_contexts`` to ``true``, you can use the ``join_context: false``
 option on an ``#atomically`` block to execute operations at the end of the block.
-
 
 
 
