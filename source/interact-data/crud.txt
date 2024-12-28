@@ -19,14 +19,14 @@ CRUD operations create, read, update, and delete documents. In this guide, you
 can learn how to use {+odm+} to perform CRUD operations.
 
 Create Operations
-~~~~~~~~~~~~~~~~~
+-----------------
 
 Create operations add new documents to a collection. If the collection doesn't
 currently exist, the operation creates a new collection. The following section
 describes the methods you can use to create new documents.
 
 ``Model.create!``
-+++++++++++++++++
+~~~~~~~~~~~~~~~~~
 
 Use ``Model.create!`` to insert a new document or multiple new documents into
 the database. If a server or validation error occurs, ``Model.create!`` raises
@@ -48,7 +48,7 @@ attempts to save the document at the end of the block.
    :end-before: end create! example
 
 ``Model.create``
-++++++++++++++++
+~~~~~~~~~~~~~~~~
 
 Use ``Model.create`` to insert a new document or multiple new documents into a 
 database. ``Model.create`` is similar to ``Model.create!`` but
@@ -76,7 +76,7 @@ For more information on the ``persisted`` and ``new_record`` methods, see
 the :ref:`mongoid-persistence-attr` section.
 
 ``Model#save!``
-+++++++++++++++
+~~~~~~~~~~~~~~~
 
 Use ``Model#save!`` to atomically save changed attributes to the collection or
 to insert a new document. ``Model#save!`` raises an exception if there are any
@@ -92,7 +92,7 @@ document and to update the ``first_name`` attribute of an existing document.
    :end-before: end save! example
 
 ``Model#save``
-++++++++++++++
+~~~~~~~~~~~~~~
 
 ``Model#save`` is similar to ``Model#save!``, except ``Model#save`` does not
 raise an exception if there are any validation errors. ``Model#save`` still raises
@@ -117,12 +117,14 @@ that document while using the ``validate: false`` option.
    :end-before: end save example
 
 Read Operations
-~~~~~~~~~~~~~~~
+---------------
 
 Read operations retrieve documents from a collection.
 
+.. _mongoid-read-attributes:
+
 ``Model#attributes``
-++++++++++++++++++++
+~~~~~~~~~~~~~~~~~~~~
 
 You can use ``Model#attributes`` to get the attributes of a model instance.
 ``Model#attributes`` returns the attributes as a hash. This hash also contains 
@@ -147,7 +149,7 @@ of an existing model instance:
       }
 
 ``Model#reload``
-++++++++++++++++
+~~~~~~~~~~~~~~~~
 
 You can use ``Model#reload`` to get the most recent version of a document from
 the database. When you reload a document, its embedded associations are also
@@ -180,7 +182,7 @@ database, ``name`` is rewritten to contain the most recent value in the database
    ``#reload`` when ``raise_not_found_error`` is set to ``false``.
 
 Reload Unsaved Documents
-````````````````````````
+++++++++++++++++++++++++
 
 When you call ``#reload`` on a document that is not persisted, the method performs
 a ``find`` query using the document's ``_id`` value. 
@@ -202,18 +204,15 @@ prints out its ``name``.
       
       Photek
 
-
-.. TODO: getting/setting attributes here?
-
 Update Operations
-~~~~~~~~~~~~~~~~~
+-----------------
 
 Update operations modify existing documents in a collection.
 
 Attempting to update a deleted document results in a ``FrozenError`` exception.
 
 ``Model#update_attributes!``
-++++++++++++++++++++++++++++
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can use ``Model#update_attributes!`` to update the attributes of an
 existing model instance. This method raises an exception if it encounters
@@ -228,7 +227,7 @@ the ``first_name`` and ``last_name`` attributes of an existing document:
    :end-before: end update attributes! example
 
 ``Model#update_attributes``
-+++++++++++++++++++++++++++
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ``Model#update_attributes`` is similar to ``Model#update_attributes!`` except it
 does not raise an exception on validation errors. The method will return ``true``
@@ -242,7 +241,7 @@ The following example shows how to use ``Model#update_attributes``:
    :end-before: end update attributes example
 
 ``Model#update_attribute``
-++++++++++++++++++++++++++
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can use ``Model#update_attribute`` to bypass validations and update a single 
 attribute of a model instance.
@@ -256,7 +255,7 @@ a document's ``first_name`` attribute:
    :end-before: end update attribute example
 
 ``Model#upsert``
-++++++++++++++++
+~~~~~~~~~~~~~~~~
 
 You can use ``Model#upsert`` to update, insert, or replace a document.
 
@@ -281,7 +280,7 @@ then replace it:
 .. TODO understand this example
 
 ``Model#touch``
-+++++++++++++++
+~~~~~~~~~~~~~~~
 
 You can use ``Model#touch`` to update a document's ``updated_at`` timestamp with
 the current time. ``Model#touch`` cascades the update to all the document's 
@@ -299,12 +298,12 @@ The following example uses ``Model#touch`` to update the
 .. TODO: are both timestamps updated in one call?
 
 Delete Operations
-~~~~~~~~~~~~~~~~~
+-----------------
 
 Delete operations remove documents from a collection.
 
 ``Model#delete``
-++++++++++++++++
+~~~~~~~~~~~~~~~~
 
 You can use ``Model#delete`` to delete a document from the database. When you
 use ``Model#delete``, {+odm+} does not run callbacks. If the document is not
@@ -323,7 +322,7 @@ error because the ``person`` document was deleted when ``unsaved_person.delete``
 was called since the two documents had the same value for ``_id``.
 
 ``Model#destroy``
-+++++++++++++++++
+~~~~~~~~~~~~~~~~~
 
 ``Model#destroy`` is similar to ``Model#delete`` except {+odm+} runs callbacks
 when it calls ``Model#destroy``. If the document is not found in the database,
@@ -337,7 +336,7 @@ The following example shows how to use ``Model#destroy``:
    :end-before: end destroy example
 
 ``Model.delete_all``
-++++++++++++++++++++
+~~~~~~~~~~~~~~~~~~~~
 
 ``Model.delete_all`` deletes all documents from the collection that ``Model`` 
 represents. ``Model.delete_all`` does not run callbacks.
@@ -350,7 +349,7 @@ The following example shows how to use ``Model.delete_all``:
    :end-before: end delete all example
 
 ``Model.destroy_all``
-+++++++++++++++++++++
+~~~~~~~~~~~~~~~~~~~~~
 
 ``Model.destroy_all`` deletes all documents from the collection that ``Model`` 
 represents. ``Model.destroy_all`` runs callbacks. This can be an expensive operation
@@ -366,13 +365,13 @@ The following example shows how to use ``Model.destroy_all``:
 .. _mongoid-persistence-attr:
 
 Persistence Attributes
-~~~~~~~~~~~~~~~~~~~~~~
+----------------------
 
 {+odm+} provides the following attributes to check if a document is
 persisted to the database.
 
 ``Model#new_record?``
-+++++++++++++++++++++
+~~~~~~~~~~~~~~~~~~~~~
 
 ``Model#new_record?`` returns ``true`` if the model instance has not been 
 saved to the database yet, and ``false`` otherwise. It is the opposite of
@@ -395,7 +394,7 @@ The following example shows how to use ``Model#new_record?``:
       false
 
 ``Model#persisted?``
-++++++++++++++++++++
+~~~~~~~~~~~~~~~~~~~~
 
 ``Model#persisted?`` returns ``true`` if the model instance is persisted to the
 database, and ``false`` otherwise. ``Model#persisted?`` is the opposite of
@@ -417,8 +416,99 @@ The following example shows how to use ``Model#persisted?``:
 
       true
 
+Access Field values
+-------------------
+
+{+odm+} provides several ways to access field values on a document.
+
+Get and Set Field Values
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+There are multiple ways to get and set field values on a document. If a field
+is explicitly declared, you can get and set this field value on the document directly.
+The following example shows how to set and then print the ``first_name`` field on a
+``Person`` class:
+
+.. literalinclude:: /includes/interact-data/crud.rb
+   :language: ruby
+   :start-after: start field values default
+   :end-before: end field values default
+
+In the preceding example, ``person.first_name`` holds the value ``"Artem"``.
+
+You can also use the ``[]`` and ``[]=`` methods on a {+odm+} model instance to
+access attributes by using Hash syntax. The following example shows how to get
+and set the aliased ``first_name`` field using the ``[]`` and ``[]=`` methods:
+
+.. literalinclude:: /includes/interact-data/crud.rb
+   :language: ruby
+   :start-after: start field values hash
+   :end-before: end field values hash
+
+The ``[]`` method is an alias for the ``read_attribute`` method and the ``[]=``
+method is an alias for the ``write_attribute`` method. To learn more about these
+methods, see the :ref:`mongoid-read-write-attributes` section on this page.
+
+.. _mongoid-read-write-attributes:
+
+``read_attribute`` & ``write_attribute``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can use the ``read_attribute`` and ``write_attribute`` methods to specify
+custom behavior when reading or writing fields. You can use these methods
+when defining a model or by calling them from model documents.
+
+To use ``read_attribute`` to get a field, pass the name of the field to the method.
+To use ``write_attribute`` to set a field, pass the name of the field and the
+value that you want to set it to.
+
+The following example uses ``read_attribute`` and ``write_attribute`` within
+a model definition to define ``first_name`` and ``first_name=`` as methods that
+are used to read and write to the ``fn`` attribute:
+
+.. literalinclude:: /includes/interact-data/crud.rb
+   :language: ruby
+   :start-after: start read write attributes
+   :end-before: end read write attributes
+
+You can also call ``read_attribute`` and ``write_attribute`` directly on a
+model instance to get and set attributes. The following example uses these methods
+on a model instance to get and set the ``first_name`` attribute to the value
+``"Pushkin"``.
+
+.. literalinclude:: /includes/interact-data/crud.rb
+   :language: ruby 
+   :start-after: start read write instance
+   :end-before: end read write instance
+
+Bulk Write Attributes
+~~~~~~~~~~~~~~~~~~~~~
+
+You can write to multiple fields at the same time by using the ``#attributes=``
+or ``write_attributes`` methods on a model instance.
+
+To use the ``#attributes=`` method, call the method on a model instance and 
+pass a Hash object that contains the fields and values that you want to set. 
+The following example shows how to use the ``#attributes=`` method to set the 
+``first_name`` and ``middle_name`` fields on the ``person`` document:
+
+.. literalinclude:: /includes/interact-data/crud.rb
+   :language: ruby 
+   :start-after: start attributes= example
+   :end-before: end attributes= example
+
+To use the ``write_attributes`` method, call the method on a model instance 
+and pass the fields and values that you want to set. The following example
+shows how to use the ``write_attributes`` method to set the ``first_name`` and
+``middle_name`` fields on the ``person`` document:
+
+.. literalinclude:: /includes/interact-data/crud.rb
+   :language: ruby 
+   :start-after: start write_attributes example
+   :end-before: end write_attributes example
+
 Atomic Update Operators
-~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------
 
 {+odm+} provides support for the following update operators. You can call these
 operators as methods on {+odm+} documents. These methods perform operations 
@@ -549,7 +639,7 @@ To learn more about update operators, see the :manual:`Update Operators <referen
 guide in the MongoDB {+server-manual+}.
 
 Group Atomic Operations
-+++++++++++++++++++++++
+~~~~~~~~~~~~~~~~~~~~~~~
 
 To group atomic operations together, you can use the ``#atomically`` method 
 on a document. All operations that you give to an ``#atomically`` block are sent to the
@@ -586,7 +676,7 @@ In the preceding example, the ``$inc`` and ``$set`` operations are executed at
 the end of the inner ``#atomically`` block.
 
 Join Contexts
-`````````````
++++++++++++++
 .. TODO: test if it's join_contexts or context
 
 The ``#atomically`` method accepts a ``join_contexts: true`` option to specify that
@@ -613,10 +703,7 @@ configuration option to ``true`` in your ``mongoid.yml`` file. To learn more abo
 When you globally set ``join_contexts`` to ``true``, you can use the ``join_context: false``
 option on an ``#atomically`` block to execute operations at the end of the block.
 
+API Documentation
+-----------------
 
-
-
-
-
-
-
+.. TODO

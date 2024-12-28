@@ -159,6 +159,91 @@ person.save!
 puts person.persisted?
 # end persisted example
 
+# start field values default
+class Person
+  include Mongoid::Document
+  
+  field :first_name
+end
+  
+person = Person.new
+  
+person.first_name = "Artem"
+person.first_name # => "Artem"
+# end field values default
+
+# start field values hash
+class Person
+  include Mongoid::Document
+  
+  field :first_name, as: :fn
+end
+  
+person = Person.new(first_name: "Artem")
+  
+person["fn"]
+# => "Artem"
+
+person[:first_name]
+# => "Artem"
+
+person
+# => #<Person _id: 606483742c97a629bdde5cfc, first_name(fn): "Artem">
+# end field values hash
+
+# start read write attributes
+class Person
+  include Mongoid::Document
+
+  def first_name
+    read_attribute(:fn)
+  end
+
+  def first_name=(value)
+    write_attribute(:fn, value)
+  end
+end
+  
+person = Person.new
+
+person.first_name = "Artem"
+person.first_name
+# => "Artem"
+# end read write attributes
+
+# start read write instance
+class Person
+    include Mongoid::Document
+  
+    field :first_name, as: :fn
+  end
+  
+  person = Person.new(first_name: "Artem")
+  # => #<Person _id: 60647a522c97a6292c195b4b, first_name(fn): "Artem">
+  
+  person.read_attribute(:first_name)
+  # => "Artem"
+  
+  person.read_attribute(:fn)
+  # => "Artem"
+  
+  person.write_attribute(:first_name, "Pushkin")
+
+  person
+  # => #<Person _id: 60647a522c97a6292c195b4b, first_name(fn): "Pushkin">
+# end read write instance
+
+# start attributes= example
+person.attributes = { first_name: "Jean-Baptiste", middle_name: "Emmanuel" }
+# end attributes= example
+
+# start write_attributes example
+person.write_attributes(
+  first_name: "Jean-Baptiste",
+  middle_name: "Emmanuel",
+)
+# end write_attributes example
+
 # start atomically example
 person.atomically do
   person.inc(age: 1)
