@@ -213,24 +213,24 @@ person.first_name
 
 # start read write instance
 class Person
-    include Mongoid::Document
+  include Mongoid::Document
   
-    field :first_name, as: :fn
-  end
+  field :first_name, as: :fn
+end
   
-  person = Person.new(first_name: "Artem")
-  # => #<Person _id: 60647a522c97a6292c195b4b, first_name(fn): "Artem">
-  
-  person.read_attribute(:first_name)
-  # => "Artem"
-  
-  person.read_attribute(:fn)
-  # => "Artem"
-  
-  person.write_attribute(:first_name, "Pushkin")
+person = Person.new(first_name: "Artem")
+# => #<Person _id: 60647a522c97a6292c195b4b, first_name(fn): "Artem">
 
-  person
-  # => #<Person _id: 60647a522c97a6292c195b4b, first_name(fn): "Pushkin">
+person.read_attribute(:first_name)
+# => "Artem"
+
+person.read_attribute(:fn)
+# => "Artem"
+
+person.write_attribute(:first_name, "Pushkin")
+
+person
+# => #<Person _id: 60647a522c97a6292c195b4b, first_name(fn): "Pushkin">
 # end read write instance
 
 # start attributes= example
