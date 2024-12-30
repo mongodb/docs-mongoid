@@ -184,11 +184,11 @@ person = Person.new(first_name: "Artem")
 person["fn"]
 # => "Artem"
 
-person[:first_name]
+person[:first_name] = "Vanya"
 # => "Artem"
 
 person
-# => #<Person _id: 606483742c97a629bdde5cfc, first_name(fn): "Artem">
+# => #<Person _id: 606483742c97a629bdde5cfc, first_name(fn): "Vanya">
 # end field values hash
 
 # start read write attributes

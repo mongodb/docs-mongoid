@@ -1,4 +1,4 @@
-.. _crud:
+.. _mongoid-crud:
 
 ===============
 CRUD Operations
@@ -29,7 +29,7 @@ describes the methods you can use to create new documents.
 ~~~~~~~~~~~~~~~~~
 
 Use ``Model.create!`` to insert a new document or multiple new documents into
-the database. If a server or validation error occurs, ``Model.create!`` raises
+the database. If server or validation errors occur, ``Model.create!`` raises
 an exception.
 
 To call ``Model.create!``, pass a hash of attributes to create a document with
@@ -62,17 +62,18 @@ but is returned with other documents that were inserted. You can use the
 returned documents were inserted into the database.
 
 The following code shows how to use ``Model.create``. The first example shows
-how to insert a ``Person`` document like in the preceding ``Model.create!``
-example. The second example attempts to insert two ``Post`` documents, one of which
-fails validation. The example then uses the ``persisted?`` method to check which
-of the documents was not inserted into the collection.
+how to insert a ``Person`` document. The second example attempts to insert two 
+``Post`` documents, but the second document fails validation because it contains
+a duplicate title.
+The example then uses the ``persisted?`` method to check if the documents are
+successfully inserted into the collection.
 
 .. literalinclude:: /includes/interact-data/crud.rb
    :language: ruby
    :start-after: start create example
    :end-before: end create example
 
-For more information on the ``persisted`` and ``new_record`` methods, see
+For more information on the ``persisted?`` and ``new_record?`` methods, see
 the :ref:`mongoid-persistence-attr` section.
 
 ``Model#save!``
@@ -126,9 +127,8 @@ Read operations retrieve documents from a collection.
 ``Model#attributes``
 ~~~~~~~~~~~~~~~~~~~~
 
-You can use ``Model#attributes`` to get the attributes of a model instance.
-``Model#attributes`` returns the attributes as a hash. This hash also contains 
-the attributes of all embedded documents.
+You can use ``Model#attributes`` to get the attributes of a model instance as 
+a hash. This hash also contains the attributes of all embedded documents.
 
 The following example shows how to use ``Model#attributes`` to get the attributes
 of an existing model instance:
@@ -318,8 +318,8 @@ well as what happens when you delete a document that is not saved to the databas
    :end-before: end delete example
 
 In the preceding example, {+odm+} raises a ``Mongoid::Errors::DocumentNotFound``
-error because the ``person`` document was deleted when ``unsaved_person.delete``
-was called since the two documents had the same value for ``_id``.
+error because ``unsaved_person.delete`` deletes the ``person`` document
+since the two documents have the same value for ``_id``.
 
 ``Model#destroy``
 ~~~~~~~~~~~~~~~~~
@@ -424,9 +424,9 @@ Access Field values
 Get and Set Field Values
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-There are multiple ways to get and set field values on a document. If a field
-is explicitly declared, you can get and set this field value on the document directly.
-The following example shows how to set and then print the ``first_name`` field on a
+There are multiple ways to get and set field values on a document. If you explicitly
+declare a field, you can get and set this field value on the document directly.
+The following example shows how to set and then get the ``first_name`` field on a
 ``Person`` class:
 
 .. literalinclude:: /includes/interact-data/crud.rb
@@ -444,6 +444,8 @@ and set the aliased ``first_name`` field using the ``[]`` and ``[]=`` methods:
    :language: ruby
    :start-after: start field values hash
    :end-before: end field values hash
+
+After this example is executed, ``person.first_name`` holds the value ``"Vanya"``.
 
 The ``[]`` method is an alias for the ``read_attribute`` method and the ``[]=``
 method is an alias for the ``write_attribute`` method. To learn more about these
@@ -473,7 +475,7 @@ are used to read and write to the ``fn`` attribute:
 
 You can also call ``read_attribute`` and ``write_attribute`` directly on a
 model instance to get and set attributes. The following example uses these methods
-on a model instance to get and set the ``first_name`` attribute to the value
+on a model instance to get the ``first_name`` attribute and set it to the value
 ``"Pushkin"``.
 
 .. literalinclude:: /includes/interact-data/crud.rb
