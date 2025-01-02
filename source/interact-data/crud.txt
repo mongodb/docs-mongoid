@@ -267,7 +267,8 @@ that the new document does not specify are removed.
 If the ``replace`` option is set to ``false`` and the document exists in the 
 database, it is updated. It persists any fields in the database that the new 
 document does not specify. If the document does not exist in the
-database, it is inserted. The ``replace`` option is set to ``false`` by default.
+database, it is inserted. If the document's collection does not exist, ``#upsert``
+creates it. The ``replace`` option is set to ``false`` by default.
 
 The following example shows how to use ``Model#upsert`` to first insert a new document
 then replace it:
@@ -277,15 +278,13 @@ then replace it:
    :start-after: start upsert example
    :end-before: end upsert example
 
-.. TODO understand this example
-
 ``Model#touch``
 ~~~~~~~~~~~~~~~
 
 You can use ``Model#touch`` to update a document's ``updated_at`` timestamp with
 the current time. ``Model#touch`` cascades the update to all the document's 
 ``belongs_to`` associations. You can also pass another time field as an option
-to update this field.
+to update this field along with ``updated_at``.
 
 The following example uses ``Model#touch`` to update the 
 ``updated_at`` and ``audited_at`` timestamps:
@@ -294,8 +293,6 @@ The following example uses ``Model#touch`` to update the
    :language: ruby
    :start-after: start touch example
    :end-before: end touch example
-
-.. TODO: are both timestamps updated in one call?
 
 Delete Operations
 -----------------
@@ -647,8 +644,6 @@ To group atomic operations together, you can use the ``#atomically`` method
 on a document. All operations that you give to an ``#atomically`` block are sent to the
 database in a single atomic command.
 
-.. TODO is this still true?
-
 .. note::
    Atomic operations apply to one document at a time. Therefore, nested
    ``#atomically`` blocks cannot make changes to multiple documents in one
@@ -679,13 +674,12 @@ the end of the inner ``#atomically`` block.
 
 Join Contexts
 +++++++++++++
-.. TODO: test if it's join_contexts or context
 
-The ``#atomically`` method accepts a ``join_contexts: true`` option to specify that
+The ``#atomically`` method accepts a ``join_context: true`` option to specify that
 operations execute at the end of the outermost ``#atomically`` block. When you
-enable this option, only the outermost block, or the first block where ``join_contexts``
+enable this option, only the outermost block, or the first block where ``join_context``
 is ``false``, writes changes to the cluster. The following example sets
-the ``join_contexts`` option to ``true``:
+the ``join_context`` option to ``true``:
 
 .. literalinclude:: /includes/interact-data/crud.rb
    :language: ruby

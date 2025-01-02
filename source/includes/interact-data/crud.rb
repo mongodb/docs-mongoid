@@ -110,7 +110,6 @@ person.upsert(replace: true)
 # end upsert example
 
 # start touch example
-person.touch
 person.touch(:audited_at)
 # end touch example
 
