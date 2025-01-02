@@ -45,7 +45,7 @@ modeled and displayed. {+odm+} replaces the default Active Record
 adapter for data modeling in Rails.
 
 To learn more about Ruby on Rails, see the `Getting Started
-with Rails <https://guides.rubyonrails.org/getting_started.html>`__
+with Rails <{+active-record-docs+}/getting_started.html>`__
 guide in the Rails documentation.
 
 MongoDB Atlas is a fully managed cloud database service that hosts your
