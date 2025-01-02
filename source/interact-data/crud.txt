@@ -22,7 +22,7 @@ Create Operations
 -----------------
 
 Create operations add new documents to a collection. If the collection doesn't
-currently exist, the operation creates a new collection. The following section
+exist, the operation creates a new collection. The following section
 describes the methods you can use to create new documents.
 
 ``Model.create!``
@@ -230,7 +230,7 @@ the ``first_name`` and ``last_name`` attributes of an existing document:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ``Model#update_attributes`` is similar to ``Model#update_attributes!`` except it
-does not raise an exception on validation errors. The method will return ``true``
+does not raise an exception on validation errors. The method returns ``true``
 if it passes validation and the document is updated, and ``false`` otherwise.
 
 The following example shows how to use ``Model#update_attributes``:
@@ -284,7 +284,7 @@ then replace it:
 You can use ``Model#touch`` to update a document's ``updated_at`` timestamp with
 the current time. ``Model#touch`` cascades the update to all the document's 
 ``belongs_to`` associations. You can also pass another time field as an option
-to update this field along with ``updated_at``.
+to update this field with ``updated_at``.
 
 The following example uses ``Model#touch`` to update the 
 ``updated_at`` and ``audited_at`` timestamps:
@@ -580,9 +580,9 @@ atomically. They skip validations and callbacks.
 
        ``set`` can also deeply set values on ``embeds_one`` associations.
        If a model instance's ``embeds_one`` association document is ``nil``, one
-       is created prior to the update.
+       is created before the update.
 
-       ``set`` should not be used with ``has_one`` associations.
+       ``set`` cannot be used with ``has_one`` associations.
 
      -
         .. code-block:: ruby
@@ -686,7 +686,7 @@ the ``join_context`` option to ``true``:
    :start-after: start join_contexts atomic
    :end-before: end join_contexts atomic
 
-In the preceding example, the ``$inc`` and ``$set`` operations will be executed at the 
+In the preceding example, the ``$inc`` and ``$set`` operations are executed at the 
 end of the outermost ``#atomically`` block. However, since an exception is raised
 before the block ends and these operations can execute, the changes are not
 persisted.
