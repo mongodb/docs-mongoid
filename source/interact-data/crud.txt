@@ -1,8 +1,15 @@
-.. _mongoid-crud:
+.. _mongoid-data-crud:
 
-===============
-CRUD Operations
-===============
+=======================
+Perform Data Operations
+=======================
+
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: ruby framework, odm, create data, edit
 
 .. contents:: On this page
    :local:
@@ -10,107 +17,114 @@ CRUD Operations
    :depth: 2
    :class: singlecol
 
-.. TODO: add meta and facets
-
 Overview
 --------
 
-CRUD operations create, read, update, and delete documents. In this guide, you 
-can learn how to use {+odm+} to perform CRUD operations.
+In this guide, you can learn how to use {+odm+} to perform CRUD (create,
+read, update, delete) operations to modify the data in your MongoDB
+collections.
+
+{+odm+} supports CRUD operations that you can perform by using other
+{+language+} mappers such as Active Record or Data Mapper.
+When using {+odm+}, general persistence operations perform atomic
+updates on only the fields that you change instead of writing the
+entire document to the database each time, as is the case with other
+ODMs.
 
 Create Operations
 -----------------
 
-Create operations add new documents to a collection. If the collection doesn't
-exist, the operation creates a new collection. The following section
-describes the methods you can use to create new documents.
+You can perform create operations to add new documents to a collection. If
+the collection doesn't exist, the operation implicitly creates the
+collection. The following sections describe the methods you can use to
+create new documents.
 
-``Model.create!``
-~~~~~~~~~~~~~~~~~
+create!
+~~~~~~~
 
-Use ``Model.create!`` to insert a new document or multiple new documents into
-the database. If server or validation errors occur, ``Model.create!`` raises
-an exception.
+Use the ``create!`` method on your model class to insert one or more
+documents into a collection. If any server or validation errors occur,
+``create!`` raises an exception.
 
-To call ``Model.create!``, pass a hash of attributes to create a document with
-the specified attributes. If you want to create and insert multiple documents, 
-you can pass an array of hashes.
+To call ``create!``, pass a hash of attributes that define the document
+you want to insert. If you want to create and insert multiple documents, 
+pass an array of hashes.
 
-The following code shows three ways to call ``Model.create!``. The first example
+This example shows multiple ways to call ``create!``. The first example
 creates one ``Person`` document, and the second example creates two ``Person``
 documents. The third example passes a ``do..end`` block to ``create!``. {+odm+}
-invokes this block with the documents passed to ``create!`` as arguments. ``Model.create!``
-attempts to save the document at the end of the block.
+invokes this block with the documents passed to ``create!`` as
+arguments. The ``create!`` method attempts to save the document at the
+end of the block:
 
 .. literalinclude:: /includes/interact-data/crud.rb
    :language: ruby
    :start-after: start create! example
    :end-before: end create! example
 
-``Model.create``
-~~~~~~~~~~~~~~~~
+create
+~~~~~~
 
-Use ``Model.create`` to insert a new document or multiple new documents into a 
-database. ``Model.create`` is similar to ``Model.create!`` but
-does not raise an exception on validation errors. Like ``Model.create!``, 
-``Model.create`` still raises exceptions on server errors, such as when
-inserting a document with an ``_id`` that already exists in the collection. 
+Use the ``create`` method to insert a new document or multiple new documents into a 
+database. ``create`` does not raise an exception on validation errors,
+unlike the ``-!``-suffixed version. ``create`` does raise exceptions on
+server errors, such as if you insert a document with a duplicate ``_id`` field. 
 
-If ``Model.create`` encounters any validation errors, the document is not inserted
+If ``create`` encounters any validation errors, the document is not inserted
 but is returned with other documents that were inserted. You can use the
-``persisted?``, ``new_record?`` or ``errors`` methods to check which of the
-returned documents were inserted into the database.
+``persisted?``, ``new_record?`` or ``errors`` methods to verify the
+documents that were inserted into the database.
 
-The following code shows how to use ``Model.create``. The first example shows
-how to insert a ``Person`` document. The second example attempts to insert two 
-``Post`` documents, but the second document fails validation because it contains
-a duplicate title.
-The example then uses the ``persisted?`` method to check if the documents are
-successfully inserted into the collection.
+This example shows how to use ``create`` to insert new documents
+into MongoDB. The first example shows how to insert a ``Person``
+document. The second example attempts to insert two ``Post`` documents,
+but the second document fails validation because it contains a duplicate
+title. The example then uses the ``persisted?`` method to confirm which
+documents were successfully inserted into the collection:
 
 .. literalinclude:: /includes/interact-data/crud.rb
    :language: ruby
    :start-after: start create example
    :end-before: end create example
 
-For more information on the ``persisted?`` and ``new_record?`` methods, see
-the :ref:`mongoid-persistence-attr` section.
+To learn more about the ``persisted?`` and ``new_record?`` methods, see
+the :ref:`mongoid-persistence-attr` section of this guide.
 
-``Model#save!``
-~~~~~~~~~~~~~~~
+save!
+~~~~~
 
-Use ``Model#save!`` to atomically save changed attributes to the collection or
-to insert a new document. ``Model#save!`` raises an exception if there are any
-server or validation errors. You can use ``Model.new`` to create a new document
-instance. Then, use ``Model#save!`` to insert the document into the database.
+Use the ``save!`` method to atomically save changed attributes to the collection or
+to insert a new document. ``save!`` raises an exception if there are any
+server or validation errors. You can use the ``new`` method to create a new document
+instance. Then, use ``save!`` to insert the document into the database.
 
-The following example shows how to use ``Model#save!`` to insert a new ``Person``
-document and to update the ``first_name`` attribute of an existing document.
+The following example shows how to use ``save!`` to insert a new ``Person``
+document and update the ``first_name`` field of the existing document:
 
 .. literalinclude:: /includes/interact-data/crud.rb
    :language: ruby
    :start-after: start save! example
    :end-before: end save! example
 
-``Model#save``
-~~~~~~~~~~~~~~
+save
+~~~~
 
-``Model#save`` is similar to ``Model#save!``, except ``Model#save`` does not
-raise an exception if there are any validation errors. ``Model#save`` still raises
-an exception if there are any server errors. The method returns ``true`` if
-all changed attributes were saved, and ``false`` if there were any validation
-errors.
+The ``save`` method does not raise an exception if there are any
+validation errors. ``save`` still raises an exception if there are any
+server errors. The method returns ``true`` if all changed attributes
+are saved, and ``false`` if any validation errors occur.
 
-You can pass the following options to ``Model#save``:
+You can pass the following options to ``save``:
 
-- ``validate: false``: bypass validations when saving the new document or updated
-  attributes.
+- ``validate: false``: To bypass validations when saving the new
+  document or updated attributes.
 
-- ``touch: false``: ignore updates to the ``updated_at`` field when updating
-  attributes. This option has no effect when inserting a new document.
+- ``touch: false``: To ignore updates to the ``updated_at`` field when
+  updating attributes. This option has no effect when inserting a new
+  document.
 
-The following code uses ``Model#save`` to insert a new document. It then updates
-that document while using the ``validate: false`` option.
+The following code uses ``save`` to insert a new document. It then updates
+that document and applies the ``validate: false`` option.
 
 .. literalinclude:: /includes/interact-data/crud.rb
    :language: ruby
@@ -120,18 +134,18 @@ that document while using the ``validate: false`` option.
 Read Operations
 ---------------
 
-Read operations retrieve documents from a collection.
+You can perform read operations to retrieve documents from a collection.
 
 .. _mongoid-read-attributes:
 
-``Model#attributes``
-~~~~~~~~~~~~~~~~~~~~
+attributes
+~~~~~~~~~~
 
-You can use ``Model#attributes`` to get the attributes of a model instance as 
-a hash. This hash also contains the attributes of all embedded documents.
+You can use the ``attributes`` method to retrieve the attributes of a
+model instance as a hash. This hash also contains the attributes of all
+embedded documents.
 
-The following example shows how to use ``Model#attributes`` to get the attributes
-of an existing model instance:
+The following example shows how to use ``attributes``:
 
 .. io-code-block::
 
@@ -141,24 +155,24 @@ of an existing model instance:
       :end-before: end attributes example
     
    .. output::
-      :language: json
+      :language: console
       
-      { "_id" => BSON::ObjectId('633467d03282a43784c2d56e'), 
+      { "_id" => BSON::ObjectId('...'), 
         "first_name" => "James", 
         "last_name" => "Nan" 
       }
 
-``Model#reload``
-~~~~~~~~~~~~~~~~
+reload
+~~~~~~
 
-You can use ``Model#reload`` to get the most recent version of a document from
-the database. When you reload a document, its embedded associations are also
-reloaded in the same query. However, {+odm+} does not reload referenced associations.
-Instead, it clears these values so that they are loaded from the database during
-the next access. 
+You can use the ``reload`` method to access the most recent version of a
+document from MongoDB. When you reload a document, {+odm+} also reloads any embedded
+associations in the same query. However, {+odm+} does not reload
+referenced associations. Instead, it clears these values so that they
+are loaded from the database during the next access.
 
-When you call ``Model#reload`` on a document, any unsaved changes to the document
-are lost. The following code shows how to call ``Model#reload`` on a document:
+When you call ``reload`` on a document, any unsaved changes to the document
+are lost. The following code shows how to call ``reload`` on a document:
 
 .. literalinclude:: /includes/interact-data/crud.rb
    :language: ruby
@@ -166,30 +180,30 @@ are lost. The following code shows how to call ``Model#reload`` on a document:
    :end-before: end reload example
 
 The preceding example updates the ``name`` field on the ``band`` document,
-but does not save it. When you call ``band.reload``, the result is stored in
-``band``. However, because the change to ``name`` was not persisted to the
-database, ``name`` is rewritten to contain the most recent value in the database.
+but does not save the new value. Because {+odm+} did not persist the
+change to the ``name`` value, ``name`` contains the original value saved
+to the database.
 
 .. note:: Document Not Found Errors
 
    When {+odm+} cannot find a document in the database, by default it raises a
-   ``Mongoid::Errors::DocumentNotFound`` error. However, you can set the
+   ``Mongoid::Errors::DocumentNotFound`` error. You can set the
    ``raise_not_found_error`` configuration option to ``false`` in your ``mongoid.yml`` 
-   file. When ``raise_not_found_error`` is set to ``false`` and the database does
-   not contain a matching document, {+odm+} replaces the document with a newly-created
-   document and sets its attributes to default values. Generally, it also changes
-   the value of the ``_id`` field. For this reason, we recommend not using
-   ``#reload`` when ``raise_not_found_error`` is set to ``false``.
+   file to direct {+odm+} to save a new document and set its attributes to
+   default values. Generally, it also changes the value of the ``_id``
+   field. For this reason, we do not recommend using ``reload`` when
+   ``raise_not_found_error`` is set to ``false``.
 
 Reload Unsaved Documents
 ++++++++++++++++++++++++
 
-When you call ``#reload`` on a document that is not persisted, the method performs
-a ``find`` query using the document's ``_id`` value. 
+When you call ``reload`` on a document that is not persisted, the method performs
+a ``find`` query on the document's ``_id`` value. 
 
-The following example uses ``#reload`` on a document that has not been saved and
-prints out its ``name``.
-``#reload`` performs a ``find`` operation using the document's ``_id`` value.
+The following example calls ``reload`` on a document that has not been
+saved and prints out the ``name`` field value. ``reload`` performs a
+``find`` operation using the document's ``_id`` value, which causes
+{+odm+} to retrieve the existing document in the collection:
 
 .. io-code-block::
    :copyable: true
@@ -207,18 +221,18 @@ prints out its ``name``.
 Update Operations
 -----------------
 
-Update operations modify existing documents in a collection.
+You can perform update operations to modify existing documents in a
+collection. If you attempt to update a deleted document, {+odm+} raises
+a ``FrozenError`` exception.
 
-Attempting to update a deleted document results in a ``FrozenError`` exception.
+update_attributes!
+~~~~~~~~~~~~~~~~~~
 
-``Model#update_attributes!``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-You can use ``Model#update_attributes!`` to update the attributes of an
+You can use the ``update_attributes!`` method to update the attributes of an
 existing model instance. This method raises an exception if it encounters
-a validation or server error.
+any validation or server errors.
 
-The following example shows how to use ``Model#update_attributes!`` to update
+The following example shows how to use ``update_attributes!`` to update
 the ``first_name`` and ``last_name`` attributes of an existing document:
 
 .. literalinclude:: /includes/interact-data/crud.rb
@@ -226,67 +240,74 @@ the ``first_name`` and ``last_name`` attributes of an existing document:
    :start-after: start update attributes! example
    :end-before: end update attributes! example
 
-``Model#update_attributes``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. tip::
 
-``Model#update_attributes`` is similar to ``Model#update_attributes!`` except it
-does not raise an exception on validation errors. The method returns ``true``
-if it passes validation and the document is updated, and ``false`` otherwise.
+   {+odm+} provides the nested attributes feature that allows you to
+   update a document and its nested associations in one call. To learn
+   more, see the :ref:`mongoid-data-nested-attr` guide.
 
-The following example shows how to use ``Model#update_attributes``:
+update_attributes
+~~~~~~~~~~~~~~~~~
+
+The ``update_attributes`` method does not raise an exception on
+validation errors. The method returns ``true`` if it passes validation
+and the document is updated, and ``false`` otherwise.
+
+The following example shows how to use ``update_attributes``:
 
 .. literalinclude:: /includes/interact-data/crud.rb
    :language: ruby
    :start-after: start update attributes example
    :end-before: end update attributes example
 
-``Model#update_attribute``
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+``update_attribute``
+~~~~~~~~~~~~~~~~~~~~
 
-You can use ``Model#update_attribute`` to bypass validations and update a single 
-attribute of a model instance.
+You can use the ``update_attribute`` method to bypass validations and
+update a *single* attribute of a model instance.
 
-The following example shows how to use ``Model#update_attribute`` to update
-a document's ``first_name`` attribute:
+The following example shows how to use ``update_attribute`` to update
+the value of a document's ``first_name`` attribute:
 
 .. literalinclude:: /includes/interact-data/crud.rb
    :language: ruby
    :start-after: start update attribute example
    :end-before: end update attribute example
 
-``Model#upsert``
-~~~~~~~~~~~~~~~~
+upsert
+~~~~~~
 
-You can use ``Model#upsert`` to update, insert, or replace a document.
+You can use the ``upsert`` method to update, insert, or replace a
+document.
 
-``Model#upsert`` accepts a ``replace`` option. If this option is set to ``true``
-and the document that calls ``Model#upsert`` exists in the database, the new document
-replaces the one in the database. Any fields in the database
-that the new document does not specify are removed.
+``upsert`` accepts a ``replace`` option. If you set this option to ``true``
+and the document that calls ``upsert`` already exists in the database,
+the new document replaces the one in the database. Any fields in the
+database that the new document does not replace are removed.
 
-If the ``replace`` option is set to ``false`` and the document exists in the 
-database, it is updated. It persists any fields in the database that the new 
-document does not specify. If the document does not exist in the
-database, it is inserted. If the document's collection does not exist, ``#upsert``
-creates it. The ``replace`` option is set to ``false`` by default.
+If you set the ``replace`` option to ``false`` and the document exists in the 
+database, it is updated. {+odm+} does not change any fields other than the
+ones specified in the update document. If the document does not exist in the
+database, it is inserted with the fields and values specified in the
+update document. The ``replace`` option is set to ``false`` by default.
 
-The following example shows how to use ``Model#upsert`` to first insert a new document
-then replace it:
+The following example shows how to use ``upsert`` to first insert a new
+document, then replace it by setting ``replace: true``:
 
 .. literalinclude:: /includes/interact-data/crud.rb
    :language: ruby
    :start-after: start upsert example
    :end-before: end upsert example
 
-``Model#touch``
-~~~~~~~~~~~~~~~
+touch
+~~~~~
 
-You can use ``Model#touch`` to update a document's ``updated_at`` timestamp with
-the current time. ``Model#touch`` cascades the update to all the document's 
-``belongs_to`` associations. You can also pass another time field as an option
-to update this field with ``updated_at``.
+You can use the ``touch`` method to update a document's ``updated_at``
+timestamp to the current time. ``touch`` cascades the update to any of
+the document's ``belongs_to`` associations. You can also pass another
+time-valued field as an option to also update that field.
 
-The following example uses ``Model#touch`` to update the 
+The following example uses ``touch`` to update the 
 ``updated_at`` and ``audited_at`` timestamps:
 
 .. literalinclude:: /includes/interact-data/crud.rb
@@ -297,17 +318,19 @@ The following example uses ``Model#touch`` to update the
 Delete Operations
 -----------------
 
-Delete operations remove documents from a collection.
+You can perform delete operations to remove documents from a collection.
 
-``Model#delete``
-~~~~~~~~~~~~~~~~
+delete
+~~~~~~
 
-You can use ``Model#delete`` to delete a document from the database. When you
-use ``Model#delete``, {+odm+} does not run callbacks. If the document is not
-saved to the database, ``Model#delete`` attempts to delete any document with the same ``_id``.
+You can use the ``delete`` method to delete a document from the database. When you
+use ``delete``, {+odm+} does not run any callbacks. If the document is not
+saved to the database, ``delete`` attempts to delete any document with
+the same ``_id`` value.
 
-The following example shows how to delete a document using ``Model#delete``, as
-well as what happens when you delete a document that is not saved to the database.
+The following example shows how to use the ``delete`` method and
+demonstrates what happens when you delete a document that is not saved
+to the database:
 
 .. literalinclude:: /includes/interact-data/crud.rb
    :language: ruby
@@ -315,44 +338,49 @@ well as what happens when you delete a document that is not saved to the databas
    :end-before: end delete example
 
 In the preceding example, {+odm+} raises a ``Mongoid::Errors::DocumentNotFound``
-error because ``unsaved_person.delete`` deletes the ``person`` document
-since the two documents have the same value for ``_id``.
+error when you call ``reload`` because ``unsaved_person.delete`` deletes
+the ``person`` document because the two documents have the same value
+for ``_id``.
 
-``Model#destroy``
-~~~~~~~~~~~~~~~~~
+destroy
+~~~~~~~
 
-``Model#destroy`` is similar to ``Model#delete`` except {+odm+} runs callbacks
-when it calls ``Model#destroy``. If the document is not found in the database,
-``Model#destroy`` also attempts to delete any document with the same ``_id``.
+The ``destroy`` method operates similarly to ``delete``, except {+odm+}
+runs callbacks when you call ``destroy``. If the document is not found
+in the database, ``destroy`` attempts to delete any document with
+the same ``_id``.
 
-The following example shows how to use ``Model#destroy``:
+The following example shows how to use ``destroy``:
 
 .. literalinclude:: /includes/interact-data/crud.rb
    :language: ruby
    :start-after: start destroy example
    :end-before: end destroy example
 
-``Model.delete_all``
-~~~~~~~~~~~~~~~~~~~~
+delete_all
+~~~~~~~~~~
 
-``Model.delete_all`` deletes all documents from the collection that ``Model`` 
-represents. ``Model.delete_all`` does not run callbacks.
+The ``delete_all`` method deletes all documents from the collection that
+are modeled by your {+odm+} model class. ``delete_all`` does not run
+callbacks.
 
-The following example shows how to use ``Model.delete_all``:
+The following example shows how to use ``delete_all`` to delete all
+``Person`` documents:
 
 .. literalinclude:: /includes/interact-data/crud.rb
    :language: ruby
    :start-after: start delete all example
    :end-before: end delete all example
 
-``Model.destroy_all``
-~~~~~~~~~~~~~~~~~~~~~
+destroy_all
+~~~~~~~~~~~
 
-``Model.destroy_all`` deletes all documents from the collection that ``Model`` 
-represents. ``Model.destroy_all`` runs callbacks. This can be an expensive operation
-because all documents are loaded into memory.
+The ``destroy_all`` method deletes all documents from the collection
+that are modeled by your {+odm+} model class. This can be an expensive
+operation because {+odm+} loads all documents into memory.
 
-The following example shows how to use ``Model.destroy_all``:
+The following example shows how to use ``destroy_all`` to delete all
+``Person`` documents:
 
 .. literalinclude:: /includes/interact-data/crud.rb
    :language: ruby
@@ -364,17 +392,17 @@ The following example shows how to use ``Model.destroy_all``:
 Persistence Attributes
 ----------------------
 
-{+odm+} provides the following attributes to check if a document is
-persisted to the database.
+The following sections describe the attributes that {+odm+} provides that
+you can use to check if a document is persisted to the database.
 
-``Model#new_record?``
-~~~~~~~~~~~~~~~~~~~~~
+new_record?
+~~~~~~~~~~~
 
-``Model#new_record?`` returns ``true`` if the model instance has not been 
-saved to the database yet, and ``false`` otherwise. It is the opposite of
-``Model#persisted?``.
+The ``new_record?`` attribute returns ``true`` if the model instance is
+*not saved* to the database yet, and ``false`` otherwise. It checks for
+the opposite condition as the ``persisted?`` attribute.
 
-The following example shows how to use ``Model#new_record?``:
+The following example shows how to use ``new_record?``:
 
 .. io-code-block::
 
@@ -390,14 +418,14 @@ The following example shows how to use ``Model#new_record?``:
 
       false
 
-``Model#persisted?``
-~~~~~~~~~~~~~~~~~~~~
+persisted?
+~~~~~~~~~~
 
-``Model#persisted?`` returns ``true`` if the model instance is persisted to the
-database, and ``false`` otherwise. ``Model#persisted?`` is the opposite of
-``Model#new_record?``.
+The ``persisted?`` attribute returns ``true`` if {+odm+} persists the
+model instance, and ``false`` otherwise. It checks for the opposite
+condition as the ``new_record?`` attribute.
 
-The following example shows how to use ``Model#persisted?``:
+The following example shows how to use ``persisted?``:
 
 .. io-code-block::
 
@@ -413,55 +441,57 @@ The following example shows how to use ``Model#persisted?``:
 
       true
 
-Access Field values
+Access Field Values
 -------------------
 
-{+odm+} provides several ways to access field values on a document.
+{+odm+} provides several ways to access field values on a document. The
+following sections describe how you can access field values.
 
 Get and Set Field Values
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 There are multiple ways to get and set field values on a document. If you explicitly
 declare a field, you can get and set this field value on the document directly.
-The following example shows how to set and then get the ``first_name`` field on a
-``Person`` class:
+The following example shows how to set and get the ``first_name`` field for a
+``Person`` instance:
 
 .. literalinclude:: /includes/interact-data/crud.rb
    :language: ruby
    :start-after: start field values default
    :end-before: end field values default
 
-In the preceding example, ``person.first_name`` holds the value ``"Artem"``.
+The preceding example first uses the ``first_name`` attribute to set a
+value, then calls it again to retrieve the value.
 
-You can also use the ``[]`` and ``[]=`` methods on a {+odm+} model instance to
-access attributes by using Hash syntax. The following example shows how to get
-and set the aliased ``first_name`` field using the ``[]`` and ``[]=`` methods:
+You can also use the ``[]`` and ``[] =`` methods on a {+odm+} model instance to
+access attributes by using hash syntax. The ``[]`` method is an alias
+for the ``read_attribute`` method and the ``[] =`` method is an alias
+for the ``write_attribute`` method. The following example shows how to
+get and set the aliased ``first_name`` field by using the ``[]`` and
+``[]=`` methods:
 
 .. literalinclude:: /includes/interact-data/crud.rb
    :language: ruby
    :start-after: start field values hash
    :end-before: end field values hash
 
-After this example is executed, ``person.first_name`` holds the value ``"Vanya"``.
-
-The ``[]`` method is an alias for the ``read_attribute`` method and the ``[]=``
-method is an alias for the ``write_attribute`` method. To learn more about these
-methods, see the :ref:`mongoid-read-write-attributes` section on this page.
+To learn more about these methods, see the
+:ref:`mongoid-read-write-attributes` section of this guide.
 
 .. _mongoid-read-write-attributes:
 
-``read_attribute`` & ``write_attribute``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+read_attribute and write_attribute
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can use the ``read_attribute`` and ``write_attribute`` methods to specify
 custom behavior when reading or writing fields. You can use these methods
-when defining a model or by calling them from model documents.
+when defining a model or by calling them on model instances.
 
 To use ``read_attribute`` to get a field, pass the name of the field to the method.
 To use ``write_attribute`` to set a field, pass the name of the field and the
-value that you want to set it to.
+value to assign.
 
-The following example uses ``read_attribute`` and ``write_attribute`` within
+The following example uses ``read_attribute`` and ``write_attribute`` in
 a model definition to define ``first_name`` and ``first_name=`` as methods that
 are used to read and write to the ``fn`` attribute:
 
@@ -483,13 +513,13 @@ on a model instance to get the ``first_name`` attribute and set it to the value
 Bulk Write Attributes
 ~~~~~~~~~~~~~~~~~~~~~
 
-You can write to multiple fields at the same time by using the ``#attributes=``
+You can write to multiple fields at the same time by using the ``attributes=``
 or ``write_attributes`` methods on a model instance.
 
-To use the ``#attributes=`` method, call the method on a model instance and 
-pass a Hash object that contains the fields and values that you want to set. 
-The following example shows how to use the ``#attributes=`` method to set the 
-``first_name`` and ``middle_name`` fields on the ``person`` document:
+To use the ``attributes=`` method, call the method on a model instance and 
+pass a hash object that contains the fields and values that you want to set. 
+The following example shows how to use the ``attributes=`` method to set the 
+``first_name`` and ``middle_name`` fields on a ``person`` document:
 
 .. literalinclude:: /includes/interact-data/crud.rb
    :language: ruby 
@@ -499,7 +529,7 @@ The following example shows how to use the ``#attributes=`` method to set the
 To use the ``write_attributes`` method, call the method on a model instance 
 and pass the fields and values that you want to set. The following example
 shows how to use the ``write_attributes`` method to set the ``first_name`` and
-``middle_name`` fields on the ``person`` document:
+``middle_name`` fields on a ``person`` document:
 
 .. literalinclude:: /includes/interact-data/crud.rb
    :language: ruby 
@@ -509,160 +539,105 @@ shows how to use the ``write_attributes`` method to set the ``first_name`` and
 Atomic Update Operators
 -----------------------
 
-{+odm+} provides support for the following update operators. You can call these
-operators as methods on {+odm+} documents. These methods perform operations 
-atomically. They skip validations and callbacks.
+{+odm+} provides support for the following update operators that you can
+call as methods on model instances. These methods perform operations 
+atomically and skip validations and callbacks.
 
-{+odm+} supports the following operators:
+The following table describe the operators supported by {+odm+}:
 
 .. list-table::
    :header-rows: 1
-   :widths: 30 60
+   :widths: 20 20 60
 
    * - Operator
+     - Description
      - Example
 
-   * - ``Model#add_to_set``
-     -
-        .. code-block:: ruby
+   * - ``add_to_set``
+     - Adds a specified value to an array-valued field.
+     - ``person.add_to_set(aliases: "Bond")``
 
-          person.add_to_set(aliases: "Bond")
+   * - ``bit``
+     - Performs a bitwise update of a field.
+     - ``person.bit(age: { and: 10, or: 12 })``
 
-   * - ``Model#bit``
-     -
-        .. code-block:: ruby
+   * - ``inc``
+     - Increments the value of a field.
+     - ``person.inc(age: 1)``
 
-          person.bit(age: { and: 10, or: 12 })
+   * - ``pop``
+     - Removes the first or last element of an array field.
+     - ``person.pop(aliases: 1)``
 
-   * - ``Model#inc``
-     -
-        .. code-block:: ruby
+   * - ``pull``
+     - Removes all instances of a value or values that match a specified
+       condition from an array field.
+     - ``person.pull(aliases: "Bond")``
 
-          person.inc(age: 1)
+   * - ``pull_all``
+     - Removes all instances of the specified values from an array
+       field.
+     - ``person.pull_all(aliases: [ "Bond", "James" ])``
 
-   * - ``Model#pop``
-     -
-        .. code-block:: ruby
+   * - ``push``
+     - Appends a specified value to an array field.
+     - ``person.push(aliases: ["007","008"])``
 
-          person.pop(aliases: 1)
+   * - ``rename``
+     - Renames a field in all matching documents.
+     - ``person.rename(bday: :dob)``
 
-   * - ``Model#pull``
-     -
-        .. code-block:: ruby
+   * - ``set``
+     - | Updates an attribute on the model instance and, if the instance
+         is already persisted, performs an atomic ``$set`` on the field, bypassing
+         validations.
 
-          person.pull(aliases: "Bond")
+       | ``set`` can also deeply set values on ``Hash`` fields.
 
-   * - ``Model#pull_all``
-     -
-        .. code-block:: ruby
+       | ``set`` can also deeply set values on ``embeds_one`` associations.
+         If a model instance's ``embeds_one`` association document is ``nil``, one
+         is created before the update.
 
-          person.pull_all(aliases: [ "Bond", "James" ])
+       | ``set`` cannot be used with ``has_one`` associations.
 
-   * - ``Model#push``
-     -
-        .. code-block:: ruby
-
-          person.push(aliases: ["007","008"])
-
-   * - ``Model#rename``
-     -
-        .. code-block:: ruby
-
-          person.rename(bday: :dob)
-
-   * - ``Model#set``
-
-       Updates an attribute on the model instance and, if the instance
-       is already persisted, performs an atomic ``$set`` on the field, bypassing
-       validations.
-
-       ``set`` can also deeply set values on Hash fields.
-
-       ``set`` can also deeply set values on ``embeds_one`` associations.
-       If a model instance's ``embeds_one`` association document is ``nil``, one
-       is created before the update.
-
-       ``set`` cannot be used with ``has_one`` associations.
-
-     -
-        .. code-block:: ruby
+     -  .. code-block:: ruby
 
           person = Person.create!(name: "Ricky Bobby")
           person.set(name: "Tyler Durden") # updates name in the database
 
-    	  person = Person.new
-          person.set(name: "Tyler Durden") # does not write to database
-    	  person.name # => "Tyler Durden"
-    	  person.persisted? # => true
+   * - ``unset``
+     - Deletes a particular field in all matching documents.
+     - ``person.unset(:name)``
 
-    	  class Post
-    	    include Mongoid::Document
-
-    	    field :metadata, type: Hash
-    	  end
-
-          post = Post.create!
-          post.set('metadata.published_at' => Time.now)
-          post.metadata['published_at'] # => Time instance
-
-          post.set('metadata.approved.today' => true)
-          post.metadata['approved'] # => {'today' => true}
-
-          class Flight
-            include Mongoid::Document
-
-            embeds_one :plan
-          end
-
-          class Plan
-            include Mongoid::Document
-
-            embedded_in :flight
-
-            field :route, type: String
-          end
-
-          flight = Flight.create!
-          flight.plan # => nil
-          flight.set('plan.route', 'test route')
-          flight.plan # => Plan instance
-          flight.plan.route # => "test route"
-
-   * - ``Model#unset``
-     -
-        .. code-block:: ruby
-
-          person.unset(:name)
-
-To learn more about update operators, see the :manual:`Update Operators <reference/operator/update>` 
-guide in the MongoDB {+server-manual+}.
+To learn more about update operators, see :manual:`Update Operators
+<reference/operator/update>` in the MongoDB {+server-manual+}.
 
 Group Atomic Operations
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-To group atomic operations together, you can use the ``#atomically`` method 
-on a document. All operations that you give to an ``#atomically`` block are sent to the
-database in a single atomic command.
+To group atomic operations together, you can use the ``atomically`` method 
+on a model instance. {+odm+} sends all operations that you pass to an
+``atomically`` block in a single atomic command.
 
-.. note::
+.. note:: Use Transactions to Modify Multiple Documents Atomically
+
    Atomic operations apply to one document at a time. Therefore, nested
-   ``#atomically`` blocks cannot make changes to multiple documents in one
+   ``atomically`` blocks cannot make changes to multiple documents in one
    atomic operation. To make changes to multiple documents in one atomic
-   operation, use a multi-document transaction. To learn more about transactions,
-   see :ref:`transactions`.
+   operation, use a multi-document transaction. To learn more about
+   transactions, see the :ref:`mongoid-data-txn` guide.
 
-To use the ``#atomically`` method, call it on a document and pass a block to it.
-The following example shows how to use ``#atomically`` to atomically perform an 
-``$inc`` and ``$set`` operation:
+The following example shows how to use ``atomically`` to atomically
+update multiple fields in a document:
 
 .. literalinclude:: /includes/interact-data/crud.rb
    :language: ruby
    :start-after: start atomically example
    :end-before: end atomically example
 
-You can nest ``#atomically`` blocks. By default, {+odm+} performs atomic writes
-defined by each block when the block ends. The following example shows how to nest
-``#atomically`` blocks:
+You can nest ``#atomically`` blocks when updating a single document. By
+default, {+odm+} performs atomic writes defined by each block when the
+block ends. The following example shows how to nest ``atomically`` blocks:
 
 .. literalinclude:: /includes/interact-data/crud.rb
    :language: ruby
@@ -670,15 +645,15 @@ defined by each block when the block ends. The following example shows how to ne
    :end-before: end default block atomic example
 
 In the preceding example, the ``$inc`` and ``$set`` operations are executed at
-the end of the inner ``#atomically`` block.
+the end of the inner ``atomically`` block.
 
 Join Contexts
 +++++++++++++
 
-The ``#atomically`` method accepts a ``join_context: true`` option to specify that
-operations execute at the end of the outermost ``#atomically`` block. When you
+The ``atomically`` method accepts a ``join_context: true`` option to specify that
+operations execute at the end of the outermost ``atomically`` block. When you
 enable this option, only the outermost block, or the first block where ``join_context``
-is ``false``, writes changes to the cluster. The following example sets
+is ``false``, writes changes to the database. The following example sets
 the ``join_context`` option to ``true``:
 
 .. literalinclude:: /includes/interact-data/crud.rb
@@ -686,20 +661,29 @@ the ``join_context`` option to ``true``:
    :start-after: start join_contexts atomic
    :end-before: end join_contexts atomic
 
-In the preceding example, the ``$inc`` and ``$set`` operations are executed at the 
-end of the outermost ``#atomically`` block. However, since an exception is raised
-before the block ends and these operations can execute, the changes are not
+In the preceding example, {+odm+} performs the ``$inc`` and ``$set`` operations at the 
+end of the outermost ``atomically`` block. However, since an exception is raised
+before the block ends and these operations can run, the changes are not
 persisted.
 
 You can also enable context joining globally, so that operations execute in the
-outermost ``#atomically`` block by default. To do this, set the ``join_contexts``
-configuration option to ``true`` in your ``mongoid.yml`` file. To learn more about
-{+odm+} configuration options, see :ref:`configuration-options`.
+outermost ``atomically`` block by default. To enable this option
+globally, set the ``join_contexts`` configuration option to ``true`` in
+your ``mongoid.yml`` file. To learn more about {+odm+} configuration
+options, see :ref:`configuration-options`.
 
-When you globally set ``join_contexts`` to ``true``, you can use the ``join_context: false``
-option on an ``#atomically`` block to execute operations at the end of the block.
+When you globally set ``join_contexts`` to ``true``, you can use the
+``join_context: false`` option on an ``atomically`` block to run
+operations at the end of the block for that block only.
 
-API Documentation
------------------
+Additional Information
+----------------------
 
-.. TODO
+To learn more about specifying query filters, see the
+:ref:`mongoid-data-specify-query` guide.
+
+To learn more about setting validation rules on your models, see the
+:ref:`mongoid-modeling-validation` guide.
+
+To learn more about defining callbacks, see the
+:ref:`mongoid-modeling-callbacks` guide.
