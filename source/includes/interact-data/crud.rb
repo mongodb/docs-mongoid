@@ -26,7 +26,6 @@ class Post
 end
 
 posts = Post.create([{title: "test"}, {title: "test"}])
-
 posts.map { |post| post.persisted? } # => [true, false]
 # end create example
 
@@ -54,21 +53,20 @@ person.save(validate: false)
 
 # start attributes example
 person = Person.new(first_name: "James", last_name: "Nan")
-
 person.save
 
 puts person.attributes
 # end attributes example
 
 # start reload example
-band = Band.create!(name: 'foo')
-# => #<Band _id: 6206d06de1b8324561f179c9, name: "foo">
+band = Band.create!(name: 'Sun 1')
+# => #<Band _id: ..., name: "Sun 1">
 
-band.name = 'bar'
-# => #<Band _id: 6206d06de1b8324561f179c9, name: "bar">
+band.name = 'Moon 2'
+# => #<Band _id: ..., name: "Moon 2">
 
 band.reload
-# => #<Band _id: 6206d06de1b8324561f179c9, name: "foo">
+# => #<Band _id: ..., name: "Sun 1">
 # end reload example
 
 # start reload unsaved example
@@ -115,12 +113,10 @@ person.touch(:audited_at)
 
 # start delete example
 person.delete
-
-person = Person.create!(...)
+person = Person.create!(name: 'Edna Park')
 
 unsaved_person = Person.new(id: person.id)
 unsaved_person.delete
-
 person.reload
 # end delete example
 
@@ -161,7 +157,6 @@ puts person.persisted?
 # start field values default
 class Person
   include Mongoid::Document
-  
   field :first_name
 end
   
@@ -187,7 +182,7 @@ person[:first_name] = "Vanya"
 # => "Artem"
 
 person
-# => #<Person _id: 606483742c97a629bdde5cfc, first_name(fn): "Vanya">
+# => #<Person _id: ..., first_name(fn): "Vanya">
 # end field values hash
 
 # start read write attributes
@@ -218,7 +213,7 @@ class Person
 end
   
 person = Person.new(first_name: "Artem")
-# => #<Person _id: 60647a522c97a6292c195b4b, first_name(fn): "Artem">
+# => #<Person _id: ..., first_name(fn): "Artem">
 
 person.read_attribute(:first_name)
 # => "Artem"
@@ -229,7 +224,7 @@ person.read_attribute(:fn)
 person.write_attribute(:first_name, "Pushkin")
 
 person
-# => #<Person _id: 60647a522c97a6292c195b4b, first_name(fn): "Pushkin">
+# => #<Person _id: ..., first_name(fn): "Pushkin">
 # end read write instance
 
 # start attributes= example
