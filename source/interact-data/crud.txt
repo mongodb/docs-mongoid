@@ -603,7 +603,8 @@ The following table describe the operators supported by {+odm+}:
      -  .. code-block:: ruby
 
           person = Person.create!(name: "Ricky Bobby")
-          person.set(name: "Tyler Durden") # updates name in the database
+          # Updates `name` in the database
+          person.set(name: "Tyler Durden")
 
    * - ``unset``
      - Deletes a particular field in all matching documents.

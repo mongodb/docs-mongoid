@@ -208,7 +208,6 @@ person.first_name
 # start read write instance
 class Person
   include Mongoid::Document
-  
   field :first_name, as: :fn
 end
   
