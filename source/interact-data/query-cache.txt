@@ -83,9 +83,9 @@ behavior if you enable query caching.
 
 For example, if you call the ``all`` method on a model class before
 calling ``first``, you might expect the ``first`` method to use the
-cached results from ``all``. However, because of the sort that {+odm+}
-applies to the second call, both methods query the database and
-separately cache results.
+cached results from ``all``. However, because {+odm+} applies a sort
+to the second call, both methods query the database and separately cache
+results.
 
 To use the cached results when calling the ``first`` method, call
 ``all.to_a.first`` on the model class, as shown in the following example
@@ -94,6 +94,11 @@ code:
 .. code-block::
 
    Band.all.to_a.first
+
+In the preceding example, chaining the ``to_a`` method runs the query
+and converts the results into an array in memory. Then, the ``first``
+method simply returns the first array entry instead of triggering
+another query and caching the results.
 
 Additional Information
 ----------------------

@@ -40,10 +40,9 @@ The preceding code schedules the queries for asynchronous execution.
 You can then access the results of the queries in your view as you
 normally do for synchronous queries.
 
-Even if a query is scheduled for asynchronous execution, it might be
+Even if you schedule a query for asynchronous execution, it might be
 executed synchronously on the caller's thread. The following list
-describes possible scenarios that this might occur depending on when the
-query results are being accessed:
+describes possible scenarios in which this situation might occur:
 
 1. If the scheduled asynchronous task has been executed, the
    results are returned.
