@@ -47,15 +47,15 @@ query criteria:
   - Example: ``Band.where(name: 'Daft Punk').create``
 
 - ``create!``: Saves a model instance to MongoDB or raises an exception
-  if a validation error occurs.
+  if a validation error occurs
 
   - Example: ``Band.where(name: 'Daft Punk').create!``
 
-- ``build``: Creates an unsaved model instance.
+- ``build``: Creates an unsaved model instance
 
   - Example: ``Band.where(name: 'Daft Punk').build``
 
-- ``new``: Creates an unsaved model instance.
+- ``new``: Creates an unsaved model instance
 
   - Example: ``Band.where(name: 'Daft Punk').new``
 
@@ -65,58 +65,58 @@ Update Documents
 You can use the following methods to update documents based on your
 query criteria:
 
-- ``update``: Updates attributes of the first matching document.
+- ``update``: Updates attributes of the first matching document
 
   - Example: ``Band.where(name: 'Sundown').update(label: 'ABC Records')``
 
-- ``update_all``: Updates attributes of all matching documents.
+- ``update_all``: Updates attributes of all matching documents
 
   - Example: ``Band.where(country: 'Canada').update_all(label: 'ABC Records')``
 
-- ``add_to_set``: Adds a value to a specified array in all matching documents.
+- ``add_to_set``: Adds a value to a specified array in all matching documents
 
   - Example: ``Band.where(name: 'Sun Down').add_to_set(label: 'ABC Records')``
 
-- ``bit``: Performs a bitwise update of a field.
+- ``bit``: Performs a bitwise update of a field
 
   - Example: ``Band.where(name: 'Sun Down').bit(likes: { and: 14, or: 4 })``
 
-- ``inc``: Increments the value of a field.
+- ``inc``: Increments the value of a field
 
   - Example: ``Band.where(name: 'Sun Down').inc(likes: 14)``
   
-- ``pop``: Removes the first or last element of an array field.
+- ``pop``: Removes the first or last element of an array field
 
   - Example: ``Band.where(name: 'Sun Down').pop(members: -1)``
   
 - ``pull``: Removes all instances of a value or values that match a
-  specified condition from an array field.
+  specified condition from an array field
 
   - Example: ``Band.where(name: 'Sun Down').pull(members: 'Jonah Larsen')``
   
-- ``pull_all``: Removes all instances of the specified values from an array field.
+- ``pull_all``: Removes all instances of the specified values from an array field
 
   - Example: ``Band.where(name: 'Sun Down').pull_all(:members, [ 'Jonah Larsen', 'Dan Jones' ])``
 
-- ``push``: Appends a specified value to an array field.
+- ``push``: Appends a specified value to an array field
 
   - Example: ``Band.where(name: 'Sun Down').push(members: 'Jonah Larsen')``
 
 - ``push_all``: Appends a specified value by using the ``$each``
-  operator in an array field.
+  operator in an array field
 
   - Example: ``Band.where(name: 'Sun Down').push_all(members: [ 'Jonah Larsen', 'Dan Jones' ])``
 
-- ``rename``: Renames a field in all matching documents.
+- ``rename``: Renames a field in all matching documents
 
   - Example: ``Band.where(name: 'Sun Down').rename(name: :title)``
 
 - ``set``: Sets a new value for a specified field in all matching
-  documents.
+  documents
 
   - Example: ``Band.where(name: 'Sun Down').set(likes: 10000)``
 
-- ``unset``: Deletes a particular field in all matching documents.
+- ``unset``: Deletes a particular field in all matching documents
 
   - Example: ``Band.where(name: 'Sun Down').unset(:likes)``
 
@@ -130,7 +130,7 @@ query criteria:
 
   - Example: ``Band.where(label: 'ABC Records').delete``
 
-- ``update_all``: Deletes all matching documents while
+- ``destroy``: Deletes all matching documents while
   running callbacks. This method loads all documents into memory.
 
   - Example: ``Band.where(label: 'ABC Records').destroy``

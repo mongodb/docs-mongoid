@@ -40,9 +40,10 @@ Automatic
 ~~~~~~~~~
 
 The {+ruby-driver+} provides middleware to automatically enable the
-query cache for Rack web requests and Active Job job runs. See the
+query cache for Rack web requests and Active Job job runs. To view
+instructions on automatically enabling the query cache, see the
 :ref:`Query Cache Rack Middleware <query-cache-middleware>` section of
-the Configuration guide for instructions.
+the configuration guide.
 
 .. note::
     

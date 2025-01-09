@@ -44,15 +44,15 @@ Even if you schedule a query for asynchronous execution, it might be
 executed synchronously on the caller's thread. The following list
 describes possible scenarios in which this situation might occur:
 
-1. If the scheduled asynchronous task has been executed, the
-   results are returned.
+- If {+odm+} completes the scheduled asynchronous task, it returns
+  the results.
 
-#. If the task has been started, but hasn't completed, the caller's
-   thread blocks until the task is finished.
+- If {+odm+} starts but does not complete the task, the caller's
+  thread blocks until {+odm+} finishes the task.
 
-#. If the task has not been started yet, it is removed from the
-   execution queue, and the query is executed synchronously on the
-   caller's thread.
+- If {+odm+} has not started a task yet, it is removed from the
+  execution queue, and {+odm+} runs the query synchronously on the
+  caller's thread.
 
 .. note::
 
