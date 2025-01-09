@@ -112,7 +112,6 @@ person.touch(:audited_at)
 # end touch example
 
 # start delete example
-person.delete
 person = Person.create!(name: 'Edna Park')
 
 unsaved_person = Person.new(id: person.id)
