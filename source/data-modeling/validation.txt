@@ -305,7 +305,7 @@ database. The following methods trigger your validation rules, so
 - ``save()``
 - ``update()``
 
-When you use the ``-!`` suffixed version of the preceding methods,
+When you use the ``!``-suffixed version of the preceding methods,
 {+odm+} returns an ``Mongoid::Errors::Validations`` exception if
 validation fails for an object.
 
