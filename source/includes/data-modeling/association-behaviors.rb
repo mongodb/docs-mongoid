@@ -1,6 +1,7 @@
 # start-extensions
 class Band
   include Mongoid::Document
+
   embeds_many :albums do
     def find_by_name(name)
       where(name: name).first
@@ -14,6 +15,7 @@ band.albums.find_by_name("Omega") # returns album "Omega"
 # start-custom-name
 class Band
   include Mongoid::Document
+
   embeds_many :records, class_name: "Album"
 end
 # end-custom-name
@@ -62,10 +64,9 @@ end
 class Band
   include Mongoid::Document
 
-  # Only return published albums
   has_many :albums, scope: -> { where(published: true) }
   
-  # Only return upcoming tours
+  # Uses a scope called "upcoming" on the Tour model
   has_many :tours, scope: :upcoming
 end
 # end-custom-scope
@@ -184,8 +185,9 @@ end
 
 # start-touch-specific
 class Band
-    include Mongoid::Document
-    belongs_to :label, touch: :bands_updated_at
+  include Mongoid::Document
+
+  belongs_to :label, touch: :bands_updated_at
 end
 # end-touch-specific
 

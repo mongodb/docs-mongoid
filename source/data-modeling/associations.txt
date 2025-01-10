@@ -519,15 +519,15 @@ method to remove all embedded ``Album`` documents from the ``Band`` class:
 Association Behaviors
 ---------------------
 
-When working with associations in {+odm+}, there are various behaviors you can
-use to customize how associations are handled in your application. The following
+When working with associations in {+odm+}, there are various behaviors that
+allow you to customize how associations are handled in your application. The following
 sections describe common association behaviors.
 
 Extensions
 ~~~~~~~~~~
 
 Extensions allow you to add specific functionality to an association. You can
-define an extension on an association by specifying a block to the association
+define an extension on an association by specifying a block in the association
 definition, as shown in the following example:
 
 .. literalinclude:: /includes/data-modeling/association-behaviors.rb
@@ -556,7 +556,7 @@ Custom Keys
 By default, {+odm+} uses the ``_id`` field of the parent class when looking up
 associations. You can specify a different field to use by specifying the
 ``primary_key`` and ``foreign_key`` macros. The following example specifies a new
-primary and foreign key for the ``Band`` and ``Album`` classes:
+primary and foreign key for the ``albums`` association on a ``Band`` class:
 
 .. literalinclude:: /includes/data-modeling/association-behaviors.rb
    :language: ruby
@@ -566,9 +566,9 @@ primary and foreign key for the ``Band`` and ``Album`` classes:
 If you are specifying a ``has_and_belongs_to_many`` association, you can also
 set the ``inverse_primary_key`` and ``inverse_foreign_key`` macros. The
 ``inverse_primary_key`` macro specifies the field on the local model that the
-remote model uses to look up the local model documents, and
-the ``inverse_foreign_key`` macro specifies the field on the remote model
-storing the values in ``inverse_primary_key``.
+remote model uses to look up the documents.
+The ``inverse_foreign_key`` macro specifies the field on the remote model
+that stores the values found in ``inverse_primary_key``.
 
 The following example specifies a new primary and foreign key for the
 ``Band`` and ``Members`` classes in a ``has_and_belongs_to_many`` association:
@@ -577,6 +577,7 @@ The following example specifies a new primary and foreign key for the
    :language: ruby
    :start-after: # start-custom-inverse-keys
    :end-before: # end-custom-inverse-keys
+   :emphasize-lines: 9, 20
 
 Custom Scopes
 ~~~~~~~~~~~~~
@@ -585,7 +586,7 @@ You can set a specific scope on an association by using the ``scope`` parameter.
 The ``scope`` parameter determines which documents {+odm+} considers to be part
 of an association. A scoped association returns only documents that match the
 scope conditions when queried. You can set the ``scope`` to either a ``Proc`` with an arity
-of zero, or a ``Symbol`` that references a named scope on the associated model.
+of zero or a ``Symbol`` that references a named scope on the associated model.
 The following example sets custom scopes on associations in a ``Band`` class:
 
 .. literalinclude:: /includes/data-modeling/association-behaviors.rb
@@ -624,7 +625,7 @@ You can turn off this validation behavior by setting the ``validate`` macro to
 Polymorphism
 ~~~~~~~~~~~~
 
-{+odm+} supports polymorphism on the child class in one-to-one and one-to-many associations.
+{+odm+} supports polymorphism on the child classes of one-to-one and one-to-many associations.
 Polymorphic associations allows a single association to contain objects of different class
 types. You can define a polymorphic association by setting the ``polymorphic``
 option to ``true`` in a child association and adding the ``as`` option to the
@@ -674,8 +675,8 @@ only for looking up records. This allows you to refactor your
 code without breaking the associations in your data. 
 
 Polymorphic type aliases are global. The keys you specify must be unique across your
-entire code base. However, it is possible to register alternative resolvers, which
-may be used for different subsets of your models. In this case, the keys must
+entire code base. However, it is possible to register alternative resolvers that
+can be used for different subsets of your models. In this case, the keys must
 only be unique for each resolver. The following example shows how to register
 alternate resolvers:
 
@@ -698,7 +699,7 @@ the following options:
   callbacks.
 - ``destroy``: Deletes the child documents and runs all model callbacks.
 - ``nullify``: Sets the foreign key of the child documents to ``nil``. The child
-  document might become orphaned if it is only referenced by the parent.
+  document might become orphaned if it is referenced by only the parent.
 - ``restrict_with_exception``: Raises an exception if the child document is not
   empty.
 - ``restrict_with_error``: Cancels the operation and returns ``false`` if the
@@ -707,7 +708,7 @@ the following options:
 If you don't specify any ``dependent`` options, {+odm+} leaves the child
 document unchanged when the parent document is deleted. The child document
 continues to reference the deleted parent document. If the child document is
-only referenced through the parent, the child document becomes orphaned.
+referenced through only the parent, the child document becomes orphaned.
 
 The following example specifies ``dependent`` options on the ``Band`` class:
 
@@ -719,13 +720,13 @@ The following example specifies ``dependent`` options on the ``Band`` class:
 Autosave Referenced Associations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-By default, {+odm+} does not automatically save associated documents for
+By default, {+odm+} does not automatically save associated documents from
 non-embedded associations when saving the parent document. Because of this, it's
 possible to create dangling references to documents that don't exist through
 associations. You can use the ``autosave`` option on a referenced association to
 automatically save associated documents when saving the parent document. The
 following example creates a ``Band`` class with an associated ``Album`` class
-and specifies the ``autosave`` option on the ``Album`` association:
+and specifies the ``autosave`` option:
 
 .. literalinclude:: /includes/data-modeling/association-behaviors.rb
    :language: ruby
@@ -782,7 +783,7 @@ following example instructs {+odm+} to touch the ``bands_updated_at`` field:
 
    In embedded associations, when an embedded document is touched, {+odm+}
    touches its parents recursively. Because of this, adding a ``touch``
-   attribute to ``embedded_in`` association is unnecessary. {+odm+} does not
+   attribute to an ``embedded_in`` association is unnecessary. {+odm+} does not
    support specifying additional fields to touch in ``embedded_in``
    associations.
 
@@ -792,7 +793,7 @@ Counter Cache
 You can use the ``counter_cache`` option to store the number of objects
 that belong to an associated field. When specifying this option, {+odm+} stores
 an extra attribute on the associated models to store the count. Because of this,
-you must specify the ``Mongoid::Attributes::Dynamic`` module in associated
+you must specify the ``Mongoid::Attributes::Dynamic`` module in the associated
 classes. The following example adds the ``counter_cache`` option to a ``Band``
 class and specifies the ``Mongoid::Attributes::Dynamic`` in a ``Label`` class:
 
@@ -818,7 +819,7 @@ document. The following example shows how to access metadata by using the
 
 .. note::
 
-   Replace ``<association name>`` in the preceding example with the name of your
+   Replace ``<association_name>`` in the preceding example with the name of your
    association.
 
 Attributes
@@ -828,7 +829,7 @@ All associations contain attributes that store information about the associated
 document. Associations contain the following attributes:
 
 - ``_target``: Contains the proxied document or documents
-- ``_base``: Contains the document that the association is defined on
+- ``_base``: Contains the document on which the association is defined
 - ``_association``: Contains information about the association
 
 The following example accesses each of the preceding attributes:
