@@ -597,7 +597,7 @@ The following example sets custom scopes on associations in a ``Band`` class:
 
    You can add documents that do not match the scope conditions to an
    association. {+odm+} saves the documents to the database and they will appear
-   in associated memory, however, you won't see the documents when querying the
+   in associated memory. However, you won't see the documents when querying the
    association.
 
 Validations
