@@ -25,7 +25,7 @@ this guide, you can learn about the different types of associations that
 {+odm+} supports and how to use them in your application.
 
 Referenced Associations
-------------------------
+-----------------------
 
 Referenced associations allow you to create a relationship between two models
 where one model references the other. {+odm+} supports the following referenced
@@ -516,17 +516,16 @@ method to remove all embedded ``Album`` documents from the ``Band`` class:
    :start-after: # start-embedded-destroy-all
    :end-before: # end-embedded-destroy-all
 
-Association Behaviors
----------------------
+Customize Association Behavior
+------------------------------
 
-When working with associations in {+odm+}, there are various behaviors that
-allow you to customize how associations are handled in your application. The following
-sections describe common association behaviors.
+You can use {+odm+} to customize how associations behave in your application.
+The following sections describe ways to customize association behaviors.
 
 Extensions
 ~~~~~~~~~~
 
-Extensions allow you to add specific functionality to an association. You can
+Extensions allow you to add custom functionality to an association. You can
 define an extension on an association by specifying a block in the association
 definition, as shown in the following example:
 
@@ -540,8 +539,8 @@ Custom Association Names
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can use the ``class_name`` macro to specify a custom class name for an
-association. This is useful when you want to use a different name for an
-association than the name of the class. The following example uses the
+association. This is useful when you want to name the association something other
+than the name of the class. The following example uses the
 ``class_name`` macro to specify that an embedded association called ``records``
 represents the ``Album`` class:
 
@@ -554,7 +553,7 @@ Custom Keys
 ~~~~~~~~~~~
 
 By default, {+odm+} uses the ``_id`` field of the parent class when looking up
-associations. You can specify a different field to use by specifying the
+associations. You can specify different fields to use by using the
 ``primary_key`` and ``foreign_key`` macros. The following example specifies a new
 primary and foreign key for the ``albums`` association on a ``Band`` class:
 
@@ -564,7 +563,7 @@ primary and foreign key for the ``albums`` association on a ``Band`` class:
    :end-before: # end-custom-keys
 
 If you are specifying a ``has_and_belongs_to_many`` association, you can also
-set the ``inverse_primary_key`` and ``inverse_foreign_key`` macros. The
+use the ``inverse_primary_key`` and ``inverse_foreign_key`` macros. The
 ``inverse_primary_key`` macro specifies the field on the local model that the
 remote model uses to look up the documents.
 The ``inverse_foreign_key`` macro specifies the field on the remote model
@@ -582,8 +581,8 @@ The following example specifies a new primary and foreign key for the
 Custom Scopes
 ~~~~~~~~~~~~~
 
-You can set a specific scope on an association by using the ``scope`` parameter.
-The ``scope`` parameter determines which documents {+odm+} considers to be part
+You can specify the scope of an association by using the ``scope`` parameter.
+The ``scope`` parameter determines the documents that {+odm+} considers part
 of an association. A scoped association returns only documents that match the
 scope conditions when queried. You can set the ``scope`` to either a ``Proc`` with an arity
 of zero or a ``Symbol`` that references a named scope on the associated model.
@@ -598,15 +597,15 @@ The following example sets custom scopes on associations in a ``Band`` class:
 
    You can add documents that do not match the scope conditions to an
    association. {+odm+} saves the documents to the database and they will appear
-   in associated memory, however, the documents are not present when the
-   association is queried in the future.
+   in associated memory, however, you won't see the documents when querying the
+   association.
 
 Validations
 ~~~~~~~~~~~
 
-By default, {+odm+} validates that the children of any associations are present
-when it loads the association into memory by using the ``validates_associated``
-macro. This applies to the following association types:
+When {+odm+} loads an association into memory, by default, it uses the
+``validates_associated`` macro to validate that any children are also present.
+{+odm+} validates children for the following association types:
 
 - ``embeds_many``
 - ``embeds_one``
@@ -650,7 +649,7 @@ In the preceding example, the ``:featured`` association in the ``Band`` class ca
 Custom Polymorphic Types
 ````````````````````````
 
-Starting in version 9.0.2, {+odm+} adds support for custom polymorphic types through
+Starting in version 9.0.2, {+odm+} supports custom polymorphic types through
 a global registry. You can specify alternative keys to represent different
 classes, decoupling your code from the data. The following example specifies
 the string ``"artist"`` as an alternate key for the ``Band`` class:
@@ -675,9 +674,9 @@ only for looking up records. This allows you to refactor your
 code without breaking the associations in your data. 
 
 Polymorphic type aliases are global. The keys you specify must be unique across your
-entire code base. However, it is possible to register alternative resolvers that
+entire code base. However, you can register alternative resolvers that
 can be used for different subsets of your models. In this case, the keys must
-only be unique for each resolver. The following example shows how to register
+be unique only for each resolver. The following example shows how to register
 alternate resolvers:
 
 .. literalinclude:: /includes/data-modeling/association-behaviors.rb
@@ -686,7 +685,7 @@ alternate resolvers:
    :end-before: # end-polymorphic-resolvers
 
 Both ``Music::Band`` and ``Tools::Band`` are aliased as 
-``"bnd"``, but use their own resolver to avoid conflicts.
+``"bnd"``, but each model uses its own resolver to avoid conflicts.
 
 Dependent Behavior
 ~~~~~~~~~~~~~~~~~~
@@ -707,7 +706,7 @@ the following options:
 
 If you don't specify any ``dependent`` options, {+odm+} leaves the child
 document unchanged when the parent document is deleted. The child document
-continues to reference the deleted parent document. If the child document is
+continues to reference the deleted parent document, and if it is
 referenced through only the parent, the child document becomes orphaned.
 
 The following example specifies ``dependent`` options on the ``Band`` class:
@@ -721,9 +720,10 @@ Autosave Referenced Associations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 By default, {+odm+} does not automatically save associated documents from
-non-embedded associations when saving the parent document. Because of this, it's
-possible to create dangling references to documents that don't exist through
-associations. You can use the ``autosave`` option on a referenced association to
+non-embedded associations when saving the parent document. This can
+result in dangling references to documents that don't exist.
+
+You can use the ``autosave`` option on a referenced association to
 automatically save associated documents when saving the parent document. The
 following example creates a ``Band`` class with an associated ``Album`` class
 and specifies the ``autosave`` option:
@@ -758,21 +758,23 @@ option to an association on the ``Band`` class:
 Touch
 ~~~~~
 
-You can add the ``touch`` option to any ``belongs_to`` association to ensure
-that {+odm+} touches the parent document any time the child document is updated.
-When {+odm+} touches the parent document, it updates the document's
-``updated_at`` field. The following example adds the ``touch`` option to an
-association on the ``Band`` class:
+When {+odm+} *touches* a document, it updates the document's
+``updated_at`` field to the current date and time. You can add the ``touch``
+option to any ``belongs_to`` association to ensure that {+odm+} touches the
+parent document whenever the child document is updated. The following example
+adds the ``touch`` option to an association on the ``Band`` class:
 
 .. literalinclude:: /includes/data-modeling/association-behaviors.rb
    :language: ruby
    :start-after: # start-touch
    :end-before: # end-touch
 
-You can also specify a string or a symbol in the ``touch`` option to specify
-another field to touch on the parent association. When doing so, {+odm+} updates
-the specified field and the ``updated_at`` field in the parent association. The
-following example instructs {+odm+} to touch the ``bands_updated_at`` field:
+You can also use the ``touch`` option to specify another field on the parent
+association, as a string or a symbol. When {+odm+} touches the parent
+association, it sets both the ``updated_at`` field and the specified field
+to the current date and time.
+
+The following example instructs {+odm+} to touch the ``bands_updated_at`` field:
 
 .. literalinclude:: /includes/data-modeling/association-behaviors.rb
    :language: ruby
@@ -783,18 +785,21 @@ following example instructs {+odm+} to touch the ``bands_updated_at`` field:
 
    In embedded associations, when an embedded document is touched, {+odm+}
    touches its parents recursively. Because of this, adding a ``touch``
-   attribute to an ``embedded_in`` association is unnecessary. {+odm+} does not
-   support specifying additional fields to touch in ``embedded_in``
-   associations.
+   attribute to an ``embedded_in`` association is unnecessary. 
+   
+   {+odm+} does not support specifying additional fields to touch in
+   ``embedded_in`` associations.
 
 Counter Cache
 ~~~~~~~~~~~~~
 
 You can use the ``counter_cache`` option to store the number of objects
-that belong to an associated field. When specifying this option, {+odm+} stores
+that belong to an associated field. When you specify this option, {+odm+} stores
 an extra attribute on the associated models to store the count. Because of this,
 you must specify the ``Mongoid::Attributes::Dynamic`` module in the associated
-classes. The following example adds the ``counter_cache`` option to a ``Band``
+classes. 
+
+The following example adds the ``counter_cache`` option to a ``Band``
 class and specifies the ``Mongoid::Attributes::Dynamic`` in a ``Label`` class:
 
 .. literalinclude:: /includes/data-modeling/association-behaviors.rb
@@ -828,9 +833,9 @@ Attributes
 All associations contain attributes that store information about the associated
 document. Associations contain the following attributes:
 
-- ``_target``: Contains the proxied document or documents
-- ``_base``: Contains the document on which the association is defined
-- ``_association``: Contains information about the association
+- ``_target``: The proxied document or documents
+- ``_base``: The document on which the association is defined
+- ``_association``: Information about the association
 
 The following example accesses each of the preceding attributes:
 
@@ -849,7 +854,7 @@ attribute:
    * - Method
      - Description
    * - ``Association#as``
-     - Returns the name of the parent to a polymorphic child.
+     - The name of the parent to a polymorphic child.
    * - ``Association#as?``
      - Returns whether an ``as`` option exists.
    * - ``Association#autobuilding?``
@@ -859,11 +864,11 @@ attribute:
    * - ``Association#cascading_callbacks?``
      - Returns whether the association has callbacks cascaded down from the parent.
    * - ``Association#class_name``
-     - Returns the class name of the proxied document.
+     - The class name of the proxied document.
    * - ``Association#cyclic?``
      - Returns whether the association is a cyclic association.
    * - ``Association#dependent``
-     - Returns the association's dependent option.
+     - The association's dependent option.
    * - ``Association#destructive?``
      - Returns ``true`` if the association has a dependent delete or destroy method.
    * - ``Association#embedded?``
@@ -871,54 +876,54 @@ attribute:
    * - ``Association#forced_nil_inverse?``
      - Returns whether the association has a ``nil`` inverse defined.
    * - ``Association#foreign_key``
-     - Returns the name of the foreign-key field.
+     - The name of the foreign-key field.
    * - ``Association#foreign_key_check``
-     - Returns the name of the foreign-key field's dirty-check method.
+     - The name of the foreign-key field's dirty-check method.
    * - ``Association#foreign_key_setter``
-     - Returns the name of the foreign-key field's setter.
+     - The name of the foreign-key field's setter.
    * - ``Association#indexed?``
      - Returns whether the foreign key is auto indexed.
    * - ``Association#inverses``
-     - Returns the names of all inverse associations.
+     - The names of all inverse associations.
    * - ``Association#inverse``
-     - Returns the name of a single inverse association.
+     - The name of a single inverse association.
    * - ``Association#inverse_class_name``
-     - Returns the class name of the association on the inverse side.
+     - The class name of the association on the inverse side.
    * - ``Association#inverse_foreign_key``
-     - Returns the name of the foreign-key field on the inverse side.
+     - The name of the foreign-key field on the inverse side.
    * - ``Association#inverse_klass``
-     - Returns the class of the association on the inverse side.
+     - The class of the association on the inverse side.
    * - ``Association#inverse_association``
-     - Returns the metadata of the association on the inverse side.
+     - The metadata of the association on the inverse side.
    * - ``Association#inverse_of``
-     - Returns the explicitly defined name of the inverse association.
+     - The explicitly defined name of the inverse association.
    * - ``Association#inverse_setter``
-     - Returns the name of the method used to set the inverse.
+     - The name of the method used to set the inverse.
    * - ``Association#inverse_type``
-     - Returns the name of the polymorphic-type field of the inverse.
+     - The name of the polymorphic-type field of the inverse.
    * - ``Association#inverse_type_setter``
-     - Returns the name of the polymorphic-type field's setter of the inverse.
+     - The name of the polymorphic-type field's setter of the inverse.
    * - ``Association#key``
-     - Returns the name of the field in the attribute's hash used to get the association.
+     - The name of the field in the attribute's hash that is used to get the association.
    * - ``Association#klass``
-     - Returns the class of the proxied documents in the association.
+     - The class of the proxied documents in the association.
    * - ``Association#name``
-     - Returns the association name.
+     - The association name.
    * - ``Association#options``
-     - Returns self, for API compatibility with ActiveRecord.
+     - Returns ``self``, for API compatibility with ActiveRecord.
    * - ``Association#order``
-     - Returns the custom sorting options on the association.
+     - The custom sorting options on the association.
    * - ``Association#polymorphic?``
      - Returns whether the association is polymorphic.
    * - ``Association#setter``
-     - Returns the name of the field to set the association.
+     - The name of the field to set the association.
    * - ``Association#store_as``
-     - Returns the name of the attribute in which to store an embedded association.
+     - The name of the attribute in which to store an embedded association.
    * - ``Association#touchable?``
      - Returns whether the association has a touch option.
    * - ``Association#type``
-     - Returns the name of the field to get the polymorphic type.
+     - The name of the field to get the polymorphic type.
    * - ``Association#type_setter``
-     - Returns the name of the field to set the polymorphic type.
+     - The name of the field to set the polymorphic type.
    * - ``Association#validate?``
      - Returns whether the association has an associated validation.
