@@ -706,7 +706,7 @@ you can view changes on your model instance:
 
    Setting the associations on a document does not modify the
    ``changes`` or ``changed_attributes`` hashes. This is true for all
-   associations, referenced or embedded. However, changing the
+   types of associations. However, changing the
    ``_id`` field on referenced associations causes the changes to
    show up in the ``changes`` and the ``changed_attributes`` hashes.
 
@@ -782,7 +782,7 @@ the value of the ``Mongoid.legacy_readonly`` feature flag:
   read-only by calling the ``readonly!`` method on that document. The
   resulting read-only document raises a ``ReadonlyDocument`` error if
   you attempt to perform any persistence operation, including, but not
-  limited to, saving, updating, deleting and destroying. Note that
+  limited to, saving, updating, deleting, and destroying. Note that
   reloading *does not* reset the read-only state.
   
   .. code-block:: ruby
