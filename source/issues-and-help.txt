@@ -25,7 +25,7 @@ Issues & Help
 We are lucky to have a vibrant MongoDB {+language+} community that includes users
 with varying levels of experience using {+odm+} and the {+ruby-driver+}.
 The quickest way to get support for general questions is through the
-:community-forum:`MongoDB Community Forums </tag/ruby>`.
+:community-forum:`MongoDB Community Forums <tag/ruby>`.
 
 Bugs / Feature Requests
 -----------------------
@@ -81,5 +81,5 @@ running the following commands:
 
    ``MONGOID-<ticket #>: <description of changes>``
 
-The {+odm+} developer team then will review your pull request and make
+The {+odm+} developer team will review your pull request and make
 comments or suggest changes.
