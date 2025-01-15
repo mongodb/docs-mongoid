@@ -44,7 +44,7 @@ in a sample ``Person`` model class:
    end
 
 You can find more information about the ``Document`` module in the `API
-documentation <{+api-root+}/Document.html>`__.
+documentation <{+api+}/Mongoid/Document.html>`__.
 
 Work with Documents
 -------------------
