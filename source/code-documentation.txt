@@ -26,7 +26,7 @@ documentation tool, for its code documentation.
 Structure
 ---------
 
-- **Modules:** All class and module definitions should be preceded by
+- **Modules:** All class and module definitions must be preceded by
   a documentation comment.
 
   .. code-block:: ruby
@@ -35,7 +35,7 @@ Structure
      # what they do with corrugated cardboard these days.
      class CardboardBox
 
-- **Methods:** All method definitions should be preceded by a
+- **Methods:** All method definitions must be preceded by a
   documentation comment. Use ``@param``, ``@yield``, and ``@return`` to
   specify inputs and output. To learn more, see the
   :ref:`mongoid-code-documentation-type-declaration` section.
@@ -70,7 +70,7 @@ Structure
      def do_something_obvious
 
 - **API Private:** Classes and public methods which are not intended for
-  external usage should be marked ``@api private``. This macro does not
+  external usage must be marked ``@api private``. This macro does not
   require a comment.
 
   Note that, because {+odm+}'s modules are mixed into application classes,
@@ -117,7 +117,7 @@ Formatting
   .. code-block:: ruby
 
      # This is the description of the method. Line wraps in the description
-     # should not be indented.
+     # must not be indented.
      #
      # @return [ Symbol ] For macros, wraps must be double-space indented
      #   on the second, third, etc. lines.
@@ -307,7 +307,7 @@ Type Declaration
 
 - **Blocks:** If the method explicitly specifies a block argument, specify the block
   argument using ``@param`` preceded by an ampersand ``&``, and also specify ``@yield``.
-  Note ``@yield`` should be used even when method calls ``block.call`` rather than
+  Note ``@yield`` must be used even when method calls ``block.call`` rather than
   ``yield`` internally.
 
   .. code-block:: ruby
@@ -340,7 +340,7 @@ Type Declaration
        yield(:peacock, :conservatory, :wrench)
      end
 
-- **Proc Args:** Proc arguments should use ``@param`` (not ``@yield``). The
+- **Proc Args:** Proc arguments must use ``@param`` (not ``@yield``). The
   inputs to the proc may be specified as subtype(s).
 
   .. code-block:: ruby
