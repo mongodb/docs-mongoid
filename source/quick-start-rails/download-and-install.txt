@@ -14,7 +14,7 @@ Download and Install
 Prerequisites
 -------------
 
-To create the Quick Start application by using Ruby on Rails 7, you need the
+To create the Quick Start application by using Ruby on Rails 8, you need the
 following software installed in your development environment:
 
 - `{+language+}. <https://www.ruby-lang.org/en/documentation/installation/>`__
@@ -23,11 +23,6 @@ following software installed in your development environment:
 - `RubyGems package manager. <https://rubygems.org/pages/download>`__
 - A terminal app and shell. For MacOS users, use Terminal or a similar app.
   For Windows users, use PowerShell.
-
-.. tip:: Rails 6 Tutorial
-
-   If you prefer to use Rails 6 to build your application, see the
-   :ref:`mongoid-getting-started-rails-6` guide.
 
 Download and Install the {+odm+} and Framework Gems
 ---------------------------------------------------

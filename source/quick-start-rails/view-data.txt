@@ -61,7 +61,7 @@ View MongoDB Data
          :copyable: false
 
          => Booting Puma
-         => Rails 7.2.1 application starting in development 
+         => Rails 8.0.1 application starting in development 
          => Run `bin/rails server --help` for more startup options
          Puma starting in single mode...
          * Puma version: 6.4.3 (ruby 3.2.5-p208) ("The Eagle of Durango")
