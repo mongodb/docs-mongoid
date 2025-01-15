@@ -19,7 +19,7 @@ MongoDB in Ruby. To work with {+odm+} from the command line using
    Model Your Data </data-modeling>
    Configuration </configuration>
    /working-with-data
-   API <https://mongodb.com/docs/mongoid/master/api/>
+   API Documentation </api>
    /whats-new
    Issues & Help </issues-and-help>
    /additional-resources
