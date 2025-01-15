@@ -120,23 +120,23 @@ Formatting
      # must not be indented.
      #
      # @return [ Symbol ] For macros, wraps must be double-space indented
-     #   on the second, third, etc. lines.
+     #   on the second, third (and so on) lines.
 
 - **Whitespace:** Do not use leading/trailing empty comment lines,
   or more than one consecutive empty comment line.
 
   .. code-block:: ruby
 
-     # GOOD:
+     # DO THIS:
      # @return [ Symbol ] The return value
      def my_method
  
-     # BAD:
+     # NOT THIS:
      # @return [ Symbol ] The return value
      #
      def my_method
  
-     # BAD:
+     # NOT THIS:
      # @param [ Symbol ] foo The input value
      #
      #
@@ -210,10 +210,10 @@ Type Declaration
 
   .. code-block:: ruby
 
-     # GOOD:
+     # DO THIS:
      # @param [ true | false | nil ] bool A boolean or nil value.
  
-     # BAD:
+     # NOT THIS:
      # @param [ TrueClass | FalseClass | NilClass ] bool A boolean or nil value.
      # @param [ Boolean ] bool A boolean value.
 
@@ -228,20 +228,20 @@ Type Declaration
 
   .. code-block:: ruby
 
-     # @param [ String... ] *items The list of items name(s) as Strings.
+     # @param [ String... ] *items The list of items' names as Strings.
      def buy_groceries(*items)
 
 - **Splat Args:** Do not use ``Array`` as the type unless each arg is actually an Array.
 
   .. code-block:: ruby
 
-     # BAD:
-     # @param [ Array<String> ] *items The list of items name(s) as Strings.
+     # DO NOT DO THIS:
+     # @param [ Array<String> ] *items The list of items' names as Strings.
      def buy_groceries(*items)
 
      buy_groceries("Cheese", "Crackers", "Wine")
  
-     # OK:
+     # DO THIS:
      # @param [ Array<String>... ] *arrays One or more arrays containing name parts.
      def set_people_names(*arrays)
  
@@ -277,8 +277,8 @@ Type Declaration
 
   .. code-block:: ruby
 
-     # @param opts [ Hash<Symbol, Object> ] The optional hash argument(s).
-     # @option opts [ String | Array<String> ] :items The items(s) as Strings to include.
+     # @param opts [ Hash<Symbol, Object> ] The optional hash argument or arguments.
+     # @option opts [ String | Array<String> ] :items The items as Strings to include.
      # @option opts [ Integer ] :limit An Integer denoting the limit.
      def buy_groceries(opts = {})
 
@@ -290,8 +290,8 @@ Type Declaration
 
   .. code-block:: ruby
 
-     # @param **kwargs The optional keyword argument(s).
-     # @option **kwargs [ String | Array<String> ] :items The items(s) as Strings to include.
+     # @param **kwargs The optional keyword argument or arguments.
+     # @option **kwargs [ String | Array<String> ] :items The items as Strings to include.
      # @option **kwargs [ Integer ] :limit An Integer denoting the limit.
      def buy_groceries(**kwargs)
 
@@ -340,8 +340,8 @@ Type Declaration
        yield(:peacock, :conservatory, :wrench)
      end
 
-- **Proc Args:** Proc arguments must use ``@param`` (not ``@yield``). The
-  inputs to the proc may be specified as subtype(s).
+- **Proc Args:** Use ``@param`` (not ``@yield``) for proc arguments. The
+  inputs to the proc may be specified as subtypes.
 
   .. code-block:: ruby
 
