@@ -12,4 +12,4 @@ API Documentation
    :maxdepth: 1
 
     {+odm+} <{+api+}>
-    Ruby Driver <{+ruby-api+}>
+    Ruby Driver <{+ruby-api+}.html>
