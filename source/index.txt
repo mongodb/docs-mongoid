@@ -22,6 +22,5 @@ MongoDB in Ruby. To work with {+odm+} from the command line using
    API <https://mongodb.com/docs/mongoid/master/api/>
    /release-notes
    Issues & Help </issues-and-help>
-   /contributing
    /additional-resources
    /ecosystem
