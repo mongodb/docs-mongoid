@@ -208,12 +208,12 @@ API Documentation
 -----------------
 
 To learn more about using indexes in {+odm+}, see the 
-`Mongoid::Indexable::ClassMethods <{+api-root+}/Indexable/ClassMethods.html>`__
+`Mongoid::Indexable::ClassMethods <{+api+}/Mongoid/Indexable/ClassMethods.html>`__
 documentation.
 
 To learn more about index options, see the `Mongoid::Indexable::Validators::Options
-<{+api-root+}/Indexable/Validators/Options.html>`__ documentation.
+<{+api+}/Mongoid/Indexable/Validators/Options.html>`__ documentation.
 
 To learn more about using Atlas Search indexes in {+odm+}, see the 
-`Mongoid::SearchIndexable::ClassMethods <{+api-root+}/SearchIndexable/ClassMethods.html>`__
+`Mongoid::SearchIndexable::ClassMethods <{+api+}/Mongoid/SearchIndexable/ClassMethods.html>`__
 documentation.

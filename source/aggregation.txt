@@ -227,6 +227,6 @@ API Documentation
 To learn more about any of the methods discussed in this
 guide, see the following API documentation:
 
-- `group() <{+api-root+}/Criteria/Queryable/Aggregable.html#group-instance_method>`__
-- `project() <{+api-root+}/Criteria/Queryable/Aggregable.html#project-instance_method>`__
-- `unwind() <{+api-root+}/Criteria/Queryable/Aggregable.html#unwind-instance_method>`__
+- `group() <{+api+}/Mongoid/Criteria/Queryable/Aggregable.html#group-instance_method>`__
+- `project() <{+api+}/Mongoid/Criteria/Queryable/Aggregable.html#project-instance_method>`__
+- `unwind() <{+api+}/Mongoid/Criteria/Queryable/Aggregable.html#unwind-instance_method>`__
