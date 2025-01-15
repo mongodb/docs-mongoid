@@ -264,3 +264,73 @@ person.atomically do
   # Name and age changes are not persisted
 end
 # end join_contexts atomic
+
+# start-dirty-tracking-view
+# Retrieves a person instance
+person = Person.first
+# Sets a new `name` value
+person.name = "Sarah Frank"
+
+# Checks to see if the document is changed
+person.changed? # true
+# Gets an array of changed fields.
+person.changed # [ :name ]
+# Gets a hash of the old and changed values for each field
+person.changes # { "name" => [ "Sarah Frink", "Sarah Frank" ] }
+
+# Checks if a specific field is changed
+person.name_changed? # true
+# Gets the changes for a specific field
+person.name_change # [ "Sarah Frink", "Sarah Frank" ]
+
+# Gets the previous value for a field
+person.name_was # "Sarah Frink"
+# end-dirty-tracking-view
+
+# start-dirty-tracking-reset
+person = Person.first
+person.name = "Sarah Frank"
+
+# Reset the changed `name` field
+person.reset_name!
+person.name # "Sarah Frink"
+# end-dirty-tracking-reset
+
+# start-dirty-tracking-prev
+person = Person.first
+person.name = "Sarah Frank"
+person.save # Clears out current changes
+
+# Lists the previous changes
+person.previous_changes
+# { "name" => [ "Sarah Frink", "Sarah Frank" ] }
+# end-dirty-tracking-prev
+
+# start-container-save
+person = Person.new
+interests = person.interests
+# => #<Set: {}>
+interests << 'Hiking'
+# => #<Set: {"Hiking"}>
+
+# Assigns the Set to the field
+person.interests = interests
+# => #<Set: {"Hiking"}>
+person.interests
+# => #<Set: {"Hiking"}>
+# end-container-save
+
+# start-override-readonly
+class Person
+  include Mongoid::Document
+  field :name, type: String
+
+  def readonly?
+    true
+  end
+end
+
+person = Person.first
+person.readonly? # => true
+person.destroy # => raises ReadonlyDocument error
+# end-override-readonly

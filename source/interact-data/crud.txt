@@ -677,6 +677,154 @@ When you globally set ``join_contexts`` to ``true``, you can use the
 ``join_context: false`` option on an ``atomically`` block to run
 operations at the end of the block for that block only.
 
+Dirty Tracking
+--------------
+
+You can track changed ("dirty") fields by using a {+odm+} API similar to
+the one available in Active Model. If you modify a defined field in a
+model, {+odm+} marks the model as dirty and allows you to perform
+special actions. The following sections describe how you can interact
+with dirty models.
+
+View Changes
+~~~~~~~~~~~~
+
+{+odm+} records changes from the time a model is instantiated, either as
+a new document or by retrieving one from the database, until the time it is
+saved. Any persistence operation clears the changes.
+
+{+odm+} creates model-specific methods that allow you to explore the
+changes to a model instance. The following code demonstrates ways that
+you can view changes on your model instance:
+
+.. literalinclude:: /includes/interact-data/crud.rb
+   :language: ruby
+   :start-after: start-dirty-tracking-view
+   :end-before: end-dirty-tracking-view
+
+.. note:: Tracking Changes to Associations
+
+   Setting the associations on a document does not modify the
+   ``changes`` or ``changed_attributes`` hashes. This is true for all
+   types of associations. However, changing the
+   ``_id`` field on referenced associations causes the changes to
+   show up in the ``changes`` and the ``changed_attributes`` hashes.
+
+Reset Changes
+~~~~~~~~~~~~~
+
+You can reset a changed field to its previous value by calling the
+``reset`` method, as shown in the following code:
+
+.. literalinclude:: /includes/interact-data/crud.rb
+   :language: ruby
+   :start-after: start-dirty-tracking-reset
+   :end-before: end-dirty-tracking-reset
+
+Persistence
+~~~~~~~~~~~
+
+{+odm+} uses dirty tracking as the basis of all persistence operations.
+It evaluates the changes on a document and atomically updates only what
+has changed, compared to other frameworks that write the entire document on
+each save. If you don't make any changes, {+odm+} does not access the
+database when you call ``Model#save``.
+
+View Previous Changes
+~~~~~~~~~~~~~~~~~~~~~
+
+After you persist a model to MongoDB, {+odm+} clears the current
+changes. However, you can still see what changes were made previously by
+calling the ``previous_changes`` method, as shown in the following
+code:
+
+.. literalinclude:: /includes/interact-data/crud.rb
+   :language: ruby
+   :start-after: start-dirty-tracking-prev
+   :end-before: end-dirty-tracking-prev
+
+Update Container Fields
+-----------------------
+
+{+odm+} currently has an issue that prevents changes to attributes of
+container types, such as ``Set`` or ``Array``, from saving to MongoDB.
+You must assign all fields, including container types, for their values
+to save to MongoDB.
+
+For example, adding an item to a ``Set`` instance as shown in the
+following code *does not* persist changes to MongoDB:
+
+.. code-block:: ruby
+
+   person = Person.new
+   person.interests
+   # => #<Set: {}>
+
+   person.interests << 'Hiking'
+   # => #<Set: {"Hiking"}>
+   person.interests
+   # => #<Set: {}> # Change does not take effect
+
+To persist this change, you must modify the field value *outside* of the
+model and assign it back to the model as shown in the following code:
+
+.. literalinclude:: /includes/interact-data/crud.rb
+   :language: ruby
+   :start-after: start-container-save
+   :end-before: end-container-save
+
+Read-only Documents
+-------------------
+
+You can mark documents as read-only in the following ways, depending on
+the value of the ``Mongoid.legacy_readonly`` feature flag:
+
+- If this flag is turned *off*, you can mark a document as
+  read-only by calling the ``readonly!`` method on that document. The
+  resulting read-only document raises a ``ReadonlyDocument`` error if
+  you attempt to perform any persistence operation, including, but not
+  limited to, saving, updating, deleting, and destroying. Note that
+  reloading *does not* reset the read-only state.
+  
+  .. code-block:: ruby
+
+     person = Person.first
+     person.readonly? # => false
+     person.readonly! # Sets the document as read-only
+     person.readonly? # => true
+     person.name = "Larissa Shay" # Changes the document
+     person.save # => raises ReadonlyDocument error
+     person.reload.readonly? # => true
+
+- If this flag is turned ``on``, you can mark a document as read-only
+  after you project that document by using methods such as ``only`` or
+  ``without``. As a result, you can't delete or destroy the read-only
+  document because {+odm+} raises a ``ReadonlyDocument`` error, but you can
+  save and update it. The read-only status *is reset* if you reload the
+  document.
+
+  .. code-block:: ruby
+
+     person = Person.only(:name).first
+     person.readonly? # => true
+     person.destroy # => raises ReadonlyDocument error
+     person.reload.readonly? # => false
+
+  .. tip:: Projection
+  
+     To learn more about projections, see the
+     :ref:`mongoid-data-projection` section of the Modify Query
+     Results guide.
+
+You can also make a document read-only by overriding the ``readonly?``
+method, as shown in the following code:
+
+.. literalinclude:: /includes/interact-data/crud.rb
+   :language: ruby
+   :start-after: start-override-readonly
+   :end-before: end-override-readonly
+   :emphasize-lines: 5-7
+
 Additional Information
 ----------------------
 
