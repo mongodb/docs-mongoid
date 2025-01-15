@@ -13,6 +13,7 @@ toc_landing_pages = [
     "/interact-data/specify-query",
     "/data-modeling",
     "/configuration",
+    "/issues-and-help"
 ]
 
 [constants]
