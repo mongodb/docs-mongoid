@@ -16,12 +16,10 @@ toc_landing_pages = [
 ]
 
 [constants]
-rails-6-version = 6.0
-rails-7-version = 7.1
 rails-8-version-docs = "v8.0"
 odm = "Mongoid"
 version = "9.0"
-full-version = "{+version+}.2"
+full-version = "{+version+}.4"
 ruby-driver = "Ruby driver"
 language = "Ruby"
 quickstart-sinatra-app-name = "my-sinatra-app"

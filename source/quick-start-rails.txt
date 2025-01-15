@@ -20,7 +20,7 @@ Quick Start - Ruby on Rails
 Overview
 --------
 
-This guide shows you how to use {+odm+} in a new **Ruby on Rails 7 (Rails)**
+This guide shows you how to use {+odm+} in a new **Ruby on Rails 8 (Rails)**
 web application, connect to a MongoDB cluster hosted on MongoDB
 Atlas, and perform read and write operations on the data in your
 cluster.
