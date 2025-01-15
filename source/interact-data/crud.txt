@@ -733,9 +733,10 @@ database when you call ``Model#save``.
 View Previous Changes
 ~~~~~~~~~~~~~~~~~~~~~
 
-After you persist a model to MongoDB, you can still see what changes
-were made previously by calling the ``Model#previous_changes`` method,
-as shown in the following code:
+After you persist a model to MongoDB, {+odm+} clears the current
+changes. However, you can still see what changes were made previously by
+calling the ``previous_changes`` method, as shown in the following
+code:
 
 .. literalinclude:: /includes/interact-data/crud.rb
    :language: ruby
@@ -796,10 +797,10 @@ the value of the ``Mongoid.legacy_readonly`` feature flag:
      person.reload.readonly? # => true
 
 - If this flag is turned ``on``, you can mark a document as read-only
-  when that document is projected, such as by using ``only`` or
-  ``without``. The resulting read-only document is not deletable or
-  destroyable, as {+odm+} raises a ``ReadonlyDocument`` error, but it is
-  saveable and updatable. The read-only status *is reset* if you reload the
+  after you project that document by using methods such as ``only`` or
+  ``without``. As a result, you can't delete or destroy the read-only
+  document because {+odm+} raises a ``ReadonlyDocument`` error, but you can
+  save and update it. The read-only status *is reset* if you reload the
   document.
 
   .. code-block:: ruby
@@ -809,14 +810,11 @@ the value of the ``Mongoid.legacy_readonly`` feature flag:
      person.destroy # => raises ReadonlyDocument error
      person.reload.readonly? # => false
 
-.. tip:: Projection
-
-   To learn more about projections, see the
-   :ref:`mongoid-data-projection` section of the Modify Query
-   Results guide.
-
-Override readonly?
-~~~~~~~~~~~~~~~~~~
+  .. tip:: Projection
+  
+     To learn more about projections, see the
+     :ref:`mongoid-data-projection` section of the Modify Query
+     Results guide.
 
 You can also make a document read-only by overriding the ``readonly?``
 method, as shown in the following code:
