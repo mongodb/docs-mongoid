@@ -165,5 +165,5 @@ API Documentation
 
 To learn more about the ``shard_key`` macro discussed in this
 guide, see the `shard_key
-<{+api-root+}/Shardable/ClassMethods.html#shard_key-instance_method>`__ API
+<{+api+}/Mongoid/Shardable/ClassMethods.html#shard_key-instance_method>`__ API
 documentation.

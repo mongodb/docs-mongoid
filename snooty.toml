@@ -13,6 +13,7 @@ toc_landing_pages = [
     "/interact-data/specify-query",
     "/data-modeling",
     "/configuration",
+    "/issues-and-help"
 ]
 
 [constants]
@@ -26,7 +27,6 @@ quickstart-sinatra-app-name = "my-sinatra-app"
 quickstart-rails-app-name = "my-rails-app"
 feedback-widget-title = "Feedback"
 server-manual = "Server manual"
-api-root = "https://www.mongodb.com/docs/mongoid/master/api/Mongoid"
-api = "https://www.mongodb.com/docs/mongoid/master/api"
-ruby-api = "https://www.mongodb.com/docs/ruby-driver/current/api/Mongo"
+api = "https://www.mongodb.com/docs/mongoid/current/api"
+ruby-api = "https://www.mongodb.com/docs/ruby-driver/current/api"
 active-record-docs = "https://guides.rubyonrails.org"

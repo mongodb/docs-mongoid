@@ -281,13 +281,13 @@ API Documentation
 For more information about the methods mentioned in this guide, see the following
 API documentation:
 
-- `#client_name <{+api-root+}/PersistenceContext.html#client_name-instance_method>`__
-- `#database_name <{+api-root+}/Clients/Options/ClassMethods.html#database_name-instance_method>`__
-- `#collection_name <{+api-root+}/Clients/Options/ClassMethods.html#collection_name-instance_method>`__
-- `#store_in <{+api-root+}/Clients/StorageOptions/ClassMethods.html#store_in-instance_method>`__
-- `Model.with <{+api-root+}/Clients/Options.html#with-instance_method>`__
-- `Mongoid::PersistenceContext <{+api-root+}/PersistenceContext.html>`__
-- `Mongoid.override_client <{+api-root+}/Config.html#override_client-instance_method>`__
-- `Mongoid.override_database <{+api-root+}/Config.html#override_database-instance_method>`__
-- `Model.mongo_client <{+api-root+}/Clients/Options/ClassMethods.html#mongo_client-instance_method>`__
-- `Model.collection <{+api-root+}/Clients/Options/ClassMethods.html#collection-instance_method>`__
+- `#client_name <{+api+}/Mongoid/PersistenceContext.html#client_name-instance_method>`__
+- `#database_name <{+api+}/Mongoid/Clients/Options/ClassMethods.html#database_name-instance_method>`__
+- `#collection_name <{+api+}/Mongoid/Clients/Options/ClassMethods.html#collection_name-instance_method>`__
+- `#store_in <{+api+}/Mongoid/Clients/StorageOptions/ClassMethods.html#store_in-instance_method>`__
+- `Model.with <{+api+}/Mongoid/Clients/Options.html#with-instance_method>`__
+- `Mongoid::PersistenceContext <{+api+}/Mongoid/PersistenceContext.html>`__
+- `Mongoid.override_client <{+api+}/Mongoid/Config.html#override_client-instance_method>`__
+- `Mongoid.override_database <{+api+}/Mongoid/Config.html#override_database-instance_method>`__
+- `Model.mongo_client <{+api+}/Mongoid/Clients/Options/ClassMethods.html#mongo_client-instance_method>`__
+- `Model.collection <{+api+}/Mongoid/Clients/Options/ClassMethods.html#collection-instance_method>`__

@@ -19,12 +19,9 @@ MongoDB in Ruby. To work with {+odm+} from the command line using
    Model Your Data </data-modeling>
    Configuration </configuration>
    Secure Your Data </security>
-   .. installation-configuration
-   .. tutorials
-   .. schema-configuration
-   working-with-data
-   API <https://mongodb.com/docs/mongoid/master/api/>
-   /release-notes
-   /contributing
+   /working-with-data
+   API Documentation </api>
+   /whats-new
+   Issues & Help </issues-and-help>
    /additional-resources
    /ecosystem
