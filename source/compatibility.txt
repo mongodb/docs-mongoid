@@ -18,7 +18,7 @@ Compatibility
    :keywords: backwards compatibility, versions, upgrade
 
 {+language+} Driver Compatibility
----------------------------------
+-------------------------
 
 The following compatibility table specifies the versions of the
 :ruby:`{+ruby-driver+} </>` that are compatible with each
@@ -74,8 +74,8 @@ The first column lists the version of {+odm+}.
 To learn more about how to read the compatibility tables, see the guide
 on :ref:`MongoDB Compatibility Tables <about-driver-compatibility>`.
 
-Rails Compatibility
--------------------
+{+ror+} Compatibility
+---------------------------
 
 The following compatibility table specifies which versions of {+ror+}
 are supported by {+odm+}.
