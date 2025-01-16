@@ -33,7 +33,7 @@ for creating, updating, managing, and maintaining Rails applications, is
 generally available.
 
 ``railsmdb`` makes it easier to work with MongoDB from the command line
-through common generators that {+language+} on Rails developers are already
+through common generators that {+ror+} developers are already
 familiar with.
 
 For example, you can use ``railsmdb`` to generate stubs for new {+odm+} models:

@@ -21,7 +21,7 @@ Overview
 --------
 
 In this guide, you can learn how to add {+odm+} to an existing Sinatra
-or Ruby on Rails (Rails) application. To learn how to set up a new
+or {+ror+} (Rails) application. To learn how to set up a new
 application that uses {+odm+}, see one of the following guides:
 
 - :ref:`mongoid-quick-start-rails`

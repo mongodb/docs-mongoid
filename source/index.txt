@@ -12,7 +12,7 @@ MongoDB in Ruby. To work with {+odm+} from the command line using
 .. toctree::
    :titlesonly:
  
-   Quick Start - Ruby on Rails </quick-start-rails>
+   Quick Start - {+ror+} </quick-start-rails>
    Quick Start - Sinatra </quick-start-sinatra>
    Add {+odm+} to an Existing Application </add-existing>
    Interact with Data </interact-data>
@@ -20,7 +20,8 @@ MongoDB in Ruby. To work with {+odm+} from the command line using
    Configuration </configuration>
    /working-with-data
    API Documentation </api>
-   /whats-new
+   What's New </whats-new>
+   Compatibility </compatibility>
    Issues & Help </issues-and-help>
    /additional-resources
    /ecosystem

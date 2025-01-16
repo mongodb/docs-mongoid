@@ -35,7 +35,7 @@ Using Mongoid with a New Rails Application
 ==========================================
 
 By using the `railsmdb CLI <https://github.com/mongodb/mongoid-railsmdb>`_ a new
-Ruby on Rails application can be quickly generated using the same options as
+{+ror+} application can be quickly generated using the same options as
 ``rails new``, but configured to work with MongoDB:
 
 .. code-block:: sh

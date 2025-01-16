@@ -12,7 +12,7 @@ Rails Integration
    :depth: 2
    :class: singlecol
 
-Mongoid seamlessly integrates into Ruby on Rails applications.
+Mongoid seamlessly integrates into {+ror+} applications.
 This page describes features that are automatically enabled in the context
 of a Rails application and Rails-related functionality which can be
 manually enabled.

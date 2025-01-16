@@ -11,7 +11,7 @@ Next Steps
 .. meta::
    :keywords: learn more
 
-Congratulations on completing the Quick Start tutorial for Ruby on Rails
+Congratulations on completing the Quick Start tutorial for {+ror+}
 7!
 
 After you complete these steps, you have a Rails web application that
