@@ -28,7 +28,7 @@ MongoDB product has access to your data in unencrypted form.
 You can set up CSFLE by using one of the following mechanisms:
 
 - Automatic encryption: Allows you to perform encrypted read and write
-  operations without needing to specify how to encrypt fields
+  operations without specifying how to encrypt fields
 - Explicit encryption: Allows you to perform encrypted read and write operations
   with specified encryption logic throughout your application.
 
@@ -54,7 +54,7 @@ libmongocrypt
 ~~~~~~~~~~~~~
 
 You can install ``libmongocrypt`` by adding the `libmongocrypt-helper gem
-<https://github.com/mongodb/libmongocrypt-helper-ruby>`__ to your ``Gemfile``,
+<https://github.com/mongodb/libmongocrypt-helper-ruby>`__ to your ``Gemfile``
 or by downloading the library manually.
 
 To install ``libmongocrypt`` by adding the gem file, navigate to the folder in
@@ -89,7 +89,7 @@ Library:
 #. Select ``crypt_shared`` in the ``Package`` dropdown.
 #. Click the ``Download`` button to download the shared library.
 
-After you download the file, extract the contents and save the shared library
+After you download the file, extract the contents and save the
 file in a location that is accessible to your application. Then, configure your
 ``mongoid.yml`` file in your application to point to the library, as shown in
 the following example:
@@ -103,14 +103,14 @@ the following example:
          options:
            auto_encryption_options:
              extra_options:
-               crypt_shared_lib_path: '/path/to/mongo_crypt_v1.so'
+               crypt_shared_lib_path: '<Path to Shared Library>'
 
 mongocryptd (Ruby v2.18 or earlier)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If you are using Ruby version 2.18 or earlier, you must use ``mongocryptd``
 instead of the Automatic Encryption Shared Library. ``mongocryptd`` comes
-pre-packaged with enterprise builds of MongoDB Server. For instruction on how to
+pre-packaged with enterprise builds of MongoDB Server. For instructions on how to
 install and configure ``mongocryptd``, see the :manual:`Install mongocryptd guide
 </core/csfle/reference/install-library/#steps>` in the MongoDB
 {+server-manual+}.
@@ -130,8 +130,8 @@ Create a Customer Master Key
 ----------------------------
 
 To encrypt and decrypt data, you must first create a Customer Master Key (CMK).
-A CMK is a key that you use to encrypt you :ref:`Data Encryption Key
-<mongoid-dek>`. Without access to a CMK, your client application cannot decrypt
+A CMK is a key that you use to encrypt your :ref:`Data Encryption Key
+<mongoid-dek>` (DEK). Without access to a CMK, your client application cannot decrypt
 DEKs associated with your encrypted data.
 
 You can create a locally-stored key to use as a local CMK for testing purposes
@@ -190,7 +190,7 @@ collection as BSON documents. MongoDB can never decrypt the DEKs, as key
 management is client-side and customer controlled.
 
 To create a DEK in {+odm+}, you can use the
-``db:mongoid:encryption:create_data_key`` Rake task, as shown in the following
+``db:mongoid:encryption:create_data_key`` rake task, as shown in the following
 example:
 
 .. code-block:: bash
@@ -201,7 +201,7 @@ You can create multiple DEKs by repeating the preceding command for the number
 of keys you want to generate.
 
 You can also provide an alternate name for your DEK. This allows you to reference
-the DEK by name when configuring encryption for your fields, and
+the DEK by name when configuring encryption for your fields and
 to dynamically assign a DEK to a field at runtime.
 
 The following example creates an alternate name when generating a new DEK:
@@ -236,7 +236,7 @@ The following limitations apply when using CSFLE with {+odm+}:
 
 - {+odm+} does not support encryption of ``embeds_many`` associations.
 - If you use the ``:key_name_field`` option, the field must be encrypted using
-  non-deterministic algorithm. To encrypt your field deterministically, you must
+  a non-deterministic algorithm. To encrypt your field deterministically, you must
   specify the ``:key_id`` option instead.
 - The limitations listed on the :manual:`CSFLE Limitations
   </core/csfle/reference/limitations/>` page also apply to {+odm+}.
@@ -271,7 +271,7 @@ is connected to the database but not configured for CSFLE, to read the document.
       data=0x012889b2cb0b1341...>}, "policy_number_key"=>"my_data_key"}
 
 In the preceding example, the ``unencrypted_client`` client is unable to read
-the encrypted fields. However, if you query the document with a client that is 
+the encrypted fields. However, if you query the document with a client that *is* 
 configured for CSFLE, {+odm+} automatically decrypts the fields.
 
 Rotate Encryption Keys
@@ -288,7 +288,7 @@ The ``rewrap_many_data_key`` method takes the following parameters:
   given filter, no keys will be rotated. Omit the filter to rotate all keys in
   your key vault collection.
 - An object that represents a new CMK with which to re-encrypt the DEKs. Omit
-  this object to rotate the data keys using their current CMKs.
+  this object to rotate the data keys by using their current CMKs.
 
 The following example rotates encryption keys by using the AWS KMS:
 

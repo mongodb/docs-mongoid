@@ -23,7 +23,7 @@ class Patient
   # This field is encrypted using AEAD_AES_256_CBC_HMAC_SHA_512-Random
   # algorithm and a different data key
   field :ssn, type: Integer, encrypt: {
-      deterministic: false, key_id: 'Vxr5m+5cQISjDOruzZgE0w=='
+      deterministic: false, key_id: '<New key ID'
   }
 
   embeds_one :insurance
