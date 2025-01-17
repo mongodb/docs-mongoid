@@ -1,7 +1,7 @@
 .. _mongoid-quick-start-rails:
 
 ===========================
-Quick Start - Ruby on Rails
+Quick Start - {+ror+}
 ===========================
 
 .. facet::
@@ -20,7 +20,7 @@ Quick Start - Ruby on Rails
 Overview
 --------
 
-This guide shows you how to use {+odm+} in a new **Ruby on Rails 8 (Rails)**
+This guide shows you how to use {+odm+} in a new **{+ror+} 8 (Rails)**
 web application, connect to a MongoDB cluster hosted on MongoDB
 Atlas, and perform read and write operations on the data in your
 cluster.
@@ -38,13 +38,13 @@ To learn how to integrate {+odm+} into an existing application, see the
 Ruby. By using {+odm+}, you can easily interact with your data and
 create flexible data models.
 
-Ruby on Rails is a web application framework for
+{+ror+} is a web application framework for
 {+language+}. Rails applications use a model-view-controller (MVC)
 architecture that allows you to easily control how your data is
 modeled and displayed. {+odm+} replaces the default Active Record
 adapter for data modeling in Rails.
 
-To learn more about Ruby on Rails, see the `Getting Started
+To learn more about {+ror+}, see the `Getting Started
 with Rails <{+active-record-docs+}/getting_started.html>`__
 guide in the Rails documentation.
 

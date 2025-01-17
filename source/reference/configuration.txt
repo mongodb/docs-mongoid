@@ -36,7 +36,7 @@ Most applications will use a single client named ``default``.
 Generating Default Configuration
 ================================
 
-If you are using Ruby on Rails, you can have Mongoid generate a default
+If you are using {+ror+}, you can have Mongoid generate a default
 configuration file for you by running the following command:
 
 .. code-block:: bash
@@ -51,14 +51,14 @@ initializer may also be used to set configuration options. Note, though, that
 settings in ``mongoid.yml`` always take precedence over settings in the
 initializer.
 
-If you are not using Ruby on Rails, you can copy the minimal configuration
+If you are not using {+ror+}, you can copy the minimal configuration
 given above and save it as ``config/mongoid.yml``.
 
 
 Loading Mongoid Configuration
 =============================
 
-If you are using Ruby on Rails, Mongoid configuration is automatically loaded
+If you are using {+ror+}, Mongoid configuration is automatically loaded
 for the current environment as stored in ``Rails.env`` when the application
 loads.
 
@@ -71,7 +71,7 @@ adding the following to ``application.rb``:
     g.orm :mongoid
   end
 
-If you are not using Ruby on Rails, Mongoid configuration must be loaded
+If you are not using {+ror+}, Mongoid configuration must be loaded
 manually. This can be done via the ``Mongoid.load!`` method, which takes
 the configuration file path as its argument, as follows:
 
@@ -509,14 +509,14 @@ logger. In other words:
   # Ruby driver logger, not Mongoid logger
   Mongoid.client(:default).logger
 
-Depending on whether Mongoid is used in a Ruby on Rails application, and how
+Depending on whether Mongoid is used in a {+ror+} application, and how
 both Mongoid and Ruby driver are configured, they may use the same logger
 instance or different instances, potentially with different configurations.
 
-In Ruby on Rails Application
+In {+ror+} Application
 ----------------------------
 
-When used in a Ruby on Rails application, Mongoid by default inherits
+When used in a {+ror+} application, Mongoid by default inherits
 the logger and the log level from Rails, and sets the driver's logger
 to the same logger instance:
 
@@ -588,7 +588,7 @@ use an initializer as follows:
 Standalone
 ----------
 
-When not loaded in a Ruby on Rails application, Mongoid respects the
+When not loaded in a {+ror+} application, Mongoid respects the
 ``log_level`` top level configuration option. It can be given in the
 configuration file as follows:
 
@@ -963,7 +963,7 @@ Enabling Query Cache for Rack Web Requests
 
 The MongoDB Ruby Driver provides a Rack middleware which enables the :ref:`Query Cache
 <query-cache>` for the duration of each web request. Below is an example of
-how to enable the Query Cache Middleware in a Ruby on Rails application:
+how to enable the Query Cache Middleware in a {+ror+} application:
 
 .. code-block:: ruby
 

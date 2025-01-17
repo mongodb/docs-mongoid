@@ -19,7 +19,7 @@ Projects
 
 - `Workarea Commerce <https://github.com/workarea-commerce/workarea>`_
 
-  Workarea is an enterprise-grade Ruby on Rails commerce platform that uses Mongoid.
+  Workarea is an enterprise-grade {+ror+} commerce platform that uses Mongoid.
 
 
 Extension Libraries
