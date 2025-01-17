@@ -1,0 +1,141 @@
+.. _mongoid-app-config:
+
+=========================
+Application Configuration
+=========================
+
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: code example, customize, behavior
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 3
+   :class: singlecol
+
+Overview
+--------
+
+In this guide, you can learn how to configure how your application
+connects to MongoDB. When you set up your application, you are required
+to supply a **connection string**, or connection URI, that contains
+a set of instructions that {+odm+} uses to connect to a MongoDB. To
+learn more about connection strings, see :manual:`Connection Strings
+</reference/connection-string/>` in the {+server-manual+}.
+
+You primarily configure {+odm+} by using a ``mongoid.yml`` file that
+specifies your connection options and clients. To learn more about
+creating a ``mongoid.yml`` file when setting up an application, see one
+of the following guides:
+
+- :ref:`mongoid-quick-start-rails`
+- :ref:`mongoid-quick-start-sinatra`
+
+Structure of mongoid.yml
+------------------------
+
+The simplest configuration for an application configures {+odm+} to
+connect to a MongoDB server at ``localhost:27017`` and access the database
+named ``myDB``. The ``mongoid.yml`` file for this configuration
+resembles the following file:
+
+.. code-block:: yaml
+   :caption: mongoid.yml
+
+   development:
+     clients:
+       default:
+         database: myDB
+         hosts:
+           - localhost:27017
+
+The top level key in the preceding file, ``development``, refers to the
+environment name which the application is running. Possible values include
+``development``, ``test`` or ``production``. The third level key,
+``default``, refers to the MongoDB client name. Most applications use a
+single client named ``default``.
+
+Generate Default Configuration
+------------------------------
+
+If you are using {+ror+} as your application framework, you can generate
+a default configuration file in your application by running the
+following shell command:
+
+.. code-block:: bash
+   
+   rails g mongoid:config
+
+This command creates the configuration file at ``config/mongoid.yml``.
+An initializer is also created at ``config/initializers/mongoid.rb``. We
+recommended that you specify all settings in ``mongoid.yml``, but you can
+also use the ``mongoid.rb`` initializer to set configuration options.
+Settings in ``mongoid.yml`` always override settings in the initializer.
+
+If you are not using {+ror+}, you can create the ``config/mongoid.yml``
+file, then copy and paste the configuration file shown in the preceding
+section.
+
+Load {+odm+} Configuration
+--------------------------
+
+.. important::
+
+   You must configure {+odm+} before using any {+odm+} component. After you
+   use or reference a component, changing the configuration might not apply
+   changes to already instantiated components.
+
+If you are using {+ror+}, Rails automatically loads your {+odm+}
+configuration for the current environment as stored in ``Rails.env``.
+
+You might need to specify {+odm+} as the ORM for your application by
+adding the following lines to your ``application.rb`` file:
+
+.. code-block:: ruby
+
+   config.generators do |g|
+     g.orm :mongoid
+   end
+
+If you are not using {+ror+}, you must load your {+odm+} configuration
+manually. Call the ``Mongoid.load!`` method, which takes the
+configuration file path as its argument:
+
+.. code-block:: ruby
+
+   # Uses automatically detected environment name
+   Mongoid.load!("config/mongoid.yml")
+ 
+   # Specifies environment name manually
+   Mongoid.load!("config/mongoid.yml", :development)
+
+{+odm+} detects the environment name by examining the following sources,
+in order:
+
+1. If ``Rails`` top-level constant is defined: ``Rails.env``
+#. If ``Sinatra`` top-level constant is defined: ``Sinatra::Base.environment``
+#. ``RACK_ENV`` environment variable
+#. ``MONGOID_ENV`` environment variable.
+
+.. note::
+
+   You can also configure {+odm+} directly in {+language+} without using
+   a configuration file. This configuration style does not support the
+   concept of environments. Any configuration that you provide is
+   applied to the current environment.
+
+Configuration Options
+---------------------
+
+The following annotated example ``mongoid.yml`` file describes where to
+set each type of configuration option and provides information about
+each option and its parameters.
+
+.. literalinclude:: /includes/configuration/sample-config-options.yml
+   :language: yaml
+
+

@@ -14,9 +14,19 @@ Configuration
 .. toctree::
    :caption: Configuration
 
+   Application Configuration </configuration/app-config.txt>
+   Persistence Targets </configuration/persistence-config>
    Sharding </configuration/sharding>
+
+.. Collection Configuration </configuration/collection-config>
 
 In this section, you can learn how to configure different options with {+odm+}.
 
-- :ref:`Sharding Configuration <mongoid-sharding-configuration>`: Learn how to configure
+- :ref:`mongoid-app-config`: Learn about settings you can use to
+  customize how your application connects to MongoDB.
+
+- :ref:`mongoid-persistence`: Learn how to use {+odm+} to view and
+  customize your document storage.
+
+- :ref:`mongoid-sharding-configuration`: Learn how to configure
   sharding in your {+odm+} application.
