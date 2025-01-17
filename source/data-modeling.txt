@@ -44,7 +44,7 @@ In this section, you can learn how to model data in {+odm+}.
   customize the life cycle of your models.
 
 - :ref:`mongoid-associations`: Learn how to create and manage data
-  associations in your model classes.
+  associations between your model classes.
 
 - :ref:`mongoid-optimize-queries-with-indexes`: Learn how to create and manage 
   indexes for your model classes.
