@@ -8,7 +8,6 @@ Tutorials
   :titlesonly:
 
   tutorials/common-errors
-  tutorials/automatic-encryption
 
 Overview
 --------
@@ -16,4 +15,3 @@ Overview
 See the following sections to learn more about working with Mongoid:
 
 - :ref:`Common Errors <common-errors>`
-- :ref:`Automatic Client-Side Field Level Encryption <automatic-encryption>`

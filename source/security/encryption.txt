@@ -1,3 +1,4 @@
+.. _automatic-encryption:
 .. _mongoid-encryption:
 
 ==================================
@@ -32,29 +33,29 @@ You can set up CSFLE by using one of the following mechanisms:
 - Explicit encryption: Allows you to perform encrypted read and write operations
   with specified encryption logic throughout your application.
 
-This guide details how to set up CSFLE with automatic encryption. To learn more
-about using explicit encryption, see the `Explicit Encryption guide
-<https://www.mongodb.com/docs/ruby-driver/current/reference/in-use-encryption/client-side-encryption/#explicit-encryption>`__ 
-in the Ruby driver documentation.
+This guide describes how to set up CSFLE with automatic encryption. To learn more
+about using explicit encryption, see the :ruby:`Explicit Encryption
+</reference/in-use-encryption/client-side-encryption/#explicit-encryption>` guide
+in the {+ruby-driver+} documentation.
 
 Install Dependencies
 --------------------
 
-To use CSFLE with {+odm+} you must first install the following dependencies:
+To use CSFLE with {+odm+}, you must first install the following dependencies:
 
 - ``libmongocrypt``
-- The Automatic Encryption Shared Library on Ruby versions 2.19 or later. Or
-  ``mongocryptd`` on Ruby versions 2.18 or earlier.
+- {+shared-library+} if you are using {+ruby-driver+} v2.19 or later. Or
+  ``mongocryptd`` if you are using {+ruby-driver+} v2.18 or earlier.
 - ``ffi``
 
-The following sections provide details on how to install the preceding
+The following sections provide details on how to install these
 dependencies.
 
 libmongocrypt
 ~~~~~~~~~~~~~
 
-You can install ``libmongocrypt`` by adding the `libmongocrypt-helper gem
-<https://github.com/mongodb/libmongocrypt-helper-ruby>`__ to your ``Gemfile``
+You can install ``libmongocrypt`` by adding the :github:`libmongocrypt-helper gem
+<mongodb/libmongocrypt-helper-ruby>` to your ``Gemfile``
 or by downloading the library manually.
 
 To install ``libmongocrypt`` by adding the gem file, navigate to the folder in
@@ -67,22 +68,21 @@ which your application is located and run the following command in your shell:
 .. note::
 
    Because the version number of ``libmongocrypt-helper`` might contain letters,
-   which indicates a pre-release version in Ruby, the ``--pre`` flag is
+   which indicates a pre-release version in {+language+}, the ``--pre`` flag is
    required.
 
 To learn how to download and install the library manually, see the
-`libmongocrypt installation guide
-<https://www.mongodb.com/docs/ruby-driver/current/reference/in-use-encryption/client-side-encryption/#libmongocrypt>`__
-in the Ruby driver documentation.
+:ruby:`libmongocrypt installation guide
+</reference/in-use-encryption/client-side-encryption/#libmongocrypt>`
+in the {+ruby-driver+} documentation.
 
-Shared Library (Ruby v2.19 or later)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Shared Library (Driver v2.19 or later)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following steps detail how to install the Automatic Encryption Shared
-Library:
+The following steps detail how to install the {+shared-library+}:
 
-1. In a browser, navigate to the `MongoDB Download Center
-   <https://www.mongodb.com/try/download/enterprise>`__.
+1. In a browser, navigate to the :website:`MongoDB Download Center
+   </try/download/enterprise>`.
 #. Select the latest current version in the ``Version`` dropdown, denoted by the 
    ``(current)`` tag.
 #. Select your platform in the ``Platform`` dropdown.
@@ -90,7 +90,7 @@ Library:
 #. Click the ``Download`` button to download the shared library.
 
 After you download the file, extract the contents and save the
-file in a location that is accessible to your application. Then, configure your
+file in a location that your application can access. Then, configure your
 ``mongoid.yml`` file in your application to point to the library, as shown in
 the following example:
 
@@ -105,11 +105,11 @@ the following example:
              extra_options:
                crypt_shared_lib_path: '<Path to Shared Library>'
 
-mongocryptd (Ruby v2.18 or earlier)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+mongocryptd (Driver v2.18 or earlier)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you are using Ruby version 2.18 or earlier, you must use ``mongocryptd``
-instead of the Automatic Encryption Shared Library. ``mongocryptd`` comes
+If you are using {+ruby-driver+} version 2.18 or earlier, you must use ``mongocryptd``
+instead of the {+shared-library+}. ``mongocryptd`` comes
 pre-packaged with enterprise builds of MongoDB Server. For instructions on how to
 install and configure ``mongocryptd``, see the :manual:`Install mongocryptd guide
 </core/csfle/reference/install-library/#steps>` in the MongoDB
@@ -135,7 +135,7 @@ A CMK is a key that you use to encrypt your :ref:`Data Encryption Key
 DEKs associated with your encrypted data.
 
 You can create a locally-stored key to use as a local CMK for testing purposes
-by running the following Ruby code:
+by running the following {+language+} code:
 
 .. code-block:: ruby
 
@@ -146,7 +146,7 @@ by running the following Ruby code:
 .. warning::
 
    Using a local CMK in a production environment is insecure. For production
-   environments we recommend using a remote key management service to create and
+   environments, use a remote key management service to create and
    store your CMK.
 
    To learn more about key management service providers, see the :manual:`KMS Providers
@@ -164,7 +164,7 @@ client for CSFLE, add the following code to your ``mongoid.yml`` file:
    development:
      clients:
        default:
-         uri: <Your connection URI>
+         uri: <connection string>
          options:
            auto_encryption_options: # This key enables automatic encryption
              key_vault_namespace: 'encryption.__keyVault' # Database and collection in which to store data keys
@@ -208,7 +208,7 @@ The following example creates an alternate name when generating a new DEK:
 
 .. code-block:: bash
 
-   rake db:mongoid:encryption:create_data_key -- --key-alt-name=my_data_key
+   rake db:mongoid:encryption:create_data_key -- --key-alt-name=<custom DEK name>
 
 Configure Encryption Schema
 ---------------------------
@@ -235,22 +235,23 @@ Limitations
 The following limitations apply when using CSFLE with {+odm+}:
 
 - {+odm+} does not support encryption of ``embeds_many`` associations.
-- If you use the ``:key_name_field`` option, the field must be encrypted using
+- If you use the ``:key_name_field`` option, you must encrypt the field by using
   a non-deterministic algorithm. To encrypt your field deterministically, you must
   specify the ``:key_id`` option instead.
 - The limitations listed on the :manual:`CSFLE Limitations
-  </core/csfle/reference/limitations/>` page also apply to {+odm+}.
+  </core/csfle/reference/limitations/>` page in the MongoDB {+server-manual+}
+  also apply to {+odm+}.
 
 Working with Data
 -----------------
 
-In most cases, automatic CSLFE works transparently in your application. After
+Usually, automatic CSLFE works transparently in your application. After
 your application is configured for CSFLE, you can create documents as usual and {+odm+}
 automatically encrypts and decrypts them according to your configuration.
 
-The following example creates a new ``Patients`` document in an application
-configured for CSFLE. It then uses a client called ``unencrypted_client``, that
-is connected to the database but not configured for CSFLE, to read the document.
+The following example creates a new ``Patient`` document in an application
+configured for CSFLE. It then uses a client called ``unencrypted_client`` that
+is connected to the database but not configured for CSFLE to read the document.
 
 .. io-code-block::
 
@@ -277,17 +278,17 @@ configured for CSFLE, {+odm+} automatically decrypts the fields.
 Rotate Encryption Keys
 ----------------------
 
-You can rotate your encryption keys by using the ``rewrap_many_data_key`` Ruby
-driver method. This method automatically decrypts multiple data encryption keys
+You can rotate your encryption keys by using the ``rewrap_many_data_key`` {+ruby-driver+}
+method. This method automatically decrypts multiple data encryption keys
 and re-encrypts them using a specified CMK. It then updates the rotated keys in
 the key vault collection. 
 
 The ``rewrap_many_data_key`` method takes the following parameters:
 
-- A filter, used to specify which fields to rotate. If no data key matches the
+- Filter, used to specify which fields to rotate. If no data key matches the
   given filter, no keys will be rotated. Omit the filter to rotate all keys in
   your key vault collection.
-- An object that represents a new CMK with which to re-encrypt the DEKs. Omit
+- Object that represents a new CMK with which to re-encrypt the DEKs. Omit
   this object to rotate the data keys by using their current CMKs.
 
 The following example rotates encryption keys by using the AWS KMS:

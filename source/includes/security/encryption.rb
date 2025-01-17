@@ -3,24 +3,24 @@ class Patient
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  encrypt_with key_id: '<Your Data Encryption Key>'
+  encrypt_with key_id: '<data encryption key>'
 
   # This field is not encrypted
   field :category, type: String
 
-  # This field is encrypted using AEAD_AES_256_CBC_HMAC_SHA_512-Random
-  # algorithm.
+  # This field is encrypted by using AEAD_AES_256_CBC_HMAC_SHA_512-Random
+  # algorithm
   field :passport_id, type: String, encrypt: {
       deterministic: false
   }
 
-  # This field is encrypted using AEAD_AES_256_CBC_HMAC_SHA_512-Deterministic
+  # This field is encrypted by using AEAD_AES_256_CBC_HMAC_SHA_512-Deterministic
   # algorithm
   field :blood_type, type: String, encrypt: {
       deterministic: true
   }
 
-  # This field is encrypted using AEAD_AES_256_CBC_HMAC_SHA_512-Random
+  # This field is encrypted by using AEAD_AES_256_CBC_HMAC_SHA_512-Random
   # algorithm and a different data key
   field :ssn, type: Integer, encrypt: {
       deterministic: false, key_id: '<New key ID'
