@@ -50,7 +50,7 @@ that connects to a MongoDB deployment.
 
 .. tip:: Other Framework Tutorials
 
-   If you prefer to use Ruby on Rails 8 as your web framework, see the
+   If you prefer to use {+ror+} 8 as your web framework, see the
    :ref:`mongoid-quick-start-rails` guide.
 
 .. TODO .. tip::

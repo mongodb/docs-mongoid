@@ -26,10 +26,10 @@ Screencasts
   of setting up an app, querying for documents, adding embedded
   associations, overriding the id, and more.
 
-- `Ruby on Rails Web Services and Integration with MongoDB, Week 3: Mongoid
+- `{+ror+} Web Services and Integration with MongoDB, Week 3: Mongoid
   <https://www.youtube.com/watch?v=9LylgiMYsUM>`_
 
-  A detailed introduction to Mongoid and Ruby on Rails web services.
+  A detailed introduction to Mongoid and {+ror+} web services.
 
 - `Create a search bar in Rails with Mongoid
   <https://www.youtube.com/watch?v=zusWR8jS5-A>`_
@@ -48,9 +48,9 @@ Articles
 
   Creating a Sinatra API with Mongoid.
 
-- `Converting an existing Ruby on Rails application to MongoDB <https://ibraheem.ca/posts/convert-rails-to-mongodb>`_
+- `Converting an existing {+ror+} application to MongoDB <https://ibraheem.ca/posts/convert-rails-to-mongodb>`_
 
-  How to Convert an existing Ruby on Rails application to use MongoDB and Mongoid.
+  How to Convert an existing {+ror+} application to use MongoDB and Mongoid.
 
 
 Sample Applications
