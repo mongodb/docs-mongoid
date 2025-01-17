@@ -116,7 +116,7 @@ The deprecated class ``{+odm+}::Errors::InvalidStorageParent`` has been
 removed.
 
 ``around_*`` Callbacks for Embedded Documents are Ignored
----------------------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 {+odm+} v8.x and older allow user to define ``around_*`` callbacks for embedded
 documents. Starting in v9.0, these callbacks are ignored and will not be executed.
@@ -205,7 +205,7 @@ the ``touch`` method.
    band.changes # => {}
 
 Sandbox Mode for Rails Console
-------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 {+odm+} now supports Rails console sandbox mode. If the Rails console started
 with ``--sandbox`` flag, {+odm+} starts a transaction on the ``:default`` client
