@@ -23,7 +23,7 @@ Overview
 In this guide, you can learn how to configure how your application
 connects to MongoDB and how it processes your data. When you set up your
 application, you are required to supply a **connection string**, or
-connection URI, that contains a set of instructions that {+odm+} uses to
+connection URI, which contains a set of instructions that {+odm+} uses to
 connect to a MongoDB. To learn more about connection strings, see
 :manual:`Connection Strings </reference/connection-string/>` in the
 {+server-manual+}.
@@ -93,7 +93,7 @@ Load {+odm+} Configuration
 If you are using {+ror+}, Rails automatically loads your {+odm+}
 configuration for the current environment as stored in ``Rails.env``.
 
-You might need to specify {+odm+} as the ORM for your application by
+You can also specify {+odm+} as the ORM for your application by
 adding the following lines to your ``application.rb`` file:
 
 .. code-block:: ruby

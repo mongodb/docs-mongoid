@@ -23,7 +23,7 @@ Overview
 In this guide, you can learn how to configure logging in your {+odm+}
 application. When configuring logging, note that {+odm+} provides a
 model layer on top of the {+ruby-driver+}, and the *driver* dispatches
-data operations to MongoDB. Therefore, some of the logging output in an
+data operations to MongoDB. Therefore, some logging output in an
 application that uses {+odm+} comes from {+odm+} itself, and some comes from
 the driver.
 

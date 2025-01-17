@@ -30,7 +30,7 @@ Enable Query Cache for Rack Web Requests
 ----------------------------------------
 
 The {+ruby-driver+} provides a Rack middleware which enables the
-query cache for the duration of each web request. The
+query cache during each web request. The
 following code demonstrates how to enable the Query Cache Middleware in
 a {+ror+} application:
 
