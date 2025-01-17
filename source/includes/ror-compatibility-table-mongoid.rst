@@ -2,39 +2,44 @@
    :header-rows: 1
    :stub-columns: 1
    :class: compatibility-large
+   :widths: 30 30 40
 
    * - Rails Framework
      - {+odm+} Support
+     - Notes
 
    * - ``ActionCable``
-     - | ✓
-       | There is no MongoDB adapter for ``ActionCable``, but you can
-         use any existing adapter, such as the `Redis Adapter
-         <{+active-record-docs+}/action_cable_overview.html#redis-adapter>`__,
-         alongside {+odm+} models.
+     - ✓
+     -  There is no MongoDB adapter for ``ActionCable``, but you can
+        use any existing adapter, such as the `Redis Adapter
+        <{+active-record-docs+}/action_cable_overview.html#redis-adapter>`__,
+        alongside {+odm+} models.
 
    * - ``ActionMailbox``
-     - | *Unsupported*
-       | Depends directly on Active Record.
+     - *Unsupported*
+     - Depends directly on Active Record.
 
    * - ``ActionMailer``
      - ✓
+     - 
 
    * - ``ActionPack``
      - ✓
+     - 
 
    * - ``ActionText``
-     - | *Unsupported*
-       | Depends directly on Active Record.
+     - *Unsupported*
+     - Depends directly on Active Record.
 
    * - ``ActionView``
      - ✓
+     - 
 
    * - ``ActiveJob``
-     - | ✓
-       | Serialization of BSON and {+odm+} objects works best if you
-         explicitly send ``BSON::ObjectId`` values as strings, and
-         reconstitute them in the job, as shown in the following code:
+     - ✓
+     - Serialization of BSON and {+odm+} objects works best if you
+       explicitly send ``BSON::ObjectId`` values as strings, and
+       reconstitute them in the job. For example:
   
        .. code-block:: ruby
        
@@ -49,17 +54,17 @@
           end
 
    * - ``ActiveModel``
-     - | ✓ 
-       | The ``Mongoid::Document`` module includes
-         ``ActiveModel::Model`` and leverages ``ActiveModel::Validations``
-         for :ref:`mongoid-modeling-validation`.
+     - ✓ 
+     - The ``Mongoid::Document`` module includes
+       ``ActiveModel::Model`` and leverages ``ActiveModel::Validations``
+       for :ref:`mongoid-modeling-validation`.
 
    * - ``ActiveStorage``
-     - | *Unsupported*
-       | Depends directly on Active Record.
+     - *Unsupported*
+     - Depends directly on Active Record.
 
    * - ``ActiveSupport``
-     - | ✓
-       | The ``Mongoid`` module requires ``ActiveSupport``.
-         ``Mongoid`` uses ``ActiveSupport::TimeWithZone`` for handling
-         time values.
+     - ✓
+     - The ``Mongoid`` module requires ``ActiveSupport``.
+       ``Mongoid`` uses ``ActiveSupport::TimeWithZone`` for handling
+       time values.

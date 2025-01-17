@@ -11,8 +11,7 @@ Next Steps
 .. meta::
    :keywords: learn more
 
-Congratulations on completing the Quick Start tutorial for {+ror+}
-7!
+Congratulations on completing the Quick Start tutorial for {+ror+} 8!
 
 After you complete these steps, you have a Rails web application that
 uses {+odm+} to connect to your MongoDB deployment, run a query on
