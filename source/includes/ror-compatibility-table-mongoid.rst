@@ -2,7 +2,7 @@
    :header-rows: 1
    :stub-columns: 1
    :class: compatibility-large
-   :widths: 30 30 40
+   :widths: 20 20 60
 
    * - Rails Framework
      - {+odm+} Support
