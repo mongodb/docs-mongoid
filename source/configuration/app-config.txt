@@ -14,18 +14,19 @@ Application Configuration
 .. contents:: On this page
    :local:
    :backlinks: none
-   :depth: 3
+   :depth: 2
    :class: singlecol
 
 Overview
 --------
 
 In this guide, you can learn how to configure how your application
-connects to MongoDB. When you set up your application, you are required
-to supply a **connection string**, or connection URI, that contains
-a set of instructions that {+odm+} uses to connect to a MongoDB. To
-learn more about connection strings, see :manual:`Connection Strings
-</reference/connection-string/>` in the {+server-manual+}.
+connects to MongoDB and how it processes your data. When you set up your
+application, you are required to supply a **connection string**, or
+connection URI, that contains a set of instructions that {+odm+} uses to
+connect to a MongoDB. To learn more about connection strings, see
+:manual:`Connection Strings </reference/connection-string/>` in the
+{+server-manual+}.
 
 You primarily configure {+odm+} by using a ``mongoid.yml`` file that
 specifies your connection options and clients. To learn more about
@@ -128,6 +129,8 @@ in order:
    concept of environments. Any configuration that you provide is
    applied to the current environment.
 
+.. _mongoid-config-options-all:
+
 Configuration Options
 ---------------------
 
@@ -138,4 +141,222 @@ each option and its parameters.
 .. literalinclude:: /includes/configuration/sample-config-options.yml
    :language: yaml
 
+Version Based Defaults
+----------------------
 
+{+odm+} supports setting configuration options to their default values
+for specific versions. This might be useful for when you update to a new
+{+odm+} version. When upgrading your {+odm+} version, set the following
+options on ``Mongoid::Config``:
+
+.. code-block:: ruby
+
+   Mongoid.configure do |config|
+     config.load_defaults <older version>
+   end
+
+This allows you to upgrade to a new version of {+odm+} while using
+the configuration options from the previous installed version.
+This feature gives you more time to implement tests for each changed
+behavior to make sure your code doesn't break or behave in unexpected
+ways. After you verify that your application works as expected, you can
+remove this code to use the current version's default configuration.
+
+ERb Pre-processing
+------------------
+
+When loading a configuration file, {+odm+} processes it by using
+:github:`ERb <ruby/erb>` before parsing it as YAML. This allows {+odm+}
+to construct the contents of the configuration file at runtime
+based on environment variables.
+
+Because {+odm+} performs ERb rendering before YAML parsing, all ERb
+directives in the configuration file are evaluated, including those
+occurring in YAML comments.
+
+The following sample ``mongoid.yml`` file demonstrates how you can
+reference an environment variable that stores your connection string:
+
+.. code-block:: yaml
+
+   development:
+     clients:
+       default:
+         uri: "<%= ENV['MONGODB_URI'] %>"
+
+.. tip::
+
+   When outputting values from ERb, ensure the values are valid YAML
+   and escape them as needed.
+
+.. _mongoid-config-time-zones:
+
+Time Zone Configuration
+-----------------------
+
+{+odm+} uses Active Support's time zone functionality, which provides
+more functionality than {+language+}'s standard library. Active Support
+allows configuration of the ``Time.zone`` variable, a thread-global
+variable which provides context for working with date and time values.
+
+You can implement correct time zone handling in your application by
+performing the following steps:
+
+1. Set the operating system's time zone to UTC.
+
+#. Set your application default time zone to UTC, as shown in the
+   following code:
+
+   .. code-block:: ruby
+   
+      # If using Rails, in `application.rb`:
+      class Application < Rails::Application
+        config.time_zone = 'UTC'
+      end
+    
+      # If not using Rails:
+      Time.zone = 'UTC'
+
+#. In each controller and job class, set the appropriate time zone in a
+   ``before_filter`` callback:
+
+   .. code-block:: ruby
+   
+      class ApplicationController < ActionController::Base
+        before_filter :fetch_user, :set_time_zone
+    
+        def set_time_zone
+          Time.zone = @user.time_zone
+        end
+      end
+
+#. Then, you can work with times in the local time zone.
+
+#. Use Active Support methods instead of the {+language+} standard library.
+
+   - Use the ``Time.zone.now`` or ``Time.current`` methods instead of
+     ``Time.now``
+   - Use the ``Date.current`` method instead of ``Date.today``
+
+   The {+language+} standard library methods such as ``Time.now`` and
+   ``Date.today`` reference your system time zone and not the value of
+   the ``Time.zone`` variable.
+
+   You might mistake these similarly named methods, so we recommend
+   using the `Rails/TimeZone
+   <https://docs.rubocop.org/rubocop-rails/cops_rails.html#railstimezone>`__
+   feature from RuboCop in your tests.
+
+Set Time Zone on MongoDB Data
+-----------------------------
+
+MongoDB stores all times in UTC without time zone information.
+{+odm+} models load and return time values as instances of
+``ActiveSupport::TimeWithZone``. You can set the ``use_utc`` option
+to control how {+odm+} sets the time zone when loading from the
+database:
+
+- ``false`` (*default*): {+odm+} uses ``Time.zone`` to set the time
+  zone of time values are loaded from database.
+- ``true``: {+odm+} always sets the time zone as UTC on loaded
+  time values.
+
+The ``use_utc`` option affects only how data is loaded and does not affect
+how data is persisted. For example, if you assign a ``Time`` or
+``ActiveSupport::TimeWithZone`` instance to a time field, the time
+zone information of the assigned instance is used
+regardless of the ``use_utc`` value.
+
+Alternatively, if you assign a string value to a time field, any time
+zone information in the string is parsed. If the string does not include
+time zone information it is parsed according to the ``Time.zone`` value.
+
+The following code sets a ``Time.zone`` value and demonstrates how
+{+odm+} processes different time strings:
+
+.. code-block:: ruby
+
+   Time.use_zone("Asia/Kolkata") do
+ 
+     # String does not include time zone, so "Asia/Kolkata" is used
+     ghandi.born_at = "1869-10-02 7:10 PM"
+ 
+     # Time zone in string (-0600) is used
+     amelia.born_at = "1897-07-24 11:30 -0600"
+   end
+
+SSL/TLS Configuration
+---------------------
+
+You can configure advanced TLS options in your application, such as
+enabling or disabling certain ciphers. To learn about the main SSL/TLS
+options, see the :ref:`mongoid-config-options-all` section of this guide.
+
+You can set TLS context hooks on the {+ruby-driver+}. TLS context
+hooks are user-provided ``Proc`` objects that are invoked before any TLS
+socket connection is created in the driver. These hooks can be used to
+modify the underlying ``OpenSSL::SSL::SSLContext`` object used by the
+socket.
+
+To set TLS context hooks, add a ``Proc`` to the ``Mongo.tls_context_hooks``
+array, which can be done in an initializer. The following example adds a hook
+that only enables the ``"AES256-SHA"`` cipher:
+
+.. code-block:: ruby
+
+   Mongo.tls_context_hooks.push(
+     Proc.new { |context|
+       context.ciphers = ["AES256-SHA"]
+     }
+   )
+
+Every ``Proc`` in ``Mongo.tls_context_hooks`` is passed an
+``OpenSSL::SSL::SSLContext`` object as its sole argument. These ``Proc``
+objects are run sequentially during socket creation.
+
+.. warning::
+
+   TLS context hooks are global and affect all ``Mongo::Client``
+   instances in an application.
+
+To learn more about TLS context hooks, see :ruby:`Modifying SSLContext
+</reference/create-client/#modifying-sslcontext>` in the {+ruby-driver+}
+documentation.
+
+Network Compression
+-------------------
+
+{+odm+} supports compression of messages to and from MongoDB. This
+functionality is provided by the {+ruby-driver+}, which implements the
+following supported algorithms:
+
+- :github:`Snappy <google/snappy>`: To use ``snappy`` compression, you
+  must install the  `snappy <https://rubygems.org/gems/snappy>`__ library.
+- `Zlib <https://zlib.net/>`__: To use ``zlib`` compression, you
+  must install the  `zlib <https://rubygems.org/gems/zlib>`__ library.
+- `Zstandard <https://facebook.github.io/zstd/>`__: To use ``zlib``
+  compression, you must install the  `zstd-ruby
+  <https://rubygems.org/gems/zstd-ruby>`__ library.
+
+To use wire protocol compression, configure the driver options
+in your ``mongoid.yml`` file:
+
+.. code-block:: yaml
+
+   development:
+     clients:
+       default:
+         ...
+         options:
+           # Specify compresses to use. (default is no compression)
+           # Accepted values are zstd, zlib, snappy, or a combination
+           compressors: ["zstd", "snappy"]
+
+If you do not explicitly request any compressors, the driver does not
+use compression, even if the required dependencies for one or more
+compressors are installed.
+
+The driver chooses the first compressor, if you specify multiple, that
+is supported by the MongoDB Server. We recommend using the ``zstd``
+compressor because it produces the highest compression at the same CPU
+consumption compared to the other compressors.
