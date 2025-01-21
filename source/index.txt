@@ -15,11 +15,10 @@ MongoDB in Ruby. To work with {+odm+} from the command line using
    Quick Start - {+ror+} </quick-start-rails>
    Quick Start - Sinatra </quick-start-sinatra>
    Add {+odm+} to an Existing Application </add-existing>
+   Configuration </configuration>
    Interact with Data </interact-data>
    Model Your Data </data-modeling>
-   Configuration </configuration>
    Secure Your Data </security>
-   /working-with-data
    API Documentation </api>
    What's New </whats-new>
    Compatibility </compatibility>
