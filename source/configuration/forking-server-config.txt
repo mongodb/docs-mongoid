@@ -27,7 +27,7 @@ When using {+odm+} with a forking web server, adhere to the following
 guidelines:
 
 - If possible, do not perform any MongoDB operations in the parent
-  process prior to forking. To learn more about how the {+ruby-driver+}
+  process before forking. To learn more about how the {+ruby-driver+}
   handles forking, see :ruby:`Usage with Forking Servers
   </reference/create-client/#usage-with-forking-servers>` in the driver
   documentation.
@@ -87,8 +87,8 @@ The following code uses the ``on_worker_boot``, ``before_fork``, and
 Unicorn
 -------
 
-Use the ``after_fork`` hook to reconnect clients in the workers. Use
-the ``before_fork`` hook to close clients in the parent process. To
+Use the ``before_fork`` hook to close clients in the parent process. Use
+the ``after_fork`` hook to reconnect clients in the workers. To
 learn more about these hooks, see `Configurator
 <https://yhbt.net/unicorn/Unicorn/Configurator.html>`__ in the Unicorn
 API documentation.

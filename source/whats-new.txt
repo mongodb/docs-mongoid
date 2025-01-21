@@ -142,7 +142,7 @@ Removal of Deprecated Options
 
 **Breaking change:** The following config options are removed in {+odm+} v9.0.
 Please ensure you have removed all references to these from your app.
-If you were using ``config.load_defaults 8.1`` prior to upgrading, you will not
+If you were using ``config.load_defaults 8.1`` before upgrading, you will not
 experience any behavior change. Refer to earlier release notes for the meaning
 of each option.
 
@@ -545,7 +545,7 @@ Consider the following code:
    record = Model.with(collection: 'other_collection') { Model.first }
    record.update(field: 'value')
 
-Prior to {+odm+} v9.0, this could would silently fail to execute the update,
+Before {+odm+} v9.0, this could would silently fail to execute the update,
 because the storage options (here, the specification of an alternate
 collection for the model) would not be remembered by the record. Thus, the
 record would be loaded from ``other_collection``, but when updated, would attempt

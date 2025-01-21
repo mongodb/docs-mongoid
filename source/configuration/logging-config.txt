@@ -75,19 +75,19 @@ files, such as ``config/environments/production.rb``:
    {+odm+} operates in a Rails application, because {+odm+} inherits
    Rails' log level.
 
-To configure either {+odm+} or driver logger differently from the Rails
-logger, use an initializer as shown in the following code:
+To configure either the {+odm+} or driver logger differently from the
+Rails logger, use an initializer as shown in the following code:
 
 .. code-block:: ruby
 
    Rails.application.configure do
      config.after_initialize do
-       # Change Mongoid log destination and/or level
+       # Change Mongoid log destination and level
        Mongoid.logger = Logger.new(STDERR).tap do |logger|
          logger.level = Logger::DEBUG
        end
  
-       # Change driver log destination and/or level
+       # Change driver log destination and level
        Mongo::Logger.logger = Logger.new(STDERR).tap do |logger|
          logger.level = Logger::DEBUG
        end
@@ -108,7 +108,7 @@ logger, use an initializer as shown in the following code:
 
 Because {+odm+} sets its own logger and the driver's logger to the
 same instance as the Rails logger, modifying any of the instances affects
-all of them. For example, the following code changes the log level for
+all the loggers. For example, the following code changes the log level for
 all three loggers:
 
 .. code-block:: ruby

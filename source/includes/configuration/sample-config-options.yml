@@ -188,7 +188,7 @@ development:
     # visit https://www.mongodb.com/docs/mongoid/current/interact-data/crud
     legacy_readonly: false
 
-    # Sets the log level. This must be set prior to referencing clients
+    # Sets the log level. This must be set before referencing clients
     # or Mongo.logger, because changes to this option are not be
     # propagated to any clients and loggers that already exist.
     log_level: :info

@@ -62,7 +62,8 @@ following code:
      include Mongo::QueryCache::Middleware::ActiveJob
    end
 
-You can also for a specific job class, as shown in the following code:
+You can also enable it for a specific job class, as shown in the
+following code:
 
 .. code-block:: ruby
 
