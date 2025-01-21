@@ -46,6 +46,8 @@ the following steps:
 
 #. Create {+odm+} models to interact with your data.
 
+.. _mongoid-add-existing-rails:
+
 Rails Application
 -----------------
 
