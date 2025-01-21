@@ -545,7 +545,7 @@ Consider the following code:
    record = Model.with(collection: 'other_collection') { Model.first }
    record.update(field: 'value')
 
-Before {+odm+} v9.0, this could would silently fail to execute the update,
+Before {+odm+} v9.0, the preceding code silently fails to execute the update,
 because the storage options (here, the specification of an alternate
 collection for the model) would not be remembered by the record. Thus, the
 record would be loaded from ``other_collection``, but when updated, would attempt
