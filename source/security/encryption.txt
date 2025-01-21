@@ -156,7 +156,7 @@ by running the following {+language+} code:
 Configure your Client
 ---------------------
 
-CSFLE requires additional configuration for your MongoDB client. To configure a
+You must configure your MongoDB client to implement CSFLE. To configure a
 client for CSFLE, add the following code to your ``mongoid.yml`` file:
 
 .. code-block:: bash
@@ -164,7 +164,7 @@ client for CSFLE, add the following code to your ``mongoid.yml`` file:
    development:
      clients:
        default:
-         uri: <connection string>
+         uri: "<connection string>"
          options:
            auto_encryption_options: # This key enables automatic encryption
              key_vault_namespace: 'encryption.__keyVault' # Database and collection in which to store data keys
@@ -318,3 +318,16 @@ one unencrypted document:
 You can encrypt existing data in a collection by reading and then writing back
 all data with a CSFLE-enabled client. When doing so, ensure that all existing
 data is the expected type and that empty values are not set as ``nil``. 
+
+Additional Information
+----------------------
+
+To learn more about CSFLE, see the :manual:`Client-Side Field Level Encryption
+</core/csfle>` guide in the MongoDB {+server-manual+}.
+
+To learn more about using CSFLE with the {+ruby-driver+}, see the
+:ruby:`Client-Side Encryption
+</reference/in-use-encryption/client-side-encryption/>` guide in the
+{+ruby-driver+} documentation.
+
+.. TODO: Add link to mongoid configuration page for encryption settings when available.

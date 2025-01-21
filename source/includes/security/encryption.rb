@@ -61,7 +61,7 @@ unencrypted_client['patients'].find.first
 
 # start-rewrap-keys
 # Create a key vault client
-key_vault_client = Mongo::Client.new('<Your connection URI>')
+key_vault_client = Mongo::Client.new('<connection string>')
 
 # Create the encryption object
 encryption = Mongo::ClientEncryption.new(
