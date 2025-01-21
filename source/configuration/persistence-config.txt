@@ -41,7 +41,7 @@ form of its representative class name. In the following example, for the
 ``Restaurant`` class, the corresponding collection is named ``restaurants``. For
 the ``Person`` class, the corresponding collection is named ``people``.
 
-.. literalinclude:: /includes/data-modeling/persistence-configuration.rb
+.. literalinclude:: /includes/configuration/persistence-configuration.rb
    :language: ruby
    :start-after: start default modeling
    :end-before: end default modeling
@@ -55,7 +55,7 @@ You can create a new pluralization rule for your model class by calling the
 instance method and passing the singular and plural forms of your class name.
 The following example specifies "reyes" as the plural of "rey":
 
-.. literalinclude:: /includes/data-modeling/persistence-configuration.rb
+.. literalinclude:: /includes/configuration/persistence-configuration.rb
    :language: ruby
    :start-after: start set pluralization
    :end-before: end set pluralization
@@ -68,7 +68,7 @@ collection.
    When {+odm+} stores a document in a database, it serializes the Ruby object
    to a BSON document that has the following structure:
 
-   .. literalinclude:: /includes/data-modeling/persistence-configuration.rb
+   .. literalinclude:: /includes/configuration/persistence-configuration.rb
       :language: ruby
       :start-after: start BSON model
       :end-before: end BSON model
@@ -88,7 +88,7 @@ database, and collection where documents for the ``Band`` class are persisted:
 
 .. io-code-block::
 
-  .. input:: /includes/data-modeling/persistence-configuration.rb
+  .. input:: /includes/configuration/persistence-configuration.rb
      :language: ruby
      :start-after: start persistence context attributes
      :end-before: end persistence context attributes
@@ -120,7 +120,7 @@ to use the ``store_in`` macro to store documents from the ``Person`` class in
 a collection called ``citizens`` in the ``other`` database within a client
 named ``analytics``:
 
-.. literalinclude:: /includes/data-modeling/persistence-configuration.rb
+.. literalinclude:: /includes/configuration/persistence-configuration.rb
    :language: ruby
    :start-after: start store_in example
    :end-before: end store_in example
@@ -136,7 +136,7 @@ to the current thread so that users cannot access each others' data.
 The following example stores documents in a database determined by a
 thread-local variable:
 
-.. literalinclude:: /includes/data-modeling/persistence-configuration.rb
+.. literalinclude:: /includes/configuration/persistence-configuration.rb
    :language: ruby
    :start-after: start store_in lambda example
    :end-before: end store_in lambda example
@@ -168,7 +168,7 @@ By default, {+odm+} stores documents for the ``Band`` class in a collection call
 use a different client, database, and collection to perform operations on the 
 ``Band`` class's documents:
 
-.. literalinclude:: /includes/data-modeling/persistence-configuration.rb
+.. literalinclude:: /includes/configuration/persistence-configuration.rb
    :language: ruby
    :start-after: start with example
    :end-before: end with example
@@ -191,7 +191,7 @@ operations. The configurations apply only to the specified type of operation.
 The following example uses the ``with`` method to specify the use of the 
 secondary node for all read operations within the block.
 
-.. literalinclude:: /includes/data-modeling/persistence-configuration.rb
+.. literalinclude:: /includes/configuration/persistence-configuration.rb
    :language: ruby
    :start-after: start read configuration
    :end-before: end read configuration
@@ -226,7 +226,7 @@ locales in different databases. The code shows how to use the
 ``{+odm+}.override_database`` method to globally set the persistence
 context based on the locale:
 
-.. literalinclude:: /includes/data-modeling/persistence-configuration.rb
+.. literalinclude:: /includes/configuration/persistence-configuration.rb
    :language: ruby
    :start-after: start global configuration example
    :end-before: end global configuration example
@@ -242,7 +242,7 @@ Client and Collection Access
 You can access the client or collection of a model or document instance by using
 the ``mongo_client`` and ``collection`` class methods:
 
-.. literalinclude:: /includes/data-modeling/persistence-configuration.rb
+.. literalinclude:: /includes/configuration/persistence-configuration.rb
    :language: ruby
    :start-after: start access client collection
    :end-before: end access client collection
@@ -258,7 +258,7 @@ The following code example accesses the client used by the ``Band`` model class.
 It then uses the ``with`` method on the client to write to the ``music``
 database, setting the ``w`` write option to ``0`` to not require write acknowledgement.
 
-.. literalinclude:: /includes/data-modeling/persistence-configuration.rb
+.. literalinclude:: /includes/configuration/persistence-configuration.rb
    :language: ruby
    :start-after: start client with example
    :end-before: end client with example
@@ -270,7 +270,7 @@ You can override the ``:read`` and ``:write`` options on a collection by using t
 ``with`` method. The following example shows how to use
 the ``with`` method to set the ``w`` write option to ``0``:
 
-.. literalinclude:: /includes/data-modeling/persistence-configuration.rb
+.. literalinclude:: /includes/configuration/persistence-configuration.rb
    :language: ruby
    :start-after: start collection with example
    :end-before: end collection with example 
