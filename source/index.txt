@@ -23,5 +23,4 @@ MongoDB in Ruby. To work with {+odm+} from the command line using
    What's New </whats-new>
    Compatibility </compatibility>
    Issues & Help </issues-and-help>
-   /additional-resources
-   /ecosystem
+   External Resources </external-resources>

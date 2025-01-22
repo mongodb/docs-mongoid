@@ -1,0 +1,132 @@
+.. _mongoid-external-resources:
+
+==================
+External Resources
+==================
+
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: mongoid, ruby, libraries, ecosystem, tools
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+Overview
+--------
+
+In this guide, you can learn about the external resources you can use to learn
+more about {+odm+}, and tools you can use to enhance your {+odm+} applications.
+
+Projects and Libraries
+----------------------
+
+The following sections describe projects and libraries that are integrated with
+or built on top of {+odm+}.
+
+Projects
+~~~~~~~~
+
+- `Workarea Commerce <https://github.com/workarea-commerce/workarea>`__ is an
+  enterprise-grade {+ror+} commerce platform that uses {+odm+}.
+
+Extension Libraries
+~~~~~~~~~~~~~~~~~~~
+  
+- `Mongoid Tree <https://github.com/benedikt/mongoid-tree>`__ is a tree structure
+  for {+odm+} documents that uses the materialized path pattern.
+  
+- `Mongoid Token <https://github.com/thetron/mongoid_token>`__ is a random,
+  unique token generator for {+odm+} documents.
+
+- `Mongoid Collection Snapshot
+  <https://github.com/mongoid/mongoid-collection-snapshot>`__ helps maintain
+  collections of processed data in {+odm+} applications.
+
+- `Mongoid Locker <https://github.com/mongoid/mongoid-locker>`__ provides
+  document-level locking for {+odm+} applications.
+  
+- `Mongo Beautiful Logger
+  <https://github.com/ibraheemdev/mongo_beautiful_logger>`__ is a library that
+  formats your MongoDB logs.
+  
+- `Mongoid Search <https://github.com/mongoid/mongoid_search>`__ provides
+  full-text search for {+odm+}.
+  
+- `Mongoid Fulltext Search <https://github.com/mongoid/mongoid_fulltext>`__
+  provides full-text search using n-gram matching for {+odm+}.
+
+Integration Libraries
+~~~~~~~~~~~~~~~~~~~~~
+
+- `CarrierWave Mongoid
+  <https://github.com/carrierwaveuploader/carrierwave-mongoid>`__ provides
+  {+odm+} support for the Carrierwave file uploads library.
+
+- `Mongoid RSpec <https://github.com/mongoid/mongoid-rspec>`__ provide RSpec
+  matchers and macros for {+odm+} applications.
+
+- `RailsAdmin <https://github.com/sferik/rails_admin>`__ is a Rails engine that
+  provides an interface for managing your data.
+
+- `ActiveAdmin Mongoid <https://github.com/activeadmin/activeadmin-mongoid>`__
+  ActiveAdmin hacks to support {+odm+}.
+  
+- `Mongoid History <https://github.com/mongoid/mongoid-history>`__ is a
+  multi-user, non-linear history tracker for {+odm+}.
+
+- `Delayed Job Mongoid
+  <https://github.com/collectiveidea/delayed_job_mongoid>`__ is a {+odm+} backend for
+  ``delayed_job``.
+  
+- `Mongo Session Store <https://github.com/mongoid/mongo_session_store>`__ is a
+  Rails-compatible session store for {+odm+}.
+
+Learning Resources
+------------------
+
+The following sections provide screencasts, articles, and sample
+applications that you can use to learn more about {+odm+}.
+
+Screencasts
+~~~~~~~~~~~
+
+- `RailsCasts: Mongoid (revised)
+  <https://www.youtube.com/watch?v=L0RqU2MdqXU>`__ gives an overview of {+odm+},
+  by Ryan Bates. It includes the basics
+  of setting up an app, querying for documents, adding embedded
+  associations, overriding the ID, and more.
+
+- `{+ror+} Web Services and Integration with MongoDB, Week 3: Mongoid
+  <https://www.youtube.com/watch?v=9LylgiMYsUM>`__ provides a detailed
+  introduction to {+odm+} and {+ror+} web services.
+
+- `Create a search bar in Rails with Mongoid
+  <https://www.youtube.com/watch?v=zusWR8jS5-A>`__ is a tutorial that explains how
+  to implement text search with {+odm+}.
+
+Articles
+~~~~~~~~
+
+- `A Simple Content Management System in Sinatra
+  <https://www.sitepoint.com/a-simple-content-management-system-in-sinatra>`__:
+  Building a content management application with Sinatra and {+odm+}. 
+
+- `How To Create A Ruby API With Sinatra
+  <https://x-team.com/blog/how-to-create-a-ruby-api-with-sinatra>`__: Creating a
+  Sinatra API with {+odm+}.
+
+- `Converting an existing {+ror+} application to MongoDB
+  <https://ibraheem.ca/posts/convert-rails-to-mongodb>`__: Learn how to Convert an
+  existing {+ror+} application to use MongoDB and {+odm+}.
+
+Sample Applications
+~~~~~~~~~~~~~~~~~~~
+
+- `Mongoid Demo <https://github.com/mongoid/mongoid-demo>`__: A repository
+  containing sample applications that use {+odm+}.
