@@ -20,8 +20,9 @@ External Resources
 Overview
 --------
 
-In this guide, you can learn about the external resources you can use to learn
-more about {+odm+}, and tools you can use to enhance your {+odm+} applications.
+In this guide, you can find external tools and resources that you can use to
+enhance your {+odm+} applications. These resources include external projects and
+libraries, and various learning resources.
 
 Projects and Libraries
 ----------------------
@@ -66,7 +67,7 @@ Integration Libraries
 
 - `CarrierWave Mongoid
   <https://github.com/carrierwaveuploader/carrierwave-mongoid>`__ provides
-  {+odm+} support for the Carrierwave file uploads library.
+  {+odm+} support for the Carrierwave file-uploads library.
 
 - `Mongoid RSpec <https://github.com/mongoid/mongoid-rspec>`__ provide RSpec
   matchers and macros for {+odm+} applications.
@@ -99,12 +100,7 @@ Screencasts
 - `RailsCasts: Mongoid (revised)
   <https://www.youtube.com/watch?v=L0RqU2MdqXU>`__ gives an overview of {+odm+},
   by Ryan Bates. It includes the basics
-  of setting up an app, querying for documents, adding embedded
-  associations, overriding the ID, and more.
-
-- `{+ror+} Web Services and Integration with MongoDB, Week 3: Mongoid
-  <https://www.youtube.com/watch?v=9LylgiMYsUM>`__ provides a detailed
-  introduction to {+odm+} and {+ror+} web services.
+  of setting up an application and working with data.
 
 - `Create a search bar in Rails with Mongoid
   <https://www.youtube.com/watch?v=zusWR8jS5-A>`__ is a tutorial that explains how

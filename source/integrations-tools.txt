@@ -16,4 +16,4 @@ Integrations & Tools
    
    Add {+odm+} to an Existing Application </integrations-tools/add-existing>
    Rails Integration </integrations-tools/rails-integration>
-   External Libraries </integrations-tools/external-resources>
+   External Resources </integrations-tools/external-resources>
