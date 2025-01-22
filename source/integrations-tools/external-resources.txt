@@ -42,8 +42,8 @@ Extension Libraries
 - `Mongoid Tree <https://github.com/benedikt/mongoid-tree>`__ is a tree structure
   for {+odm+} documents that uses the materialized path pattern.
   
-- `Mongoid Token <https://github.com/thetron/mongoid_token>`__ is a random,
-  unique token generator for {+odm+} documents.
+- `Mongoid Token <https://github.com/thetron/mongoid_token>`__ generates random,
+   tokens for {+odm+} documents.
 
 - `Mongoid Collection Snapshot
   <https://github.com/mongoid/mongoid-collection-snapshot>`__ helps maintain
@@ -69,14 +69,14 @@ Integration Libraries
   <https://github.com/carrierwaveuploader/carrierwave-mongoid>`__ provides
   {+odm+} support for the Carrierwave file-uploads library.
 
-- `Mongoid RSpec <https://github.com/mongoid/mongoid-rspec>`__ provide RSpec
+- `Mongoid RSpec <https://github.com/mongoid/mongoid-rspec>`__ provides RSpec
   matchers and macros for {+odm+} applications.
 
 - `RailsAdmin <https://github.com/sferik/rails_admin>`__ is a Rails engine that
   provides an interface for managing your data.
 
 - `ActiveAdmin Mongoid <https://github.com/activeadmin/activeadmin-mongoid>`__
-  ActiveAdmin hacks to support {+odm+}.
+  provides ActiveAdmin hacks to support {+odm+}.
   
 - `Mongoid History <https://github.com/mongoid/mongoid-history>`__ is a
   multi-user, non-linear history tracker for {+odm+}.
@@ -97,10 +97,9 @@ applications that you can use to learn more about {+odm+}.
 Screencasts
 ~~~~~~~~~~~
 
-- `RailsCasts: Mongoid (revised)
-  <https://www.youtube.com/watch?v=L0RqU2MdqXU>`__ gives an overview of {+odm+},
-  by Ryan Bates. It includes the basics
-  of setting up an application and working with data.
+- `RailsCasts: Mongoid (revised) with Ryan Bates
+  <https://www.youtube.com/watch?v=L0RqU2MdqXU>`__ gives an overview of {+odm+}.
+  It includes the basics of setting up an application and working with data.
 
 - `Create a search bar in Rails with Mongoid
   <https://www.youtube.com/watch?v=zusWR8jS5-A>`__ is a tutorial that explains how
@@ -118,7 +117,7 @@ Articles
   Sinatra API with {+odm+}.
 
 - `Converting an existing {+ror+} application to MongoDB
-  <https://ibraheem.ca/posts/convert-rails-to-mongodb>`__: Learn how to Convert an
+  <https://ibraheem.ca/posts/convert-rails-to-mongodb>`__: Learn how to convert an
   existing {+ror+} application to use MongoDB and {+odm+}.
 
 Sample Applications
