@@ -63,8 +63,8 @@ models before every request in development mode. This can slow down your
 application, so if you are not using any inheritance you can turn this
 feature off.
 
-The following code demonstrates how you can set the ``preload_models``
-feature to off by accessing ``config.mongoid``:
+The following code demonstrates how you can turn off preloading by
+setting the ``preload_models`` feature to ``false``:
 
 .. code-block:: ruby
 
@@ -80,8 +80,8 @@ provides the conversions between {+odm+} exceptions and HTTP codes:
 - ``Mongoid::Errors::DocumentNotFound``: Converted to ``404 Not Found``
 - ``Mongoid::Errors::Validations``: Converted to ``422 Unprocessable Content``
 
-Controller Runtime Instrumentation
-----------------------------------
+Execution Time Logging
+----------------------
 
 {+odm+} can output the time spent executing database commands to the Rails
 instrumentation event ``process_action.action_controller``. {+odm+}
