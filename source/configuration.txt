@@ -20,8 +20,7 @@ Configuration
    Logging </configuration/logging-config>
    Query Cache Middleware </configuration/query-cache-config>
    Forking Servers </configuration/forking-server-config>
-
-.. Collection Configuration </configuration/collection-config>
+   Collection Configuration </configuration/collection-config>
 
 In this section, you can learn how to configure different options with {+odm+}.
 
@@ -42,3 +41,6 @@ In this section, you can learn how to configure different options with {+odm+}.
 
 - :ref:`mongoid-forking-server-config`: Learn how to configure your
   application to use a forking web server.
+
+- :ref:`mongoid-collection-config`: Learn how to specify configuration options
+  for a collection in your application.

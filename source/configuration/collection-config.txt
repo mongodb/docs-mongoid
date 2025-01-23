@@ -1,0 +1,104 @@
+.. _mongoid-collection-config:
+
+========================
+Collection Configuration
+========================
+
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: code example, collections, time series, capped collection
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+Overview
+--------
+
+In this guide, you can learn how to specify configuration options for a
+collection in your {+odm+} application.
+
+Configure Collection Options
+----------------------------
+
+You can specify configuration options for a collection by using the
+``:collection_options`` argument with the ``store_in``
+macro. The ``:collection_options`` argument accepts any collection option that
+your driver and server version supports. 
+
+.. note::
+
+   To apply the collection options, your collection must be explicitly created
+   prior to use. To learn how to create a collection using a Rake task, see the
+   :ref:`mongoid-create-collection-rake` section of this guide.
+
+To learn more about collection options available in the {+ruby-driver+}, see the
+:ruby:`Collections </reference/collection-tasks/>` guide in the {+ruby-driver+}
+documentation.
+
+The following sections show examples of how to configure collection options with
+{+odm+}.
+
+Time Series Collection
+~~~~~~~~~~~~~~~~~~~~~~
+
+Time series collections efficiently store sequences of measurements over a
+period of time. The following example shows how to configure a time series
+collection with
+{+odm+}:
+
+.. literalinclude:: /includes/configuration/collection-config.rb
+   :language: ruby
+   :start-after: # start-time-series-config
+   :end-before: # end-time-series-config
+
+Capped Collection
+~~~~~~~~~~~~~~~~~
+
+Capped collections have maximum size or document counts that prevent them from
+growing beyond maximum thresholds. The following example shows how to configure
+a capped collectionq with {+odm+}:
+
+.. literalinclude:: /includes/configuration/collection-config.rb
+   :language: ruby
+   :start-after: # start-capped-config
+   :end-before: # end-capped-config
+
+Default Collation
+~~~~~~~~~~~~~~~~~
+
+Collations are sets of rules for how to compare strings, typically in a
+particular natural language. The following example shows how to specify a
+default collation to use on a
+collection with {+odm+}:
+
+.. literalinclude:: /includes/configuration/collection-config.rb
+   :language: ruby
+   :start-after: # start-default-collation-config
+   :end-before: # end-default-collation-config
+
+.. _mongoid-create-collection-rake:
+
+Collection Management Rake Task
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To apply the collection options you specify in your {+odm+} application, you
+must explicitly create the corresponding collection. To do so, use the
+``db:mongoid:create_collections`` Rake task by running the following command in
+your shell:
+
+.. code-block:: bash
+  
+   rake db:mongoid:create_collections
+
+You can also run the ``create_collection`` command on a single model in the
+Rails console, as shown in the following example:
+
+.. code-block:: ruby
+
+   Model.create_collection
