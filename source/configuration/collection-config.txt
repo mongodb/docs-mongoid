@@ -62,12 +62,12 @@ Capped Collection
 
 Capped collections have maximum size or document counts that prevent them from
 growing beyond maximum thresholds. The following example shows how to configure
-a capped collectionq with {+odm+}:
+a capped collection with {+odm+}:
 
 .. literalinclude:: /includes/configuration/collection-config.rb
    :language: ruby
-   :start-after: # start-capped-config
-   :end-before: # end-capped-config
+   :start-after: # start-capped-collection-config
+   :end-before: # end-capped-collection-config
 
 Default Collation
 ~~~~~~~~~~~~~~~~~
@@ -85,7 +85,7 @@ collection with {+odm+}:
 .. _mongoid-create-collection-rake:
 
 Collection Management Rake Task
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------
 
 To apply the collection options you specify in your {+odm+} application, you
 must explicitly create the corresponding collection. To do so, use the
