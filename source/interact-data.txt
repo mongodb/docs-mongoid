@@ -17,6 +17,7 @@ Interact with Data
    Perform Data Operations </interact-data/crud>
    Specify a Query </interact-data/specify-query>
    Modify Query Results </interact-data/modify-results>
+   Aggregation </interact-data/aggregation>
    Search Text </interact-data/text-search>
    Transactions and Sessions </interact-data/transaction>
    Nested Attributes </interact-data/nested-attributes>
@@ -32,6 +33,9 @@ MongoDB data.
 
 - :ref:`mongoid-data-modify-results`: Learn how to modify the way that
   {+odm+} returns results from queries.
+
+- :ref:`mongoid-aggregation`: Learn how to transform your data by using
+  MongoDB aggregation.
 
 - :ref:`mongoid-data-text-search`: Learn how to perform efficient
   searches on text fields.
