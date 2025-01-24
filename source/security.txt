@@ -18,4 +18,5 @@ Secure Your Data
 
 In this section, you can learn how to secure your data when using {+odm+}.
 
-- :ref:`Client-Side Field Level Encryption <mongoid-encryption>` Learn how to encrypt your data with {+odm+}.
+- :ref:`Client-Side Field Level Encryption <mongoid-encryption>` Learn
+  how to encrypt your data with {+odm+}.
