@@ -30,7 +30,7 @@ using {+odm+}, you can easily interact with your data and create
 flexible data models native to {+language+} applications.
 
 You can add {+odm+} to your {+language+} application to connect it to
-a MongoDB database. You can install {+odm+} by adding it to your project's
+a MongoDB database. Install {+odm+} by adding it to your project's
 ``Gemfile`` or set up a runnable project by following one of the
 Quick Start guides.
 
