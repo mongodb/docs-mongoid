@@ -43,4 +43,4 @@ In this section, you can learn how to configure different options with {+odm+}.
   application to use a forking web server.
 
 - :ref:`mongoid-collection-config`: Learn how to specify configuration options
-  for a collection in your application.
+  for a MongoDB collection in your application.

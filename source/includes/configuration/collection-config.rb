@@ -16,7 +16,7 @@ end
 # end-time-series-config
 
 # start-capped-collection-config
-class Name
+class Blog
   include Mongoid::Document
 
   store_in collection_options: {
@@ -27,7 +27,7 @@ end
 # end-capped-collection-config
 
 # start-default-collation-config
-class Name
+class Title
   include Mongoid::Document
 
   store_in collection_options: {
