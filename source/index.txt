@@ -27,9 +27,10 @@ Introduction
 Welcome to the documentation site for {+odm+}. {+odm+} is the officially
 supported object-document mapper (ODM) for MongoDB in {+language+}.
 
-You can add {+odm+} to your application to connect your {+language+} to
-MongoDB. Install it by adding it to your project's ``Gemfile`` file or
-set up a runnable project by following one of the Quick Start guides.
+You can add {+odm+} to your application to connect your {+language+}
+application to MongoDB. You can install {+odm+} by adding it to your project's
+``Gemfile`` or set up a runnable project by following one of the
+Quick Start guides.
 
 Quick Start
 -----------
@@ -69,14 +70,14 @@ Integrations & Tools
 
 To learn how to add {+odm+} to an existing application,
 see the :ref:`mongoid-integrations-tools` section. This section also
-includes information about the Rails framework and other resources.
+includes information about the {+ror+} framework and other resources.
 
 Compatibility
 -------------
 
-To learn about the versions of the MongoDB Server, {+language+}
-language, {+ruby-driver+}, and Rails that are compatible with each
-version of {+odm+}, see :ref:`mongoid-compatibility`.
+To learn about the versions of the {+mdb-server+}, the {+language+}
+language, the {+ruby-driver+}, and {+ror+} framework that are compatible
+with each version of {+odm+}, see :ref:`mongoid-compatibility`.
 
 What's New
 ----------
