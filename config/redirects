@@ -8,16 +8,65 @@ symlink: upcoming -> master
 raw: ${prefix}/ -> ${base}/current/
 raw: ${prefix}/stable -> ${base}/current/
 
-# Redirects from old/legacy docs to standardized docs
-[*-v9.0]: ${prefix}/${version}/installation/ -> ${base}/upcoming/#quick-start
-[*-v9.0]: ${prefix}/${version}/reference/compatibility/ -> ${base}/upcoming/compatibility/
+# Redirects for standardized (new) page URLs in old docs
+[*-v9.0]: ${prefix}/${version}/compatibility/ -> ${base}/${version}/reference/compatibility/ 
+[*-v9.0]: ${prefix}/${version}/configuration/ -> ${base}/${version}/reference/configuration/
+[*-v9.0]: ${prefix}/${version}/integrations-tools/rails-integration/ -> ${base}/${version}/reference/rails-integration/
+[*-v9.0]: ${prefix}/${version}/quick-start-sinatra/ -> ${base}/${version}/tutorials/getting-started-sinatra/
+[*-v9.0]: ${prefix}/${version}/quick-start-rails/ -> ${base}/${version}/tutorials/getting-started-rails7/
+[*-v9.0]: ${prefix}/${version}/data-modeling/documents/ -> ${base}/${version}/tutorials/documents/
+[*-v9.0]: ${prefix}/${version}/security/encryption/ -> ${base}/${version}/tutorials/automatic-encryption/
+[*-v9.0]: ${prefix}/${version}/data-modeling/field-types/ -> ${base}/${version}/reference/fields/
+[*-v9.0]: ${prefix}/${version}/data-modeling/inheritance/ -> ${base}/${version}/reference/inheritance/
+[*-v9.0]: ${prefix}/${version}/data-modeling/associations/ -> ${base}/${version}/reference/associations/
+[*-v9.0]: ${prefix}/${version}/data-modeling/validation/ -> ${base}/${version}/reference/validation/
+[*-v9.0]: ${prefix}/${version}/configuration/collection-config/ -> ${base}/${version}/reference/collection-configuration/
+[*-v9.0]: ${prefix}/${version}/data-modeling/indexes/ -> ${base}/${version}/reference/indexes/
+[*-v9.0]: ${prefix}/${version}/configuration/sharding/ -> ${base}/${version}/reference/sharding/
+[*-v9.0]: ${prefix}/${version}/interact-data/crud/ -> ${base}/${version}/reference/crud/
+[*-v9.0]: ${prefix}/${version}/interact-data/specify-query/ -> ${base}/${version}/reference/queries/
+[*-v9.0]: ${prefix}/${version}/interact-data/text-search/ -> ${base}/${version}/reference/text-search/
+[*-v9.0]: ${prefix}/${version}/interact-data/aggregation/ -> ${base}/${version}/reference/aggregation/
+[*-v9.0]: ${prefix}/${version}/configuration/persistence-config/ -> ${base}/${version}/reference/persistence-configuration/
+[*-v9.0]: ${prefix}/${version}/interact-data/nested-attributes/ -> ${base}/${version}/reference/nested-attributes/
+[*-v9.0]: ${prefix}/${version}/data-modeling/callbacks/ -> ${base}/${version}/reference/callbacks/
+[*-v9.0]: ${prefix}/${version}/interact-data/transaction/ -> ${base}/${version}/reference/transactions/
+[*-v9.0]: ${prefix}/${version}/whats-new/ -> ${base}/${version}/release-notes/mongoid-9.0/
+[*-v9.0]: ${prefix}/${version}/code-documentation/ -> ${base}/${version}/contributing/code-documentation/
+[*-v9.0]: ${prefix}/${version}/issues-and-help/ -> ${base}/${version}/contributing/contributing-guidelines/
+[*-v9.0]: ${prefix}/${version}/integrations-tools/external-resources/ -> ${base}/${version}/ecosystem/
 
-
-
-
-
-
-
-
-
-
+# Redirects for old page URLs in standardized (new) docs
+[master]: ${prefix}/${version}/installation/ -> ${base}/${version}/#quick-start
+[master]: ${prefix}/${version}/reference/compatibility/ -> ${base}/${version}/compatibility/
+[master]: ${prefix}/${version}/reference/configuration/ -> ${base}/${version}/configuration/
+[master]: ${prefix}/${version}/reference/rails-integration/ -> ${base}/${version}/integrations-tools/rails-integration/
+[master]: ${prefix}/${version}/tutorials/getting-started-sinatra/ -> ${base}/${version}/quick-start-sinatra/
+[master]: ${prefix}/${version}/tutorials/getting-started-rails7/ -> ${base}/${version}/quick-start-rails/
+[master]: ${prefix}/${version}/tutorials/getting-started-rails6/ -> ${base}/${version}/quick-start-rails/
+[master]: ${prefix}/${version}/tutorials/documents/ -> ${base}/${version}/data-modeling/documents/
+[master]: ${prefix}/${version}/tutorials/common-errors/ -> ${base}/${version}/
+[master]: ${prefix}/${version}/tutorials/automatic-encryption/ -> ${base}/${version}/security/encryption/
+[master]: ${prefix}/${version}/reference/fields/ -> ${base}/${version}/data-modeling/field-types/
+[master]: ${prefix}/${version}/reference/inheritance/ -> ${base}/${version}/data-modeling/inheritance/
+[master]: ${prefix}/${version}/reference/associations/ -> ${base}/${version}/data-modeling/associations/
+[master]: ${prefix}/${version}/reference/validation/ -> ${base}/${version}/data-modeling/validation/
+[master]: ${prefix}/${version}/reference/collection-configuration/ -> ${base}/${version}/configuration/collection-config/
+[master]: ${prefix}/${version}/reference/indexes/ -> ${base}/${version}/data-modeling/indexes/
+[master]: ${prefix}/${version}/reference/sharding/ -> ${base}/${version}/configuration/sharding/
+[master]: ${prefix}/${version}/reference/crud/ -> ${base}/${version}/interact-data/crud/
+[master]: ${prefix}/${version}/reference/queries/ -> ${base}/${version}/interact-data/specify-query/
+[master]: ${prefix}/${version}/reference/text-search/ -> ${base}/${version}/interact-data/text-search/
+[master]: ${prefix}/${version}/reference/aggregation/ -> ${base}/${version}/interact-data/aggregation/
+[master]: ${prefix}/${version}/reference/map-reduce/ -> ${base}/${version}/interact-data/aggregation/
+[master]: ${prefix}/${version}/reference/persistence-configuration/ -> ${base}/${version}/configuration/persistence-config/
+[master]: ${prefix}/${version}/reference/nested-attributes/ -> ${base}/${version}/interact-data/nested-attributes/
+[master]: ${prefix}/${version}/reference/callbacks/ -> ${base}/${version}/data-modeling/callbacks/
+[master]: ${prefix}/${version}/reference/sessions/ -> ${base}/${version}/interact-data/transaction/
+[master]: ${prefix}/${version}/reference/transactions/ -> ${base}/${version}/interact-data/transaction/
+[master]: ${prefix}/${version}/release-notes/upgrading/ -> ${base}/${version}/whats-new/
+[master]: ${prefix}/${version}/release-notes/mongoid-9.0/ -> ${base}/${version}/whats-new/
+[master]: ${prefix}/${version}/contributing/code-documentation/ -> ${base}/${version}/code-documentation/
+[master]: ${prefix}/${version}/contributing/contributing-guidelines/ -> ${base}/${version}/issues-and-help/
+[master]: ${prefix}/${version}/additional-resources/ -> ${base}/${version}/integrations-tools/external-resources/
+[master]: ${prefix}/${version}/ecosystem/ -> ${base}/${version}/integrations-tools/external-resources/

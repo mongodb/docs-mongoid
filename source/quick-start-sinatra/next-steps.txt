@@ -21,7 +21,7 @@ the sample data, and render retrieved results.
 .. `mongoid-quickstart <>`__
 .. GitHub repository.
 
-Learn more about {+odm+} features from the following resources:
+Learn more about {+odm+} features from the following sections:
 
 - :ref:`mongoid-data-modeling`: Learn how to customize your {+odm+}
   models.
