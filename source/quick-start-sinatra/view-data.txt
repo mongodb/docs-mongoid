@@ -103,7 +103,7 @@ View MongoDB Data
    .. step:: (Optional) View your results as JSON documents
 
       Instead of generating a view to render your results, you can
-      use the ``to_json()`` method to display your results in JSON
+      use the ``to_json`` method to display your results in JSON
       format.
       
       Replace the ``list_restaurants`` route in the ``app.rb`` file with

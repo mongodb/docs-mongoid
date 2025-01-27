@@ -73,7 +73,7 @@ class is present in your parent class, as shown in the following example:
    :emphasize-lines: 6
 
 To learn more about validations in {+odm+}, see the :ref:`Validations
-<mongoid-validation>` guide.
+<mongoid-modeling-validation>` guide.
 
 Has Many
 ~~~~~~~~
@@ -110,7 +110,7 @@ class is present in your parent class, as shown in the following example:
    :emphasize-lines: 6
 
 To learn more about validations in {+odm+}, see the :ref:`Validations
-<mongoid-validation>` guide.
+<mongoid-modeling-validation>` guide.
 
 Retrieve Association Information
 ````````````````````````````````
@@ -396,7 +396,7 @@ are embedded in a ``Band`` class. The query returns documents that have a
    :start-after: # start-embedded-query
    :end-before: # end-embedded-query
 
-You can use the ``pluck()`` projection method to retrieve embedded documents
+You can use the ``pluck`` projection method to retrieve embedded documents
 without retrieving their associated parent documents, as shown in the following
 example:
 
@@ -434,13 +434,14 @@ Embedded matching on loaded documents has the following known limitations:
 
 - Embedded matching is not implemented for the following features:
   
-  - :ref:`Text search <mongoid-text-search>`
-  - :manual:`Geospatial query operators </reference/operator/query-geospatial/>`
-  - Operators that execute JavaScript code, such as :manual:`$where </reference/operator/query/where/>`
+  - :ref:`Text search <mongoid-data-text-search>`
+  - :manual:`Geospatial queries </reference/operator/query-geospatial/>`
+  - Operators that execute JavaScript code, such as :manual:`$where
+    </reference/operator/query/where/>`
   - Operators that are implemented through other server functionality, such as
-    :manual:`$expr <https://mongodb.com/docs/manual/reference/operator/query/expr/>`
+    :manual:`$expr </reference/operator/query/expr/>`
     and :manual:`$jsonSchema
-    <https://mongodb.com/docs/manual/reference/operator/query/jsonSchema/>`
+    </reference/operator/query/jsonSchema/>`
 
 - {+odm+} expands ``Range`` arguments to hashes with ``$gte`` and ``$lte``
   conditions. This can lead to invalid queries in some cases and raises a an
@@ -450,7 +451,7 @@ Embedded matching on loaded documents has the following known limitations:
   as a pattern while also providing options to the ``$options`` field. You can
   only provide options if the regular expression pattern is a string.
 
-- MongoDB Server versions 4.0 and earlier do not strictly validate ``$type``
+- {+mdb-server+} versions 4.0 and earlier do not strictly validate ``$type``
   arguments.
 
 Omit _id Fields
@@ -477,14 +478,14 @@ Delete Embedded Associations
 You can delete child documents from ``embeds_many`` associations by using one of
 the following methods:
 
-- ``clear()``
-- ``delete_all()``
-- ``destroy_all()``
+- ``clear``
+- ``delete_all``
+- ``destroy_all``
 
-The ``clear()`` method uses the :manual:`$unset operator
+The ``clear`` method uses the :manual:`$unset operator
 </reference/operator/update/unset>` operator to remove an entire embedded
-association from the parent document. The ``clear()`` method does not run any
-``destroy`` callbacks. The following example uses the ``clear()``
+association from the parent document. The ``clear`` method does not run any
+``destroy`` callbacks. The following example uses the ``clear``
 method to remove all embedded associations from the ``Band`` class:
 
 .. literalinclude:: /includes/data-modeling/associations.rb
@@ -492,12 +493,12 @@ method to remove all embedded associations from the ``Band`` class:
    :start-after: # start-embedded-clear
    :end-before: # end-embedded-clear
 
-The ``delete_all()`` method uses the :manual:`$pullAll operator
+The ``delete_all`` method uses the :manual:`$pullAll operator
 </reference/operator/update/pullAll>` operator to remove documents in an
-embedded association. ``delete_all()`` loads the association if it has not
+embedded association. ``delete_all`` loads the association if it has not
 yet been loaded, then only removes the documents that exist in the application.
-The ``delete_all()`` method does not run any ``destroy`` callbacks. 
-The following example uses the ``delete_all()`` method to remove all embedded
+The ``delete_all`` method does not run any ``destroy`` callbacks. 
+The following example uses the ``delete_all`` method to remove all embedded
 ``Album`` documents from the ``Band`` class:
 
 .. literalinclude:: /includes/data-modeling/associations.rb
@@ -505,10 +506,10 @@ The following example uses the ``delete_all()`` method to remove all embedded
    :start-after: # start-embedded-delete-all
    :end-before: # end-embedded-delete-all
 
-The ``destroy_all()`` method also uses the :manual:`$pullAll operator
+The ``destroy_all`` method also uses the :manual:`$pullAll operator
 </reference/operator/update/pullAll>` operator to remove documents in an
 embedded association. It also runs any ``destroy`` callbacks that are defined on
-the associated documents. The following example uses the ``destroy_all()``
+the associated documents. The following example uses the ``destroy_all``
 method to remove all embedded ``Album`` documents from the ``Band`` class:
 
 .. literalinclude:: /includes/data-modeling/associations.rb

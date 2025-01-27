@@ -331,14 +331,14 @@ functionality is provided by the {+ruby-driver+}, which implements the
 following supported algorithms:
 
 - `Zstandard <https://facebook.github.io/zstd/>`__ (*Recommended*): To use ``zstandard``
-  compression, you must install the  `zstd-ruby
-  <https://rubygems.org/gems/zstd-ruby>`__ library. This compressor
+  compression, you must install the :rubygems:`zstd-ruby
+  <gems/zstd-ruby>` library. This compressor
   produces the highest compression at the same CPU consumption compared
   to the other compressors.
 - :github:`Snappy <google/snappy>`: To use ``snappy`` compression, you
-  must install the  `snappy <https://rubygems.org/gems/snappy>`__ library.
+  must install the :rubygems:`snappy <gems/snappy>` library.
 - `Zlib <https://zlib.net/>`__: To use ``zlib`` compression, you
-  must install the  `zlib <https://rubygems.org/gems/zlib>`__ library.
+  must install the :rubygems:`zlib <gems/zlib>` library.
 
 To use wire protocol compression, configure the driver options
 in your ``mongoid.yml`` file:
@@ -359,4 +359,4 @@ use compression, even if the required dependencies for one or more
 compressors are installed.
 
 The driver chooses the first compressor, if you specify multiple, that
-is supported by the MongoDB Server.
+is supported by your MongoDB deployment.

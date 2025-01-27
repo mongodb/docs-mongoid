@@ -110,7 +110,7 @@ mongocryptd (Driver v2.18 or earlier)
 
 If you are using {+ruby-driver+} version 2.18 or earlier, you must use ``mongocryptd``
 instead of the {+shared-library+}. ``mongocryptd`` comes
-pre-packaged with enterprise builds of MongoDB Server. For instructions on how to
+pre-packaged with enterprise builds of {+mdb-server+}. For instructions on how to
 install and configure ``mongocryptd``, see the :manual:`Install mongocryptd guide
 </core/csfle/reference/install-library/#steps>` in the MongoDB
 {+server-manual+}.
@@ -118,7 +118,7 @@ install and configure ``mongocryptd``, see the :manual:`Install mongocryptd guid
 ffi
 ~~~
 
-{+odm+} uses the `ffi gem <https://github.com/ffi/ffi>`__ to call functions from
+{+odm+} uses the :github:`ffi gem <ffi/ffi>` to call functions from
 ``libmongocrypt``. Add the gem to your ``Gemfile`` by running the following
 command in your shell:
 
@@ -330,4 +330,5 @@ To learn more about using CSFLE with the {+ruby-driver+}, see the
 </reference/in-use-encryption/client-side-encryption/>` guide in the
 {+ruby-driver+} documentation.
 
-.. TODO: Add link to mongoid configuration page for encryption settings when available.
+To learn more about configuring {+odm+} in your application, see the
+:ref:`mongoid-app-config` guide.

@@ -60,10 +60,10 @@ You can use the High-Level Transaction API to internally manage the
 lifecycle of your transaction. This API either commits your transaction
 or ends it and incorporates error handling logic.
 
-You can start a transaction by calling the ``transaction()`` method on
+You can start a transaction by calling the ``transaction`` method on
 an instance of a model, on the model class, or on a ``{+odm+}`` module.
 
-When you call the ``transaction()`` method, {+odm+} performs the
+When you call the ``transaction`` method, {+odm+} performs the
 following tasks:
 
 1. Creates a session on the client.
@@ -124,7 +124,7 @@ and demonstrates how operations are run based on the origin client:
 
 .. note::
    
-   When you call the ``transaction()`` method on the ``{+odm+}`` module,
+   When you call the ``transaction`` method on the ``{+odm+}`` module,
    {+odm+} creates the transaction by using the ``:default`` client.
 
 Ending Transactions
@@ -168,7 +168,8 @@ created, saved, or deleted inside a transaction, if the transaction was
 unsuccessful and changes were rolled back. {+odm+} never triggers
 ``after_rollback`` outside of a transaction.
 
-.. TODO link to callbacks guide.
+To learn more about callbacks, see the :ref:`mongoid-modeling-callbacks`
+guide.
 
 .. _mongoid-txn-low-level:
 
@@ -177,12 +178,12 @@ Low-Level Transaction API
 
 When using the low-level API, you must create a session before
 starting a transaction. You can create a session by calling the
-``with_session()`` method on a model class or an instance of a model.
+``with_session`` method on a model class or an instance of a model.
 
-Then, you can start a transaction by calling the ``start_transaction()``
+Then, you can start a transaction by calling the ``start_transaction``
 method on a session. When using this API, you must manually commit or
-end the transaction. You can use the ``commit_transaction()`` and
-``abort_transaction()`` methods on the session instance to manage the
+end the transaction. You can use the ``commit_transaction`` and
+``abort_transaction`` methods on the session instance to manage the
 transaction lifecycle.
 
 Example
@@ -225,7 +226,7 @@ Options
 
 You can specify a read concern, write concern or read
 preference when starting a transaction by passing options to the
-``start_transaction()`` method:
+``start_transaction`` method:
 
 .. code-block:: ruby
 
@@ -236,7 +237,7 @@ preference when starting a transaction by passing options to the
    )
 
 To learn more about the available transaction options, see
-:ruby-api:`start_transaction()
+:ruby-api:`start_transaction
 </Session.html#start_transaction-instance_method>` in the
 {+ruby-driver+} API documentation.
 
@@ -247,7 +248,7 @@ To perform operations within a transaction, operations must use the same
 client that the session was initiated on. By default, all operations
 are performed by using the default client.
 
-To explicitly use a different client, use the ``with()`` method: 
+To explicitly use a different client, use the ``with`` method: 
 
 .. literalinclude:: /includes/interact-data/transaction.rb
    :start-after: start-other-client
@@ -261,7 +262,7 @@ Session API
 -----------
 
 You can use sessions in {+odm+} in a similar way that you can
-perform a transaction. You can call the ``with_session()`` method on a
+perform a transaction. You can call the ``with_session`` method on a
 model class or on an instance of a model and perform some operations in
 a block. All operations in the block will be performed in the context of
 single session.
@@ -270,9 +271,9 @@ The following limitations apply when using sessions:
 
 - You cannot share a session across threads. Sessions are not thread-safe.
 
-- You cannot nest sessions. For example, you cannot call the ``with_session()``
+- You cannot nest sessions. For example, you cannot call the ``with_session``
   method on a model class within the block passed to
-  the ``with_session()`` method on another model class. The following
+  the ``with_session`` method on another model class. The following
   code demonstrates a nested session that results in an error:
 
   .. code-block:: ruby
@@ -287,13 +288,13 @@ The following limitations apply when using sessions:
 - All model classes and instances used within the session block must use
   the same driver client. For example, if you specify different
   a different client for a model used in the block than those of the
-  model or instance that you called ``with_session()`` on, {+odm+} returns
+  model or instance that you called ``with_session`` on, {+odm+} returns
   an error.
 
 Examples
 ~~~~~~~~
 
-You can use the ``with_session()`` method on a model class and pass it session
+You can use the ``with_session`` method on a model class and pass it session
 options to perform a block of operations in the context of a session.
 
 The following code enables the ``causal_consistency`` option to
@@ -311,7 +312,7 @@ To learn more about the available session options, see the
 </Session.html#initialize-instance_method>` in the
 {+ruby-driver+} API documentation.
 
-Alternatively, you can use the ``with_session()`` method on an instance of a
+Alternatively, you can use the ``with_session`` method on an instance of a
 model and pass it session options to perform a block of operations in
 the context of a session.
 
@@ -331,4 +332,5 @@ Additional Information
 To learn more about transactions, see :manual:`Transactions </core/transactions/>` in
 the {+server-manual+}.
 
-.. TODO To learn more about performing CRUD operations, see the :ref:`` guide.
+To learn more about performing CRUD operations, see the
+:ref:`mongoid-data-crud` guide.

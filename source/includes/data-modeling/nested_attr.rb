@@ -18,8 +18,8 @@ band.producer_attributes = { name: 'Alaina Moore' }
 band = Band.create(
   name: 'Tennis',
   albums_attributes: [
-     { name: 'Swimmer', year: 2020 },
-     { name: 'Young & Old', year: 2013 }]
+    { name: 'Swimmer', year: 2020 },
+    { name: 'Young & Old', year: 2013 }]
 )
 # end-create-attr
 
@@ -36,7 +36,7 @@ band = Band.where(name: 'Vampire Weekend').first
 album = band.albums.first
 # Updates the entry by passing the _id value
 band.update(albums_attributes: [
-   { _id: album._id, year: 2011 } ])
+  { _id: album._id, year: 2011 } ])
 # end-update-id
 
 # start-delete-id
@@ -45,14 +45,14 @@ band = Band.where(name: 'Vampire Weekend').first
 album = band.albums.first
 # Deletes the entry by passing the _id value
 band.update(albums_attributes: [
-   { _id: album._id, _destroy: true } ])
+  { _id: album._id, _destroy: true } ])
 # end-delete-id
 
 # start-multiple-ops
 band = Band.where(name: 'Yeah Yeah Yeahs').first
 # Performs multiple data changes
 band.update(albums_attributes: [
-   { name: 'Show Your Bones', year: 2006 },
-   { _id: 1, name: 'Fever To T3ll' },
-   { _id: 2, _destroy: true } ])
+  { name: 'Show Your Bones', year: 2006 },
+  { _id: 1, name: 'Fever To T3ll' },
+  { _id: 2, _destroy: true } ])
 # end-multiple-ops

@@ -34,7 +34,7 @@ To learn how to integrate {+odm+} into an existing application, see the
    </tutorials/quick-start/>`.
 
 {+odm+} is an Object-Document Mapper (ODM) framework for MongoDB in
-Ruby. By using {+odm+}, you can easily interact with your data and
+{+language+}. By using {+odm+}, you can easily interact with your data and
 create flexible data models.
 
 Sinatra is a domain-specific language (DSL) for creating web

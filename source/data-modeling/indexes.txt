@@ -1,4 +1,5 @@
 .. _mongoid-optimize-queries-with-indexes:
+.. _mongoid-indexes:
 
 =============================
 Optimize Queries With Indexes

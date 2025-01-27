@@ -39,8 +39,8 @@ initializer in the ``config/initializers/mongoid.rb`` file.
    ``mongoid.yml`` as the default location for {+odm+} configuration
    when possible.
    
-.. TODO To learn more about available configuration options,
-   see the :ref:`` section.
+To learn more about all available configuration options,
+see the :ref:`mongoid-configuration` guides.
 
 The following code demonstrates how to create a Rails logger by
 accessing ``config.mongoid``:
@@ -53,7 +53,8 @@ accessing ``config.mongoid``:
      end
    end
 
-.. TODO To learn more about logging settings, see the :ref:`` guide.
+To learn more about logging settings, see the
+:ref:`mongoid-logging-config` guide.
 
 Model Preloading
 ----------------
@@ -98,7 +99,7 @@ This logging is set up automatically in your Rails application.
 
    The time indicated in log entries is the time that the MongoDB
    deployment takes to run MongoDB operations in addition to the time taken to
-   send commands and receive results from the MongoDB Server. It does
+   send commands and receive results from {+mdb-server+}. It does
    not include time taken by the driver and {+odm+} to generate the
    queries, cast types, or otherwise process the results.
 

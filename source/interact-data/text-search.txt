@@ -49,8 +49,6 @@ The following sections describe how to perform each of these actions.
 Define a Text Index on Your Model
 ---------------------------------
 
-.. TODO link to indexes page
-
 Use the ``index`` macro to specify the text index in your model
 definition. The following code creates a ``Dish`` model class that
 includes a text index on the ``description`` field:
@@ -79,6 +77,9 @@ Rake task to create the index based on your model specification:
 .. code-block:: bash
 
    bundle exec rake db:mongoid:create_indexes
+
+To learn more about using indexes with {+odm+}, see the
+:ref:`mongoid-indexes` guide.
 
 Perform Text Searches
 ---------------------
@@ -210,4 +211,5 @@ Additional Information
 To learn more about constructing query filters, see
 :ref:`mongoid-data-specify-query`.
 
-.. TODO link to CRUD guide
+To learn more about performing CRUD operations, see the
+:ref:`mongoid-data-crud` guide.

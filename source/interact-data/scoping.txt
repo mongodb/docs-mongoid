@@ -101,7 +101,8 @@ You can direct {+odm+} to raise an error when a scope overwrites an
 existing class method by setting the ``scope_overwrite_exception``
 configuration option to ``true``.
 
-.. TODO add link to config options page
+To learn more about this setting, see the :ref:`mongoid-app-config`
+guide.
 
 Default Scopes
 --------------
@@ -111,10 +112,10 @@ criteria to most queries. By defining a default scope, you specify these
 criteria as the default for any queries that use the model. Default
 scopes return ``Criteria`` objects.
 
-To create a default scope, you must define the ``default_scope()`` method
+To create a default scope, you must define the ``default_scope`` method
 on your model class.
 
-The following code defines the ``default_scope()`` method on the ``Band``
+The following code defines the ``default_scope`` method on the ``Band``
 model to only retrieve documents in which the ``active`` field value is ``true``:
 
 .. literalinclude:: /includes/interact-data/scoping.rb
@@ -179,7 +180,7 @@ Suppose you create a ``Label`` model that contains an association to a
 ``Band`` in which the value of ``active`` is ``true``. When you update
 the ``active`` field to ``false``, {+odm+} still loads it despite the
 default scope. To view the documents in the association with the scope
-applied, you must call the ``reload()`` operator.
+applied, you must call the ``reload`` operator.
 
 The following code demonstrates this sequence:
 
@@ -195,7 +196,7 @@ or and nor Query Behavior
 
 {+odm+} treats the criteria in a default scope the same way as any other
 query conditions. This can lead to surprising behavior when using the
-``or()`` and ``nor()`` methods.
+``or`` and ``nor`` methods.
 
 The following examples demonstrate how {+odm+} interprets queries on
 models with a default scope:
@@ -224,7 +225,7 @@ You can direct {+odm+} to not apply the default scope by using the
 Override Default Scope at Runtime
 ---------------------------------
 
-You can use the ``with_scope()`` method to change the default scope in a
+You can use the ``with_scope`` method to change the default scope in a
 block at runtime.
 
 The following model defines the *named* scope ``mexican``:
@@ -236,7 +237,7 @@ The following model defines the *named* scope ``mexican``:
    :dedent:
    :emphasize-lines: 7
 
-You can use the ``with_scope()`` method to set the ``mexican`` named
+You can use the ``with_scope`` method to set the ``mexican`` named
 scope as the default scope at runtime, as shown in the following code:
 
 .. literalinclude:: /includes/interact-data/scoping.rb
@@ -262,4 +263,5 @@ the following example:
 Additional Information
 ----------------------
 
-.. TODO add info links
+To learn more about customizing your {+odm+} models, see the
+:ref:`mongoid-data-modeling` guides.

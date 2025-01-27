@@ -28,7 +28,8 @@ insert, update, and delete operations.
 To learn more about creating filter criteria, see the
 :ref:`mongoid-data-specify-query` guide.
 
-.. TODO To learn more about performing CRUD operations, see the :ref:`` guide.
+To learn more about performing CRUD operations, see the
+:ref:`mongoid-data-crud` guide.
 
 Persistence Methods
 -------------------

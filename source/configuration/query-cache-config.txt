@@ -26,6 +26,8 @@ activate the :ref:`mongoid-query-cache` for each request to store your
 query results. This can improve your application speed and efficiency by
 reducing the number of calls your application must make to the database.
 
+.. _mongoid-query-cache-rack:
+
 Enable Query Cache for Rack Web Requests
 ----------------------------------------
 

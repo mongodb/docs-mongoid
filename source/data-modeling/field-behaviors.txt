@@ -83,6 +83,8 @@ following example:
    Always set the ``pre-processed`` option to ``true`` to set a
    default ``Proc`` value for the ``_id`` field.
 
+.. _mongoid-field-behaviors-storage-names:
+
 Specify Storage Names
 ---------------------
 
@@ -102,6 +104,8 @@ following example creates a field called ``name`` that {+odm+} stores in the dat
 
 {+odm+} stores the ``name`` field as ``"n"``, but you can still access the field as
 ``name`` in your application.
+
+.. _mongoid-field-behaviors-aliases:
 
 Field Aliases
 -------------
@@ -222,11 +226,15 @@ you attempt to explicitly update a read-only field, {+odm+} raises a
    Calls to atomic persistence operators, such as ``bit`` and ``inc``, still
    persist changes to the read-only field.
 
+To learn about specifying entire models as read-only, see the
+:ref:`mongoid-crud-read-only` section of the Perform Data Operations
+guide.
+
 Localize Fields
 ---------------
 
-{+odm+} supports localized fields by using the `i18n gem
-<https://github.com/ruby-i18n/i18n>`__. When you localize a field, {+odm+}
+{+odm+} supports localized fields by using the :github:`i18n gem
+<ruby-i18n/i18n>`. When you localize a field, {+odm+}
 stores the field as a hash of locale keys and values. Accessing the fields
 behaves in the same way as a string value. You can localize fields of any field
 type.
@@ -247,8 +255,8 @@ method:
    :start-after: # start-localized-translations
    :end-before: # end-localized-translations
 
-You can specify fallbacks for localized fields by enabling the `i18n fallbacks
-<https://github.com/ruby-i18n/i18n/wiki/Fallbacks>`__ feature. 
+You can specify fallbacks for localized fields by enabling the
+:github:`i18n fallbacks <ruby-i18n/i18n/wiki/Fallbacks>` feature.
 
 Enable fallbacks in a Rails application by setting the ``config.i18n.fallbacks``
 configuration setting in your environment and setting the fallback languages:
