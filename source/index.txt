@@ -34,6 +34,14 @@ a MongoDB database. Install {+odm+} by adding it to your project's
 ``Gemfile`` or set up a runnable project by following one of the
 Quick Start guides.
 
+Connect to a Compatible MongoDB Deployment
+------------------------------------------
+
+You can use {+odm+} to connect to MongoDB deployments running on one of
+the following hosted services or editions:
+
+.. include:: /includes/fact-environments.rst
+
 Quick Start
 -----------
 
