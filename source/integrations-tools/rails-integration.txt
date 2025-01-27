@@ -99,7 +99,7 @@ This logging is set up automatically in your Rails application.
 
    The time indicated in log entries is the time that the MongoDB
    deployment takes to run MongoDB operations in addition to the time taken to
-   send commands and receive results from the {+mdb-server+}. It does
+   send commands and receive results from {+mdb-server+}. It does
    not include time taken by the driver and {+odm+} to generate the
    queries, cast types, or otherwise process the results.
 

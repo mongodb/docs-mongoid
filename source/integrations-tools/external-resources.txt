@@ -112,7 +112,7 @@ Articles
   <https://www.sitepoint.com/a-simple-content-management-system-in-sinatra>`__:
   Building a content management application with Sinatra and {+odm+}. 
 
-- `How To Create A {+language+} API With Sinatra
+- `How to Create a {+language+} API With Sinatra
   <https://x-team.com/blog/how-to-create-a-ruby-api-with-sinatra>`__: Creating a
   Sinatra API with {+odm+}.
 

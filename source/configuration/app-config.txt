@@ -359,4 +359,4 @@ use compression, even if the required dependencies for one or more
 compressors are installed.
 
 The driver chooses the first compressor, if you specify multiple, that
-is supported by the {+mdb-server+}.
+is supported by your MongoDB deployment.

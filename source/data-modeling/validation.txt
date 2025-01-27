@@ -330,7 +330,7 @@ documents that are in memory to optimize performance.
 Additional Information
 ----------------------
 
-To learn more about the field types you can use in {+odm+} models, see
+To learn more about the field types that you can use in {+odm+} models, see
 the :ref:`mongoid-field-types` guide.
 
 To learn more about validation methods and macros in {+odm+}, see the

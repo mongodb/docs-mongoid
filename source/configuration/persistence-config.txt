@@ -30,7 +30,7 @@ the persistence configuration of a model class.
 
 .. note::
    
-   The term client refers to a host configuration defined under
+   The term "client" refers to a host configuration defined under
    ``clients`` in your ``mongoid.yml`` file. Most applications use
    a single client named ``default``.
 
