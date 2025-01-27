@@ -198,7 +198,8 @@ Type Declaration
      # @param [ Hash<Symbol, [ true | false ]> ] hash A Hash whose keys are Symbols,
      #   and whose values are boolean values.
 
-- **Ruby Values:** Specific values may be denoted in the type using Ruby syntax.
+- **{+language+} Values:** Specific values may be denoted in the type
+  using {+language+} syntax.
 
   .. code-block:: ruby
 
@@ -206,7 +207,7 @@ Type Declaration
 
 - **True, False, and Nil:** Use ``true``, ``false``, and ``nil`` rather than
   ``TrueClass``, ``FalseClass``, and ``NilClass``. Do not use ``Boolean`` as a type
-  since it does not exist in Ruby.
+  since it does not exist in {+language+}.
 
   .. code-block:: ruby
 

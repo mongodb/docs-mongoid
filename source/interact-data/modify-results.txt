@@ -49,13 +49,13 @@ In MongoDB, *projection* is the process of specifying fields to include
 or exclude from results. {+odm+} provides the following operators
 to project fields:
 
-- ``only()``: Specifies fields to include
-- ``without()``: Specifies fields to exclude
+- ``only``: Specifies fields to include
+- ``without``: Specifies fields to exclude
 
 Include Fields
 ~~~~~~~~~~~~~~
 
-The ``only()`` method retrieves only the specified fields from the
+The ``only`` method retrieves only the specified fields from the
 database.
 
 The following code returns only the ``name`` field from documents in
@@ -75,7 +75,7 @@ which the value of the ``members`` field is ``4``:
 If you attempt to reference attributes that have not been loaded,
 {+odm+} raises a ``Mongoid::Errors::AttributeNotLoaded`` error.
 
-You can also use the ``only()`` method to include fields from embedded
+You can also use the ``only`` method to include fields from embedded
 documents. 
 
 Consider that the ``Band`` model embeds multiple ``Tour`` objects. You can
@@ -96,7 +96,7 @@ Then, you can access the embedded fields from the returned documents:
    # the first Band in the results
    bands.first.tours.first
 
-You can pass fields of referenced associations to the ``only()`` method,
+You can pass fields of referenced associations to the ``only`` method,
 but the projection is ignored when loading the embedded objects. {+odm+}
 loads all fields of the referenced associations. For example, when you
 access the embedded ``Tour`` object as shown in the preceding code,
@@ -110,7 +110,7 @@ access the embedded ``Tour`` object as shown in the preceding code,
 
 If a document contains ``has_one`` or ``has_and_belongs_to_many``
 associations, and you want {+odm+} to load those associations when
-you call the ``only()`` method, you must include the fields with foreign
+you call the ``only`` method, you must include the fields with foreign
 keys in the list of attributes.
 
 In the following example, the ``Band`` and ``Manager`` models have a
@@ -142,7 +142,7 @@ Exclude Fields
 ~~~~~~~~~~~~~~
 
 You can explicitly exclude fields from results by using the
-``without()`` method.
+``without`` method.
 
 The following code excludes the ``year`` field from returned ``Band``
 objects:
@@ -157,7 +157,7 @@ objects:
 
    {+odm+} requires the ``_id`` field for various operations, so you
    *cannot* exclude the ``_id`` field or the ``id`` alias from results.
-   If you pass ``_id`` or ``id`` to the ``without()`` method, {+odm+}
+   If you pass ``_id`` or ``id`` to the ``without`` method, {+odm+}
    ignores it.
 
 .. _mongoid-data-sort:
@@ -166,7 +166,7 @@ Sort Results
 ------------
 
 You can specify the order in which {+odm+} returns documents by using the
-``order()`` and ``order_by()`` methods.
+``order`` and ``order_by`` methods.
 
 These methods accept a hash that indicates which fields to order the
 documents by, and whether to use an ascending or descending order for
@@ -189,7 +189,7 @@ shows how to sort on the ``name`` and ``year`` fields:
 
   - Example: ``Band.order_by(name: "asc", year: "desc")``
 
-The ``order()`` method also accepts the following sort specifications:
+The ``order`` method also accepts the following sort specifications:
 
 - Array of two-element arrays:
 
@@ -211,8 +211,8 @@ The ``order()`` method also accepts the following sort specifications:
 
 .. tip::
 
-   Instead of using ``order()`` or ``order_by()``, you can also use the
-   ``asc()`` and ``desc()`` methods to specify sort orders: 
+   Instead of using ``order`` or ``order_by``, you can also use the
+   ``asc`` and ``desc`` methods to specify sort orders: 
 
    .. code-block:: ruby
    
@@ -234,14 +234,14 @@ the previous sorts have been applied.
 Paginate Results
 ----------------
 
-{+odm+} provides the ``limit()``, ``skip()``, and ``batch_size()``
+{+odm+} provides the ``limit``, ``skip``, and ``batch_size``
 pagination methods that you can use on ``Criteria`` objects. The
 following sections describe how to use these operators.
 
 Limit Number of Results
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-You can use the ``limit()`` method to limit the number of results that
+You can use the ``limit`` method to limit the number of results that
 {+odm+} returns.
 
 The following code retrieves a maximum of ``5`` documents:
@@ -254,7 +254,7 @@ The following code retrieves a maximum of ``5`` documents:
 
 .. note::
 
-   Alternatively, you can use the ``take()`` method to retrieve a
+   Alternatively, you can use the ``take`` method to retrieve a
    specified number of documents from the database:
 
    .. code-block:: ruby
@@ -264,10 +264,10 @@ The following code retrieves a maximum of ``5`` documents:
 Skip Results
 ~~~~~~~~~~~~
 
-You can skip a specified number of results by using the ``skip()``
-method, or its alias ``offset()``.
+You can skip a specified number of results by using the ``skip``
+method, or its alias ``offset``.
 
-If you chain a ``limit()`` call to ``skip()``, the limit is applied
+If you chain a ``limit`` call to ``skip``, the limit is applied
 after documents are skipped, as demonstrated in the following example:
 
 .. literalinclude:: /includes/interact-data/modify-results.rb
@@ -278,7 +278,7 @@ after documents are skipped, as demonstrated in the following example:
 
 .. tip::
     
-   When performing pagination, use ``skip()`` on :ref:`sorted results <mongoid-data-sort>`
+   When performing pagination, use ``skip`` on :ref:`sorted results <mongoid-data-sort>`
    to ensure consistent results.
 
 The following code skips the first ``3`` documents when returning results:
@@ -293,10 +293,10 @@ Generate Batches of Results
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 When executing large queries and when iterating over query results by using
-an enumerator method such as ``Criteria#each()``, {+odm+} automatically
+an enumerator method such as ``Criteria#each``, {+odm+} automatically
 uses the MongoDB :manual:`getMore </reference/command/getMore/>` command
 to load results in batches. The default batch size is ``1000``, but
-you can set a different value by using the ``batch_size()`` method.
+you can set a different value by using the ``batch_size`` method.
 
 The following code sets the batch size to ``500``:
 
@@ -309,4 +309,8 @@ The following code sets the batch size to ``500``:
 Additional Information
 ----------------------
 
-.. TODO: add links to the bottom of this page
+To learn more about constructing queries, see the
+:ref:`mongoid-data-specify-query` guide.
+
+To learn about {+odm+} data modeling, see the
+:ref:`mongoid-data-modeling` guides.

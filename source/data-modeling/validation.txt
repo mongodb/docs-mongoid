@@ -255,9 +255,8 @@ Validate Associations
 You can use the ``validates_associated`` helper to validate any
 associations that your model has. When you include this validation rule,
 {+odm+} validates any association documents any time you try to
-save an instance.
-
-.. TODO link to associations page
+save an instance. To learn more about associations, see the
+:ref:`mongoid-associations` guide.
 
 This example defines an association validation rule on the
 ``Author`` model to run the validation rules for the embedded ``Book``
@@ -301,9 +300,9 @@ Behavior
 database. The following methods trigger your validation rules, so
 {+odm+} saves the object to the database only if it passes validation:
 
-- ``create()``
-- ``save()``
-- ``update()``
+- ``create``
+- ``save``
+- ``update``
 
 When you use the ``!``-suffixed version of the preceding methods,
 {+odm+} returns an ``Mongoid::Errors::Validations`` exception if
@@ -312,7 +311,7 @@ validation fails for an object.
 Trigger Validation
 ~~~~~~~~~~~~~~~~~~
 
-You can run validations manually by using the ``valid?()`` method. This
+You can run validations manually by using the ``valid?`` method. This
 method returns ``true`` if the object passes validation, and
 ``false`` otherwise:
 
@@ -323,13 +322,16 @@ method returns ``true`` if the object passes validation, and
    :emphasize-lines: 7, 11, 14
    :dedent:
 
-{+odm+} behaves differently from Active Record when running ``valid?()``
-on persisted data. Active Record's ``valid?()`` runs all
-validations, but {+odm+}'s ``valid?()`` runs validations only on
+{+odm+} behaves differently from Active Record when running ``valid?``
+on persisted data. Active Record's ``valid?`` runs all
+validations, but {+odm+}'s ``valid?`` runs validations only on
 documents that are in memory to optimize performance.
 
 Additional Information
 ----------------------
+
+To learn more about the field types you can use in {+odm+} models, see
+the :ref:`mongoid-field-types` guide.
 
 To learn more about validation methods and macros in {+odm+}, see the
 :mongoid-api:`Mongoid::Validatable <Mongoid/Validatable.html>` module
@@ -339,5 +341,3 @@ To view a full list of validations helpers in Active Record, see the
 `ActiveModel::Validations::HelperMethods
 <https://api.rubyonrails.org/classes/ActiveModel/Validations/HelperMethods.html>`__
 reference in the Rails API documentation.
-
-.. TODO link to field types guide.

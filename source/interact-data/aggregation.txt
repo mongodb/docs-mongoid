@@ -86,19 +86,19 @@ pipeline operators:
      - Method Name
    
    * - :manual:`$group <reference/operator/aggregation/group/>`
-     - ``group()``
+     - ``group``
 
    * - :manual:`$project <reference/operator/aggregation/project/>`
-     - ``project()``
+     - ``project``
 
    * - :manual:`$unwind <reference/operator/aggregation/unwind/>`
-     - ``unwind()``
+     - ``unwind``
 
 To create an aggregation pipeline by using one of the preceding operators, call
 the corresponding method on an instance of ``Criteria``. Calling the method adds
 the aggregation operation to the ``pipeline`` atrritbure of the ``Criteria``
 instance. To run the aggregation pipeline, pass the ``pipeline`` attribute value
-to the ``Collection#aggregate()`` method. 
+to the ``Collection#aggregate`` method. 
 
 Example
 ~~~~~~~
@@ -133,12 +133,12 @@ The following example creates an aggregation pipeline that outputs the states a
 participant has visited by using the following
 aggregation operations:
 
-- ``match()``, which find documents in which the ``participants.name`` field
+- ``match``, which find documents in which the ``participants.name`` field
   value is ``"Serenity"``
-- ``unwind()``, which deconstructs the ``states`` array field and outputs a
+- ``unwind``, which deconstructs the ``states`` array field and outputs a
   document for each element in the array
-- ``group()``, which groups the documents by the value of their ``states`` field
-- ``project()``, which prompts the pipeline to return only the ``_id`` and
+- ``group``, which groups the documents by the value of their ``states`` field
+- ``project``, which prompts the pipeline to return only the ``_id`` and
   ``states`` fields
 
 .. io-code-block::
@@ -153,7 +153,7 @@ aggregation operations:
 Aggregation without Builders
 ----------------------------
 
-You can use the ``Collection#aggregate()`` method to run aggregation operations that do not have
+You can use the ``Collection#aggregate`` method to run aggregation operations that do not have
 corresponding builder methods by passing in an array of aggregation
 operations. Using this method to perform the aggregation returns
 raw ``BSON::Document`` objects rather than ``Mongoid::Document`` model
@@ -227,6 +227,6 @@ API Documentation
 To learn more about any of the methods discussed in this
 guide, see the following API documentation:
 
-- `group() <{+api+}/Mongoid/Criteria/Queryable/Aggregable.html#group-instance_method>`__
-- `project() <{+api+}/Mongoid/Criteria/Queryable/Aggregable.html#project-instance_method>`__
-- `unwind() <{+api+}/Mongoid/Criteria/Queryable/Aggregable.html#unwind-instance_method>`__
+- `group <{+api+}/Mongoid/Criteria/Queryable/Aggregable.html#group-instance_method>`__
+- `project <{+api+}/Mongoid/Criteria/Queryable/Aggregable.html#project-instance_method>`__
+- `unwind <{+api+}/Mongoid/Criteria/Queryable/Aggregable.html#unwind-instance_method>`__

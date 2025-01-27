@@ -87,6 +87,8 @@ configuration options:
 Additional Information
 ----------------------
 
-.. TODO link to config guide
+To learn more about configuring {+odm+} in your application, see the
+:ref:`mongoid-app-config` guide.
 
-.. TODO link to crud operations
+To learn more about performing CRUD operations, see the
+:ref:`mongoid-data-crud` guide.

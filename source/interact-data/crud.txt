@@ -135,6 +135,7 @@ Read Operations
 ---------------
 
 You can perform read operations to retrieve documents from a collection.
+To learn more about creating query filters to retrieve a subset of your documents, see the :ref:`mongoid-data-specify-query` guide.
 
 .. _mongoid-read-attributes:
 
@@ -772,6 +773,8 @@ model and assign it back to the model as shown in the following code:
    :language: ruby
    :start-after: start-container-save
    :end-before: end-container-save
+
+.. _mongoid-crud-read-only:
 
 Read-only Documents
 -------------------

@@ -30,7 +30,8 @@ when retrieving a document from the database, {+odm+} translates a BSON
 ``double`` type to use the {+language+} ``Float`` type. When you save the
 document again, {+odm+} converts the field back to a BSON ``double``.
 
-.. TODO: To learn more about modeling documents in {+odm+}, see :ref:`mongoid-modeling-documents`.
+To learn more about modeling documents in {+odm+}, see the
+:ref:`mongoid-modeling-documents` guide.
 
 .. note::
 
@@ -134,10 +135,8 @@ Time
 
 You can store values as BSON ``Time`` instances by using the ``Time`` field value.
 ``Time`` fields are stored in the time zone configured for your application. To
-learn more about configuring time zones, see the :ref:`Time Zones <time-zones>`
-guide. 
-
-.. TODO: Update Time Zones guide ref if it's changed during standardization
+learn more about configuring time zones, see the :ref:`mongoid-config-time-zones`
+section of the Application Configuration guide.
 
 The following example creates a ``Voter`` class and specifies that the value of the
 ``registered_at`` field is a ``Time`` type:
@@ -151,11 +150,10 @@ The following example creates a ``Voter`` class and specifies that the value of 
 
    Storing a ``Date`` or ``DateTime`` value in a field specified as ``Time``
    converts the value to ``Time`` when assigned. If you store a string in a
-   ``Time`` field, {+odm+} parses the string by using the ``Time.parse()``
-   method.
-
-.. TODO: Add this to the note:
-.. To learn more about how {+odm+} converts queries, see :ref:`<Field Type Query Conversions section>`
+   ``Time`` field, {+odm+} parses the string by using the ``Time.parse``
+   method. To learn more about how {+odm+} converts queries, see the
+   :ref:`mongoid-query-field-type-conversions` section of the Specify a
+   Query guide.
 
 Date
 ~~~~
@@ -182,12 +180,11 @@ to ``Date`` before assigning them to the field.
 .. note::
 
    When a database contains a string value for a ``Date`` field, the driver
-   parses the value by using the ``Time.parse()`` method, then discards the time
-   portion. ``Time.parse()`` considers values without time zones to be in local
-   time.
-
-.. TODO: Add this to the note:
-.. To learn more about how {+odm+} converts queries, see :ref:`<Field Type Query Conversions section>`
+   parses the value by using the ``Time.parse`` method, then discards the time
+   portion. ``Time.parse`` considers values without time zones to be in local
+   time. To learn more about how {+odm+} converts queries, see the
+   :ref:`mongoid-query-field-type-conversions` section of the Specify a
+   Query guide.
 
 DateTime
 ~~~~~~~~
@@ -224,14 +221,12 @@ value by using the timezone configured as the default for your application:
    :start-after: # start-datetime-string
    :end-before: # end-datetime-string
 
-To learn more about configuring time zones, see the :ref:`Time Zones <time-zones>`
-guide. 
-
-.. TODO: Update Time Zones guide ref if it's changed during standardization
+To learn more about configuring time zones, see the :ref:`mongoid-config-time-zones`
+section of the Application Configuration guide.
 
 .. note::
 
-   {+odm+} parses string values into ``DateTime`` by using the ``Time.parse()``
+   {+odm+} parses string values into ``DateTime`` by using the ``Time.parse``
    method, which considers values without time zones to be in local time.
 
 Timestamps
@@ -270,7 +265,7 @@ the ``::Short`` option when including the module:
    :end-before: # end-timestamps-short
 
 You can disable creating the timestamp field for specific operations by calling
-the ``timeless()`` method on the method call. The following example disables the
+the ``timeless`` method on the method call. The following example disables the
 timestamps for the ``save`` operation:
 
 .. literalinclude:: /includes/data-modeling/field-types.rb
@@ -284,7 +279,7 @@ Regexp
 You can store regular expressions in a field by using the ``Regexp`` type. 
 
 While MongoDB implements `Perl Compatible Regular Expressions (PCRE) <https://www.pcre.org/>`__,
-{+odm+} uses {+language+}'s `Onigmo <https://github.com/k-takata/Onigmo>`__ library. PCRE and
+{+odm+} uses {+language+}'s :github:`Onigmo <k-takata/Onigmo>` library. PCRE and
 Onigmo provide generally similar functionality, but there are several syntax
 differences. For example, Onigmo uses ``\A`` and ``\z`` to match the beginning and
 end of a string, while PCRE uses ``^`` and ``$``.
@@ -292,7 +287,7 @@ end of a string, while PCRE uses ``^`` and ``$``.
 When you declare a field as a ``Regexp``, {+odm+} converts {+language+} regular
 expressions to BSON regular expressions when storing the result into your
 database. The database returns the field as a ``Bson::Regexp::Raw`` instance.
-You can use the ``compile()`` method on ``BSON::Regexp::Raw`` instances to convert
+You can use the ``compile`` method on ``BSON::Regexp::Raw`` instances to convert
 the data back to a {+language+} regular expression.
 
 The following example creates a ``Token`` class and specifies the ``pattern``
@@ -307,9 +302,9 @@ field as a ``Regexp``:
 
    Converting a BSON regular expression to a {+language+} regular expression might
    produce a different regular expression than the original. This difference is
-   due to the differences between the Onigmo and PCRE syntaxes.
-
-.. TODO: To learn more about regular expressions in {+odm+}, see :ref:`mongoid-regular-expressions`.
+   due to the differences between the Onigmo and PCRE syntaxes. To learn
+   more about regular expressions in {+odm+}, see the
+   :ref:`mongoid-query-regex` section of the Specify a Query guide.
 
 BigDecimal
 ~~~~~~~~~~
@@ -472,11 +467,11 @@ You can create custom field types and define how {+odm+} serializes and
 deserializes them. To create a custom field type, define a class that
 implements the following methods:
 
-- ``mongoize()``: Takes an instance of your custom type and converts it to
+- ``mongoize``: Takes an instance of your custom type and converts it to
   an object that MongoDB can store.
-- ``demongoize()``: Takes an object from MongoDB and converts it to an
+- ``demongoize``: Takes an object from MongoDB and converts it to an
   instance of your custom type.
-- ``evolve()``: Takes an instance of your custom type and converts it to a
+- ``evolve``: Takes an instance of your custom type and converts it to a
   criteria that MongoDB can use to query the database.
 
 The following example creates a custom field type called ``Point`` and
@@ -487,16 +482,16 @@ implements the preceding methods:
    :start-after: # start-custom-field-type
    :end-before: # end-custom-field-type
 
-In the preceding example, the ``mongoize()`` *instance method* accepts an instance
+In the preceding example, the ``mongoize`` *instance method* accepts an instance
 of your custom type object and converts it to an ``Array`` to store in the
-database. The ``mongoize()`` *class method* accepts objects of all types and
+database. The ``mongoize`` *class method* accepts objects of all types and
 converts them to similar types that can be stored in the database. {+odm+} uses
-the ``mongoize()`` class method when it calls the getter and setter methods.
+the ``mongoize`` class method when it calls the getter and setter methods.
 
-The ``demongoize()`` method converts the stored ``Array`` value into the custom
+The ``demongoize`` method converts the stored ``Array`` value into the custom
 ``Point`` type. The {+odm+} uses this method when it calls the getter.
 
-The ``evolve()`` method converts the custom ``Point`` type into a queryable
+The ``evolve`` method converts the custom ``Point`` type into a queryable
 ``Array`` type, and converts all other types to ``object``. {+odm+} uses this
 method when it calls a method that queries the database.
 
@@ -516,10 +511,12 @@ color in the application, but stores the color as an integer in the database:
    :start-after: # start-phantom-field-type
    :end-before: # end-phantom-field-type
 
+.. _mongoid-field-types-dynamic:
+
 Dynamic Fields
 --------------
 
-You can instruct {+odm+} to create fields dynamically by inluding the
+You can instruct {+odm+} to create fields dynamically by including the
 ``Mongoid::Attributes::Dynamic`` module in your model. This allows {+odm+} to
 create fields based on an arbitrary hash, or based on the documents already
 stored in the database.
@@ -558,24 +555,19 @@ string to indicate a query operator. Because of this, you should avoid using the
 characters in your field names. 
 
 If your application requires the use of these characters, you can access the
-fields by calling the ``send()`` method. The following example creates a ``User``
+fields by calling the ``send`` method. The following example creates a ``User``
 class with fields that contain reserved characters. It then accesses the fields
-by using the ``send()`` method:
+by using the ``send`` method:
 
 .. literalinclude:: /includes/data-modeling/field-types.rb
    :language: ruby
    :start-after: # start-reserved-characters
    :end-before: # end-reserved-characters
 
-You can also access these fields by calling the ``read_attribute()`` method.
+You can also access these fields by calling the ``read_attribute`` method.
 
 .. important::
 
    Because updating and replacing fields containing these reserved characters
    requires special operators, calling getters and setters on these fields
    raises an ``InvalidDotDollarAssignment`` exception.
-
-.. Additional Information
-.. ----------------------
-
-.. TODO: Add Additional Information section with links to relevant pages once they are standardized

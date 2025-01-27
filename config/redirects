@@ -1,10 +1,23 @@
 define: prefix docs/mongoid
-define: base https://www.mongodb.com/docs/mongoid
-define: versions 8.1 upcoming
+define: base https://www.mongodb.com/${prefix}
+define: versions v9.0 master
 
-symlink: current -> 8.1
+symlink: current -> v9.0
+symlink: upcoming -> master
 
 raw: ${prefix}/ -> ${base}/current/
-raw: ${prefix}/master -> ${base}/upcoming/
+raw: ${prefix}/stable -> ${base}/current/
 
-raw: ${prefix}/current/release-notes/mongoid-7.0 -> ${base}/current/
+# Redirects from old/legacy docs to standardized docs
+[*-v9.0]: ${prefix}/${version}/installation/ -> ${base}/upcoming/#quick-start
+[*-v9.0]: ${prefix}/${version}/reference/compatibility/ -> ${base}/upcoming/compatibility/
+
+
+
+
+
+
+
+
+
+

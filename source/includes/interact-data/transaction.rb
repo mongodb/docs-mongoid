@@ -1,26 +1,26 @@
 # start-example-models
 class Book
-    include Mongoid::Document
+  include Mongoid::Document
 
-    field :title, type: String
-    field :author, type: String
-    field :length, type: Integer
+  field :title, type: String
+  field :author, type: String
+  field :length, type: Integer
 end
 
 class Film
-    include Mongoid::Document
+  include Mongoid::Document
 
-    field :title, type: String
-    field :year, type: Integer
+  field :title, type: String
+  field :year, type: Integer
 end
 # end-example-models
 
 # start-txn-operations
 # Starts a transaction from the model class
 Book.transaction do
-    # Saves new Book and Film instances to MongoDB
-    Book.create(title: 'Covert Joy', author: 'Clarice Lispector')
-    Film.create(title: 'Nostalgia', year: 1983)
+  # Saves new Book and Film instances to MongoDB
+  Book.create(title: 'Covert Joy', author: 'Clarice Lispector')
+  Film.create(title: 'Nostalgia', year: 1983)
 end
 
 # Starts a transaction from an instance of Book

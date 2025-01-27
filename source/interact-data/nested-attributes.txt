@@ -81,9 +81,9 @@ There are multiple ways to update a nested attribute:
   name>_attributes`` in the value to update the associations.
 - Use the ``update_attributes`` setter method and specify the attribute
   names in the value to update the associations.
-- Use the ``update()`` method and specify ``<association
+- Use the ``update`` method and specify ``<association
   name>_attributes`` in the value to update the associations.
-- Use the ``create()`` method and specify ``<association
+- Use the ``create`` method and specify ``<association
   name>_attributes`` in the value to create the associations.
 
 The following example demonstrates how to create a ``Band`` instance
@@ -101,7 +101,7 @@ Creating Nested Documents
 
 You can create new nested documents by using the nested attributes
 feature. When creating a document, omit the ``_id`` field. The following
-code uses the ``update()`` method to create a nested ``album`` document
+code uses the ``update`` method to create a nested ``album`` document
 on an existing ``Band`` instance:
 
 .. literalinclude:: /includes/data-modeling/nested_attr.rb
@@ -118,7 +118,7 @@ Updating Nested Documents
 
 You can update existing nested documents by using the nested attributes
 feature. To instruct {+odm+} to update a nested document by using
-attributes, pass the document's ``_id`` value to the ``update()``
+attributes, pass the document's ``_id`` value to the ``update``
 method. The following example uses the ``_id`` value of an ``albums``
 entry to update the ``year`` field:
 
@@ -137,7 +137,7 @@ Delete Nested Documents
 -----------------------
 
 You can delete nested documents by specifying the ``_destroy``
-attribute to the ``update()`` method. To enable deletion of nested
+attribute to the ``update`` method. To enable deletion of nested
 document, you must set ``allow_destroy: true`` in the
 ``accepts_nested_attributes_for`` declaration, as shown in the following
 code:
@@ -187,6 +187,8 @@ Additional Information
 To learn more about querying, see the :ref:`mongoid-data-specify-query`
 guide.
 
-.. TODO link to CRUD guide
+To learn more about performing CRUD operations, see the
+:ref:`mongoid-data-crud` guide.
 
-.. TODO link to associations guide
+To learn more about associations, see the :ref:`mongoid-associations`
+guide.

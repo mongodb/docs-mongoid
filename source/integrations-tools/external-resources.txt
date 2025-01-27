@@ -33,59 +33,59 @@ or built on top of {+odm+}.
 Projects
 ~~~~~~~~
 
-- `Workarea Commerce <https://github.com/workarea-commerce/workarea>`__ is an
+- :github:`Workarea Commerce <workarea-commerce/workarea>` is an
   enterprise-grade {+ror+} commerce platform that uses {+odm+}.
 
 Extension Libraries
 ~~~~~~~~~~~~~~~~~~~
   
-- `Mongoid Tree <https://github.com/benedikt/mongoid-tree>`__ is a tree structure
+- :github:`Mongoid Tree <benedikt/mongoid-tree>` is a tree structure
   for {+odm+} documents that uses the materialized path pattern.
   
-- `Mongoid Token <https://github.com/thetron/mongoid_token>`__ generates random,
-   tokens for {+odm+} documents.
+- :github:`Mongoid Token <thetron/mongoid_token>` generates random,
+  unique tokens for {+odm+} documents.
 
-- `Mongoid Collection Snapshot
-  <https://github.com/mongoid/mongoid-collection-snapshot>`__ helps maintain
+- :github:`Mongoid Collection Snapshot
+  <mongoid/mongoid-collection-snapshot>` helps maintain
   collections of processed data in {+odm+} applications.
 
-- `Mongoid Locker <https://github.com/mongoid/mongoid-locker>`__ provides
+- :github:`Mongoid Locker <mongoid/mongoid-locker>` provides
   document-level locking for {+odm+} applications.
   
-- `Mongo Beautiful Logger
-  <https://github.com/ibraheemdev/mongo_beautiful_logger>`__ is a library that
+- :github:`Mongo Beautiful Logger
+  <ibraheemdev/mongo_beautiful_logger>` is a library that
   formats your MongoDB logs.
   
-- `Mongoid Search <https://github.com/mongoid/mongoid_search>`__ provides
+- :github:`Mongoid Search <mongoid/mongoid_search>` provides
   full-text search for {+odm+}.
   
-- `Mongoid Fulltext Search <https://github.com/mongoid/mongoid_fulltext>`__
+- :github:`Mongoid Fulltext Search <mongoid/mongoid_fulltext>`
   provides full-text search using n-gram matching for {+odm+}.
 
 Integration Libraries
 ~~~~~~~~~~~~~~~~~~~~~
 
-- `CarrierWave Mongoid
-  <https://github.com/carrierwaveuploader/carrierwave-mongoid>`__ provides
+- :github:`CarrierWave Mongoid
+  <carrierwaveuploader/carrierwave-mongoid>` provides
   {+odm+} support for the Carrierwave file-uploads library.
 
-- `Mongoid RSpec <https://github.com/mongoid/mongoid-rspec>`__ provides RSpec
+- :github:`Mongoid RSpec <mongoid/mongoid-rspec>` provides RSpec
   matchers and macros for {+odm+} applications.
 
-- `RailsAdmin <https://github.com/sferik/rails_admin>`__ is a Rails engine that
+- :github:`RailsAdmin <sferik/rails_admin>` is a Rails engine that
   provides an interface for managing your data.
 
-- `ActiveAdmin Mongoid <https://github.com/activeadmin/activeadmin-mongoid>`__
+- :github:`ActiveAdmin Mongoid <activeadmin/activeadmin-mongoid>`
   provides ActiveAdmin hacks to support {+odm+}.
   
-- `Mongoid History <https://github.com/mongoid/mongoid-history>`__ is a
+- :github:`Mongoid History <mongoid/mongoid-history>` is a
   multi-user, non-linear history tracker for {+odm+}.
 
-- `Delayed Job Mongoid
-  <https://github.com/collectiveidea/delayed_job_mongoid>`__ is a {+odm+} backend for
+- :github:`Delayed Job Mongoid
+  <collectiveidea/delayed_job_mongoid>` is a {+odm+} backend for
   ``delayed_job``.
   
-- `Mongo Session Store <https://github.com/mongoid/mongo_session_store>`__ is a
+- :github:`Mongo Session Store <mongoid/mongo_session_store>` is a
   Rails-compatible session store for {+odm+}.
 
 Learning Resources
@@ -112,7 +112,7 @@ Articles
   <https://www.sitepoint.com/a-simple-content-management-system-in-sinatra>`__:
   Building a content management application with Sinatra and {+odm+}. 
 
-- `How To Create A Ruby API With Sinatra
+- `How To Create A {+language+} API With Sinatra
   <https://x-team.com/blog/how-to-create-a-ruby-api-with-sinatra>`__: Creating a
   Sinatra API with {+odm+}.
 
@@ -123,5 +123,5 @@ Articles
 Sample Applications
 ~~~~~~~~~~~~~~~~~~~
 
-- `Mongoid Demo <https://github.com/mongoid/mongoid-demo>`__: A repository
+- :github:`Mongoid Demo <mongoid/mongoid-demo>`: A repository
   containing sample applications that use {+odm+}.

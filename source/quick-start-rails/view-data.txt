@@ -32,7 +32,7 @@ View MongoDB Data
 
       The ``app/controllers/restaurants_controller.rb`` file contains
       methods that specify how your app handles different
-      requests. Replace the ``index()`` method body with the following code:
+      requests. Replace the ``index`` method body with the following code:
 
       .. code-block:: ruby
 

@@ -104,7 +104,7 @@ You might change the discriminator key from the default field name
 You can change the discriminator key on the class level
 or on the global level. To change the discriminator key on the class
 level, you can set the custom key name on the parent class by using the
-``discriminator_key()`` method.
+``discriminator_key`` method.
 
 The following example demonstrates how to set a custom discriminator key
 when defining a model class:
@@ -166,7 +166,7 @@ Change the Discriminator Value
 ------------------------------
 
 You can customize the value that {+odm+} sets as the discriminator value
-in MongoDB. Use the ``discriminator_value()`` method when defining a
+in MongoDB. Use the ``discriminator_value`` method when defining a
 class to customize the discriminator value, as shown in the following
 example:
 
@@ -201,9 +201,9 @@ Embedded Associations
 ---------------------
 
 You can create any type of parent class or child class in an embedded
-association by assignment or by using the ``build()`` and ``create()``
+association by assignment or by using the ``build`` and ``create``
 methods. You can pass desired model class as the second parameter to the
-``build()`` and ``create()`` methods to instruct {+odm+} to create that
+``build`` and ``create`` methods to instruct {+odm+} to create that
 specific instance as an emdedded document.
 
 The following code creates an instance of ``Employee``, then
@@ -262,12 +262,12 @@ Persistence Contexts
 
 You can change the persistence context of a child class from
 the persistence context of its parent to store the document in a
-different location than the default. By using the ``store_in()`` method,
+different location than the default. By using the ``store_in`` method,
 you can store an instance of a child class in a different collection,
 database, or cluster than an instance of the parent model.
 
 The following model definitions demonstrate how to use the
-``store_in()`` method to store instances of ``Employee`` and ``Manager``
+``store_in`` method to store instances of ``Employee`` and ``Manager``
 in a different collection than the ``people`` collection:
 
 .. code-block:: ruby
@@ -304,4 +304,5 @@ are stored in the collection associated with the parent class.
 Additional Information
 ----------------------
 
-.. TODO add links to persistence docs
+To learn more about configuring the target collection for your
+operations, see the :ref:`mongoid-persistence` guide.

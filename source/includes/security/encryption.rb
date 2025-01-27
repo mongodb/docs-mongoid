@@ -11,19 +11,19 @@ class Patient
   # This field is encrypted by using AEAD_AES_256_CBC_HMAC_SHA_512-Random
   # algorithm
   field :passport_id, type: String, encrypt: {
-      deterministic: false
+    deterministic: false
   }
 
   # This field is encrypted by using AEAD_AES_256_CBC_HMAC_SHA_512-Deterministic
   # algorithm
   field :blood_type, type: String, encrypt: {
-      deterministic: true
+    deterministic: true
   }
 
   # This field is encrypted by using AEAD_AES_256_CBC_HMAC_SHA_512-Random
   # algorithm and a different data key
   field :ssn, type: Integer, encrypt: {
-      deterministic: false, key_id: '<New key ID'
+    deterministic: false, key_id: '<New key ID'
   }
 
   embeds_one :insurance
@@ -38,8 +38,8 @@ class Insurance
   # This field is encrypted using AEAD_AES_256_CBC_HMAC_SHA_512-Random
   # algorithm using a key with an alternate name stored in the policy_number_key field
   field :policy_number, type: Integer, encrypt: {
-      deterministic: false,
-      key_name_field: :policy_number_key
+    deterministic: false,
+    key_name_field: :policy_number_key
   }
 
   embedded_in :patient

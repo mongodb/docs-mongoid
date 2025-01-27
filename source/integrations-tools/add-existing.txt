@@ -133,7 +133,7 @@ for each Rails component, as shown in the following sample
 
    Because they rely on Active Record, the `ActionText
    <{+active-record-docs+}/action_text_overview.html>`__,
-   `ActiveStorage <https://edgeguides.rubyonrails.org/active_storage_overview.html>`__, and
+   `ActiveStorage <{+active-record-docs+}/active_storage_overview.html>`__, and
    `ActionMailbox
    <{+active-record-docs+}/action_mailbox_basics.html>`__
    adapters cannot be used alongside {+odm+}.
@@ -159,7 +159,7 @@ When creating {+odm+} models, you can define fields in the following
 ways:
 
 - Define fields explicitly
-- Use :ref:`dynamic fields <mongoid-dynamic-fields>`
+- Use :ref:`dynamic fields <mongoid-field-types-dynamic>`
 
 For example, a basic Active Record ``Post`` model might resemble the
 following:

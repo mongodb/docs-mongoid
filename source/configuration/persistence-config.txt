@@ -30,8 +30,9 @@ the persistence configuration of a model class.
 
 .. note::
    
-   "Client" refers to a host configuration defined under ``clients`` in your
-   ``mongoid.yml`` file. Most applications use a single client named ``default``.
+   The term client refers to a host configuration defined under
+   ``clients`` in your ``mongoid.yml`` file. Most applications use
+   a single client named ``default``.
 
 Default Collection Name
 -----------------------
@@ -48,12 +49,12 @@ the ``Person`` class, the corresponding collection is named ``people``.
 
 However, the default rules of pluralization don't always work. For 
 example, suppose your model is named ``Rey``. The plural form of this word in
-Spanish is "reyes," but the default collection name is "reys."
+Spanish is ``reyes``, but the default collection name is ``reys``.
 
 You can create a new pluralization rule for your model class by calling the
-`ActiveSupport::Inflector::Inflections.plural() <https://api.rubyonrails.org/classes/ActiveSupport/Inflector/Inflections.html#method-i-plural>`__ 
+`ActiveSupport::Inflector::Inflections.plural <https://api.rubyonrails.org/classes/ActiveSupport/Inflector/Inflections.html#method-i-plural>`__ 
 instance method and passing the singular and plural forms of your class name.
-The following example specifies "reyes" as the plural of "rey":
+The following example specifies ``reyes`` as the plural of ``rey``:
 
 .. literalinclude:: /includes/configuration/persistence-configuration.rb
    :language: ruby
@@ -65,8 +66,9 @@ collection.
 
 .. note:: BSON Document Structure
 
-   When {+odm+} stores a document in a database, it serializes the Ruby object
-   to a BSON document that has the following structure:
+   When {+odm+} stores a document in a database, it serializes the
+   {+language+} object to a BSON document that has the following
+   structure:
 
    .. literalinclude:: /includes/configuration/persistence-configuration.rb
       :language: ruby

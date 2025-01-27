@@ -29,7 +29,7 @@ Configure Collection Options
 You can specify configuration options for a collection by using the
 ``:collection_options`` argument with the ``store_in``
 macro. The ``:collection_options`` argument accepts any collection option that
-your {+ruby-driver+} and MongoDB server version supports. 
+your {+ruby-driver+} and {+mdb-server+} version supports.
 
 .. note::
 
