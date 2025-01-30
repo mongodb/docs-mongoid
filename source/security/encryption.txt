@@ -245,7 +245,7 @@ The following limitations apply when using CSFLE with {+odm+}:
 Working with Data
 -----------------
 
-Usually, automatic CSLFE works transparently in your application. After
+Usually, automatic CSFLE works transparently in your application. After
 your application is configured for CSFLE, you can create documents as usual and {+odm+}
 automatically encrypts and decrypts them according to your configuration.
 
