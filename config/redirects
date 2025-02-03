@@ -72,6 +72,6 @@ raw: ${prefix}/stable -> ${base}/current/
 [v9.0-*]: ${prefix}/${version}/ecosystem/ -> ${base}/${version}/integrations-tools/external-resources/
 
 # Redirects for updated API pages
-[v9.0-*]: ${prefix}/${version}/api/Mongoid/Association/Referenced/NestedAttributes.html -> ${prefix}/${version}/api/Mongoid/Association/Referenced.html
-[*-master]: ${prefix}/${version}/api/Mongoid/Config/Introspection.html -> ${prefix}/${version}/api/Mongoid/Config.html
-[*-master]: ${prefix}/${version}/api/Mongoid/Config/Introspection/Option.html -> ${prefix}/${version}/api/Mongoid/Config.html
+[v9.0-*]: ${prefix}/${version}/api/Mongoid/Association/Referenced/NestedAttributes.html -> ${base}/${version}/api/Mongoid/Association/Referenced.html
+[*-master]: ${prefix}/${version}/api/Mongoid/Config/Introspection.html -> ${base}/${version}/api/Mongoid/Config.html
+[*-master]: ${prefix}/${version}/api/Mongoid/Config/Introspection/Option.html -> ${base}/${version}/api/Mongoid/Config.html
