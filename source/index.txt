@@ -2,7 +2,7 @@
 .. _mongoid-odm:
 
 ================================
-{+odm+}: ODM for MongoDB in Ruby
+{+odm+}: The ODM for MongoDB in Ruby
 ================================
 
 .. toctree::
