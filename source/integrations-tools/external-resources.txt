@@ -4,6 +4,7 @@
 External Tools and Resources
 ============================
 
+
 .. facet::
    :name: genre
    :values: reference
