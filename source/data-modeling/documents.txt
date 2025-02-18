@@ -1,8 +1,8 @@
 .. _mongoid-modeling-documents:
 
-=========
-Documents
-=========
+===========================
+Ruby Document Object Module
+===========================
 
 .. facet::
    :name: genre
