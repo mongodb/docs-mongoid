@@ -1,8 +1,8 @@
 .. _mongoid-modeling-documents:
 
-===========================
-Ruby Document Object Module
-===========================
+================================================
+Include the Document Module in Your Object Class
+================================================
 
 .. facet::
    :name: genre
