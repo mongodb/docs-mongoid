@@ -126,7 +126,7 @@ development:
     # Allows duplicate indexes to be declared and sent
     # to the server. The server then validates the indexes and raises an
     # exception if duplicate indexes are detected. When false, indexes
-    # are validated on the client which can lead to some indexes
+    # are validated on the client, which can lead to some indexes
     # getting silently ignored even if they are not duplicates.
     # (default: false)
     allow_duplicate_index_declarations: false

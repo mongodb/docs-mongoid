@@ -26,10 +26,10 @@ What's New in 9.1
 The 9.1 release includes the following new features, improvements, and
 fixes:
 
-- Creates the ``Mongoid.allow_duplicate_index_declarations``
+- Adds the ``Mongoid.allow_duplicate_index_declarations``
   configuration option that enables you to send index verification to
-  the server. This allows you to view an error if a duplicate index is
-  declared. To learn more, see the :ref:`mongoid-config-options-all`
+  the server. If a duplicate index is declared, the server raises an
+  error. To learn more, see the :ref:`mongoid-config-options-all`
   section of the Application Configuration guide.
 
 .. _mongoid-version-9.0:
