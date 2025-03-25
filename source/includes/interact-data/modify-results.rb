@@ -48,7 +48,7 @@ Band.where(country: 'Argentina').raw(typed: true)
 # end-raw-typed
 
 # start-raw-false
-# Retrieve raw results
+# Retrieves raw results
 results = Band.where(members: 4).raw
 
 # ... Perform actions on results
