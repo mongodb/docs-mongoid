@@ -174,7 +174,7 @@ callbacks are executed within a {+language+} `Fiber
 ``Thread#[]`` and ``Thread#[]=`` methods to get and set fiber-local
 variables, those callbacks are not reading or setting the values you expect.
 
-We recommended that you use the ``Thread#thread_variable_get`` and
+We recommend that you use the ``Thread#thread_variable_get`` and
 ``Thread#thread_variable_set`` methods to get and set true
 thread-local variables. For convenience, {+odm+} v9.0.3 introduces
 the `Mongoid::Threaded.get <{+api+}/Mongoid/Threaded.html#get-instance_method>`__
