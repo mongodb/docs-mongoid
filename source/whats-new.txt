@@ -42,6 +42,7 @@ fixes:
   ``nil``:
 
   .. code-block:: ruby
+     :emphasize-lines: 3
 
      module Mongoid
        module Document
