@@ -110,8 +110,8 @@ key called ``country_id``, {+odm+} shards by that field:
    :start-after: # start-shard-key-association
    :end-before: # end-shard-key-association
 
-You can specify a shard key on an embedded document by using dot notation to
-delimit the field names. The following example creates a shard key on the
+You can specify a shard key on an embedded document by using dot notation (``.``)
+to delimit the field names. The following example creates a shard key on the
 ``address.city`` field:
 
 .. literalinclude:: /includes/configuration/sharding.rb
@@ -121,9 +121,9 @@ delimit the field names. The following example creates a shard key on the
 
 .. note::
 
-   Because the period (``.``) character is used to delimit embedded fields, {+odm+} does
-   not support creating shard keys on fields with names that contain a period
-   character.
+   Because the period (``.``) character is reserved for delimiting embedded fields,
+   MongoDB does not support creating shard keys on fields with names that contain a
+   period character.
 
 Sharding Management Rake Tasks
 ------------------------------
