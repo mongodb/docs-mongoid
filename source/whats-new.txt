@@ -152,7 +152,7 @@ removed.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 {+odm+} v8.x and older allow user to define ``around_*`` callbacks for embedded
-documents. Starting in v9.0, by default, these callbacks are ignored and will
+documents. Starting in v9.0, by default these callbacks are ignored and will
 not be executed. A warning will be printed to the console if such callbacks are defined.
 
 If you want to restore the old behavior, you can set
