@@ -39,8 +39,7 @@ the following command:
 
    git clone https://github.com/mongodb-developer/mongodb-atlas-with-ruby-on-rails-example.git
 
-Before you can start this tutorial, you also need to set up the
-following components:
+Then, set up the following components:
 
 1. Create a MongoDB Atlas cluster. To learn how to create a cluster, see
    the :ref:`mongoid-quick-start-rails-create-deployment` step of the
