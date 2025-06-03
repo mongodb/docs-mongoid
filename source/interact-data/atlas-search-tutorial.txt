@@ -302,7 +302,8 @@ Steps
       Navigate to http://127.0.0.1:3000/ to view the landing page.
 
       To submit a query, add a term or phrase in the search bar then
-      click the :guilabel:`Search` button.
+      click the :guilabel:`Search` button. The following image depicts
+      the search results for the term ``"outdoor"``:
 
       .. figure:: /includes/figures/atlas-search-tutorial-render.png
          :alt: The rendered Search results
