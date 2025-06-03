@@ -58,7 +58,13 @@ Then, set up the following components:
 
 #. Start the Rails app by running the ``rails server`` command, then
    complete the :guilabel:`New Idea` entry form to insert some sample
-   data into the ``inspiration.ideas`` collection. You can also 
+   data into the ``inspiration.ideas`` collection.
+
+   .. tip:: Sample Data
+      
+      To successfully demonstrate the search functionality later in
+      the tutorial, insert sample documents that contain some overlapping
+      terms.
 
 #. Create an Atlas Search index in Compass or the Atlas UI called
    ``inspiration`` with dynamic mappings. To learn more about creating
