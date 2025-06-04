@@ -39,7 +39,7 @@ the following command:
 
    git clone https://github.com/mongodb-developer/mongodb-atlas-with-ruby-on-rails-example.git
 
-Then, set up the following components:
+Then, perform the following setup actions:
 
 1. Create a MongoDB Atlas cluster. To learn how to create a cluster, see
    the :ref:`mongoid-quick-start-rails-create-deployment` step of the
@@ -62,14 +62,15 @@ Then, set up the following components:
 
    .. tip:: Sample Data
       
-      To successfully demonstrate the search functionality later in
+      To achieve the search functionality demonstrated later in
       the tutorial, insert sample documents that contain some overlapping
-      terms.
+      terms in the ``name`` or ``description`` fields.
 
 #. Create an Atlas Search index in Compass or the Atlas UI called
-   ``inspiration`` with dynamic mappings. To learn more about creating
-   Atlas Search indexes, see the :atlas:`Manage Atlas Search Indexes
-   </atlas-search/manage-indexes/>` guide in the Atlas documentation.
+   ``inspiration`` with dynamic (default) mappings. To learn more about
+   creating Atlas Search indexes, see the :atlas:`Manage Atlas Search
+   Indexes </atlas-search/manage-indexes/>` guide in the Atlas
+   documentation.
 
 Steps
 -----
@@ -79,11 +80,11 @@ Steps
 
    .. step:: Configure the Atlas Search feature in your {+odm+} model.
 
-      First, update the ``Idea`` model to handle queries to our
-      database by defining the ``search`` method in the model. The
-      method ``self.search(query)`` defines a class method called
-      ``search`` that takes a single argument ``query`` and returns the
-      results.
+      First, update the ``Idea`` model to handle Atlas Search queries on
+      the ``ideas`` collection by defining the ``search`` method in the
+      model. The method ``self.search(query)`` defines a class method
+      called ``search`` that takes a single argument ``query`` and
+      returns the search results.
 
       Open the ``app/models/idea.rb`` file and replace its contents with
       the following code:
@@ -165,11 +166,9 @@ Steps
 
    .. step:: Generate the Search controller.
 
-      In this step, you create a ``SearchesController`` to handle Atlas Search
-      requests and display results.
-      
       Run the following command to generate the ``SearchesController``
-      and the ``display_results`` view file:
+      and the ``display_results`` view file, which handle ``search``
+      requests and display the results, respectively:
       
       .. code-block:: bash
       
@@ -298,7 +297,8 @@ Steps
 
    .. step:: Start your application and run Search queries.
 
-      Run the following command to start your application:
+      In your project directory, run the following command to start your
+      application:
       
       .. code-block:: bash
       
@@ -306,7 +306,7 @@ Steps
 
       Navigate to http://127.0.0.1:3000/ to view the landing page.
 
-      To submit a query, add a term or phrase in the search bar then
+      To submit a query, type a term or phrase in the search bar then
       click the :guilabel:`Search` button. The following image depicts
       the search results for the term ``"outdoor"``:
 
