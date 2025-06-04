@@ -68,9 +68,8 @@ Then, perform the following setup actions:
 
 #. Create an Atlas Search index in Compass or the Atlas UI called
    ``inspiration`` with dynamic (default) mappings. To learn more about
-   creating Atlas Search indexes, see the :atlas:`Manage Atlas Search
-   Indexes </atlas-search/manage-indexes/>` guide in the Atlas
-   documentation.
+   creating Atlas Search indexes, see the
+   :ref:`mongoid_indexes_atlas_search` section of the Indexes guide.
 
 Steps
 -----
